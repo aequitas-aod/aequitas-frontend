@@ -1,0 +1,11 @@
+{
+  "breadcrumb": {
+    "dataset-choice": "Scelta del dataset",
+    "dataset-configuration": "Configurazione del dataset"
+  },
+
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  }
+}

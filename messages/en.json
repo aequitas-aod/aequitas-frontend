@@ -1,0 +1,40 @@
+{
+  "common": {
+    "create": "Create",
+    "continue": "Continue"
+  },
+  "breadcrumb": {
+    "dataset-choice": "Scelta del dataset",
+    "dataset-view": "Dataset view",
+    "feature-view": "Feature view",
+    "dependencies": "Dependencies",
+    "detection": "Detection",
+    "data-migration": "Data migration"
+  },
+  "dataset-choice": {
+    "title": "Select a default dataset",
+    "subtitle": "Available datasets",
+    "create-custom-dataset": "Do you have your own dataset?",
+    "details": {
+      "size": "Size",
+      "records": "Records",
+      "created": "Created"
+    },
+    "custom-dataset-dialog": {
+      "title": "Upload your dataset",
+
+      "name": "Name",
+      "name-placeholder": "Enter the name of the dataset",
+
+      "description": "Description",
+      "description-placeholder": "Enter the description of the dataset",
+
+      "file-placeholder": "Upload a file"
+    }
+  },
+
+  "HomePage": {
+    "title": "Hello world!",
+    "dataset-choice": "Go to dataset choice"
+  }
+}
