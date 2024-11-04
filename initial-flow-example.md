@@ -49,6 +49,43 @@ Le operazioni rilevanti lato API sono:
 
 ## Esemplificazione del flusso
 
+### Caricamento iniziale
+
+Al caricamento iniziale del frontend, il backend deve fornire tutte le domande necessarie come array di oggetti JSON.
+
+- `GET /projects/{project-name}/questionnaires`
+
+  - risposta possibile
+
+    ```json
+    [
+      {
+        "step": 1,
+        "id": {
+          "code": "p-1-DatasetSelection"
+        },
+        "label": "Dataset Choice",
+        "longDescription": "Choose a dataset or load your own."
+      },
+      {
+        "step": 2,
+        "id": {
+          "code": "p-2-DataView"
+        },
+        "label": "Data View",
+        "longDescription": "This view shows the data in the dataset."
+      },
+      {
+        "step": 3,
+        "id": {
+          "code": "p-3-FeatureView"
+        },
+        "label": "Feature View",
+        "longDescription": "Select target and sensitive features."
+      }
+    ]
+    ```
+
 ### Dataset Choice View
 
 Al caricamento della view:
@@ -226,9 +263,10 @@ Ad esempio la descrizione del dataset nella Dataset Choice View:
 
 - In fase di caricamento di un eventuale nuovo dataset, nel PUT da parte del frontend viene aggiunto il type:
 
-        `PUT /projects/{project-name}/context?key=custom-dataset-1&type=Dataset`
+  `PUT /projects/{project-name}/context?key=custom-dataset-1&type=Dataset`
 
   Il body conterrà direttamente il file encoded
+
 - Verrà impedito lato client il caricamento di file differenti da CSV
 - Se il dataset non viene correttamente riconosciuto lato backend verrà inviato un opportuno messaggio al frontend
 - Dalla chiamata della Feature View:
@@ -238,7 +276,7 @@ Ad esempio la descrizione del dataset nella Dataset Choice View:
   non verranno prese le informazioni delle answers che invece verranno prese dalla chiamata:
 
   `GET /projects/{project-name}/context?key=custom&type=Features`
-  
+
   che restituirà un json col seguente tracciato:
 
 ```json
@@ -259,3 +297,7 @@ Ad esempio la descrizione del dataset nella Dataset Choice View:
 ```
 
 Per ogni feature verranno creati i checkbox sensitive e target identificati rispettivamente con i suffissi **-sensitive** e **-target** aggiunti al nome della feature
+
+{
+
+}
