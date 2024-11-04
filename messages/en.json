@@ -15,21 +15,25 @@
     "title": "Select a dataset",
     "subtitle": "Available datasets",
     "create-custom-dataset": "Do you have your own dataset?",
+    "buttons": {
+      "continue": "Continue"
+    },
     "details": {
       "size": "Size",
       "records": "Records",
       "created": "Created"
     },
-    "custom-dataset-dialog": {
+    "create-custom-dataset-dialog": {
+      "create": "Create",
       "title": "Upload your dataset",
-
+      "subtitle": "Click Continue when you're done",
       "name": "Name",
       "name-placeholder": "Enter the name of the dataset",
-
       "description": "Description",
       "description-placeholder": "Enter the description of the dataset",
-
-      "file-placeholder": "Upload a file"
+      "file-placeholder": "Upload a file",
+      "submit": "Continue",
+      "cancel": "Cancel"
     }
   },
 
