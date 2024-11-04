@@ -56,8 +56,8 @@ export default function PrivateLayout({
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-1 p-4 space-x-4">
-        <Sidebar menuItems={menuItems} lang={locale} />
-        <div className="">{children}</div>
+        <Sidebar menuItems={menuItems} />
+        <div className="w-full">{children}</div>
       </div>
       <Footer />
     </div>

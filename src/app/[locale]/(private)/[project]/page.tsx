@@ -1,10 +1,10 @@
 "use client"
-import { DataMitigationPage } from "@/app/features/data-mitigation/page";
-import { DatasetChoicePage } from "@/app/features/dataset-choice/page";
-import { DatasetViewPage } from "@/app/features/dataset-view/page";
-import { DependenciesPage } from "@/app/features/dependencies/page";
-import { DetectionPage } from "@/app/features/detection/page";
-import { FeatureViewPage } from "@/app/features/feature-view/page";
+import { DataMitigationPage } from "@/features/data-mitigation/page";
+import { DatasetChoicePage } from "@/features/dataset-choice/page";
+import { DatasetViewPage } from "@/features/dataset-view/page";
+import { DependenciesPage } from "@/features/dependencies/page";
+import { DetectionPage } from "@/features/detection/page";
+import { FeatureViewPage } from "@/features/feature-view/page";
 import { useParams } from "next/navigation";
 
 export default function ProjectPage() {
