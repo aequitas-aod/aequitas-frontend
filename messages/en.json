@@ -12,7 +12,7 @@
     "data-migration": "Data migration"
   },
   "dataset-choice": {
-    "title": "Select a default dataset",
+    "title": "Select a dataset",
     "subtitle": "Available datasets",
     "create-custom-dataset": "Do you have your own dataset?",
     "details": {
