@@ -10,15 +10,13 @@ import {
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, MenuItemWithState } from "@/components/molecules/Menu";
 import { usePathname } from "next/navigation";
-import { HelpCircleIcon } from "lucide-react";
 import { IoInformationCircleOutline } from "react-icons/io5";
 
 interface SidebarProps {
-  lang: string;
   menuItems: IMenuItem[];
 }
 
-export const Sidebar = ({ lang, menuItems }: SidebarProps) => {
+export const Sidebar = ({ menuItems }: SidebarProps) => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState<string>("");
@@ -32,9 +30,7 @@ export const Sidebar = ({ lang, menuItems }: SidebarProps) => {
 
   const currentIndex = menuItems.findIndex((item) =>
     pathname.includes(item.path)
-  );
-
-  console.log("currentIndex", currentIndex);
+  ) + 1;
 
   const parsedMenuItems: MenuItemWithState[] = menuItems.map((item) => ({
     ...item,
