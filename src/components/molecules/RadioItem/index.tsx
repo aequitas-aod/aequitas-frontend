@@ -1,13 +1,13 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
-import { DatasetAnswer } from "@/features/dataset-choice/mock";
+import { Answers } from "../../../../mocks/1_dataset-choice/mock";
 
 export const RadioItem = ({
   option,
   selected,
   onSelect,
 }: {
-  option: DatasetAnswer;
+  option: Answers;
   selected: string | null;
   onSelect: (value: string) => void;
 }) => {

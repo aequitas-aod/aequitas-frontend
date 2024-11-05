@@ -3,9 +3,8 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
-import { datasetSelection } from "./mock";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { dataset } from "../../../mocks/1_dataset-choice/mock";
+import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 
 export const DatasetChoicePage = ({}) => {
@@ -13,7 +12,7 @@ export const DatasetChoicePage = ({}) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<string | null>(null);
 
-  const options = datasetSelection.answers;
+  const options = dataset.answers;
 
   const onSelect = (value: string) => {
     setSelected(value);

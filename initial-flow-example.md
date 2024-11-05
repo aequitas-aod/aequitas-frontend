@@ -100,6 +100,7 @@ Al caricamento della view:
         "code": "p-1-DatasetSelection" // id della view lato backend...
       }, // ... "DatasetSelection" si potrebbe usare forse come ID della view lato frontend
       "text": "Choose a dataset or load your own.", // titolo della pagina
+      "description": "Select a dataset from the list below or load your own.", // descrizione della pagina
       "type": "single", // metadato che indica che alla fine verrà selezionato un solo elemento
       "answers": [
         // informazioni relative alle risposte ammissibile
@@ -107,20 +108,26 @@ Al caricamento della view:
           "id": {
             "code": "p-1-AdultDataset" // ID della risposta lato backend...
           }, // ... si potrebbe usare forse come ID del campo del frontend che permette di selezionare questo dataset
-          "text": "Adult Census Income Dataset" // nome "intelleggibile" con cui mostrare il nome del dataset all'utente
+          "text": "Adult Census Income Dataset", // nome "intelleggibile" con cui mostrare il nome del dataset all'utente
+          "description": "This dataset contains information about adults and their income.", // descrizione del dataset
+          "select": true // metadato che indica che questa risposta è selezionabile
         },
         {
           "id": {
             "code": "p-1-BankDataset"
           },
-          "text": "Bank Marketing Dataset"
+          "text": "Bank Marketing Dataset",
+          "description": "This dataset contains information about adults and their income.", // descrizione del dataset
+          "select": false // metadato che indica che questa risposta è selezionabile
         },
         // altre risposte pre-confezionate qui
         {
           "id": {
             "code": "p-1-Custom" // questo corrisponde alla selezione di un dataset fornito dall'utente
           }, // (vedi sotto)
-          "text": "Create a custom dataset"
+          "text": "Create a custom dataset",
+          "description": "This dataset contains information about adults and their income.", // descrizione del dataset
+          "select": false // metadato che indica che questa risposta è selezionabile
         }
       ]
     }
@@ -302,7 +309,6 @@ Per ogni feature verranno creati i checkbox sensitive e target identificati risp
 
 }
 
-
 # AGGIORNAMENTO 5 novembre
 
 Proposta per gestione labels e ordinamento colonne:
@@ -312,24 +318,24 @@ Proposta per gestione labels e ordinamento colonne:
   "columns": [
     {
       "label": "Name",
-      "key": "name",
+      "key": "name"
     },
     {
       "label": "Max",
-      "key": "max",
+      "key": "max"
     },
     {
       "label": "Min",
-      "key": "min",
+      "key": "min"
     },
     {
       "label": "Sensitive",
-      "key": "sensitive",
+      "key": "sensitive"
     },
     {
       "label": "Output",
-      "key": "target",
-    },
+      "key": "target"
+    }
   ],
   "rows": [
     {
@@ -340,10 +346,10 @@ Proposta per gestione labels e ordinamento colonne:
       "avg": 50,
       "target": false,
       "sensitive": false,
-      "values": ["Low", "Medium", "High"], 
-      "histogram": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "values": ["Low", "Medium", "High"],
+      "histogram": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
-  //...
+    //...
   ]
 }
 ```
