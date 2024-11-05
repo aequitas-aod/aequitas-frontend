@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { MenuItemWithState } from "../Menu";
+import { IMenuItemWithState } from "../Menu";
+import { SidebarItem } from "../../../../mocks/sidebar";
 
-export interface IMenuItem {
-  id: number;
-  name: string;
-  path: string;
-  longDescription?: string;
+export interface IMenuItem extends SidebarItem {
   icon?: React.ReactNode;
 }
 
 interface MenuItemProps {
-  item: MenuItemWithState;
+  item: IMenuItemWithState;
   onInfoClick?: (item: IMenuItem) => void;
 }
 

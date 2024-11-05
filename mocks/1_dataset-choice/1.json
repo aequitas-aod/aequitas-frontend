@@ -26,7 +26,7 @@
         "id": {
           "code": "p-1-Custom"
         },
-        "text": "Create a custom dataset",
+        "text": "My custom dataset",
         "description": "This dataset contains information about adults and their income.",
         "select": false
       }

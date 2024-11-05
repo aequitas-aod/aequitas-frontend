@@ -1,11 +1,11 @@
 import { MenuItem, type IMenuItem } from "../MenuItem";
 
-export interface MenuItemWithState extends IMenuItem {
+export interface IMenuItemWithState extends IMenuItem {
   state: "past" | "current" | "future";
 }
 
 interface MenuProps {
-  items: MenuItemWithState[];
+  items: IMenuItemWithState[];
   currentPath: string;
   onInfoClick: (item: IMenuItem) => void;
 }

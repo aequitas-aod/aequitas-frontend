@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { IMenuItem } from "@/components/molecules/MenuItem";
-import { Menu, MenuItemWithState } from "@/components/molecules/Menu";
+import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { usePathname } from "next/navigation";
 import { IoInformationCircleOutline } from "react-icons/io5";
 
@@ -32,19 +32,19 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
     pathname.includes(item.path)
   ) + 1;
 
-  const parsedMenuItems: MenuItemWithState[] = menuItems.map((item) => ({
+  const parsedMenuItems: IMenuItemWithState[] = menuItems.map((item) => ({
     ...item,
     icon: <IoInformationCircleOutline />,
     state:
-      currentIndex < item.id
+      currentIndex < item.step
         ? "future"
-        : currentIndex === item.id
+        : currentIndex === item.step
         ? "current"
         : "past",
     path: item.path,
   }));
   return (
-    <div className="h-full w-40 bg-white text-black flex flex-col">
+    <div className="h-full flex flex-col">
       <Menu
         items={parsedMenuItems}
         currentPath={pathname}

@@ -8,23 +8,31 @@ export const RadioItem = ({
   onSelect,
 }: {
   option: Answers;
-  selected: string | null;
+  selected: boolean;
   onSelect: (value: string) => void;
 }) => {
-  const isSelected = selected === option.id.code;
-
   return (
     <div
       key={option.id.code}
       onClick={() => onSelect(option.id.code)}
-      className={`flex items-center space-x-2 py-6 px-4 border rounded-lg cursor-pointer ${
-        isSelected
-          ? "bg-indigo-200 border-indigo-300 font-extrabold"
-          : "border-gray-300"
-      }`}
+      className={`flex items-center space-x-2 py-6 px-4 border rounded-lg cursor-pointer hover:bg-indigo-100 hover:border-indigo-100 hover:font-medium	
+        ${
+          selected
+            ? "bg-indigo-200 border-indigo-300 font-extrabold"
+            : "border-gray-300"
+        }`}
     >
-      <RadioGroupItem value={option.id.code} checked={isSelected} />
-      <Label htmlFor={option.id.code}>{option.text}</Label>
+      <RadioGroupItem value={option.id.code} checked={selected} />
+      <Label
+        className={`text-sm hover:font-medium text-black ${
+          selected
+            ? "text-indigo-950 font-extrabold"
+            : "text-gray-900 font-light"
+        }`}
+        htmlFor={option.id.code}
+      >
+        {option.text}
+      </Label>
     </div>
   );
 };
