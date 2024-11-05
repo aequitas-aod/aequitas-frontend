@@ -1,0 +1,34 @@
+{
+  "id": {
+    "code": "p-1-DatasetSelection"
+  },
+  "text": "Choose a dataset or load your own.",
+  "description": "Select a dataset from the list below or load your own.",
+  "type": "single",
+  "answers": [
+    {
+      "id": {
+        "code": "p-1-AdultDataset"
+      },
+      "text": "Adult Census Income Dataset",
+      "description": "This dataset contains information about adults and their income.",
+      "select": true
+    },
+    {
+      "id": {
+        "code": "p-1-BankDataset"
+      },
+      "text": "Bank Marketing Dataset",
+      "description": "This dataset contains information about adults and their income.",
+      "select": false
+    },
+    {
+      "id": {
+        "code": "p-1-Custom"
+      },
+      "text": "My custom dataset",
+      "description": "This dataset contains information about adults and their income.",
+      "select": false
+    }
+  ]
+}

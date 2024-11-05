@@ -3,13 +3,12 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
-import { Answers, dataset } from "../../../mocks/1_dataset-choice/mock";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { DatasetPreview } from "./dataset-preview";
+import { Answers, dataset } from "../../../mocks/1/mock";
 
-export const DatasetChoicePage = ({}) => {
-  const router = useRouter();
+export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<Answers | null>(null);
 
@@ -17,6 +16,10 @@ export const DatasetChoicePage = ({}) => {
 
   const onSelect = (value: string) => {
     setSelected(options.find((option) => option.id.code === value) || null);
+  };
+
+  const onContinue = () => {
+    onNext();
   };
 
   return (
@@ -51,7 +54,7 @@ export const DatasetChoicePage = ({}) => {
         </div>
       </div>
       <div className="flex justify-end p-4">
-        <Button onClick={() => router.push("/dataset-view")}>
+        <Button onClick={onContinue} disabled={!selected}>
           {t("buttons.continue")}
         </Button>
       </div>

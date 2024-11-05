@@ -1,0 +1,15 @@
+{
+  "id": {
+    "code": "p-1-BankDataset"
+  },
+  "text": "Bank Marketing Dataset",
+  "description": "This dataset contains information about adults and their income.",
+  "select": false,
+  "details": [
+    {
+      "size": 32561,
+      "records": 15,
+      "created": "1996-05-01"
+    }
+  ]
+}
