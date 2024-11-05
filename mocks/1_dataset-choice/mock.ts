@@ -1,5 +1,5 @@
 // Import del questionario dal file JSON
-import questionarrie1 from "./1.json";
+import questionarrie1 from "./questionnaire.json";
 
 // Definizione dell'interfaccia Answers
 export interface Answers {
