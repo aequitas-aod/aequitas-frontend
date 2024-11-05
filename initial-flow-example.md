@@ -301,3 +301,51 @@ Per ogni feature verranno creati i checkbox sensitive e target identificati risp
 {
 
 }
+
+
+# AGGIORNAMENTO 5 novembre
+
+Proposta per gestione labels e ordinamento colonne:
+
+```json
+{
+  "columns": [
+    {
+      "label": "Name",
+      "key": "name",
+    },
+    {
+      "label": "Max",
+      "key": "max",
+    },
+    {
+      "label": "Min",
+      "key": "min",
+    },
+    {
+      "label": "Sensitive",
+      "key": "sensitive",
+    },
+    {
+      "label": "Output",
+      "key": "target",
+    },
+  ],
+  "rows": [
+    {
+      "name": "feature1",
+      "type": "int",
+      "min": 0,
+      "max": 100,
+      "avg": 50,
+      "target": false,
+      "sensitive": false,
+      "values": ["Low", "Medium", "High"], 
+      "histogram": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    }
+  //...
+  ]
+}
+```
+
+L'implementazione senza "columns" non permette di differenziare key da label e di gestire l'ordinamento delle colonne. In caso si gestisse la label della colonna coincidente con la chiave del json, in caso di rinomina ad esempio di "sensitive", i dati già presenti a database non tornerebbero.
