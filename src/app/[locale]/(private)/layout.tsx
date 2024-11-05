@@ -2,17 +2,19 @@ import { Footer } from "@/components/organisms/Footer/Footer";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 import { sidebarItems } from "../../../../mocks/sidebar";
 
-export default function PrivateLayout({
+export default async function PrivateLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
-  const menuItems = sidebarItems.map((item) => ({
-    ...item,
-    href: `/${locale}/${item.path}`,
-  }));
+  const menuItems = await Promise.all(
+    sidebarItems.map(async (item) => ({
+      ...item,
+      href: `/${(await params).locale}/${item.path}`,
+    }))
+  );
 
   return (
     <div className="flex flex-col h-screen">
