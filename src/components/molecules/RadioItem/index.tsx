@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
-import { Answers } from "../../../../mocks/1_dataset-choice/mock";
+import { Answers } from "../../../../mocks/1/mock";
 
 export const RadioItem = ({
   option,

@@ -12,6 +12,7 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<Answers | null>(null);
 
+  // fare la chiamata per ottenere i dati
   const options = dataset.answers;
 
   const onSelect = (value: string) => {
