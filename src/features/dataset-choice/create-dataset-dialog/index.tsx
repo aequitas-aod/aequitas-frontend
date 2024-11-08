@@ -107,7 +107,6 @@ export const CreateDatasetDialog = () => {
 
               {/* Submit Button */}
               <div className="flex justify-end">
-                
                 <Button type="submit">
                   {t("create-custom-dataset-dialog.submit")}
                 </Button>
