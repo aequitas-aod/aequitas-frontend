@@ -39,6 +39,9 @@
   "dataset-view": {
     "buttons": {
       "continue": "Continue"
+    },
+    "errors": {
+      "parsing-csv": "Error parsing CSV file"
     }
   },
   "feature-view": {
