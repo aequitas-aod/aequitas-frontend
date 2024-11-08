@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function LocaleLayout({
   children,
@@ -10,7 +11,10 @@ export default async function LocaleLayout({
   const locale = (await params).locale;
   return (
     <html lang={locale}>
-      <body>{children}</body>
+      <body>
+        <main> {children}</main>
+        <Toaster />
+      </body>
     </html>
   );
 }
