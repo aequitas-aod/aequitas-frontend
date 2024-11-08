@@ -11,7 +11,7 @@ export const DatasetPreview = ({
   details?: Record<string, string>[];
 }) => {
   return (
-    <div className="flex flex-col border p-4 shadow-md rounded-md bg-white">
+    <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
       {title ? (
         <p className="text-2xl text-black">{title}</p>
       ) : (

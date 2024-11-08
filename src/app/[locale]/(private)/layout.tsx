@@ -1,7 +1,6 @@
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 import { sidebarItems } from "../../../../mocks/sidebar";
-
 export default async function PrivateLayout({
   children,
   params,
@@ -17,8 +16,8 @@ export default async function PrivateLayout({
   );
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex flex-1 p-4 space-x-4">
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-1 p-4 space-x-4 h-screen">
         <Sidebar menuItems={menuItems} />
         <div className="w-full">{children}</div>
       </div>

@@ -5,22 +5,23 @@ import { DatasetViewPage } from "@/features/dataset-view/page";
 import { DependenciesPage } from "@/features/dependencies/page";
 import { DetectionPage } from "@/features/detection/page";
 import { FeatureViewPage } from "@/features/feature-view/page";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function QuestionnaireContainer() {
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const initialQuestion = searchParams.get("question") || "1";
+  const [question, setQuestion] = useState(initialQuestion);
 
-  const [question, setQuestion] = useState(searchParams.get("question") || "1");
-
-  const incrementQuestion = () => {
-    const nextQuest = (parseInt(question, 10) + 1).toString();
-    setQuestion(nextQuest);
-  };
+  useEffect(() => {
+    const currentQuestion = searchParams.get("question") || "1";
+    setQuestion(currentQuestion);
+  }, [searchParams]);
 
   return (
-    <div>
-      {question === "1" && <DatasetChoicePage onNext={incrementQuestion} />}
+    <div className="flex flex-col h-full">
+      {question === "1" && <DatasetChoicePage />}
       {question === "2" && <DatasetViewPage />}
       {question === "3" && <FeatureViewPage />}
       {question === "4" && <DependenciesPage />}
