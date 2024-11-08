@@ -36,7 +36,16 @@
       "cancel": "Cancel"
     }
   },
-
+  "dataset-view": {
+    "buttons": {
+      "continue": "Continue"
+    }
+  },
+  "feature-view": {
+    "buttons": {
+      "continue": "Continue"
+    }
+  },
   "HomePage": {
     "title": "Hello world!",
     "questionnaire": "Go to questionnaire"

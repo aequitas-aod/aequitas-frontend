@@ -1,1 +1,1 @@
-export type LocalizedPage = Readonly<{ params: { locale: string } }>
+export type LocalizedPage = Readonly<{ params: { locale: string } }>;

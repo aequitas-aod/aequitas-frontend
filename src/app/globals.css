@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Avenir', Arial, Helvetica, sans-serif; /* Updated to use Avenir */
-  background-color: #F2F4FC;
+  font-family: "Avenir", Arial, Helvetica, sans-serif; /* Updated to use Avenir */
+  background-color: #f2f4fc;
 }
 
 @layer base {

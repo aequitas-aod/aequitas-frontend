@@ -19,14 +19,19 @@ export default function QuestionnaireContainer() {
     setQuestion(currentQuestion);
   }, [searchParams]);
 
+  const onNext = () => {
+    const nextQuestion = parseInt(question) + 1;
+    router.push(`questionnaire?question=${nextQuestion}`);
+  };
+
   return (
     <div className="flex flex-col h-full">
-      {question === "1" && <DatasetChoicePage />}
-      {question === "2" && <DatasetViewPage />}
-      {question === "3" && <FeatureViewPage />}
-      {question === "4" && <DependenciesPage />}
-      {question === "5" && <DetectionPage />}
-      {question === "6" && <DataMitigationPage />}
+      {question === "1" && <DatasetChoicePage onNext={onNext} />}
+      {question === "2" && <DatasetViewPage onNext={onNext} />}
+      {question === "3" && <FeatureViewPage onNext={onNext} />}
+      {question === "4" && <DependenciesPage onNext={onNext} />}
+      {question === "5" && <DetectionPage onNext={onNext} />}
+      {question === "6" && <DataMitigationPage onNext={onNext} />}
     </div>
   );
 }

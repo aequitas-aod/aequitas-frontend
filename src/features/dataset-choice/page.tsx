@@ -1,16 +1,15 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { DatasetPreview } from "./dataset-preview";
 import { Answers, dataset } from "../../../mocks/1/mock";
+import { QuestionnaireContent } from "@/containers/layout";
 
-export const DatasetChoicePage = () => {
-  const router = useRouter();
+export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<Answers | null>(null);
 
@@ -22,14 +21,18 @@ export const DatasetChoicePage = () => {
   };
 
   const onContinue = () => {
-    router.push(`questionnaire?question=2`);
+    // fare la chiamata per salvare i dati
+    onNext();
   };
 
   return (
     <>
-      <div
-        className="flex flex-col flex-1 border h-full rounded-md"
-        id="content"
+      <QuestionnaireContent
+        action={
+          <Button onClick={onContinue} disabled={!selected}>
+            {t("buttons.continue")}
+          </Button>
+        }
       >
         <div className="flex space-x-4 items-center justify-center py-5 bg-indigo-600 text-indigo-50 rounded-t-md">
           <p>{t("create-custom-dataset")}</p>
@@ -58,12 +61,7 @@ export const DatasetChoicePage = () => {
             />
           </div>
         </div>
-      </div>
-      <div className="flex justify-end p-4">
-        <Button onClick={onContinue} disabled={!selected}>
-          {t("buttons.continue")}
-        </Button>
-      </div>
+      </QuestionnaireContent>
     </>
   );
 };
