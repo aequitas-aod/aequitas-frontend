@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-
 import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
@@ -13,15 +12,19 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<Answers | null>(null);
 
-  // fare la chiamata per ottenere i dati
+  // Simulazione delle opzioni del dataset
   const options = dataset.answers;
 
+  // Funzione per selezionare un'opzione
   const onSelect = (value: string) => {
-    setSelected(options.find((option) => option.id.code === value) || null);
+    const selectedOption =
+      options.find((option) => option.id.code === value) || null;
+    setSelected(selectedOption);
   };
 
+  // Funzione per continuare alla prossima pagina
   const onContinue = () => {
-    // fare la chiamata per salvare i dati
+    // chiamata per salvare i dati (se necessario)
     onNext();
   };
 
@@ -42,12 +45,12 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
           <div id="dataset-selection" className="flex-1">
             <p className="text-sm">{t("title")}</p>
             <p>{t("subtitle")}</p>
-            <RadioGroup defaultValue="" className="">
+            <RadioGroup>
               {options.map((option) => (
                 <RadioItem
                   key={option.id.code}
                   option={option}
-                  selected={option.select}
+                  selected={selected?.id.code === option.id.code}
                   onSelect={onSelect}
                 />
               ))}
