@@ -12,17 +12,14 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<Answers | null>(null);
 
-  // Simulazione delle opzioni del dataset
   const options = dataset.answers;
 
-  // Funzione per selezionare un'opzione
   const onSelect = (value: string) => {
     const selectedOption =
       options.find((option) => option.id.code === value) || null;
     setSelected(selectedOption);
   };
 
-  // Funzione per continuare alla prossima pagina
   const onContinue = () => {
     // chiamata per salvare i dati (se necessario)
     onNext();
