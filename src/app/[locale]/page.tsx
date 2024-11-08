@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>{t("title")}</h1>
-      <Link href="/questionnarie">{t("questionnarie")}</Link>
+      <Link href="/questionnaire">{t("questionnaire")}</Link>
     </div>
   );
 }
