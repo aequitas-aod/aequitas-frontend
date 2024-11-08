@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -9,15 +9,17 @@ import {
 } from "@/components/ui/dialog";
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { IoInformationCircleOutline } from "react-icons/io5";
 
-interface SidebarProps {
+type SidebarProps = {
   menuItems: IMenuItem[];
-}
+};
 
 export const Sidebar = ({ menuItems }: SidebarProps) => {
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const question = searchParams.get("question") || "1";
+
   const [open, setOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState<string>("");
   const [dialogContent, setDialogContent] = useState<string>("");
@@ -28,9 +30,10 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
     setOpen(true);
   };
 
-  const currentIndex = menuItems.findIndex((item) =>
-    pathname.includes(item.path)
-  ) + 1;
+  const currentIndex = useMemo(
+    () => menuItems.findIndex((item) => item.step === parseInt(question)) + 1,
+    [question, menuItems]
+  );
 
   const parsedMenuItems: IMenuItemWithState[] = menuItems.map((item) => ({
     ...item,
@@ -39,15 +42,16 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
       currentIndex < item.step
         ? "future"
         : currentIndex === item.step
-        ? "current"
-        : "past",
+          ? "current"
+          : "past",
     path: item.path,
   }));
+
   return (
     <div className="h-full flex flex-col">
       <Menu
         items={parsedMenuItems}
-        currentPath={pathname}
+        currentPath={question}
         onInfoClick={handleInfoClick}
       />
 

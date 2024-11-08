@@ -12,8 +12,8 @@ export interface Answers {
   details?: Array<{ key: string; value: string }>; // Aggiunta della proprietà 'details'
 }
 
-// Definizione dell'interfaccia Questionnarie
-export interface Questionnarie {
+// Definizione dell'interfaccia Questionnaire
+export interface Questionnaire {
   id: {
     code: string; // ID della view lato backend
   };
@@ -24,7 +24,7 @@ export interface Questionnarie {
 }
 
 // Creazione dell'oggetto dataset con il tipo corretto
-export const dataset: Questionnarie = {
+export const dataset: Questionnaire = {
   ...questionarrie1,
   answers: questionarrie1.answers.map((answer) => ({
     ...answer,

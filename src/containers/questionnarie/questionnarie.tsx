@@ -8,7 +8,7 @@ import { FeatureViewPage } from "@/features/feature-view/page";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function QuestionnarieContainer() {
+export default function QuestionnaireContainer() {
   const searchParams = useSearchParams();
 
   const [question, setQuestion] = useState(searchParams.get("question") || "1");
