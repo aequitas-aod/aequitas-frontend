@@ -29,20 +29,26 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
     <>
       <QuestionnaireContent
         action={
-          <Button onClick={onContinue} disabled={!selected}>
+          <Button
+            onClick={onContinue}
+            disabled={!selected}
+            variant={!selected ? "default" : "secondary"}
+          >
             {t("buttons.continue")}
           </Button>
         }
       >
         <div className="flex space-x-4 items-center justify-center py-5 bg-indigo-600 text-indigo-50 rounded-t-md">
           <p>{t("create-custom-dataset")}</p>
-          <CreateDatasetDialog />
+          <CreateDatasetDialog onContinue={onNext} />
         </div>
-        <div className="flex justify-between space-x-4 p-4 bg-wild-sand-50 rounded-b-md flex-1">
+        <div className="flex justify-between space-x-4 p-8 bg-wild-sand-50 rounded-b-md flex-1">
           <div id="dataset-selection" className="flex-1">
-            <p className="text-sm">{t("title")}</p>
-            <p>{t("subtitle")}</p>
-            <RadioGroup>
+            <p className="text-base text-primary-950 font-extrabold">
+              {t("title")}
+            </p>
+            <p className="text-[#64748B] text-sm">{t("subtitle")}</p>
+            <RadioGroup className="mt-4">
               {options.map((option) => (
                 <RadioItem
                   key={option.id.code}
