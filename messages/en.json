@@ -31,9 +31,8 @@
       "name-placeholder": "Enter the name of the dataset",
       "description": "Description",
       "description-placeholder": "Enter the description of the dataset",
-      "file-placeholder": "Upload a file",
-      "submit": "Continue",
-      "cancel": "Cancel"
+      "upload-file": "Upload file",
+      "submit": "Continue"
     }
   },
   "dataset-view": {
