@@ -13,24 +13,24 @@ interface MenuItemProps {
 
 const stateStyles = {
   current: {
-    bg: "bg-indigo-800",
-    border: "border-indigo-900",
-    text: "text-indigo-50",
-    hoverBg: "hover:bg-indigo-800",
+    bg: "bg-primary-800",
+    border: "border-primary-900",
+    text: "text-primary-50",
+    hoverBg: "hover:bg-primary-800",
     fontWeight: "font-extrabold",
   },
   past: {
-    bg: "bg-indigo-200",
-    border: "border-indigo-300",
-    text: "text-indigo-950",
-    hoverBg: "hover:bg-indigo-300",
+    bg: "bg-primary-200",
+    border: "border-primary-300",
+    text: "text-primary-950",
+    hoverBg: "hover:bg-primary-300",
     fontWeight: "font-normal",
   },
   future: {
-    bg: "bg-wild-sand-100",
-    border: "border-wild-sand-200",
-    text: "text-wild-sand-700",
-    hoverBg: "hover:bg-wild-sand-100",
+    bg: "bg-neutral-100",
+    border: "border-neutral-200",
+    text: "text-neutral-700",
+    hoverBg: "hover:bg-neutral-100",
     fontWeight: "font-normal",
   },
 };

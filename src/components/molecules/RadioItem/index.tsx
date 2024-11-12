@@ -15,10 +15,10 @@ export const RadioItem = ({
     <div
       key={option.id.code}
       onClick={() => onSelect(option.id.code)}
-      className={`flex items-center space-x-2 py-6 px-4 rounded-lg cursor-pointer hover:bg-indigo-100 hover:border-indigo-100 hover:font-medium	
+      className={`flex items-center space-x-2 py-6 px-4 rounded-lg cursor-pointer hover:bg-primary-100 hover:border-primary-100 hover:font-medium	
         ${
           selected
-            ? "bg-indigo-200 border-indigo-300 font-extrabold "
+            ? "bg-primary-200 border-primary-300 font-extrabold "
             : "border-gray-300 font-light"
         }`}
     >
@@ -26,7 +26,7 @@ export const RadioItem = ({
       <p
         className={`text-sm hover:font-medium text-black ${
           selected
-            ? "text-indigo-950 font-extrabold"
+            ? "text-primary-950 font-extrabold"
             : "text-gray-900 font-light"
         }`}
       >
