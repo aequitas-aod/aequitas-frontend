@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -12,7 +13,16 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body>
-        <main> {children}</main>
+        <Suspense
+          fallback={
+            <div>
+              <h1>Loading...</h1>
+            </div>
+          }
+        >
+          <main> {children}</main>
+        </Suspense>
+
         <Toaster />
       </body>
     </html>
