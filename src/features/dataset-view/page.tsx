@@ -59,7 +59,7 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
   };
 
   // temp solution to avoid error
-  const emptyRowsCount = Math.max(30 - data.length, 0);
+  const emptyRowsCount = Math.max(50 - data.length, 0);
 
   return (
     <QuestionnaireContent
@@ -68,42 +68,48 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
           {t("buttons.continue")}
         </Button>
       }
+      className="!bg-neutral-50"
     >
-      <Table className="w-full overflow-auto">
-        <TableHeader>
-          <TableRow className="h-14">
-            {columns.map((column, index) => (
-              <TableHead
-                key={index}
-                className="w-32 bg-neutral-100 text-center border-l text-neutral-600"
-              >
-                {column}
-              </TableHead>
+      <div className="overflow-auto flex-grow bg-neutral-50">
+        <Table className="">
+          <TableHeader>
+            <TableRow className="h-14">
+              {columns.map((column, index) => (
+                <TableHead
+                  key={index}
+                  className="min-w-32 bg-neutral-100 text-center border-l text-neutral-600"
+                >
+                  {column}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody className="bg-neutral-50 text-primary-950 text-center">
+            {data.map((row, rowIndex) => (
+              <TableRow key={rowIndex} className="border-b">
+                {columns.map((column, colIndex) => (
+                  <TableCell
+                    key={colIndex}
+                    className="border-l min-h-14 border-b"
+                  >
+                    {row[column]}
+                  </TableCell>
+                ))}
+              </TableRow>
             ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody className="bg-neutral-50 text-primary-950 text-center">
-          {data.map((row, rowIndex) => (
-            <TableRow key={rowIndex}>
-              {columns.map((column, colIndex) => (
-                <TableCell key={colIndex} className="border-l h-14">
-                  {row[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-          {/* Aggiungi righe vuote per arrivare a un totale di 30 */}
-          {Array.from({ length: emptyRowsCount }).map((_, index) => (
-            <TableRow key={`empty-${index}`}>
-              {columns.map((_, colIndex) => (
-                <TableCell key={colIndex} className="border-l h-14">
-                  &nbsp;
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+            {/* Aggiungi righe vuote per arrivare a un totale di 30 */}
+            {Array.from({ length: emptyRowsCount }).map((_, index) => (
+              <TableRow key={`empty-${index}`}>
+                {columns.map((_, colIndex) => (
+                  <TableCell key={colIndex} className="border-l h-14">
+                    &nbsp;
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </QuestionnaireContent>
   );
 };

@@ -15,7 +15,7 @@ export const DatasetPreview = ({
       {title ? (
         <p className="text-2xl text-black">{title}</p>
       ) : (
-        <p className="text-base text-wild-sand-300">No dataset selected</p>
+        <p className="text-base text-neutral-300">No dataset selected</p>
       )}
       {description && (
         <p className="text-[#94A3B8] text-sm mt-2">{description}</p>
@@ -27,7 +27,7 @@ export const DatasetPreview = ({
             key={detail.key}
             className="flex justify-start items-center gap-8 mt-4"
           >
-            <Label className="text-wild-sand-400 text-sm">{detail.key}</Label>
+            <Label className="text-neutral-400 text-sm">{detail.key}</Label>
             <Input readOnly value={detail.value} className="w-46" />
           </div>
         ))}
