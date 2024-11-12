@@ -75,7 +75,16 @@ export const CreateDatasetDialog = ({
         {t("create-custom-dataset-dialog.create")}
       </Button>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (!isOpen) {
+            form.reset(); // Reset dei dati del form
+            setFile(null); // Reset del file caricato
+          }
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t("create-custom-dataset-dialog.title")}</DialogTitle>
@@ -150,9 +159,9 @@ export const CreateDatasetDialog = ({
                   <Button variant="outline" size="icon">
                     <PlusIcon className="w-4 h-4" />
                   </Button>
-                  <Label htmlFor="json" className="cursor-pointer">
+                  <p className="cursor-pointer">
                     {t("create-custom-dataset-dialog.upload-file")}
-                  </Label>
+                  </p>
                   <Input
                     id="json"
                     type="file"
