@@ -1,4 +1,3 @@
-
 trigger:
 - main
 - develop
@@ -8,12 +7,10 @@ variables:
   vercelToken: $(VERCEL_CI_TOKEN)
 
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-    variables:
-      vercelProjectId: $(VERCEL_PROJECT_ID_STAGING)
+    vercelProjectId: $(VERCEL_PROJECT_ID_STAGING)
 
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
-    variables:
-      vercelProjectId: $(VERCEL_PROJECT_ID_DEVELOP)
+    vercelProjectId: $(VERCEL_PROJECT_ID_DEVELOP)
 
 pool:
   vmImage: ubuntu-latest
