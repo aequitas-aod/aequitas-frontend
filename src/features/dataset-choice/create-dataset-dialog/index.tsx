@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
@@ -45,8 +45,27 @@ export const CreateDatasetDialog = ({
     },
   });
 
+  const cleanFileName = (fileName: string) => {
+    return fileName.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, " ");
+  };
+
+  useEffect(() => {
+    if (file) {
+      const cleanedName = cleanFileName(file.name);
+      form.setValue("name", cleanedName);
+      form.setValue(
+        "description",
+        `Dataset created from the file: ${cleanedName}`
+      );
+
+      // Forza il form a "toccare" i campi dopo il loro aggiornamento
+      form.setFocus("name");
+      form.setFocus("description");
+      form.trigger(["name", "description"]);
+    }
+  }, [file, form]);
+
   const onSubmit = (data: FormValues) => {
-    alert(JSON.stringify(data, null, 2));
     setOpen(false);
     // chiamata per salvare i dati (se necessario)
     onContinue();
@@ -95,47 +114,7 @@ export const CreateDatasetDialog = ({
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {t("create-custom-dataset-dialog.name")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t(
-                          "create-custom-dataset-dialog.name-placeholder"
-                        )}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {t("create-custom-dataset-dialog.description")}
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder={t(
-                          "create-custom-dataset-dialog.description-placeholder"
-                        )}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {/* Upload File Section moved up */}
               {file ? (
                 <>
                   <div className="flex items-center space-x-2 justify-between">
@@ -172,6 +151,50 @@ export const CreateDatasetDialog = ({
                   />
                 </div>
               )}
+
+              {/* Name Field */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("create-custom-dataset-dialog.name")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t(
+                          "create-custom-dataset-dialog.name-placeholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Description Field */}
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("create-custom-dataset-dialog.description")}
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t(
+                          "create-custom-dataset-dialog.description-placeholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               {/* Submit Button */}
               <div className="flex justify-end">
