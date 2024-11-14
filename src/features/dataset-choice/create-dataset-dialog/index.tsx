@@ -24,7 +24,6 @@ import { useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
-import { Label } from "@/components/ui/label";
 import { CheckIcon, PlusIcon, TrashIcon } from "lucide-react";
 
 export const CreateDatasetDialog = ({
@@ -78,9 +77,7 @@ export const CreateDatasetDialog = ({
     }
   };
 
-  // Funzione per gestire il click sul div
   const handleFileInput = () => {
-    // Attiva il click sull'input file
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -152,7 +149,6 @@ export const CreateDatasetDialog = ({
                 </div>
               )}
 
-              {/* Name Field */}
               <FormField
                 control={form.control}
                 name="name"
@@ -174,7 +170,6 @@ export const CreateDatasetDialog = ({
                 )}
               />
 
-              {/* Description Field */}
               <FormField
                 control={form.control}
                 name="description"
@@ -196,7 +191,6 @@ export const CreateDatasetDialog = ({
                 )}
               />
 
-              {/* Submit Button */}
               <div className="flex justify-end">
                 <Button type="submit" disabled={isDisabled}>
                   {t("create-custom-dataset-dialog.submit")}
