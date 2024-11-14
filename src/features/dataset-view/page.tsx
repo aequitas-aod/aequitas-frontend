@@ -20,7 +20,6 @@ interface Dataset {
 
 export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("dataset-view");
-  const [enabled, setEnabled] = useState(false);
   const [data, setData] = useState<Dataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
   const { toast } = useToast();
@@ -58,11 +57,7 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <QuestionnaireContent
-      action={
-        <Button onClick={onContinue} disabled={!enabled}>
-          {t("buttons.continue")}
-        </Button>
-      }
+      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-neutral-50"
     >
       <div className="overflow-auto flex-grow bg-neutral-50">
