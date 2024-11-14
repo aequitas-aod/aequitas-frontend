@@ -296,8 +296,8 @@ Ad esempio la descrizione del dataset nella Dataset Choice View:
     "avg": 50,
     "target": false,
     "sensitive": false,
-    "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], // da fare come array
-    "hinstogram": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // da fare come array
+    "values": ["low", "medium", "high"],
+    "histogram": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // da fare come array
   }
   //...
 ]
