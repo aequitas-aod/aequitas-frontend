@@ -67,20 +67,25 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
               {columns.map((column, index) => (
                 <TableHead
                   key={index}
-                  className="min-w-32 bg-neutral-100 text-center border-l text-neutral-600"
+                  className={`min-w-32 bg-neutral-100 text-center text-neutral-600 border-b-2 ${
+                    index !== columns.length - 1 ? "border-r-2" : ""
+                  }`}
                 >
                   {column}
                 </TableHead>
               ))}
             </TableRow>
           </TableHeader>
+
           <TableBody className="bg-neutral-50 text-primary-950 text-center">
             {data.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="border-b">
                 {columns.map((column, colIndex) => (
                   <TableCell
                     key={colIndex}
-                    className="border-l min-h-14 border-b"
+                    className={`min-h-14 border-b-2 border-neutral-100 ${
+                      colIndex !== 0 ? "border-l-2" : ""
+                    } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
                   >
                     {row[column]}
                   </TableCell>
