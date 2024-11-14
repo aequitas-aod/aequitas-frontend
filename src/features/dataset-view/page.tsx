@@ -12,11 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
-
-const csvData = `sepal_length,sepal_width,petal_length,petal_width,species
-5.1,3.5,1.4,0.2,setosa
-4.9,3.0,1.4,0.2,setosa
-4.7,3.2,1.3,0.2,setosa`;
+import { csvData } from "../../../mocks/2/csv";
 
 interface Dataset {
   [key: string]: string;
@@ -59,7 +55,6 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
   };
 
   // temp solution to avoid error
-  const emptyRowsCount = Math.max(50 - data.length, 0);
 
   return (
     <QuestionnaireContent
@@ -93,16 +88,6 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
                     className="border-l min-h-14 border-b"
                   >
                     {row[column]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-            {/* Aggiungi righe vuote per arrivare a un totale di 30 */}
-            {Array.from({ length: emptyRowsCount }).map((_, index) => (
-              <TableRow key={`empty-${index}`}>
-                {columns.map((_, colIndex) => (
-                  <TableCell key={colIndex} className="border-l h-14">
-                    &nbsp;
                   </TableCell>
                 ))}
               </TableRow>
