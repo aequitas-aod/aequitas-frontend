@@ -1,6 +1,19 @@
 
 trigger:
 - main
+- develop
+
+variables:
+  vercelOrgId: $(VERCEL_ORG_ID)
+  vercelToken: $(VERCEL_CI_TOKEN)
+
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+    variables:
+      vercelProjectId: $(VERCEL_PROJECT_ID_STAGING)
+
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+    variables:
+      vercelProjectId: $(VERCEL_PROJECT_ID_DEVELOP)
 
 pool:
   vmImage: ubuntu-latest
@@ -9,7 +22,7 @@ steps:
   - task: vercel-deployment-task@1
     name: Deploy
     inputs:
-      vercelProjectId: $(VERCEL_CI_TOKEN)
-      vercelOrgId: $(VERCEL_ORG_ID)
-      vercelToken: $(VERCEL_CI_TOKEN)
+      vercelProjectId: $(vercelProjectId)
+      vercelOrgId: $(vercelOrgId)
+      vercelToken: $(vercelToken)
       production: true
