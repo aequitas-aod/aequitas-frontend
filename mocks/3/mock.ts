@@ -16,7 +16,7 @@ export const features: Feature[] = [
     min: 0,
     max: 100,
     avg: 50,
-    target: false,
+    target: true,
     sensitive: false,
     values: ["low", "medium", "high"],
     histogram: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // da fare come array
@@ -43,19 +43,12 @@ export const features: Feature[] = [
     values: ["low", "medium", "high"],
     histogram: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // da fare come array
   },
-  {
-    name: "feature4",
-    type: "int",
-    min: 0,
-    max: 100,
-    avg: 50,
-    target: true,
-    sensitive: false,
-    values: ["low", "medium", "high"],
-    histogram: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // da fare come array
-  },
 ];
 
 export type Feature = {
-  [key: string]: string | number | boolean | string[] | number[] | undefined;
+  name: string;
+  target: boolean;
+  sensitive: boolean;
+  // da qui in poi i campi sono opzionali e dinamici
+  [key: string]: string | number | boolean | string[] | number[];
 };
