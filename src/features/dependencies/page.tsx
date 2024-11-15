@@ -18,8 +18,7 @@ export const Dependencies = ({
 
   const { mutate, isPending } = useMutationProxies({
     onSuccess: () => {
-      alert("Updated");
-      //onNext();
+      onNext();
     },
   });
 

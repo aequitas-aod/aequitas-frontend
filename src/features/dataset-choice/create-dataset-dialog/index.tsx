@@ -132,7 +132,7 @@ export const CreateDatasetDialog = ({
                   className="flex items-center space-x-2 cursor-pointer"
                   onClick={handleFileInput}
                 >
-                  <Button variant="outline" size="icon">
+                  <Button variant="outline" size="icon" disabled>
                     <PlusIcon className="w-4 h-4" />
                   </Button>
                   <p className="cursor-pointer">

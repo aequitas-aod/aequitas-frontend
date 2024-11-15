@@ -36,7 +36,6 @@ export const FeaturesView = ({
 
   const { mutate, isPending } = useMutationQuestionnaire({
     onSuccess: () => {
-      alert("Updated");
       onNext();
     },
   });
