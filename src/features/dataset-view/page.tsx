@@ -88,7 +88,7 @@ export const DatasetView = ({
                 {columns.map((col, colIndex) => (
                   <TableCell
                     key={colIndex}
-                    className={`min-h-14 border-b-2 border-neutral-100 ${
+                    className={`min-h-14 border-b-2 border-neutral-100 py-4 ${
                       colIndex !== 0 ? "border-l-2" : ""
                     } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
                   >

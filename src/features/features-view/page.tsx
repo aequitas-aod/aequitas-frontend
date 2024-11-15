@@ -61,14 +61,14 @@ export const FeaturesView = ({
         code: `${feature.feature}-sensitive`,
       }));
 
-    const outputFeatures = data
-      .filter((feature) => feature.output)
+    const targetFeatures = data
+      .filter((feature) => feature.target)
       .map((feature) => ({
-        code: `${feature.feature}-output`,
+        code: `${feature.feature}-target`,
       }));
 
     const answerIds = {
-      answer_ids: { ...sensitiveFeatures, ...outputFeatures },
+      answer_ids: { ...sensitiveFeatures, ...targetFeatures },
     };
     mutate(answerIds);
   };
@@ -100,6 +100,7 @@ export const FeaturesView = ({
           if (typeof value === "boolean") {
             updatedRow[key] = value;
           }
+
           if (typeof value === "string") {
             const parsedValue = parseArrayOrObject(value);
             updatedRow[key] = parsedValue;
@@ -127,13 +128,12 @@ export const FeaturesView = ({
               <TableHead
                 key={key}
                 className={`text-center bg-neutral-100 text-neutral-400 border-b-2 border-neutral-200 px-6 ${
-                  key === "output" && "!bg-primary-950 !text-white !px-0 !w-16"
+                  key === "target" && "!bg-primary-950 !text-white !px-0 !w-16"
                 } ${
                   key === "sensitive" &&
                   "!bg-primary-900 !text-white !w-16 !px-0"
                 } 
                   ${key === "distribution" && "!w-[600px]"}
-                  ${key === "values" && "!w-[300px]"}
                 ${
                   key === "feature" && "!bg-neutral-50"
                 } ${colIndex !== columns.length - 1 && "border-r-2"}`}
@@ -152,10 +152,10 @@ export const FeaturesView = ({
                 <TableCell
                   key={key}
                   className={`text-center bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 ${
-                    key === "output" && "!bg-primary-200"
+                    key === "target" && "!bg-primary-200"
                   } 
               
-                  ${key === "distribution" && "!h-[200px]"}
+             
                   
                   ${
                     key === "sensitive" && "!bg-primary-300"
@@ -165,7 +165,7 @@ export const FeaturesView = ({
                 >
                   {Array.isArray(feature[key]) ? (
                     feature[key].join(", ")
-                  ) : key === "output" || key === "sensitive" ? (
+                  ) : key === "target" || key === "sensitive" ? (
                     <Checkbox
                       checked={feature[key] as boolean}
                       onCheckedChange={() =>
