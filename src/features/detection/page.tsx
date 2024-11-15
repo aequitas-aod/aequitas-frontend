@@ -69,7 +69,9 @@ export const DetectionPage = ({ onNext }: { onNext: () => void }) => {
     >
       <div className="flex p-2 h-full">
         <div className="w-60 p-6">
-          <p className="mb-6">Detect bias in the data</p>
+          <p className="mb-6 text-neutral-800 text-base font-normal">
+            Detect bias in the data
+          </p>
 
           {featureData.map((feature) => (
             <Accordion key={feature.name} type="single" collapsible>

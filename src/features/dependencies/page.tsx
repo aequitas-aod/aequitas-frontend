@@ -1,41 +1,82 @@
 import { Button } from "@/components/ui/button";
 import { QuestionnaireContent } from "@/containers/layout";
 import { useTranslations } from "next-intl";
-
 import { useState } from "react";
-import { Feature, features } from "../../../mocks/3/mock";
-import { getSensitiveFeatures } from "../../../mocks/4/mock";
+import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
+import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
+import { ProxyDataParams, ProxyDataResponse } from "@/api/types";
+import { useMutationProxies } from "@/api/hooks";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-export const DependenciesPage = ({ onNext }: { onNext: () => void }) => {
+export const Dependencies = ({
+  onNext,
+  data,
+}: {
+  onNext: () => void;
+  data: ProxyDataResponse;
+}) => {
   const t = useTranslations("feature-view");
-  const [enabled, setEnabled] = useState(false);
 
-  const [featureData, setFeatureData] = useState<Feature[]>(features);
+  const { mutate, isPending } = useMutationProxies({
+    onSuccess: () => {
+      alert("Updated");
+      //onNext();
+    },
+  });
 
+  const [featureData, setFeatureData] = useState<ProxyDataResponse>(data);
+
+  const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
+    // Aggiorna la copia dello stato, modificando solo l'attributo specificato
+    const updatedFeatureData = { ...featureData };
+
+    if (
+      updatedFeatureData[featureKey] &&
+      updatedFeatureData[featureKey][attributeKey]
+    ) {
+      updatedFeatureData[featureKey][attributeKey] = {
+        ...updatedFeatureData[featureKey][attributeKey],
+        suggested_proxy:
+          updatedFeatureData[featureKey][attributeKey].suggested_proxy ===
+          "true"
+            ? "false"
+            : "true",
+      };
+    }
+
+    // Imposta il nuovo stato
+    setFeatureData(updatedFeatureData);
+  };
+
+  function transformProxyData(data: ProxyDataResponse): ProxyDataParams {
+    const transformedData: ProxyDataParams = {};
+
+    for (const category in data) {
+      transformedData[category] = {};
+
+      for (const attribute in data[category]) {
+        const item = data[category][attribute];
+        transformedData[category][attribute] = {
+          correlation: item.correlation,
+          proxy: item.suggested_proxy,
+        };
+      }
+    }
+
+    return transformedData;
+  }
   const onContinue = () => {
-    // fare la chiamata per salvare i dati
-    onNext();
+    const body = transformProxyData(featureData);
+    console.log(body);
+    mutate({ dataset: "custom-1", body });
   };
 
   return (
     <QuestionnaireContent
-      action={
-        <Button onClick={onContinue} disabled={!enabled}>
-          {t("buttons.continue")}
-        </Button>
-      }
+      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-white"
     >
       <div className="flex p-2 h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 grid grid-cols-2 grid-rows-2 gap-4 rounded">
-          {/* Aggiungi i 4 quadrati nella griglia */}
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded">
             Grafico Aequitas
           </div>
@@ -49,24 +90,38 @@ export const DependenciesPage = ({ onNext }: { onNext: () => void }) => {
             Grafico Aequitas
           </div>
         </div>
-        <div className="w-60 p-6">
-          <p className="mb-6">Select possibily proxy features</p>
-          {/* accordion per ogni feature */}
-          {featureData.map((feature, index) => (
-            <Accordion key={feature.name} type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="bg-primary-400 py-1 px-2.5 rounded-lg text-white">
-                      30
-                    </div>
-                    {feature.name}
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>{feature.name}</AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          ))}
+        <div className="w-[380px] p-6">
+          <p className="mb-6 text-neutral-800 text-base font-normal">
+            Select possibly proxy features
+          </p>
+          {Object.entries(featureData).map(([featureKey, attributes]) => {
+            const suggestedCount = Object.entries(attributes).filter(
+              ([_, attributeData]) => attributeData.suggested_proxy === "true"
+            ).length;
+            return (
+              <FeatureAccordion
+                key={featureKey}
+                featureKey={featureKey}
+                suggestedCount={suggestedCount}
+              >
+                {Object.entries(attributes).map(
+                  ([attributeKey, attributeData]) => (
+                    <FeatureCheckbox
+                      key={attributeKey}
+                      attributeKey={attributeKey}
+                      attributeData={attributeData}
+                      featureKey={featureKey}
+                      featureIndex={Object.entries(attributes).findIndex(
+                        ([key]) => key === attributeKey
+                      )}
+                      onCheckboxChange={handleCheckboxChange}
+                      totalItems={Object.entries(attributes).length}
+                    />
+                  )
+                )}
+              </FeatureAccordion>
+            );
+          })}
         </div>
       </div>
     </QuestionnaireContent>

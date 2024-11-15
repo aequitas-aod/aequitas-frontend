@@ -12,13 +12,18 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
-import { csvData } from "../../../mocks/2/csv";
 
 interface Dataset {
   [key: string]: string;
 }
 
-export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
+export const DatasetView = ({
+  onNext,
+  contextData,
+}: {
+  onNext: () => void;
+  contextData: string;
+}) => {
   const t = useTranslations("dataset-view");
   const [data, setData] = useState<Dataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
@@ -29,7 +34,7 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
   };
 
   useEffect(() => {
-    parseCsv(csvData);
+    parseCsv(contextData);
   }, []);
 
   // Funzione per convertire CSV in JSON e aggiornare le colonne
@@ -80,14 +85,25 @@ export const DatasetViewPage = ({ onNext }: { onNext: () => void }) => {
           <TableBody className="bg-neutral-50 text-primary-950 text-center">
             {data.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="border-b">
-                {columns.map((column, colIndex) => (
+                {columns.map((col, colIndex) => (
                   <TableCell
                     key={colIndex}
                     className={`min-h-14 border-b-2 border-neutral-100 ${
                       colIndex !== 0 ? "border-l-2" : ""
                     } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
                   >
-                    {row[column]}
+                    {Array.isArray(row[col]) ? (
+                      col === "distribution" ? (
+                        <div style={{ maxHeight: "100px" }}>
+                          {/* TODO: chart*/}
+                          {row[col].join(", !")}
+                        </div>
+                      ) : (
+                        row[col].join(", ")
+                      )
+                    ) : (
+                      row[col]?.toString() || ""
+                    )}
                   </TableCell>
                 ))}
               </TableRow>

@@ -1,22 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+
 import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
-import { DatasetPreview } from "./dataset-preview";
-import { Answers, dataset } from "../../../mocks/1/mock";
 import { QuestionnaireContent } from "@/containers/layout";
 
-export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
-  const t = useTranslations("dataset-choice");
-  const [selected, setSelected] = useState<Answers | null>(null);
+import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { DatasetPreview } from "./dataset-preview";
 
-  const options = dataset.answers;
+export const DatasetChoice = ({
+  data,
+  onNext,
+}: {
+  data: QuestionnaireResponse;
+  onNext: () => void;
+}) => {
+  const t = useTranslations("dataset-choice");
+  const [selected, setSelected] = useState<AnswerResponse | null>(null);
+
+  const options = data.answers;
 
   const onSelect = (value: string) => {
     const selectedOption =
       options.find((option) => option.id.code === value) || null;
+    if (!selectedOption) {
+      return;
+    }
     setSelected(selectedOption);
   };
 
@@ -62,7 +73,7 @@ export const DatasetChoicePage = ({ onNext }: { onNext: () => void }) => {
           <div id="dataset-preview" className="flex-1">
             <DatasetPreview
               title={selected?.text}
-              description={selected?.description}
+              description={selected?.description || ""}
               details={selected?.details}
             />
           </div>
