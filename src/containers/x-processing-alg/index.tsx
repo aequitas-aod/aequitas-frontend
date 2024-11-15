@@ -1,4 +1,4 @@
-import { useQuestionnaire } from "@/api/context/hooks";
+import { useQuestionnaire } from "@/api/hooks";
 import { XProcessAlgorithm } from "@/features/x-processing-alg";
 import React from "react";
 
