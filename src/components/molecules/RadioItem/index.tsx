@@ -1,13 +1,13 @@
+import { AnswerResponse } from "@/api/types";
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
-import { Answers } from "../../../../mocks/1/mock";
 
 export const RadioItem = ({
   option,
   selected,
   onSelect,
 }: {
-  option: Answers;
+  option: AnswerResponse;
   selected: boolean;
   onSelect: (value: string) => void;
 }) => {
