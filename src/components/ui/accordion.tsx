@@ -43,7 +43,7 @@ const AccordionTrigger = React.forwardRef<
       className={cn(
         "flex flex-1 items-center justify-between p-4 font-medium transition-all",
         // Aggiungiamo lo stile di default (bianco, testo nero)
-        "data-[state=closed]:bg-white data-[state=closed]:text-black",
+        "data-[state=closed]:bg-white data-[state=closed]:text-neutral-950",
         // Aggiungiamo lo stile personalizzato per quando l'accordion è aperto
         "data-[state=open]:bg-primary-500 data-[state=open]:text-white",
         "[&[data-state=open]>svg]:rotate-180",
@@ -78,7 +78,7 @@ const AccordionContent = React.forwardRef<
     className={cn(
       "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
       // Quando l'accordion è aperto, il background diventa 'primary-50' e aggiungiamo mb-4
-      "data-[state=open]:bg-primary-50 data-[state=open]:p-4",
+      "data-[state=open]:bg-primary-50 data-[state=open]:px-4 data-[state=open]:py-1",
       variant === "primary" && "text-white"
     )}
     {...props}
