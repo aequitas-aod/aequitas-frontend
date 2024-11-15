@@ -224,7 +224,7 @@ Quando la pagina è caricata:
     }
     ```
 
-Una volta selezionate le caratteristiche sensibili e di output, al clic sul pulsante "Next":
+Una volta selezionate le caratteristiche sensibili e di target, al clic sul pulsante "Next":
 
 - `PUT /projects/{project-name}/questionnaire/2`
 
@@ -333,7 +333,7 @@ Proposta per gestione labels e ordinamento colonne:
       "key": "sensitive"
     },
     {
-      "label": "Output",
+      "label": "Target",
       "key": "target"
     }
   ],

@@ -1,3 +1,6 @@
+<!-- TODO: problemi con la distribution, dentro le graffe non c'è un ordinamento, meglio due array, uno per le x e uno per le y, tipo
+ {"keys": ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2',... ], "values": [8441, 0, 12074,... ]}  -->
+
 ## Background e descrizione API
 
 Nella nostra modellazione originale, il flusso delle view è visto come un questionario.
@@ -95,11 +98,6 @@ Al caricamento della view:
     }
     ```
 
-<mark>
-Gli id con code Custom vanno esclusi dalla lista di dataset mostrati nel front-end
-Si deve ancora aggiungere le informazioni di contesto con size, description, rows, created-at
-</mark>
-
 Successivamente
 
 1.  ... se l'utente ha selezionato un dataset pre-confezionato:
@@ -143,9 +141,7 @@ Successivamente
 
     - `PUT /projects/{project-code}/context?key=dataset__custom-1`
 
-      - il corpo della richiesta HTTP contiene il dataset caricato dall'utente
-
-<mark>RIMOSSA SEZIONE DI DATI CHE INVECE VERRANNO CALCOLATI DAL BACKEND</mark>
+      - il corpo della richiesta HTTP contiene il dataset caricato dall'utente in **formato CSV**:
 
 Tutte le richieste HTTP in entrambi i punti 1. e 2. vengono eseguiti al premere del pulsante "Continue".
 
@@ -155,23 +151,76 @@ A questo punto si passa alla Data View.
 
 La "Data View" visualizza semplicemente il contenuto del dataset.
 
+- `GET /projects/{project-code}/questionnaire/2`
+
+  - risposta:
+
+    ```json
+    {
+      "id": {
+        "code": "DatasetConfirmation",
+        "project_code": "p-1"
+      },
+      "text": "Are you sure to proceed with this dataset?",
+      "type": "single",
+      "answers": [
+        {
+          "id": {
+            "code": "yes",
+            "question_code": "DatasetConfirmation",
+            "project_code": "p-1"
+          },
+          "text": "Yes",
+          "description": null,
+          "selected": false
+        },
+        {
+          "id": {
+            "code": "no",
+            "question_code": "DatasetConfirmation",
+            "project_code": "p-1"
+          },
+          "text": "No",
+          "description": null,
+          "selected": false
+        }
+      ]
+    }
+    ```
+
 Recupero dei dati:
 
 - `GET /projects/{project-code}/context?key=dataset__{ID_DEL_DATASET}` dove `{ID_DEL_DATASET}` in questo caso è `custom-1`
+
   - risposta in formato **CSV**, ad esempio:
+    ```csv
+    age,workclass,fnlwgt,education,education-num,marital-status,occupation,relationship,race,sex,capitalgain,capitalloss,hoursperweek,native-country,class
+    2,State-gov,77516.0,Bachelors,13,Never-married,Adm-clerical,Not-in-family,White,Male,1,0,2,United-States,<=50K
+    3,Self-emp-not-inc,83311.0,Bachelors,13,Married-civ-spouse,Exec-managerial,Husband,White,Male,0,0,0,United-States,<=50K
+    2,Private,215646.0,HS-grad,9,Divorced,Handlers-cleaners,Not-in-family,White,Male,0,0,2,United-States,<=50K
+    3,Private,234721.0,11th,7,Married-civ-spouse,Handlers-cleaners,Husband,Black,Male,0,0,2,United-States,<=50K
+    1,Private,338409.0,Bachelors,13,Married-civ-spouse,Prof-specialty,Wife,Black,Female,0,0,2,Cuba,<=50K
+    ```
 
-<mark>Verrà fornito un nuovo dataset corretto</mark>
+  Tuttavia, il backend potrebbe aver bisogno di tempo per calcolare le statistiche, quindi questa interazione dovrebbe essere asincrona, nel senso che non si deve bloccare l'interfaccia utente in attesa della risposta.
 
-        ```csv
-        sex,age,workclass,fnlwgt,education,education-num,marital-status,occupation,relationship,race,capitalgain,capitalloss,hoursperweek,native-country,class
-        1.0,1.3405643351084173,0.9611518123772529,17517.220482475575,1.11160017349171,5.272907692406985,0.6579724682889373,2.4476781959366147,1.403345424967505,0.43417388084565317,0.263145407760534,0.3739967565157661,1.4874752320278937,1.068008871517426,1.0
-        1.0,1.3405643351084173,0.9611518123772529,17517.220482475575,1.11160017349171,5.272907692406985,0.6579724682889373,2.4476781959366147,1.403345424967505,0.43417388084565317,0.263145407760534,0.3739967565157661,1.4874752320278937,1.068008871517426,1.0
-        1.0,1.9733014370518274,0.45753835610605453,208904.86142343242,4.776736471156541,11.885070373838898,1.0886574583632154,5.523328396543898,2.841204093649109,0.2501686574103876,0.0918465383138652,-0.026507590439510124,2.1758916960636703,1.2748796340831579,1.0
-        1.0,1.9733014370518274,0.45753835610605453,208904.86142343242,4.776736471156541,11.885070373838898,1.0886574583632154,5.523328396543898,2.841204093649109,0.2501686574103876,0.0918465383138652,-0.026507590439510124,2.1758916960636703,1.2748796340831579,1.0
-        0.0,1.9733014370518274,0.45753835610605453,208904.86142343242,4.776736471156541,11.885070373838898,1.0886574583632154,5.523328396543898,2.841204093649109,0.2501686574103876,0.0918465383138652,-0.026507590439510124,2.1758916960636703,1.2748796340831579,1.0
-        ```
+- L'utente prosegue confermando il dataset.
 
-Tuttavia, il backend potrebbe aver bisogno di tempo per calcolare le statistiche, quindi questa interazione dovrebbe essere asincrona, nel senso che non si deve bloccare l'interfaccia utente in attesa della risposta.
+  `PUT /projects/{project-code}/questionnaire/2`
+
+  - body:
+
+    ```json
+    {
+      "answer_ids": [
+        {
+          "code": "yes",
+          "question_code": "DatasetConfirmation",
+          "project_code": "p-1"
+        }
+      ]
+    }
+    ```
 
 ### Features View
 
@@ -183,33 +232,31 @@ Quando la pagina è caricata:
 
   ```csv
   feature,missing_values,min,max,mean,std,1st_percentile,2nd_percentile,3rd_percentile,type,values,distribution,output,sensitive
-  age,0,0.0,4.0,1.7695369510415284,1.266784781771372,1.0,2.0,3.0,integer,"[0, 1, 2, 3, 4]","{'0.0 - 0.4': 8441, '0.4 - 0.8': 0, '0.8 - 1.2': 12074, '1.2 - 1.6': 0, '1.6 - 2.0': 0, '2.0 - 2.4': 11472, '2.4 - 2.8': 0, '2.8 - 3.2': 7936, '3.2 - 3.6': 0, '3.6 - 4.0': 5299}",False,False
-  workclass,0,,,,,,,,categorical,"['Federal-gov', 'Local-gov', 'Private', 'Self-emp-inc', 'Self-emp-not-inc', 'State-gov', 'Without-pay']","{'Private': 33307, 'Self-emp-not-inc': 3796, 'Local-gov': 3100, 'State-gov': 1946, 'Self-emp-inc': 1646, 'Federal-gov': 1406, 'Without-pay': 21, 'Never-worked': 0}",False,False
-  fnlwgt,0,13492.0,1490400.0,189734.7343107337,105639.19513422118,117388.25,178316.0,237926.0,float,,"{'13492.0 - 161182.8': 18701, '161182.8 - 308873.6': 20916, '308873.6 - 456564.4': 4803, '456564.4 - 604255.2': 604, '604255.2 - 751946.0': 140, '751946.0 - 899636.8': 32, '899636.8 - 1047327.6': 12, '1047327.6 - 1195018.4': 7, '1195018.4 - 1342709.2': 3, '1342709.2 - 1490400.0': 4}",False,False
-  education,0,,,,,,,,categorical,"['10th', '11th', '12th', '1st-4th', '5th-6th', '7th-8th', '9th', 'Assoc-acdm', 'Assoc-voc', 'Bachelors', 'Doctorate', 'HS-grad', 'Masters', 'Preschool', 'Prof-school', 'Some-college']","{'HS-grad': 14783, 'Some-college': 9899, 'Bachelors': 7570, 'Masters': 2514, 'Assoc-voc': 1959, '11th': 1619, 'Assoc-acdm': 1507, '10th': 1223, '7th-8th': 823, 'Others': 3325}",False,False
-  education-num,0,1.0,16.0,10.118460041572686,2.5528811950758743,9.0,10.0,13.0,integer,"[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]","{'1.0 - 2.5': 294, '2.5 - 4.0': 449, '4.0 - 5.5': 1499, '5.5 - 7.0': 1223, '7.0 - 8.5': 2196, '8.5 - 10.0': 14783, '10.0 - 11.5': 11858, '11.5 - 13.0': 1507, '13.0 - 14.5': 10084, '14.5 - 16.0': 1329}",False,False
-  marital-status,0,,,,,,,,categorical,"['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Married-spouse-absent', 'Never-married', 'Separated', 'Widowed']","{'Married-civ-spouse': 21055, 'Never-married': 14598, 'Divorced': 6297, 'Separated': 1411, 'Widowed': 1277, 'Married-spouse-absent': 552, 'Married-AF-spouse': 32}",False,False
-  occupation,0,,,,,,,,categorical,"['Adm-clerical', 'Armed-Forces', 'Craft-repair', 'Exec-managerial', 'Farming-fishing', 'Handlers-cleaners', 'Machine-op-inspct', 'Other-service', 'Priv-house-serv', 'Prof-specialty', 'Protective-serv', 'Sales', 'Tech-support', 'Transport-moving']","{'Craft-repair': 6020, 'Prof-specialty': 6008, 'Exec-managerial': 5984, 'Adm-clerical': 5540, 'Sales': 5408, 'Other-service': 4808, 'Machine-op-inspct': 2970, 'Transport-moving': 2316, 'Handlers-cleaners': 2046, 'Others': 4122}",False,False
-  relationship,0,,,,,,,,categorical,"['Husband', 'Not-in-family', 'Other-relative', 'Own-child', 'Unmarried', 'Wife']","{'Husband': 18666, 'Not-in-family': 11702, 'Own-child': 6626, 'Unmarried': 4788, 'Wife': 2091, 'Other-relative': 1349}",False,False
-  race,0,,,,,,,,categorical,"['Amer-Indian-Eskimo', 'Asian-Pac-Islander', 'Black', 'Other', 'White']","{'White': 38903, 'Black': 4228, 'Asian-Pac-Islander': 1303, 'Amer-Indian-Eskimo': 435, 'Other': 353}",False,True
-  sex,0,,,,,,,,binary,"['Female', 'Male']","{'Male': 30527, 'Female': 14695}",False,True
-  capitalgain,0,0.0,4.0,0.20505506169563487,0.7561768730118918,0.0,0.0,0.0,integer,"[0, 1, 2, 3, 4]","{'0.0 - 0.4': 41432, '0.4 - 0.8': 0, '0.8 - 1.2': 981, '1.2 - 1.6': 0, '1.6 - 2.0': 0, '2.0 - 2.4': 1221, '2.4 - 2.8': 0, '2.8 - 3.2': 502, '3.2 - 3.6': 0, '3.6 - 4.0': 1086}",False,False
-  capitalloss,0,0.0,4.0,0.1165583123258591,0.5605390667662566,0.0,0.0,0.0,integer,"[0, 1, 2, 3, 4]","{'0.0 - 0.4': 43082, '0.4 - 0.8': 0, '0.8 - 1.2': 360, '1.2 - 1.6': 0, '1.6 - 2.0': 0, '2.0 - 2.4': 723, '2.4 - 2.8': 0, '2.8 - 3.2': 763, '3.2 - 3.6': 0, '3.6 - 4.0': 294}",False,False
-  hoursperweek,0,0.0,4.0,1.98805890938039,0.8752176175356808,2.0,2.0,2.0,integer,"[0, 1, 2, 3, 4]","{'0.0 - 0.4': 3602, '0.4 - 0.8': 0, '0.8 - 1.2': 5198, '1.2 - 1.6': 0, '1.6 - 2.0': 0, '2.0 - 2.4': 26149, '2.4 - 2.8': 0, '2.8 - 3.2': 8684, '3.2 - 3.6': 0, '3.6 - 4.0': 1589}",False,False
-  native-country,0,,,,,,,,categorical,"['Cambodia', 'Canada', 'China', 'Columbia', 'Cuba', 'Dominican-Republic', 'Ecuador', 'El-Salvador', 'England', 'France', 'Germany', 'Greece', 'Guatemala', 'Haiti', 'Holand-Netherlands', 'Honduras', 'Hong', 'Hungary', 'India', 'Iran', 'Ireland', 'Italy', 'Jamaica', 'Japan', 'Laos', 'Mexico', 'Nicaragua', 'Outlying-US(Guam-USVI-etc)', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto-Rico', 'Scotland', 'South', 'Taiwan', 'Thailand', 'Trinadad&Tobago', 'United-States', 'Vietnam', 'Yugoslavia']","{'United-States': 41292, 'Mexico': 903, 'Philippines': 283, 'Germany': 193, 'Puerto-Rico': 175, 'Canada': 163, 'El-Salvador': 147, 'India': 147, 'Cuba': 133, 'Others': 1786}",False,False
-  class,0,,,,,,,,binary,"['<=50K', '>50K']","{'<=50K': 34014, '>50K': 11208}",True,False
+  age,0,0.0,4.0,1.7695369510415284,1.266784781771372,1.0,2.0,3.0,integer,"[0, 1, 2, 3, 4]","{'keys': ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2', '1.2 - 1.6', '1.6 - 2.0', '2.0 - 2.4', '2.4 - 2.8', '2.8 - 3.2', '3.2 - 3.6', '3.6 - 4.0'], 'values': array([ 8441,     0, 12074,     0,     0, 11472,     0,  7936,     0,
+          5299])}",False,False
+  workclass,0,,,,,,,,categorical,"['Federal-gov', 'Local-gov', 'Private', 'Self-emp-inc', 'Self-emp-not-inc', 'State-gov', 'Without-pay']","{'keys': ['Private', 'Self-emp-not-inc', 'Local-gov', 'State-gov', 'Self-emp-inc', 'Federal-gov', 'Without-pay', 'Never-worked'], 'values': [33307, 3796, 3100, 1946, 1646, 1406, 21, 0]}",False,False
+  fnlwgt,0,13492.0,1490400.0,189734.7343107337,105639.19513422118,117388.25,178316.0,237926.0,float,,"{'keys': ['13492.0 - 161182.8', '161182.8 - 308873.6', '308873.6 - 456564.4', '456564.4 - 604255.2', '604255.2 - 751946.0', '751946.0 - 899636.8', '899636.8 - 1047327.6', '1047327.6 - 1195018.4', '1195018.4 - 1342709.2', '1342709.2 - 1490400.0'], 'values': array([18701, 20916,  4803,   604,   140,    32,    12,     7,     3,
+          4])}",False,False
+  education,0,,,,,,,,categorical,"['10th', '11th', '12th', '1st-4th', '5th-6th', '7th-8th', '9th', 'Assoc-acdm', 'Assoc-voc', 'Bachelors', 'Doctorate', 'HS-grad', 'Masters', 'Preschool', 'Prof-school', 'Some-college']","{'keys': ['HS-grad', 'Some-college', 'Bachelors', 'Masters', 'Assoc-voc', '11th', 'Assoc-acdm', '10th', '7th-8th', 'Others'], 'values': [14783, 9899, 7570, 2514, 1959, 1619, 1507, 1223, 823, 3325]}",False,False
+  education-num,0,1.0,16.0,10.118460041572686,2.5528811950758743,9.0,10.0,13.0,integer,"[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]","{'keys': ['1.0 - 2.5', '2.5 - 4.0', '4.0 - 5.5', '5.5 - 7.0', '7.0 - 8.5', '8.5 - 10.0', '10.0 - 11.5', '11.5 - 13.0', '13.0 - 14.5', '14.5 - 16.0'], 'values': array([  294,   449,  1499,  1223,  2196, 14783, 11858,  1507, 10084,
+          1329])}",False,False
+  marital-status,0,,,,,,,,categorical,"['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Married-spouse-absent', 'Never-married', 'Separated', 'Widowed']","{'keys': ['Married-civ-spouse', 'Never-married', 'Divorced', 'Separated', 'Widowed', 'Married-spouse-absent', 'Married-AF-spouse'], 'values': [21055, 14598, 6297, 1411, 1277, 552, 32]}",False,False
+  occupation,0,,,,,,,,categorical,"['Adm-clerical', 'Armed-Forces', 'Craft-repair', 'Exec-managerial', 'Farming-fishing', 'Handlers-cleaners', 'Machine-op-inspct', 'Other-service', 'Priv-house-serv', 'Prof-specialty', 'Protective-serv', 'Sales', 'Tech-support', 'Transport-moving']","{'keys': ['Craft-repair', 'Prof-specialty', 'Exec-managerial', 'Adm-clerical', 'Sales', 'Other-service', 'Machine-op-inspct', 'Transport-moving', 'Handlers-cleaners', 'Others'], 'values': [6020, 6008, 5984, 5540, 5408, 4808, 2970, 2316, 2046, 4122]}",False,False
+  relationship,0,,,,,,,,categorical,"['Husband', 'Not-in-family', 'Other-relative', 'Own-child', 'Unmarried', 'Wife']","{'keys': ['Husband', 'Not-in-family', 'Own-child', 'Unmarried', 'Wife', 'Other-relative'], 'values': [18666, 11702, 6626, 4788, 2091, 1349]}",False,False
+  race,0,,,,,,,,categorical,"['Amer-Indian-Eskimo', 'Asian-Pac-Islander', 'Black', 'Other', 'White']","{'keys': ['White', 'Black', 'Asian-Pac-Islander', 'Amer-Indian-Eskimo', 'Other'], 'values': [38903, 4228, 1303, 435, 353]}",False,True
+  sex,0,,,,,,,,binary,"['Female', 'Male']","{'keys': ['Male', 'Female'], 'values': [30527, 14695]}",False,True
+  capitalgain,0,0.0,4.0,0.20505506169563487,0.7561768730118918,0.0,0.0,0.0,integer,"[0, 1, 2, 3, 4]","{'keys': ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2', '1.2 - 1.6', '1.6 - 2.0', '2.0 - 2.4', '2.4 - 2.8', '2.8 - 3.2', '3.2 - 3.6', '3.6 - 4.0'], 'values': array([41432,     0,   981,     0,     0,  1221,     0,   502,     0,
+          1086])}",False,False
+  capitalloss,0,0.0,4.0,0.1165583123258591,0.5605390667662566,0.0,0.0,0.0,integer,"[0, 1, 2, 3, 4]","{'keys': ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2', '1.2 - 1.6', '1.6 - 2.0', '2.0 - 2.4', '2.4 - 2.8', '2.8 - 3.2', '3.2 - 3.6', '3.6 - 4.0'], 'values': array([43082,     0,   360,     0,     0,   723,     0,   763,     0,
+          294])}",False,False
+  hoursperweek,0,0.0,4.0,1.98805890938039,0.8752176175356808,2.0,2.0,2.0,integer,"[0, 1, 2, 3, 4]","{'keys': ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2', '1.2 - 1.6', '1.6 - 2.0', '2.0 - 2.4', '2.4 - 2.8', '2.8 - 3.2', '3.2 - 3.6', '3.6 - 4.0'], 'values': array([ 3602,     0,  5198,     0,     0, 26149,     0,  8684,     0,
+          1589])}",False,False
+  native-country,0,,,,,,,,categorical,"['Cambodia', 'Canada', 'China', 'Columbia', 'Cuba', 'Dominican-Republic', 'Ecuador', 'El-Salvador', 'England', 'France', 'Germany', 'Greece', 'Guatemala', 'Haiti', 'Holand-Netherlands', 'Honduras', 'Hong', 'Hungary', 'India', 'Iran', 'Ireland', 'Italy', 'Jamaica', 'Japan', 'Laos', 'Mexico', 'Nicaragua', 'Outlying-US(Guam-USVI-etc)', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto-Rico', 'Scotland', 'South', 'Taiwan', 'Thailand', 'Trinadad&Tobago', 'United-States', 'Vietnam', 'Yugoslavia']","{'keys': ['United-States', 'Mexico', 'Philippines', 'Germany', 'Puerto-Rico', 'Canada', 'El-Salvador', 'India', 'Cuba', 'Others'], 'values': [41292, 903, 283, 193, 175, 163, 147, 147, 133, 1786]}",False,False
+  class,0,,,,,,,,binary,"['<=50K', '>50K']","{'keys': ['<=50K', '>50K'], 'values': [34014, 11208]}",True,False
+
   ```
 
-<mark>Si è proposta la seguente modifica al campo distribution:
-
-```
-"{'keys': ['0.0 - 0.4', '0.4 - 0.8', '0.8 - 1.2',... ], 'values': [8441, 0, 12074,... ]}"
-```
-
-In codice seguente si sono corretti i code
-</mark>
-
-- `GET /projects/{project-code}/questionnaire/2`
+- `GET /projects/{project-code}/questionnaire/3`
 
   - risposta:
 
@@ -224,14 +271,14 @@ In codice seguente si sono corretti i code
       "answers": [
         {
           "id": {
-            "code": "age-sensitive" // da usare come ID della checkbox
+            "code": "feature1-sensitive" // da usare come ID della checkbox
           },
           "description": null,
           "selected": false
         },
         {
           "id": {
-            "code": "age-output"
+            "code": "feature1-target"
           },
           "description": null,
           "selected": false
@@ -241,35 +288,33 @@ In codice seguente si sono corretti i code
     }
     ```
 
-Una volta selezionate le caratteristiche sensibili e di output, al clic sul pulsante "Continue":
+Una volta selezionate le caratteristiche sensibili e di target, al clic sul pulsante "Continue":
 
-- `PUT /projects/{project-code}/questionnaire/2`
+- `PUT /projects/{project-code}/questionnaire/3`
 
   - possibile body:
 
-<mark>Corretta la struttura con code</mark>
-
-```json
-{
-  "answer_ids": [
+    ```json
     {
-      "code": "sex-sensitive"
-    },
-    {
-      "code": "race-sensitive"
-    },
-    {
-      "code": "class-output"
+      "answer_ids": [
+        {
+          "code": "sex-sensitive"
+        },
+        {
+          "code": "race-sensitive"
+        },
+        {
+          "code": "class-target"
+        }
+      ]
     }
-  ]
-}
-```
+    ```
 
-        Vengono inviati solo gli ID delle checkbox selezionate nel POST.
+    Vengono inviati solo gli ID delle checkbox selezionate nel POST.
 
 ### Dependencies View:
 
-- `GET /projects/{project-code}/questionnaire/3`
+- `GET /projects/{project-code}/questionnaire/4`
 
   - risposta:
 
@@ -304,7 +349,6 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
   ```json
   "{correlation matrix in formato vettoriale}"
 
-
   // ad esempio '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" stroke="black" stroke-width="3" fill="lightblue" /></svg>'
   ```
 
@@ -314,7 +358,6 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
   ```json
   "{dependency graph in formato vettoriale}"
-
 
   // analogo a sopra
   ```
@@ -459,7 +502,7 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
   2.  si prosegue dando (l'unica, in questo caso) risposta alla domanda del questionario
 
-      `PUT /projects/{project-code}/questionnaire/3`
+      `PUT /projects/{project-code}/questionnaire/4`
 
       - body, sempre così (è l'unica risposta possibile)
 
@@ -479,61 +522,132 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
 ### Detection View
 
-- `GET /projects/{project-code}/questionnaire/4`
+- `GET /projects/{project-code}/questionnaire/5`
+
+      -   risposta:
+
+      ```json
+      {
+          "id": {
+              "code": "Detection",
+              "project_code": "p-1"
+          },
+          "text": "Select the fairness metrics and the features to check.",
+          "type": "multiple", // risposta multipla, quindi checkbox
+          "answers": [
+              {
+                  "id": {
+                      "code": "AverageOdds",
+                      "question_code": "Detection",
+                      "project_code": "p-1"
+                  },
+                  "text": "Average Absolute Odds", // valore da visualizzare a fianco della checkbox
+                  "description": "The Average Absolute Odds Difference (AAOD) is a metric used ...", // descrizione da mostrare eventualmente tramite hover
+                  "selected": false
+              },
+              {
+                  "id": {
+                      "code": "DisparateImpact",
+                      "question_code": "Detection",
+                      "project_code": "p-1"
+                  },
+                  "text": "Disparate Impact",
+                  "description": "Disparate Impact (DI) examines ...",
+                  "selected": false
+              },
+              {
+                  "id": {
+                      "code": "EqualOpportunity",
+                      "question_code": "Detection",
+                      "project_code": "p-1"
+                  },
+                  "text": "Equal Opportunity",
+                  "description": "The Equal Opportunity Difference (EOD) measures ...",
+                  "selected": false
+              },
+              {
+                  "id": {
+                      "code": "StatisticalParityDifference",
+                      "question_code": "Detection",
+                      "project_code": "p-1"
+                  },
+                  "text": "Statistical Parity Difference",
+                  "description": "Statistical Parity Difference (SPD) measures the difference between ...",
+                  "selected": false
+              }
+          ],
+          "created_at": "2024-11-12T10:00:09.611719"
+      }
+      ```
+
+- Ottengo le features dal backend per popolare la schermata (in particolare le sensitive features)
+
+  `GET /projects/{project-code}/context?key=features__custom-1`
 
   - risposta:
 
   ```json
   {
-    "id": {
-      "code": "Detection",
-      "project_code": "p-1"
+    "age": {
+      "target": false,
+      "sensitive": false
     },
-    "text": "Select the fairness metrics and the features to check.",
-    "type": "multiple", // risposta multipla, quindi checkbox
-    "answers": [
-      {
-        "id": {
-          "code": "AverageOdds",
-          "question_code": "Detection",
-          "project_code": "p-1"
-        },
-        "text": "Average Absolute Odds", // valore da visualizzare a fianco della checkbox
-        "description": "The Average Absolute Odds Difference (AAOD) is a metric used ...", // descrizione da mostrare eventualmente tramite hover
-        "selected": false
-      },
-      {
-        "id": {
-          "code": "DisparateImpact",
-          "question_code": "Detection",
-          "project_code": "p-1"
-        },
-        "text": "Disparate Impact",
-        "description": "Disparate Impact (DI) examines ...",
-        "selected": false
-      },
-      {
-        "id": {
-          "code": "EqualOpportunity",
-          "question_code": "Detection",
-          "project_code": "p-1"
-        },
-        "text": "Equal Opportunity",
-        "description": "The Equal Opportunity Difference (EOD) measures ...",
-        "selected": false
-      },
-      {
-        "id": {
-          "code": "StatisticalParityDifference",
-          "question_code": "Detection",
-          "project_code": "p-1"
-        },
-        "text": "Statistical Parity Difference",
-        "description": "Statistical Parity Difference (SPD) measures the difference between ...",
-        "selected": false
-      }
-    ],
-    "created_at": "2024-11-12T10:00:09.611719"
+    "workclass": {
+      "target": false,
+      "sensitive": false
+    },
+    "fnlwgt": {
+      "target": false,
+      "sensitive": false
+    },
+    "education": {
+      "target": false,
+      "sensitive": false
+    },
+    "education-num": {
+      "target": false,
+      "sensitive": false
+    },
+    "marital-status": {
+      "target": false,
+      "sensitive": false
+    },
+    "occupation": {
+      "target": false,
+      "sensitive": false
+    },
+    "relationship": {
+      "target": false,
+      "sensitive": false
+    },
+    "race": {
+      "target": false,
+      "sensitive": true
+    },
+    "sex": {
+      "target": false,
+      "sensitive": true
+    },
+    "capitalgain": {
+      "target": false,
+      "sensitive": false
+    },
+    "capitalloss": {
+      "target": false,
+      "sensitive": false
+    },
+    "hoursperweek": {
+      "target": false,
+      "sensitive": false
+    },
+    "native-country": {
+      "target": false,
+      "sensitive": false
+    },
+    "class": {
+      "target": true,
+      "sensitive": false
+    }
   }
   ```
 
@@ -779,7 +893,7 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
   2.  si seleziona la risposta alla domanda del questionario
 
-      `PUT /projects/{project-code}/questionnaire/4`
+      `PUT /projects/{project-code}/questionnaire/5`
 
       - il body della request deve contenere gli ID delle risposte selezionate (in questo caso, le metriche prese in considerazione), per esempio:
 
@@ -804,7 +918,7 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
 ### Data Mitigation View
 
-- `GET /projects/{project-code}/questionnaire/5`
+- `GET /projects/{project-code}/questionnaire/6`
 
   - risposta:
 
@@ -864,7 +978,7 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
 - l'utente seleziona il radio button dell'algoritmo scelto:
 
-  - `PUT /projects/{project-code}/questionnaire/5`
+  - `PUT /projects/{project-code}/questionnaire/6`
 
     - body: l'ID dell'algoritmo scelto
 
@@ -965,7 +1079,6 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
         ```json
         "{correlation matrix in formato vettoriale}"
 
-
         // ad esempio '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" stroke="black" stroke-width="3" fill="lightblue" /></svg>'
         ```
 
@@ -975,7 +1088,6 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
         ```json
         "{dependency graph in formato vettoriale}"
-
 
         // analogo a sopra
         ```
@@ -993,7 +1105,7 @@ Una volta selezionate le caratteristiche sensibili e di output, al clic sul puls
 
 Semplice schermata in cui si chiede se si vuole fare un nuovo pre-processing o andare avanti con in-processing.
 
-- `GET /projects/{project-code}/questionnaire/6`
+- `GET /projects/{project-code}/questionnaire/7`
 
   - risposta:
 
@@ -1043,7 +1155,7 @@ Semplice schermata in cui si chiede se si vuole fare un nuovo pre-processing o a
 
 - l'utente seleziona il radio button, dopodichè cliccando su "Continue":
 
-  1.  `PUT /projects/{project-code}/questionnaire/6`
+  1.  `PUT /projects/{project-code}/questionnaire/7`
 
       - body supponendo di voler passare all'in-processing:
 
@@ -1089,4 +1201,4 @@ DELETE /projects/{project-code}/questionnaire/{nth}
 
 dove **{nth}** è l'indice della domanda nel questionario che si vuole eliminare, per tornare alla domanda precedente.
 
-> Se si vuole tornare indietro di più schermate (tramite la breadcrumb ad esempio), è necessario effettuare più DELETE, una per ogni schermata/domanda. Ad esempio, se si vuole passare dalla **Detection View** alla **Features View**, è necessario effettuare in ordine: `DELETE /projects/{project-code}/questionnaire/4` e `DELETE /projects/{project-code}/questionnaire/3`.
+> Se si vuole tornare indietro di più schermate (tramite la breadcrumb ad esempio), è necessario effettuare più DELETE, una per ogni schermata/domanda. Ad esempio, se si vuole passare dalla **Detection View** alla **Features View**, è necessario effettuare in ordine: `DELETE /projects/{project-code}/questionnaire/5` e `DELETE /projects/{project-code}/questionnaire/4`.
