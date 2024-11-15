@@ -1,25 +1,55 @@
 // move json types here
 
-export type Answers = {
+export type AnswerResponse = {
   id: {
     code: string; // ID della risposta lato backend
+    question_code?: string; // ID della domanda lato backend
+    project_code?: string; // Codice del progetto
   };
   text: string; // Nome intelleggibile del dataset
-  description?: string; // Descrizione breve del dataset
-  select: boolean; // Indica se è selezionato
+  description: string | null; // Descrizione breve del dataset
+  selected: boolean; // Indica se è selezionato
+  details: {
+    [key: string]: string | number; // Dettagli del dataset
+  };
 };
 
 export type QuestionnaireResponse = {
   id: {
     code: string; // ID della view lato backend
+    project_code: string; // Codice del progetto
   };
-  description: string; // Descrizione lunga della view
   text: string; // Titolo della pagina
   type: string; // Metadato che indica che alla fine verrà selezionato un solo elemento
-  answers: Answers[]; // Array di risposte
+  answers: AnswerResponse[]; // Array di risposte
 };
 
-export type ContextResponse = {
-  // todo
-  details?: Array<{ key: string; value: string }>; // Aggiunta della proprietà 'details'
+type AttributeDataResponse = {
+  correlation: number;
+  suggested_proxy: string;
 };
+
+export type ProxyDataResponse = Record<
+  string,
+  Record<string, AttributeDataResponse>
+>;
+
+export type MetricsResponse<T = {}> = Record<
+  string,
+  Condition<T>[] | undefined
+>;
+
+type Condition<T> = {
+  when: T; // Condizione dinamica (può avere proprietà opzionali)
+  value: number | string; // valore che può essere un numero o "NaN" (stringa)
+};
+
+type AttributeDataParams = {
+  correlation: number;
+  proxy: string;
+};
+
+export type ProxyDataParams = Record<
+  string,
+  Record<string, AttributeDataParams>
+>;
