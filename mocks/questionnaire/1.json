@@ -1,34 +1,55 @@
 {
   "id": {
-    "code": "p-1-DatasetSelection"
+    "code": "DatasetSelection",
+    "project_code": "p-1"
   },
   "text": "Choose a dataset or load your own.",
-  "description": "Select a dataset from the list below or load your own.",
   "type": "single",
   "answers": [
     {
       "id": {
-        "code": "p-1-AdultDataset"
+        "code": "AdultDataset",
+        "question_code": "DatasetSelection",
+        "project_code": "p-1"
       },
       "text": "Adult Census Income Dataset",
-      "description": "This dataset contains information about adults and their income.",
-      "select": true
+      "description": "Predict whether income exceeds $50K/yr based on census data.",
+      "selected": false,
+      "details": {
+        "created": "18 Oct 2024",
+        "size": "1.5MB",
+        "rows": 48842
+      }
     },
     {
       "id": {
-        "code": "p-1-BankDataset"
+        "code": "BreastCancerDataset",
+        "question_code": "DatasetSelection",
+        "project_code": "p-1"
       },
-      "text": "Bank Marketing Dataset",
-      "description": "This dataset contains information about adults and their income.",
-      "select": false
+      "text": "Breast Cancer Dataset",
+      "description": null,
+      "selected": false,
+      "details": {
+        "key": "value",
+        "size": "1.5MB",
+        "rows": 48842
+      }
     },
     {
       "id": {
-        "code": "p-1-Custom"
+        "code": "Custom",
+        "question_code": "DatasetSelection",
+        "project_code": "p-1"
       },
-      "text": "My custom dataset",
-      "description": "This dataset contains information about adults and their income.",
-      "select": false
+      "text": "Custom",
+      "description": "Load your own dataset.",
+      "selected": false,
+      "details": {
+        "key": "value",
+        "size": "1.5MB",
+        "rows": 48842
+      }
     }
   ]
 }

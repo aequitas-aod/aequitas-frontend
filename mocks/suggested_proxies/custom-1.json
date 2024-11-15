@@ -1,0 +1,118 @@
+{
+  "sex": {
+    "age": {
+      "correlation": 0.09,
+      "suggested_proxy": "true"
+    },
+    "workclass": {
+      "correlation": -0.01,
+      "suggested_proxy": "false"
+    },
+    "fnlwgt": {
+      "correlation": 0.03,
+      "suggested_proxy": "false"
+    },
+    "education": {
+      "correlation": 0.03,
+      "suggested_proxy": "false"
+    },
+    "education-num": {
+      "correlation": 0.01,
+      "suggested_proxy": "false"
+    },
+    "marital-status": {
+      "correlation": -0.38,
+      "suggested_proxy": "false"
+    },
+    "occupation": {
+      "correlation": -0.04,
+      "suggested_proxy": "false"
+    },
+    "relationship": {
+      "correlation": -0.17,
+      "suggested_proxy": "false"
+    },
+    "race": {
+      "correlation": -0.11,
+      "suggested_proxy": "false"
+    },
+    "capitalgain": {
+      "correlation": 0.07,
+      "suggested_proxy": "false"
+    },
+    "capitalloss": {
+      "correlation": 0.05,
+      "suggested_proxy": "false"
+    },
+    "hoursperweek": {
+      "correlation": 0.24,
+      "suggested_proxy": "false"
+    },
+    "native-country": {
+      "correlation": 0.01,
+      "suggested_proxy": "false"
+    },
+    "class": {
+      "correlation": -0.21,
+      "suggested_proxy": "false"
+    }
+  },
+  "mario": {
+    "age": {
+      "correlation": 0.09,
+      "suggested_proxy": "true"
+    },
+    "workclass": {
+      "correlation": -0.01,
+      "suggested_proxy": "false"
+    },
+    "fnlwgt": {
+      "correlation": 0.03,
+      "suggested_proxy": "false"
+    },
+    "education": {
+      "correlation": 0.03,
+      "suggested_proxy": "false"
+    },
+    "education-num": {
+      "correlation": 0.01,
+      "suggested_proxy": "false"
+    },
+    "marital-status": {
+      "correlation": -0.38,
+      "suggested_proxy": "false"
+    },
+    "occupation": {
+      "correlation": -0.04,
+      "suggested_proxy": "false"
+    },
+    "relationship": {
+      "correlation": -0.17,
+      "suggested_proxy": "false"
+    },
+    "race": {
+      "correlation": -0.11,
+      "suggested_proxy": "false"
+    },
+    "capitalgain": {
+      "correlation": 0.07,
+      "suggested_proxy": "false"
+    },
+    "capitalloss": {
+      "correlation": 0.05,
+      "suggested_proxy": "false"
+    },
+    "hoursperweek": {
+      "correlation": 0.24,
+      "suggested_proxy": "false"
+    },
+    "native-country": {
+      "correlation": 0.01,
+      "suggested_proxy": "false"
+    },
+    "class": {
+      "correlation": -0.21,
+      "suggested_proxy": "false"
+    }
+  }
+}

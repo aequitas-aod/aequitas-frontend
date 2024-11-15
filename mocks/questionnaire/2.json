@@ -1,0 +1,24 @@
+{
+  "id": {
+    "code": "FeatureView",
+    "project_code": "p-1"
+  },
+  "text": "Select target and sensitive features.",
+  "type": "multiple",
+  "answers": [
+    {
+      "id": {
+        "code": "age-sensitive"
+      },
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "age-output"
+      },
+      "description": null,
+      "selected": false
+    }
+  ]
+}
