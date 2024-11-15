@@ -10,6 +10,13 @@ export const sleep = (ms: number): Promise<void> => {
 };
 
 export const parseArrayOrObject = (value: string) => {
+  const number = Number(value);
+  // Se il valore non è un numero, ritorna il valore originale
+  // se no lo ritorno come numero a 3 decimali
+  if (!isNaN(number)) {
+    return number.toFixed(3);
+  }
+
   // Rimuovi gli spazi bianchi
   const trimmedValue = value.trim();
 
