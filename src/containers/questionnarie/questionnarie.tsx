@@ -9,6 +9,7 @@ import { DatasetChoicePage } from "../dataset-choice";
 import { FeaturesViewPage } from "../features-view";
 import { DependenciesPage } from "../dependencies";
 import { DatasetViewPage } from "../dataset-view";
+import { XProcessAlgorithmPage } from "../x-processing-alg";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
@@ -35,6 +36,9 @@ export default function QuestionnaireContainer() {
 
       {question === "5" && <DetectionPage onNext={onNext} />}
       {question === "6" && <DataMitigationPage onNext={onNext} />}
+      {/*question === "7" && (
+        <XProcessAlgorithmPage onNext={onNext} questionId={7} />
+      )*/}
     </div>
   );
 }

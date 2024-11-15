@@ -48,4 +48,13 @@ export const sidebarItems: SidebarItem[] = [
     longDescription:
       "Apply strategies to mitigate data issues and improve data quality.",
   },
+  {
+    /*
+    step: 7,
+    name: "X-Processing",
+    path: `questionnaire?question=7`,
+    longDescription:
+      "This section is used to detect issues or anomalies in your data.",
+  */
+  },
 ];
