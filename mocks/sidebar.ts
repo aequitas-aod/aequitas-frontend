@@ -27,6 +27,7 @@ export const sidebarItems: SidebarItem[] = [
     longDescription:
       "This section provides an overview of the features within your dataset.",
   },
+  /*
   {
     step: 4,
     name: "Dependencies",

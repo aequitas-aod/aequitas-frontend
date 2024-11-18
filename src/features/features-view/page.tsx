@@ -16,14 +16,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Papa from "papaparse";
 import { toast } from "@/hooks/use-toast";
 import { Histogram } from "@/components/molecules/Histogram";
-import { parseArrayOrObject, parseBoolean } from "@/lib/utils";
+import { processDataset } from "@/lib/utils";
 import { useMutationQuestionnaire } from "@/api/hooks";
-import { CsvData } from "@/types/types";
-
-// Tipo per i dati parsati, in cui ogni chiave ha un valore che può essere un booleano, un array, un oggetto, ecc.
-interface ParsedDataset {
-  [key: string]: string | boolean | string[] | Record<string, number>;
-}
+import { CsvData, ParsedDataset } from "@/types/types";
 
 export const FeaturesView = ({
   onNext,
@@ -74,47 +69,32 @@ export const FeaturesView = ({
   };
 
   useEffect(() => {
-    parseCsv(contextData);
-  }, [contextData]);
-
-  const parseCsv = (csv: string) => {
-    const result = Papa.parse<CsvData>(csv, {
-      header: true,
-      skipEmptyLines: true,
-    });
-
-    if (result.errors.length > 0) {
-      toast({
-        title: t("errors.parsing-csv"),
-        description: result.errors[0].message,
-        variant: "destructive",
+    const parseCsv = (csv: string) => {
+      const result = Papa.parse<CsvData>(csv, {
+        header: true,
+        skipEmptyLines: true,
       });
-    } else {
-      // Processa i dati e converte i valori booleani, array e oggetti
-      const processedData = result.data.map((row) => {
-        const updatedRow: ParsedDataset = {};
-        Object.keys(row).forEach((key) => {
-          let value: string | boolean = row[key]; // Assicurati che value possa essere una stringa o un booleano.
-          // Converte i valori booleani
-          value = parseBoolean(value);
-          if (typeof value === "boolean") {
-            updatedRow[key] = value;
-          }
 
-          if (typeof value === "string") {
-            const parsedValue = parseArrayOrObject(value);
-            updatedRow[key] = parsedValue;
-          }
-          // Gestisce il parsing di array/oggetti
+      if (result.errors.length > 0) {
+        toast({
+          title: t("errors.parsing-csv"),
+          description: result.errors[0].message,
+          variant: "destructive",
         });
-        return updatedRow;
-      });
-      setData(processedData);
-      if (result.data.length > 0) {
-        setColumns(Object.keys(result.data[0]));
+      } else {
+        // Processa i dati e converte i valori booleani, stringhe, array e oggetti
+        const processedData = processDataset(result.data);
+        setData(processedData);
+        if (result.data.length > 0) {
+          setColumns(Object.keys(result.data[0]));
+        }
       }
-    }
-  };
+    };
+
+    parseCsv(contextData);
+  }, [contextData, t]);
+
+  console.log(data);
 
   return (
     <QuestionnaireContent
@@ -146,38 +126,38 @@ export const FeaturesView = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((feature, rowIndex) => (
+          {data.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
-              {columns.map((key, colIndex) => (
+              {columns.map((col, colIndex) => (
                 <TableCell
-                  key={key}
-                  className={`text-center bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 ${
-                    key === "target" && "!bg-primary-200"
+                  key={col}
+                  className={`text-left bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 ${
+                    col === "target" && "!bg-primary-200"
                   } 
-              
-             
-                  
                   ${
-                    key === "sensitive" && "!bg-primary-300"
-                  } ${key === "feature" && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
+                    col === "sensitive" && "!bg-primary-300"
+                  } ${col === "feature" && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
                     colIndex !== columns.length - 1 && "border-r-2"
-                  }`}
+                  }
+                  ${typeof row[col] === "number" && "!text-right"}
+                  ${typeof row[col] === "boolean" && "!text-center"}
+                  `}
                 >
-                  {Array.isArray(feature[key]) ? (
-                    feature[key].join(", ")
-                  ) : key === "target" || key === "sensitive" ? (
+                  {Array.isArray(row[col]) ? (
+                    row[col].join(", ")
+                  ) : col === "target" || col === "sensitive" ? (
                     <Checkbox
-                      checked={feature[key] as boolean}
+                      checked={row[col] as boolean}
                       onCheckedChange={() =>
-                        handleCheckboxChange(rowIndex, key)
+                        handleCheckboxChange(rowIndex, col)
                       }
                       className="mr-4"
                       variant="outlined-black"
                     />
-                  ) : key === "distribution" ? (
-                    <Histogram data={feature[key] as Record<string, number>} />
+                  ) : col === "distribution" ? (
+                    <Histogram data={row[col] as Record<string, number>} />
                   ) : (
-                    feature[key]?.toString() || ""
+                    row[col]?.toString() || ""
                   )}
                 </TableCell>
               ))}

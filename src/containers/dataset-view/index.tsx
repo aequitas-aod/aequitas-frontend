@@ -27,6 +27,5 @@ export const DatasetViewPage = ({
     return <div>No data available</div>;
   }
 
-  console.log({ contextData });
   return <DatasetView onNext={onNext} contextData={contextData} />;
 };

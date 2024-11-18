@@ -1,3 +1,4 @@
+import { CsvData, ParsedDataset } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -9,7 +10,35 @@ export const sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-export const parseArrayOrObject = (value: string) => {
+/**
+ * Processa i dati del CSV, convertendo i valori booleani, array e oggetti.
+ * @param data - Array di oggetti rappresentanti le righe del CSV.
+ * @returns Array di oggetti elaborati.
+ */
+export const processDataset = (data: CsvData[]): ParsedDataset[] => {
+  return data.map((row) => {
+    const updatedRow: ParsedDataset = {};
+    Object.keys(row).forEach((key) => {
+      let value: string | boolean = row[key]; // Assicura che value sia una stringa o un booleano.
+
+      // Converte i valori booleani
+      value = parseBoolean(value);
+      if (typeof value === "boolean") {
+        updatedRow[key] = value;
+        return;
+      }
+
+      // Converte stringhe in array/oggetti, se necessario
+      if (typeof value === "string") {
+        const parsedValue = parseDatasetString(value);
+        updatedRow[key] = parsedValue;
+      }
+    });
+    return updatedRow;
+  });
+};
+
+export const parseDatasetString = (value: string) => {
   const number = Number(value);
   // Se il valore non è un numero, ritorna il valore originale
   // se no lo ritorno come numero a 3 decimali

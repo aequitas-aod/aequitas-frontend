@@ -9,7 +9,6 @@ import { DatasetChoicePage } from "../dataset-choice";
 import { FeaturesViewPage } from "../features-view";
 import { DependenciesPage } from "../dependencies";
 import { DatasetViewPage } from "../dataset-view";
-import { XProcessAlgorithmPage } from "../x-processing-alg";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
