@@ -62,13 +62,13 @@ export const DatasetView = ({
       className="!bg-neutral-50"
     >
       <div className="overflow-auto flex-grow bg-neutral-50">
-        <Table className="">
+        <Table>
           <TableHeader>
             <TableRow className="h-14">
               {columns.map((column, index) => (
                 <TableHead
                   key={index}
-                  className={`min-w-32 bg-neutral-100 text-center text-neutral-600 border-b-2
+                  className={`min-w-30 bg-neutral-100 text-center text-neutral-600 border-b-2
                 
                     ${index !== columns.length - 1 ? "border-r-2" : ""}`}
                 >
@@ -81,31 +81,32 @@ export const DatasetView = ({
           <TableBody className="bg-neutral-50 text-primary-950">
             {data.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="border-b">
-                {columns.map((col, colIndex) => (
-                  <TableCell
-                    key={colIndex}
-                    className={`min-h-14 border-b-2 border-neutral-100 py-4 px-4
+                {columns.map((col, colIndex) => {
+                  const cellContent = Array.isArray(row[col])
+                    ? row[col].join(", ")
+                    : row[col]?.toString() || "";
+
+                  const isTruncated = cellContent.length > 20;
+                  const displayedContent = isTruncated
+                    ? `${cellContent.slice(0, 20)}...`
+                    : cellContent;
+
+                  return (
+                    <TableCell
+                      key={colIndex}
+                      className={`min-h-14 border-b-2 border-neutral-100 py-4 px-4
                       
                   ${typeof row[col] === "number" && "!text-right"}
                   ${typeof row[col] === "boolean" && "!text-center"}
                   ${
                     colIndex !== 0 ? "border-l-2" : ""
                   } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
-                  >
-                    {Array.isArray(row[col]) ? (
-                      col === "distribution" ? (
-                        <div style={{ maxHeight: "100px" }}>
-                          {/* TODO: chart*/}
-                          {row[col].join(", !")}
-                        </div>
-                      ) : (
-                        row[col].join(", ")
-                      )
-                    ) : (
-                      row[col]?.toString() || ""
-                    )}
-                  </TableCell>
-                ))}
+                      title={isTruncated ? cellContent : ""}
+                    >
+                      {displayedContent}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             ))}
           </TableBody>
