@@ -1,0 +1,30 @@
+{
+  "n_prototypes": {
+    "label": "Number of Prototypes",
+    "description": "Size of the set of prototypes",
+    "type": "integer",
+    "default": 50,
+    "values": [10, 200]
+  },
+  "reconstruct_weight": {
+    "label": "Reconstruct Weight",
+    "description": "Weight coefficient on the reconstruct loss term",
+    "type": "float",
+    "default": 0.5,
+    "values": [0, 1]
+  },
+  "fairness_weight": {
+    "label": "Weight for Fairness loss",
+    "description": "Weight coefficient on the fairness loss term",
+    "type": "float",
+    "default": 0.5,
+    "values": [0, 1]
+  },
+  "random_state": {
+    "label": "Random State",
+    "description": "Seed for reproducibility",
+    "type": "categorical",
+    "default": 42,
+    "values": [0, 1, 42, 999]
+  }
+}

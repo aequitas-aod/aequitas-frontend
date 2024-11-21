@@ -35,6 +35,16 @@
       "submit": "Continue"
     }
   },
+  "data-mitigation": {
+    "title": "Choose your X-processing algorithm:",
+    "subtitle": "Available algorithms",
+    "buttons": {
+      "continue": "Continue"
+    },
+    "launch-algorithm": {
+      "no-selection": "Select an algorithm first."
+    }
+  },
   "dataset-view": {
     "buttons": {
       "continue": "Continue"

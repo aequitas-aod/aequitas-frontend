@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackendApi } from "./client";
 import {
   MetricsResponse,
+  PreprocessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
   QuestionnaireResponse,
@@ -122,6 +123,21 @@ export const useDependencyGraph = (dataset: string) => {
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
       return backendApi.getVectorialData(dataset, "dependency_graph");
+    },
+  });
+  return query;
+};
+
+// data-mitigation
+
+export const usePreprocessingHyperparameters = (dataset: string) => {
+  const query = useQuery<PreprocessingHyperparametersResponse>({
+    queryKey: ["preprocessing-hyperparameters", dataset],
+    queryFn: async () => {
+      return backendApi.getPreprocessingHyperparametersContext(
+        dataset,
+        "preprocessing-hyperparameters"
+      );
     },
   });
   return query;

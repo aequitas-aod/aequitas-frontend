@@ -39,6 +39,19 @@ export type MetricsResponse<T = {}> = Record<
   Condition<T>[] | undefined
 >;
 
+export type PreprocessingHyperparametersValue = {
+  label: string;
+  description: string;
+  type: string;
+  default: number;
+  values: string[];
+};
+
+export type PreprocessingHyperparametersResponse = Record<
+  string,
+  PreprocessingHyperparametersValue
+>;
+
 type Condition<T> = {
   when: T; // Condizione dinamica (può avere proprietà opzionali)
   value: number | string; // valore che può essere un numero o "NaN" (stringa)

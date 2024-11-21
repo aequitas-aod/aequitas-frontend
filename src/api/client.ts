@@ -1,6 +1,7 @@
 import { sleep } from "@/lib/utils";
 import {
   MetricsResponse,
+  PreprocessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
   QuestionnaireResponse,
@@ -51,6 +52,15 @@ export class BackendApi {
     dataset: string,
     key: string
   ): Promise<MetricsResponse> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
+    return require(`../../mocks/${key}/${dataset}.json`);
+  }
+
+  async getPreprocessingHyperparametersContext(
+    dataset: string,
+    key: string
+  ): Promise<PreprocessingHyperparametersResponse> {
     await sleep(500);
     console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
     return require(`../../mocks/${key}/${dataset}.json`);

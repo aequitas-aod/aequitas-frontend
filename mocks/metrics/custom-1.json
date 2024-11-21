@@ -12,21 +12,21 @@
         "sex": "Male",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.79876472674682
     },
     {
       "when": {
         "sex": "Female",
         "class": "<=50K"
       },
-      "value": 0.7756136532154777
+      "value": 0.8756136532154777
     },
     {
       "when": {
         "sex": "Female",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.79876472674682
     },
     {
       "when": {
@@ -40,7 +40,7 @@
         "race": "White",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.39876472674682
     },
     {
       "when": {
@@ -54,7 +54,7 @@
         "race": "Black",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.99876472674682
     },
     {
       "when": {
@@ -68,7 +68,7 @@
         "race": "Asian-Pac-Islander",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.79876472674682
     },
     {
       "when": {
@@ -82,7 +82,7 @@
         "race": "Amer-Indian-Eskimo",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 1.0476472674682
     },
     {
       "when": {
@@ -96,7 +96,7 @@
         "race": "Other",
         "class": ">50K"
       },
-      "value": "NaN"
+      "value": 0.79876472674682
     }
   ],
   "statistical_parity_difference": [
