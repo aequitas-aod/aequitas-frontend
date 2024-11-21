@@ -18,13 +18,14 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export const Histogram = ({ data }: { data: Record<string, number> }) => {
+  console.log({ data });
   const chartData = Object.entries(data).map(([key, desktop]) => ({
     key,
     desktop,
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-[100px]">
+    <ChartContainer config={chartConfig} className="h-[120px]">
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
