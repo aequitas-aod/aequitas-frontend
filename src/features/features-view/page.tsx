@@ -94,8 +94,6 @@ export const FeaturesView = ({
     parseCsv(contextData);
   }, [contextData, t]);
 
-  console.log(data);
-
   return (
     <QuestionnaireContent
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
@@ -118,9 +116,7 @@ export const FeaturesView = ({
                   key === "feature" && "!bg-neutral-50"
                 } ${colIndex !== columns.length - 1 && "border-r-2"}`}
               >
-                {key === "feature"
-                  ? ""
-                  : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key === "feature" ? "" : key}
               </TableHead>
             ))}
           </TableRow>
@@ -128,39 +124,55 @@ export const FeaturesView = ({
         <TableBody>
           {data.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
-              {columns.map((col, colIndex) => (
-                <TableCell
-                  key={col}
-                  className={`text-left bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 ${
-                    col === "target" && "!bg-primary-200"
-                  } 
-                  ${
-                    col === "sensitive" && "!bg-primary-300"
-                  } ${col === "feature" && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
-                    colIndex !== columns.length - 1 && "border-r-2"
-                  }
-                  ${typeof row[col] === "number" && "!text-right"}
-                  ${typeof row[col] === "boolean" && "!text-center"}
-                  `}
-                >
-                  {Array.isArray(row[col]) ? (
-                    row[col].join(", ")
-                  ) : col === "target" || col === "sensitive" ? (
-                    <Checkbox
-                      checked={row[col] as boolean}
-                      onCheckedChange={() =>
-                        handleCheckboxChange(rowIndex, col)
-                      }
-                      className="mr-4"
-                      variant="outlined-black"
-                    />
-                  ) : col === "distribution" ? (
-                    <Histogram data={row[col] as Record<string, number>} />
-                  ) : (
-                    row[col]?.toString() || ""
-                  )}
-                </TableCell>
-              ))}
+              {columns.map((col, colIndex) => {
+                const cellContent = Array.isArray(row[col])
+                  ? row[col].join(", ")
+                  : row[col]?.toString() || "";
+
+                const isTruncated =
+                  cellContent.length > 20 &&
+                  col !== "feature" &&
+                  col !== "target" &&
+                  col !== "sensitive" &&
+                  col !== "distribution";
+
+                const displayedContent = isTruncated
+                  ? `${cellContent.slice(0, 20)}...`
+                  : cellContent;
+
+                return (
+                  <TableCell
+                    key={col}
+                    className={`text-left bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 px-6 ${
+                      col === "target" && "!bg-primary-200"
+                    } 
+            ${col === "sensitive" && "!bg-primary-300"}
+            ${col === "feature" && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
+              colIndex !== columns.length - 1 && "border-r-2"
+            }
+            ${col === "distribution" && "!px-1"}
+            ${typeof row[col] === "number" && "!text-right"}
+            ${typeof row[col] === "boolean" && "!text-center"}
+            `}
+                    title={isTruncated ? cellContent : ""}
+                  >
+                    {col === "target" || col === "sensitive" ? (
+                      <Checkbox
+                        checked={row[col] as boolean}
+                        onCheckedChange={() =>
+                          handleCheckboxChange(rowIndex, col)
+                        }
+                        className="mr-4"
+                        variant="outlined-black"
+                      />
+                    ) : col === "distribution" ? (
+                      <Histogram data={row[col] as Record<string, number>} />
+                    ) : (
+                      displayedContent
+                    )}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           ))}
         </TableBody>
