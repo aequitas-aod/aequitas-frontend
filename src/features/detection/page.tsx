@@ -10,7 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export const DetectionPage = ({ onNext }: { onNext: () => void }) => {
+export const Detection = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("feature-view");
   const [enabled, setEnabled] = useState(false);
   const [selectedGraph, setSelectedGraph] = useState<string | null>(null); // Stato per selezionare un grafico
