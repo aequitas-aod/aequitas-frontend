@@ -6,17 +6,23 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireContent } from "@/containers/layout";
 
-import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
-import { DatasetPreview } from "./dataset-preview";
+import type {
+  AnswerResponse,
+  PreprocessingHyperparametersResponse,
+  QuestionnaireResponse,
+} from "@/api/types";
+import { LaunchAlgorithm } from "./launch-algorithm";
 
-export const XProcessAlgorithm = ({
+export const DataMitigation = ({
   data,
   onNext,
+  formData,
 }: {
   data: QuestionnaireResponse;
   onNext: () => void;
+  formData: PreprocessingHyperparametersResponse;
 }) => {
-  const t = useTranslations("dataset-choice");
+  const t = useTranslations("data-mitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
 
   const options = data.answers;
@@ -48,7 +54,7 @@ export const XProcessAlgorithm = ({
           </Button>
         }
       >
-        <div className="flex space-x-4 items-center justify-center py-5 bg-primary-600 text-primary-50 rounded-t-md">
+        <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
           <div id="dataset-selection" className="flex-1">
             <p className="text-base text-primary-950 font-extrabold">
               {t("title")}
@@ -66,10 +72,9 @@ export const XProcessAlgorithm = ({
             </RadioGroup>
           </div>
           <div id="dataset-preview" className="flex-1">
-            <DatasetPreview
+            <LaunchAlgorithm
+              formData={selected ? formData : {}}
               title={selected?.text}
-              description={selected?.description || ""}
-              details={selected?.details}
             />
           </div>
         </div>
