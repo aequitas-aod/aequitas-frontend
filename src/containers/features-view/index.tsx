@@ -27,6 +27,5 @@ export const FeaturesViewPage = ({
     return <div>No data available</div>;
   }
 
-  console.log({ contextData });
   return <FeaturesView onNext={onNext} contextData={contextData} />;
 };
