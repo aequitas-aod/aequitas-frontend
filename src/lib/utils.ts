@@ -43,7 +43,12 @@ export const parseDatasetString = (value: string) => {
   // Se il valore non è un numero, ritorna il valore originale
   // se no lo ritorno come numero a 3 decimali
   if (!isNaN(number)) {
-    return number.toFixed(3);
+    if (Number.isInteger(number)) {
+      return number;
+    }
+
+    // Altrimenti, ritorna il numero arrotondato a 3 decimali
+    return parseFloat(number.toFixed(3));
   }
 
   // Rimuovi gli spazi bianchi
