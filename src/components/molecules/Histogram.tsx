@@ -1,8 +1,14 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  YAxis,
+} from "recharts";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -10,18 +16,23 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-} satisfies ChartConfig;
+const generateChartConfig = (data: Record<string, number>): ChartConfig => {
+  const config: ChartConfig = {};
+  Object.keys(data).forEach((key) => {
+    config[key] = {
+      label: key,
+      color: "var(--chart-1)",
+    };
+  });
+  return config;
+};
 
 export const Histogram = ({ data }: { data: Record<string, number> }) => {
-  console.log({ data });
-  const chartData = Object.entries(data).map(([key, desktop]) => ({
+  const chartConfig = generateChartConfig(data);
+
+  const chartData = Object.entries(data).map(([key, value]) => ({
     key,
-    desktop,
+    value,
   }));
 
   return (
@@ -33,13 +44,10 @@ export const Histogram = ({ data }: { data: Record<string, number> }) => {
           tickLine={false}
           tickMargin={10}
           axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
+          hide
         />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent hideLabel />}
-        />
-        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+        <Bar dataKey="value" fill="var(--chart-1)" radius={4}></Bar>{" "}
       </BarChart>
     </ChartContainer>
   );
