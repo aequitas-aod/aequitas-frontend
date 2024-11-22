@@ -39,6 +39,9 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
 };
 
 export const parseDatasetString = (value: string) => {
+  if (value.trim() === "") {
+    return "-";
+  }
   const number = Number(value);
   // Se il valore non è un numero, ritorna il valore originale
   // se no lo ritorno come numero a 3 decimali
