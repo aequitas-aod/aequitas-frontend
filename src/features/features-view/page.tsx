@@ -158,8 +158,8 @@ export const FeaturesView = ({
             }
             ${col === DISTRIBUTION && "!px-1"}
 
-            ${typeof row[col] === "number" && "!text-right"}
-            ${(typeof row[col] === "boolean" || row[col] === "-") && "!text-center"}
+           ${(typeof row[col] === "number" || row[col] === "-") && "!text-right"}
+            ${typeof row[col] === "boolean" && "!text-center"}
             `}
                     title={isTruncated ? cellContent : ""}
                   >

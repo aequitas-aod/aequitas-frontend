@@ -97,8 +97,8 @@ export const DatasetView = ({
                       key={colIndex}
                       className={`min-h-14 border-b-2 border-neutral-100 py-4 px-4
                       
-                  ${typeof row[col] === "number" && "!text-right"}
-                  ${(typeof row[col] === "boolean" || row[col] === "-") && "!text-center"}
+                  ${(typeof row[col] === "number" || row[col] === "-") && "!text-right"}
+                  ${typeof row[col] === "boolean" && "!text-center"}
                   ${
                     colIndex !== 0 ? "border-l-2" : ""
                   } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
