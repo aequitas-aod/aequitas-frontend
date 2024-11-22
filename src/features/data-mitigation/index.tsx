@@ -71,12 +71,11 @@ export const DataMitigation = ({
               ))}
             </RadioGroup>
           </div>
-          <div id="dataset-preview" className="flex-1">
-            <LaunchAlgorithm
-              formData={selected ? formData : {}}
-              title={selected?.text}
-            />
-          </div>
+          {selected && (
+            <div id="dataset-preview" className="flex-1">
+              <LaunchAlgorithm formData={formData} title={selected.text} />
+            </div>
+          )}
         </div>
       </QuestionnaireContent>
     </>

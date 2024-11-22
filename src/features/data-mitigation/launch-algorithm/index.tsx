@@ -22,7 +22,7 @@ export const LaunchAlgorithm = ({
   formData,
   title,
 }: {
-  title?: string;
+  title: string;
   formData: PreprocessingHyperparametersResponse;
 }) => {
   const t = useTranslations("data-mitigation");
