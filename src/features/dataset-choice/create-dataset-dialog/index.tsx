@@ -139,9 +139,9 @@ export const CreateDatasetDialog = ({
                     {t("create-custom-dataset-dialog.upload-file")}
                   </p>
                   <Input
-                    id="json"
+                    id="csv"
                     type="file"
-                    accept=".json"
+                    accept=".csv"
                     onChange={handleFileChange}
                     ref={fileInputRef}
                     className="hidden"
