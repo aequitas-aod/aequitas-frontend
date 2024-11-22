@@ -9,8 +9,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FeatureName } from "@/containers/detection";
+import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 
-export const Detection = ({ onNext }: { onNext: () => void }) => {
+export const Detection = ({
+  onNext,
+  data,
+}: {
+  onNext: () => void;
+  data: FeatureName[];
+}) => {
   const t = useTranslations("feature-view");
   const [selectedGraph, setSelectedGraph] = useState<string | null>(null); // Stato per selezionare un grafico
   const [featureData, setFeatureData] = useState<Feature[]>(features);
@@ -43,29 +51,45 @@ export const Detection = ({ onNext }: { onNext: () => void }) => {
       className="!bg-white"
     >
       <div className="flex p-2 h-full">
-        <div className="w-60 p-6">
+        <div className="w-90 p-6">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             Detect bias in the data
           </p>
 
-          {featureData.map((feature) => (
-            <Accordion key={feature.name} type="single" collapsible>
+          {data?.map((feature) => (
+            <Accordion key={feature.text} type="single" collapsible>
               <AccordionItem value="item-1">
                 <AccordionTrigger>
                   <div className="flex items-center justify-between gap-4">
                     <div className="bg-primary-400 py-1 px-2.5 rounded-lg text-white">
-                      30
+                      {Object.keys(feature.value).length}
                     </div>
-                    {feature.name}
+                    {feature.text}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent>{feature.name}</AccordionContent>
+                <AccordionContent>
+                  {/*Object.entries(feature.value).map(
+                    ([attributeKey, attributeData]) => (
+                      <FeatureCheckbox
+                        key={attributeKey}
+                        attributeKey={attributeKey}
+                        attributeData={attributeData}
+                        featureKey={featureKey}
+                        featureIndex={Object.entries(attributes).findIndex(
+                          ([key]) => key === attributeKey
+                        )}
+                        onCheckboxChange={handleCheckboxChange}
+                        totalItems={Object.entries(attributes).length}
+                      />
+                    )
+                  )*/}
+                </AccordionContent>
               </AccordionItem>
             </Accordion>
           ))}
         </div>
         <div className="flex flex-1 flex-col p-4 bg-neutral-100 gap-4 rounded">
-          {graphs.map((graph) => (
+          {/*graphs.map((graph) => (
             <div
               key={graph.key}
               onClick={() => handleGraphClick(graph.key)}
@@ -82,7 +106,7 @@ export const Detection = ({ onNext }: { onNext: () => void }) => {
                 Grafico Aequitas
               </div>
             </div>
-          ))}
+          ))*/}
         </div>
       </div>
     </QuestionnaireContent>
