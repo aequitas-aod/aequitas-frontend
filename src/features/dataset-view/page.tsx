@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { processDataset } from "@/lib/utils";
 import { CsvData, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
+import { TRUNCATE_TEXT } from "@/config/constants";
 
 export const DatasetView = ({
   onNext,
@@ -86,9 +87,9 @@ export const DatasetView = ({
                     ? row[col].join(", ")
                     : row[col]?.toString() || "";
 
-                  const isTruncated = cellContent.length > 20;
+                  const isTruncated = cellContent.length > TRUNCATE_TEXT;
                   const displayedContent = isTruncated
-                    ? `${cellContent.slice(0, 20)}...`
+                    ? `${cellContent.slice(0, TRUNCATE_TEXT)}...`
                     : cellContent;
 
                   return (
@@ -97,7 +98,7 @@ export const DatasetView = ({
                       className={`min-h-14 border-b-2 border-neutral-100 py-4 px-4
                       
                   ${typeof row[col] === "number" && "!text-right"}
-                  ${typeof row[col] === "boolean" && "!text-center"}
+                  ${(typeof row[col] === "boolean" || row[col] === "-") && "!text-center"}
                   ${
                     colIndex !== 0 ? "border-l-2" : ""
                   } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}

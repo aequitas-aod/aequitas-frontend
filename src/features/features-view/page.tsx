@@ -19,6 +19,13 @@ import { Histogram } from "@/components/molecules/Histogram";
 import { processDataset } from "@/lib/utils";
 import { useMutationQuestionnaire } from "@/api/hooks";
 import { CsvData, ParsedDataset } from "@/types/types";
+import {
+  TARGET,
+  TRUNCATE_TEXT,
+  SENSITIVE,
+  DISTRIBUTION,
+  FEATURE_NAME,
+} from "@/config/constants";
 
 export const FeaturesView = ({
   onNext,
@@ -106,12 +113,11 @@ export const FeaturesView = ({
               <TableHead
                 key={key}
                 className={`text-center bg-neutral-100 text-neutral-400 border-b-2 border-neutral-200 px-6 ${
-                  key === "target" && "!bg-primary-950 !text-white !px-0 !w-16"
+                  key === TARGET && "!bg-primary-950 !text-white !px-0 !w-16"
                 } ${
-                  key === "sensitive" &&
-                  "!bg-primary-900 !text-white !w-16 !px-0"
+                  key === SENSITIVE && "!bg-primary-900 !text-white !w-16 !px-0"
                 } 
-                  ${key === "distribution" && "!w-[600px]"}
+                  ${key === DISTRIBUTION && "!w-[600px]"}
                 ${
                   key === "feature" && "!bg-neutral-50"
                 } ${colIndex !== columns.length - 1 && "border-r-2"}`}
@@ -130,33 +136,34 @@ export const FeaturesView = ({
                   : row[col]?.toString() || "";
 
                 const isTruncated =
-                  cellContent.length > 20 &&
-                  col !== "feature" &&
-                  col !== "target" &&
-                  col !== "sensitive" &&
-                  col !== "distribution";
+                  cellContent.length > TRUNCATE_TEXT &&
+                  col !== FEATURE_NAME &&
+                  col !== TARGET &&
+                  col !== SENSITIVE &&
+                  col !== DISTRIBUTION;
 
                 const displayedContent = isTruncated
-                  ? `${cellContent.slice(0, 20)}...`
+                  ? `${cellContent.slice(0, TRUNCATE_TEXT)}...`
                   : cellContent;
 
                 return (
                   <TableCell
                     key={col}
-                    className={`text-left bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 px-6 ${
-                      col === "target" && "!bg-primary-200"
+                    className={`bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 px-6 ${
+                      col === TARGET && "!bg-primary-200"
                     } 
-            ${col === "sensitive" && "!bg-primary-300"}
-            ${col === "feature" && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
+            ${col === SENSITIVE && "!bg-primary-300"}
+            ${col === FEATURE_NAME && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
               colIndex !== columns.length - 1 && "border-r-2"
             }
-            ${col === "distribution" && "!px-1"}
+            ${col === DISTRIBUTION && "!px-1"}
+
             ${typeof row[col] === "number" && "!text-right"}
-            ${typeof row[col] === "boolean" && "!text-center"}
+            ${(typeof row[col] === "boolean" || row[col] === "-") && "!text-center"}
             `}
                     title={isTruncated ? cellContent : ""}
                   >
-                    {col === "target" || col === "sensitive" ? (
+                    {col === TARGET || col === SENSITIVE ? (
                       <Checkbox
                         checked={row[col] as boolean}
                         onCheckedChange={() =>
@@ -165,7 +172,7 @@ export const FeaturesView = ({
                         className="mr-4"
                         variant="outlined-black"
                       />
-                    ) : col === "distribution" ? (
+                    ) : col === DISTRIBUTION ? (
                       <Histogram data={row[col] as Record<string, number>} />
                     ) : (
                       displayedContent
