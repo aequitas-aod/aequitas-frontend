@@ -14,13 +14,11 @@
       },
       "text": "Adult Census Income Dataset",
       "description": "This is a custom dataset uploaded by the user.",
-
       "selected": false,
       "details": {
         "size": 4.8,
         "rows": 48842,
         "columns": 15,
-        "description": "This is a custom dataset uploaded by the user.",
         "created-at": "2024-11-12T10:00:09.611719"
       }
     },
@@ -37,7 +35,6 @@
         "size": 4.8,
         "rows": 48842,
         "columns": 15,
-        "description": "This is a custom dataset uploaded by the user.",
         "created-at": "2024-11-12T10:00:09.611719"
       }
     },
@@ -54,7 +51,6 @@
         "size": 4.8,
         "rows": 48842,
         "columns": 15,
-        "description": "This is a custom dataset uploaded by the user.",
         "created-at": "2024-11-12T10:00:09.611719"
       }
     }
