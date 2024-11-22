@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/utils";
 import {
+  FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
   ProxyDataParams,
@@ -46,6 +47,15 @@ export class BackendApi {
     console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
     const csvData = (await import(`../../mocks/${key}/${dataset}.ts`)).default;
     return csvData;
+  }
+
+  async getFeaturesContext(
+    dataset: string,
+    key: string
+  ): Promise<FeaturesResponse> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
+    return require(`../../mocks/${key}/${dataset}.json`);
   }
 
   async getMetricsContext(
