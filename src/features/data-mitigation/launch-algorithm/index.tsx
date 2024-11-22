@@ -1,16 +1,22 @@
-import {
-  PreprocessingHyperparametersResponse,
-  PreprocessingHyperparametersValue,
-} from "@/api/types";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 
-import React, { Fragment } from "react";
-import { Form, FormItem, FormLabel } from "@/components/ui/form";
+import type {
+  PreprocessingHyperparametersResponse,
+  PreprocessingHyperparametersValue,
+} from "@/api/types";
 
 export const LaunchAlgorithm = ({
   formData,
@@ -20,61 +26,80 @@ export const LaunchAlgorithm = ({
   formData: PreprocessingHyperparametersResponse;
 }) => {
   const t = useTranslations("data-mitigation");
-  // Create a form based on the configuration
-  const form = useForm({
-    // resolver: zodResolver(FormSchema), // Assuming a validation schema exists
-    defaultValues: Object.keys(formData).reduce((acc, key) => {
-      acc[key] = formData[key].default;
-      return acc;
-    }, {}),
-  });
+  const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {};
+  const onSubmit = (data: any) => {
+    console.log("Form Data:", data);
+  };
 
-  // Dynamic field rendering
-  const renderField = (
-    key: string,
-    fieldConfig: PreprocessingHyperparametersValue
+  const renderInput = (
+    name: string,
+    config: PreprocessingHyperparametersValue
   ) => {
-    const { label, type, values, default: defaultValue } = fieldConfig;
-
-    switch (type) {
+    switch (config.type) {
       case "integer":
-        return (
-          <Fragment key={key}>
-            <FormItem>
-              <FormLabel>{label}</FormLabel>
-              <Input
-                type="number"
-                {...form.register(key)}
-                defaultValue={defaultValue}
-              />
-            </FormItem>
-          </Fragment>
-        );
-
       case "float":
         return (
-          <Fragment key={key}>
-            <FormItem>
-              <FormLabel>{label}</FormLabel>
-              <Input
-                type="number"
-                step="0.01"
-                {...form.register(key)}
-                defaultValue={defaultValue}
-              />
-            </FormItem>
-          </Fragment>
+          <Controller
+            name={name}
+            control={control}
+            defaultValue={config.default}
+            render={({ field }) => (
+              <div className="space-y-2">
+                <Label htmlFor={name}>{config.label}</Label>
+                <Input
+                  {...field}
+                  id={name}
+                  type="number"
+                  step={config.type === "float" ? "any" : "1"}
+                  min={config.values[0]}
+                  max={config.values[1]}
+                />
+                <p className="text-sm text-muted-foreground">
+                  {config.description}
+                </p>
+              </div>
+            )}
+          />
         );
-
       case "categorical":
-        return <Fragment key={key}></Fragment>;
-
+        return (
+          <Controller
+            name={name}
+            control={control}
+            defaultValue={config.default}
+            render={({ field }) => (
+              <div className="space-y-2">
+                <Label htmlFor={name}>{config.label}</Label>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={
+                    field.value?.toString() || config.default.toString()
+                  }
+                >
+                  <SelectTrigger id={name}>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {config.values.map((value) => (
+                      <SelectItem key={value} value={value.toString()}>
+                        {value}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-sm text-muted-foreground">
+                  {config.description}
+                </p>
+              </div>
+            )}
+          />
+        );
       default:
         return null;
     }
   };
+
   return (
     <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
       {title ? (
@@ -84,19 +109,12 @@ export const LaunchAlgorithm = ({
           {t("launch-algorithm.no-selection")}
         </p>
       )}
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 h-full"
-        >
-          {/* Dynamically render each field based on the configuration */}
-          {Object.keys(formData).map((key) => renderField(key, formData[key]))}
-
-          <div className="flex justify-end mt-auto">
-            <Button type="submit">Submit</Button>
-          </div>
-        </form>
-      </Form>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {Object.entries(formData).map(([key, config]) => (
+          <div key={key}>{renderInput(key, config)}</div>
+        ))}
+        <Button type="submit">Run</Button>
+      </form>
     </div>
   );
 };
