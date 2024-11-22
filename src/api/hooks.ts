@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackendApi } from "./client";
 import {
+  FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
   ProxyDataParams,
@@ -87,6 +88,17 @@ export const useStatsContext = (dataset: string) => {
 };
 
 // detection view
+
+// detection view
+export const useFeaturesContext = (dataset: string) => {
+  const query = useQuery<FeaturesResponse>({
+    queryKey: ["features", dataset],
+    queryFn: async () => {
+      return backendApi.getFeaturesContext(dataset, "features");
+    },
+  });
+  return query;
+};
 export const useMetricsContext = (dataset: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
