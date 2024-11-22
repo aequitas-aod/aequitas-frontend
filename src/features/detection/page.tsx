@@ -12,7 +12,6 @@ import {
 
 export const Detection = ({ onNext }: { onNext: () => void }) => {
   const t = useTranslations("feature-view");
-  const [enabled, setEnabled] = useState(false);
   const [selectedGraph, setSelectedGraph] = useState<string | null>(null); // Stato per selezionare un grafico
   const [featureData, setFeatureData] = useState<Feature[]>(features);
 
@@ -32,26 +31,6 @@ export const Detection = ({ onNext }: { onNext: () => void }) => {
         { key: "high", value: 0 },
       ],
     },
-    {
-      feature: "feature1",
-      key: "graph-2",
-      title: "SP(Y=y1 | FS1)",
-      histogram: [
-        { key: "low", value: 0 },
-        { key: "medium", value: 0 },
-        { key: "high", value: 0 },
-      ],
-    },
-    {
-      feature: "feature1",
-      key: "graph-3",
-      title: "SP(Y=y1 | FS1)",
-      histogram: [
-        { key: "low", value: 0 },
-        { key: "medium", value: 0 },
-        { key: "high", value: 0 },
-      ],
-    },
   ];
 
   const handleGraphClick = (graphKey: string) => {
@@ -60,11 +39,7 @@ export const Detection = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <QuestionnaireContent
-      action={
-        <Button onClick={onContinue} disabled={!enabled}>
-          {t("buttons.continue")}
-        </Button>
-      }
+      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-white"
     >
       <div className="flex p-2 h-full">

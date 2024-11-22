@@ -1,0 +1,51 @@
+{
+  "id": {
+    "code": "Detection",
+    "project_code": "p-1"
+  },
+  "text": "Select the fairness metrics and the features to check.",
+  "type": "multiple",
+  "answers": [
+    {
+      "id": {
+        "code": "AverageOdds",
+        "question_code": "Detection",
+        "project_code": "p-1"
+      },
+      "text": "Average Absolute Odds",
+      "description": "The Average Absolute Odds Difference (AAOD) is a metric used ...",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "DisparateImpact",
+        "question_code": "Detection",
+        "project_code": "p-1"
+      },
+      "text": "Disparate Impact",
+      "description": "Disparate Impact (DI) examines ...",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "EqualOpportunity",
+        "question_code": "Detection",
+        "project_code": "p-1"
+      },
+      "text": "Equal Opportunity",
+      "description": "The Equal Opportunity Difference (EOD) measures ...",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "StatisticalParityDifference",
+        "question_code": "Detection",
+        "project_code": "p-1"
+      },
+      "text": "Statistical Parity Difference",
+      "description": "Statistical Parity Difference (SPD) measures the difference between ...",
+      "selected": false
+    }
+  ],
+  "created_at": "2024-11-12T10:00:09.611719"
+}
