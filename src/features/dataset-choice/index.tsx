@@ -70,13 +70,15 @@ export const DatasetChoice = ({
               ))}
             </RadioGroup>
           </div>
-          <div id="dataset-preview" className="flex-1">
-            <DatasetPreview
-              title={selected?.text}
-              description={selected?.description || ""}
-              details={selected?.details}
-            />
-          </div>
+          {selected && (
+            <div className="flex-1">
+              <DatasetPreview
+                title={selected.text}
+                description={selected.description || ""}
+                details={selected.details}
+              />
+            </div>
+          )}
         </div>
       </QuestionnaireContent>
     </>
