@@ -13,12 +13,15 @@
         "project_code": "p-1"
       },
       "text": "Adult Census Income Dataset",
-      "description": "Predict whether income exceeds $50K/yr based on census data.",
+      "description": "This is a custom dataset uploaded by the user.",
+
       "selected": false,
       "details": {
-        "created": "18 Oct 2024",
-        "size": "1.5MB",
-        "rows": 48842
+        "size": 4.8,
+        "rows": 48842,
+        "columns": 15,
+        "description": "This is a custom dataset uploaded by the user.",
+        "created-at": "2024-11-12T10:00:09.611719"
       }
     },
     {
@@ -31,9 +34,11 @@
       "description": null,
       "selected": false,
       "details": {
-        "key": "value",
-        "size": "1.5MB",
-        "rows": 48842
+        "size": 4.8,
+        "rows": 48842,
+        "columns": 15,
+        "description": "This is a custom dataset uploaded by the user.",
+        "created-at": "2024-11-12T10:00:09.611719"
       }
     },
     {
@@ -46,9 +51,11 @@
       "description": "Load your own dataset.",
       "selected": false,
       "details": {
-        "key": "value",
-        "size": "1.5MB",
-        "rows": 48842
+        "size": 4.8,
+        "rows": 48842,
+        "columns": 15,
+        "description": "This is a custom dataset uploaded by the user.",
+        "created-at": "2024-11-12T10:00:09.611719"
       }
     }
   ]
