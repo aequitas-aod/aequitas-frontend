@@ -39,6 +39,14 @@ export type MetricsResponse<T = {}> = Record<
   Condition<T>[] | undefined
 >;
 
+export type FeaturesResponse = Record<
+  string,
+  {
+    target: boolean;
+    sensitive: boolean;
+  }
+>;
+
 export type PreprocessingHyperparametersValue = {
   label: string;
   description: string;
