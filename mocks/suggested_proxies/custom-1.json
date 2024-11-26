@@ -1,8 +1,70 @@
 {
+  "race": {
+    "age": {
+      "correlation": -0.02,
+      "suggested_proxy": "false"
+    },
+    "workclass": {
+      "correlation": 0.04,
+      "suggested_proxy": "false"
+    },
+    "fnlwgt": {
+      "correlation": 0.11,
+      "suggested_proxy": "false"
+    },
+    "education": {
+      "correlation": 0.01,
+      "suggested_proxy": "false"
+    },
+    "education-num": {
+      "correlation": -0.08,
+      "suggested_proxy": "false"
+    },
+    "marital-status": {
+      "correlation": 0.13,
+      "suggested_proxy": "false"
+    },
+    "occupation": {
+      "correlation": 0.04,
+      "suggested_proxy": "false"
+    },
+    "relationship": {
+      "correlation": 0.12,
+      "suggested_proxy": "false"
+    },
+    "race": {
+      "correlation": 1.0,
+      "suggested_proxy": "true"
+    },
+    "sex": {
+      "correlation": -0.12,
+      "suggested_proxy": "false"
+    },
+    "capitalgain": {
+      "correlation": -0.03,
+      "suggested_proxy": "false"
+    },
+    "capitalloss": {
+      "correlation": -0.03,
+      "suggested_proxy": "false"
+    },
+    "hoursperweek": {
+      "correlation": -0.06,
+      "suggested_proxy": "false"
+    },
+    "native-country": {
+      "correlation": 0.05,
+      "suggested_proxy": "false"
+    },
+    "class": {
+      "correlation": 0.1,
+      "suggested_proxy": "false"
+    }
+  },
   "sex": {
     "age": {
-      "correlation": 0.09,
-      "suggested_proxy": "true"
+      "correlation": 0.08,
+      "suggested_proxy": "false"
     },
     "workclass": {
       "correlation": -0.01,
@@ -17,7 +79,7 @@
       "suggested_proxy": "false"
     },
     "education-num": {
-      "correlation": 0.01,
+      "correlation": 0.0,
       "suggested_proxy": "false"
     },
     "marital-status": {
@@ -29,12 +91,16 @@
       "suggested_proxy": "false"
     },
     "relationship": {
-      "correlation": -0.17,
+      "correlation": -0.18,
       "suggested_proxy": "false"
     },
     "race": {
-      "correlation": -0.11,
+      "correlation": -0.12,
       "suggested_proxy": "false"
+    },
+    "sex": {
+      "correlation": 1.0,
+      "suggested_proxy": "true"
     },
     "capitalgain": {
       "correlation": 0.07,
@@ -53,7 +119,7 @@
       "suggested_proxy": "false"
     },
     "class": {
-      "correlation": -0.21,
+      "correlation": -0.22,
       "suggested_proxy": "false"
     }
   }
