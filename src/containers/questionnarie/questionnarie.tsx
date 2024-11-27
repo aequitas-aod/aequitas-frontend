@@ -26,7 +26,7 @@ export default function QuestionnaireContainer() {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <>
       {question === "1" && <DatasetChoicePage onNext={onNext} questionId={1} />}
       {question === "2" && <DatasetViewPage onNext={onNext} questionId={2} />}
       {question === "3" && <FeaturesViewPage onNext={onNext} questionId={3} />}
@@ -35,6 +35,6 @@ export default function QuestionnaireContainer() {
       {question === "6" && (
         <DataMitigationPage onNext={onNext} questionId={6} />
       )}
-    </div>
+    </>
   );
 }

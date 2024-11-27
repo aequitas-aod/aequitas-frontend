@@ -30,16 +30,14 @@ export default async function PrivateLayout({
 
   return (
     <div className="flex flex-col h-[100vh]">
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden p-4 gap-4">
         {/* Sidebar occupa tutta l'altezza disponibile */}
         <Sidebar menuItems={menuItems} />
 
         {/* Contenuto principale */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Contenuto scrollabile */}
-          <div className="flex-1 flex flex-col p-4 overflow-hidden">
-            {children}
-          </div>
+          {children}
         </div>
       </div>
       {/* Footer fisso in basso */}
