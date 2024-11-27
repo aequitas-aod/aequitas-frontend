@@ -6,6 +6,7 @@ import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { ProxyDataParams, ProxyDataResponse } from "@/api/types";
 import { useMutationProxies } from "@/api/hooks";
+import Image from "next/image";
 
 export const Dependencies = ({
   onNext,
@@ -72,24 +73,21 @@ export const Dependencies = ({
   return (
     <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
-      className="!bg-white"
+      className="!bg-white !overflow-hidden"
     >
       <div className="flex p-2 h-full">
-        <div className="flex flex-1 p-4 bg-neutral-100 grid grid-cols-2 grid-rows-2 gap-4 rounded">
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded">
-            Grafico Aequitas
-          </div>
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded">
-            Grafico Aequitas
-          </div>
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded">
-            Grafico Aequitas
-          </div>
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded">
-            Grafico Aequitas
+        <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
+          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
+            <Image
+              src="/images/4_2_correlation_matrix.png"
+              alt="Dependencies"
+              layout="fill"
+              objectFit="contain"
+              className="rounded"
+            />
           </div>
         </div>
-        <div className="w-[380px] p-6">
+        <div className="w-[380px] p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             Select possibly proxy features
           </p>
