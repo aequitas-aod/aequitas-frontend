@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { QuestionnaireContent } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/containers/layout";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
@@ -70,7 +70,7 @@ export const Dependencies = ({
   };
 
   return (
-    <QuestionnaireContent
+    <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-white"
     >
@@ -123,6 +123,6 @@ export const Dependencies = ({
           })}
         </div>
       </div>
-    </QuestionnaireContent>
+    </QuestionnaireLayout>
   );
 };

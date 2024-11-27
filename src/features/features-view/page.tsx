@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { QuestionnaireContent } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/containers/layout";
 import {
   TableHeader,
   TableRow,
@@ -102,7 +102,7 @@ export const FeaturesView = ({
   }, [contextData, t]);
 
   return (
-    <QuestionnaireContent
+    <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-neutral-50"
     >
@@ -184,6 +184,6 @@ export const FeaturesView = ({
           ))}
         </TableBody>
       </Table>
-    </QuestionnaireContent>
+    </QuestionnaireLayout>
   );
 };

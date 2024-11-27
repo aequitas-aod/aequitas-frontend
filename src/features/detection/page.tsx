@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { QuestionnaireContent } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/containers/layout";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Feature, features } from "../../../mocks/3/mock";
@@ -46,7 +46,7 @@ export const Detection = ({
   };
 
   return (
-    <QuestionnaireContent
+    <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-white"
     >
@@ -109,6 +109,6 @@ export const Detection = ({
           ))*/}
         </div>
       </div>
-    </QuestionnaireContent>
+    </QuestionnaireLayout>
   );
 };

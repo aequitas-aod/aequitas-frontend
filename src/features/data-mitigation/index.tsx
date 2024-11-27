@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
-import { QuestionnaireContent } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/containers/layout";
 
 import type {
   AnswerResponse,
@@ -43,7 +43,7 @@ export const DataMitigation = ({
 
   return (
     <>
-      <QuestionnaireContent
+      <QuestionnaireLayout
         action={
           <Button
             onClick={onContinue}
@@ -77,7 +77,7 @@ export const DataMitigation = ({
             </div>
           )}
         </div>
-      </QuestionnaireContent>
+      </QuestionnaireLayout>
     </>
   );
 };

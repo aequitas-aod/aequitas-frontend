@@ -29,11 +29,20 @@ export default async function PrivateLayout({
   setRequestLocale(locale);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex flex-1 p-4 space-x-4 h-screen">
+    <div className="flex flex-col h-[100vh]">
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar occupa tutta l'altezza disponibile */}
         <Sidebar menuItems={menuItems} />
-        <div className="w-full">{children}</div>
+
+        {/* Contenuto principale */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Contenuto scrollabile */}
+          <div className="flex-1 flex flex-col p-4 overflow-hidden">
+            {children}
+          </div>
+        </div>
       </div>
+      {/* Footer fisso in basso */}
       <Footer />
     </div>
   );

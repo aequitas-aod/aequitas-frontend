@@ -5,7 +5,7 @@ import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
-import { QuestionnaireContent } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/containers/layout";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { DatasetPreview } from "./dataset-preview";
@@ -38,7 +38,7 @@ export const DatasetChoice = ({
 
   return (
     <>
-      <QuestionnaireContent
+      <QuestionnaireLayout
         action={
           <Button
             onClick={onContinue}
@@ -53,7 +53,7 @@ export const DatasetChoice = ({
           <p>{t("create-custom-dataset")}</p>
           <CreateDatasetDialog onContinue={onNext} />
         </div>
-        <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
+        <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1 h-full">
           <div id="dataset-selection" className="flex-1">
             <p className="text-base text-primary-950 font-extrabold">
               {t("title")}
@@ -80,7 +80,7 @@ export const DatasetChoice = ({
             </div>
           )}
         </div>
-      </QuestionnaireContent>
+      </QuestionnaireLayout>
     </>
   );
 };
