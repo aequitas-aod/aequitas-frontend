@@ -1,4 +1,3 @@
-// components/FeatureAccordion.tsx
 import {
   Accordion,
   AccordionContent,

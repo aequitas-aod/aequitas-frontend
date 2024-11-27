@@ -8,10 +8,15 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export type FeatureName = {
-  text: string;
-  value: FeaturesResponse;
-};
+export type DetectionData = Record<
+  string,
+  Record<
+    string,
+    {
+      selected: string;
+    }
+  >
+>;
 
 export const DetectionPage: React.FC<QuestionnairePageProps> = ({
   questionId,
@@ -41,32 +46,27 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
     return <div>No data...</div>;
   }
 
-  // Filtrare solo le caratteristiche sensibili
+  // Filtra le chiavi con sensitive=true e assegna loro il valore false
   const sensitiveFeatures = Object.keys(featuresData)
-    .filter((key) => featuresData[key].sensitive) // Filtra le chiavi con sensitive = true
-    .reduce((obj, key) => {
-      obj[key] = featuresData[key]; // Aggiungi ogni chiave e valore a un nuovo oggetto
-      return obj;
-    }, {} as FeaturesResponse); // Usa il tipo FeaturesResponse per il risultato
+    .filter((key) => featuresData[key].sensitive === true)
+    .reduce(
+      (obj, key) => {
+        obj[key] = {
+          selected: "false",
+        };
+        return obj;
+      },
+      {} as Record<string, { selected: string }>
+    );
 
-  console.log(sensitiveFeatures);
+  const questionaireKeys: DetectionData = questionnaireData.answers.reduce(
+    (acc, answer) => {
+      const keys = Object.keys(answer);
+      acc = { ...acc, [answer.id.code]: sensitiveFeatures };
+      return acc;
+    },
+    {}
+  );
 
-  console.log(sensitiveFeatures);
-
-  console.log(sensitiveFeatures);
-
-  // per ogni text dentro questionnarieData, gli aggiungo come valore il valore di featuresData
-  const featureName: FeatureName[] = questionnaireData.answers
-    .map((question) => question.text)
-    .map((text) => {
-      return {
-        text,
-
-        value: sensitiveFeatures,
-      };
-    });
-
-  console.log(featureName);
-
-  return <Detection onNext={onNext} data={featureName} />;
+  return <Detection onNext={onNext} data={questionaireKeys} />;
 };

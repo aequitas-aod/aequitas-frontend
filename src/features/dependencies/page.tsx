@@ -98,7 +98,12 @@ export const Dependencies = ({
             return (
               <FeatureAccordion
                 key={featureKey}
-                featureKey={featureKey}
+                featureKey={
+                  featureKey
+                    .replace(/([a-z])([A-Z])/g, "$1 $2") // Aggiunge uno spazio tra lettere minuscole e maiuscole
+                    .toLowerCase() // Converte tutto in minuscolo
+                    .replace(/\b\w/g, (char) => char.toUpperCase()) // Rende la prima lettera di ogni parola maiuscola
+                }
                 suggestedCount={suggestedCount}
               >
                 {Object.entries(attributes).map(
@@ -106,13 +111,15 @@ export const Dependencies = ({
                     <FeatureCheckbox
                       key={attributeKey}
                       attributeKey={attributeKey}
-                      attributeData={attributeData}
+                      title={attributeKey.toUpperCase()}
                       featureKey={featureKey}
                       featureIndex={Object.entries(attributes).findIndex(
                         ([key]) => key === attributeKey
                       )}
                       onCheckboxChange={handleCheckboxChange}
+                      selectionStatus={attributeData.suggested_proxy}
                       totalItems={Object.entries(attributes).length}
+                      label={`${(attributeData.correlation * 100).toFixed(0)}%`}
                     />
                   )
                 )}

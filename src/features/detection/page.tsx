@@ -2,44 +2,43 @@ import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/containers/layout";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Feature, features } from "../../../mocks/3/mock";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { FeatureName } from "@/containers/detection";
+import { DetectionData } from "@/containers/detection";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
+import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 
 export const Detection = ({
   onNext,
   data,
 }: {
   onNext: () => void;
-  data: FeatureName[];
+  data: DetectionData;
 }) => {
   const t = useTranslations("feature-view");
-  const [selectedGraph, setSelectedGraph] = useState<string | null>(null); // Stato per selezionare un grafico
-  const [featureData, setFeatureData] = useState<Feature[]>(features);
+  const [selectedGraph, setSelectedGraph] = useState<string | null>(null);
+  const [featureData, setFeatureData] = useState<DetectionData>(data);
 
   const onContinue = () => {
     // fare la chiamata per salvare i dati
     onNext();
   };
 
-  const graphs = [
-    {
-      feature: "feature1",
-      key: "graph-1",
-      title: "SP(Y=y1 | FS1)",
-      histogram: [
-        { key: "low", value: 0 },
-        { key: "medium", value: 0 },
-        { key: "high", value: 0 },
-      ],
-    },
-  ];
+  const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
+    const updatedFeatureData = { ...featureData };
+
+    if (
+      updatedFeatureData[featureKey] &&
+      updatedFeatureData[featureKey][attributeKey]
+    ) {
+      updatedFeatureData[featureKey][attributeKey] = {
+        ...updatedFeatureData[featureKey][attributeKey],
+        selected:
+          updatedFeatureData[featureKey][attributeKey].selected === "true"
+            ? "false"
+            : "true",
+      };
+    }
+    setFeatureData(updatedFeatureData);
+  };
 
   const handleGraphClick = (graphKey: string) => {
     setSelectedGraph(selectedGraph === graphKey ? null : graphKey);
@@ -56,37 +55,40 @@ export const Detection = ({
             Detect bias in the data
           </p>
 
-          {data?.map((feature) => (
-            <Accordion key={feature.text} type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="bg-primary-400 py-1 px-2.5 rounded-lg text-white">
-                      {Object.keys(feature.value).length}
-                    </div>
-                    {feature.text}
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  {/*Object.entries(feature.value).map(
-                    ([attributeKey, attributeData]) => (
-                      <FeatureCheckbox
-                        key={attributeKey}
-                        attributeKey={attributeKey}
-                        attributeData={attributeData}
-                        featureKey={featureKey}
-                        featureIndex={Object.entries(attributes).findIndex(
-                          ([key]) => key === attributeKey
-                        )}
-                        onCheckboxChange={handleCheckboxChange}
-                        totalItems={Object.entries(attributes).length}
-                      />
-                    )
-                  )*/}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          ))}
+          {Object.entries(featureData).map(([featureKey, attributes]) => {
+            const suggestedCount = Object.entries(attributes).filter(
+              ([_, attributeData]) => attributeData
+            ).length;
+            return (
+              <FeatureAccordion
+                key={featureKey}
+                featureKey={
+                  featureKey
+                    .replace(/([a-z])([A-Z])/g, "$1 $2") // Aggiunge uno spazio tra lettere minuscole e maiuscole
+                    .toLowerCase() // Converte tutto in minuscolo
+                    .replace(/\b\w/g, (char) => char.toUpperCase()) // Rende la prima lettera di ogni parola maiuscola
+                }
+                suggestedCount={suggestedCount}
+              >
+                {Object.entries(attributes).map(
+                  ([attributeKey, attributeData]) => (
+                    <FeatureCheckbox
+                      key={attributeKey}
+                      attributeKey={attributeKey}
+                      featureKey={featureKey}
+                      featureIndex={Object.entries(attributes).findIndex(
+                        ([key]) => key === attributeKey
+                      )}
+                      onCheckboxChange={handleCheckboxChange}
+                      selectionStatus={attributeData.selected}
+                      totalItems={Object.entries(attributes).length}
+                      title={attributeKey.toUpperCase()}
+                    />
+                  )
+                )}
+              </FeatureAccordion>
+            );
+          })}
         </div>
         <div className="flex flex-1 flex-col p-4 bg-neutral-100 gap-4 rounded">
           {/*graphs.map((graph) => (
