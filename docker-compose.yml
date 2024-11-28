@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3123:80"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=xyp
+    mem_limit: "2g"
+    memswap_limit: "2g"
