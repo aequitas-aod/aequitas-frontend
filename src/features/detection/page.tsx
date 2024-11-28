@@ -23,20 +23,19 @@ export const Detection = ({
   };
 
   const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
-    const updatedFeatureData = { ...featureData };
-
-    if (
-      updatedFeatureData[featureKey] &&
-      updatedFeatureData[featureKey][attributeKey]
-    ) {
-      updatedFeatureData[featureKey][attributeKey] = {
-        ...updatedFeatureData[featureKey][attributeKey],
-        selected:
-          updatedFeatureData[featureKey][attributeKey].selected === "true"
-            ? "false"
-            : "true",
-      };
-    }
+    const updatedFeatureData = {
+      ...featureData,
+      [featureKey]: {
+        ...featureData[featureKey],
+        [attributeKey]: {
+          ...featureData[featureKey][attributeKey],
+          selected:
+            featureData[featureKey][attributeKey].selected === "true"
+              ? "false"
+              : "true",
+        },
+      },
+    };
     setFeatureData(updatedFeatureData);
   };
 
@@ -56,8 +55,9 @@ export const Detection = ({
           </p>
 
           {Object.entries(featureData).map(([featureKey, attributes]) => {
+            // devo prendere tutti gli attributi con selected = true
             const suggestedCount = Object.entries(attributes).filter(
-              ([_, attributeData]) => attributeData
+              ([_, attributeData]) => attributeData.selected === "true"
             ).length;
             return (
               <FeatureAccordion
