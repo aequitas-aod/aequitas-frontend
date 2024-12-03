@@ -101,7 +101,6 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
     items: ConditionResponse<T>[],
     mainKey: string
   ): Graph[] {
-    console.log({ items });
     const grouped: { [key: string]: { [label: string]: ClassValue[] } } = {};
 
     items.forEach((item) => {
@@ -130,8 +129,6 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
 
   // Convertiamo i dati
   const parsedData = parseData(metricsData);
-
-  console.log({ parsedData });
 
   // Filtra le chiavi con sensitive=true e assegna loro il valore false
   const sensitiveFeatures = Object.keys(featuresData)
