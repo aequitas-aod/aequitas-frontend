@@ -17,6 +17,7 @@ export interface IMenuItem extends SidebarItem {
 interface MenuItemProps {
   item: IMenuItemWithState;
   onInfoClick?: (item: IMenuItem) => void;
+  onNavigate: (path: number) => void;
 }
 
 const stateStyles = {
@@ -43,22 +44,22 @@ const stateStyles = {
   },
 };
 
-export const MenuItem = ({ item, onInfoClick }: MenuItemProps) => {
+export const MenuItem = ({ item, onInfoClick, onNavigate }: MenuItemProps) => {
   const { bg, border, text, hoverBg, fontWeight } = stateStyles[item.state];
   const isDisabled = item.state === "future";
 
   const [open, setOpen] = useState(false); // Stato per la dialog
-  const [navigateTo, setNavigateTo] = useState<string | null>(null); // URL di navigazione dopo conferma
+  const [navigateTo, setNavigateTo] = useState<number | null>(null); // URL di navigazione dopo conferma
 
-  const handlePastClick = (path: string) => {
-    setNavigateTo(path);
+  const handlePastClick = (step: number) => {
+    setNavigateTo(step);
     setOpen(true);
   };
 
   const handleConfirmNavigation = () => {
     if (navigateTo) {
-      window.location.href = navigateTo; // Navigazione (oppure utilizza `next/router`)
       setOpen(false);
+      onNavigate(navigateTo);
     }
   };
 
@@ -82,18 +83,16 @@ export const MenuItem = ({ item, onInfoClick }: MenuItemProps) => {
         ) : item.state === "past" ? (
           <div
             className={`w-32 text-sm text-center py-3.5 rounded-md transition-colors border-2 ${bg} ${text} ${hoverBg} ${border} ${fontWeight} cursor-pointer`}
-            onClick={() => handlePastClick(item.path)}
+            onClick={() => handlePastClick(item.step)}
           >
             {item.name}
           </div>
         ) : (
-          <Link href={item.path}>
-            <div
-              className={`w-32 text-sm text-center py-3.5 rounded-md transition-colors border-2 ${bg} ${text} ${hoverBg} ${border} ${fontWeight}`}
-            >
-              {item.name}
-            </div>
-          </Link>
+          <div
+            className={`w-32 text-sm text-center py-3.5 rounded-md transition-colors border-2 ${bg} ${text} ${hoverBg} ${border} ${fontWeight}`}
+          >
+            {item.name}
+          </div>
         )}
       </div>
 

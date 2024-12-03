@@ -1,5 +1,6 @@
 import { useSuggestedProxies } from "@/api/hooks";
 import { Dependencies } from "@/features/dependencies/page";
+import { useSidebarStore } from "@/store/sidebarStore";
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -11,7 +12,11 @@ export const DependenciesPage: React.FC<QuestionnairePageProps> = ({
   questionId,
   onNext,
 }) => {
-  const { data, isLoading, error } = useSuggestedProxies("custom-1");
+  const { datasetKey } = useSidebarStore();
+  if (!datasetKey) {
+    throw new Error("Dataset key is missing");
+  }
+  const { data, isLoading, error } = useSuggestedProxies(datasetKey);
 
   if (isLoading) {
     return <div>Loading...</div>;

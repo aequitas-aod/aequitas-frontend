@@ -5,10 +5,11 @@ import { useState } from "react";
 import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
-import { QuestionnaireLayout } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { DatasetPreview } from "./dataset-preview";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 export const DatasetChoice = ({
   data,
@@ -19,6 +20,7 @@ export const DatasetChoice = ({
 }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
+  const { setDatasetKey } = useSidebarStore();
 
   const options = data.answers;
 
@@ -32,6 +34,10 @@ export const DatasetChoice = ({
   };
 
   const onContinue = () => {
+    if (!selected) {
+      return;
+    }
+    setDatasetKey("custom-1");
     // chiamata per salvare i dati (se necessario)
     onNext();
   };

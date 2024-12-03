@@ -1,5 +1,6 @@
 import { useDatasetContext } from "@/api/hooks";
 import { DatasetView } from "@/features/dataset-view/page";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 import React from "react";
 
@@ -12,8 +13,11 @@ export const DatasetViewPage = ({
   questionId,
   onNext,
 }: QuestionnairePageProps) => {
-  //const { data, isLoading, error } = useQuestionnaire(questionId);
-  const { data: contextData, isLoading, error } = useDatasetContext("custom-1");
+  const { datasetKey } = useSidebarStore();
+  if (!datasetKey) {
+    throw new Error("Dataset key is missing");
+  }
+  const { data: contextData, isLoading, error } = useDatasetContext(datasetKey);
 
   if (isLoading) {
     return <div>Loading...</div>;

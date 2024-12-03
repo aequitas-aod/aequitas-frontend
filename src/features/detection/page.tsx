@@ -2,11 +2,16 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { QuestionnaireLayout } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
-import { DetectionData, Graph, MetricGraphs } from "@/containers/detection";
 import { FeatureCheckboxList } from "./accordion";
 import { GraphsDisplay } from "./graphs";
+import {
+  DetectionData,
+  Graph,
+  MetricGraphs,
+} from "@/api/hooks/useDetectionData";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 export const Detection = ({
   onNext,
@@ -22,7 +27,6 @@ export const Detection = ({
   const [featureData, setFeatureData] = useState<DetectionData>(data);
 
   const onContinue = () => {
-    // Save data and continue
     onNext();
   };
 

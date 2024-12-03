@@ -2,32 +2,30 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { QuestionnaireLayout } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
-import Papa from "papaparse";
-import { toast } from "@/hooks/use-toast";
-import { processDataset } from "@/lib/utils";
-import { useMutationQuestionnaire } from "@/api/hooks";
-import { CsvData, ParsedDataset } from "@/types/types";
+import { useUpdateQuestionnaireMutation } from "@/api/hooks";
+import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
 
 export const FeaturesView = ({
   onNext,
-  contextData,
+  features,
 }: {
   onNext: () => void;
-  contextData: string;
+  features: ParsedDataset[];
 }) => {
   const t = useTranslations("feature-view");
 
-  const { mutate, isPending } = useMutationQuestionnaire({
+  const { mutate, isPending } = useUpdateQuestionnaireMutation({
     onSuccess: () => {
       onNext();
     },
   });
+  console.log(features);
 
-  const [data, setData] = useState<ParsedDataset[]>([]);
-  const [columns, setColumns] = useState<string[]>([]);
+  const [data, setData] = useState<ParsedDataset[]>(features);
+  const columns = features.length > 0 ? Object.keys(features[0]) : [];
 
   const handleCheckboxChange = (index: number, key: string) => {
     setData((prevData) => {
@@ -58,32 +56,6 @@ export const FeaturesView = ({
     };
     mutate(answerIds);
   };
-
-  useEffect(() => {
-    const parseCsv = (csv: string) => {
-      const result = Papa.parse<CsvData>(csv, {
-        header: true,
-        skipEmptyLines: true,
-      });
-
-      if (result.errors.length > 0) {
-        toast({
-          title: t("errors.parsing-csv"),
-          description: result.errors[0].message,
-          variant: "destructive",
-        });
-      } else {
-        // Processa i dati e converte i valori booleani, stringhe, array e oggetti
-        const processedData = processDataset(result.data);
-        setData(processedData);
-        if (result.data.length > 0) {
-          setColumns(Object.keys(result.data[0]));
-        }
-      }
-    };
-
-    parseCsv(contextData);
-  }, [contextData, t]);
 
   return (
     <QuestionnaireLayout

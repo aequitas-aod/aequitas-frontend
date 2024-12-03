@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
-import { QuestionnaireLayout } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import type {
   AnswerResponse,
@@ -12,6 +12,7 @@ import type {
   QuestionnaireResponse,
 } from "@/api/types";
 import { LaunchAlgorithm } from "./launch-algorithm";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 export const DataMitigation = ({
   data,
@@ -24,7 +25,7 @@ export const DataMitigation = ({
 }) => {
   const t = useTranslations("data-mitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
-
+  const { incrementDatesetKey } = useSidebarStore();
   const options = data.answers;
 
   const onSelect = (value: string) => {
@@ -37,6 +38,7 @@ export const DataMitigation = ({
   };
 
   const onContinue = () => {
+    incrementDatesetKey();
     // chiamata per salvare i dati (se necessario)
     onNext();
   };

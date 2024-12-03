@@ -1,5 +1,7 @@
 import { useStatsContext } from "@/api/hooks";
+import { useFeatureView } from "@/api/hooks/useFeatureView";
 import { FeaturesView } from "@/features/features-view/page";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 import React from "react";
 
@@ -12,8 +14,11 @@ export const FeaturesViewPage = ({
   questionId,
   onNext,
 }: QuestionnairePageProps) => {
-  //const { data, isLoading, error } = useQuestionnaire(questionId);
-  const { data: contextData, isLoading, error } = useStatsContext("custom-1");
+  const { datasetKey } = useSidebarStore();
+  if (!datasetKey) {
+    throw new Error("Dataset key is missing");
+  }
+  const { data, isLoading, error } = useFeatureView(datasetKey);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -23,9 +28,9 @@ export const FeaturesViewPage = ({
     return <div>Error: {error.message}</div>;
   }
 
-  if (!contextData) {
+  if (!data || data.length === 0) {
     return <div>No data available</div>;
   }
 
-  return <FeaturesView onNext={onNext} contextData={contextData} />;
+  return <FeaturesView onNext={onNext} features={data} />;
 };

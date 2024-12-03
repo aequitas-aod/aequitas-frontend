@@ -21,20 +21,38 @@ export const useQuestionnaire = (n: number) => {
   return query;
 };
 
-export const useMutationQuestionnaire = ({
+export type QuestionnaireMutationParams = {
+  answer_ids: {
+    code: string;
+    question_code?: string;
+    project_code?: string;
+  }[];
+};
+
+export const useUpdateQuestionnaireMutation = ({
   onSuccess,
 }: {
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (body: {
-      answer_ids: {
-        code: string;
-        question_code?: string;
-        project_code?: string;
-      }[];
-    }) => {
+    mutationFn: (body: QuestionnaireMutationParams) => {
       return backendApi.putQuestionnaire(1, body);
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+  return mutation;
+};
+
+export const useDeleteQuestionnaireMutation = ({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: (nth: number) => {
+      return backendApi.deleteQuestionnaire(nth);
     },
     onSuccess: () => {
       onSuccess();

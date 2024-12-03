@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { Histogram } from "@/components/molecules/Histogram";
+import { Histogram } from "@/components/molecules/Histogram/Histogram";
 import { ParsedDataset } from "@/types/types";
 import {
   TARGET,

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { QuestionnaireLayout } from "@/containers/layout";
+import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";

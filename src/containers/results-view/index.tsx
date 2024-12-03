@@ -1,6 +1,7 @@
-import { usePreprocessingHyperparameters, useQuestionnaire } from "@/api/hooks";
-import { DataMitigation } from "@/features/data-mitigation";
+import { useQuestionnaire, useStatsContext } from "@/api/hooks";
+import { DMResults } from "@/features/results-view";
 import { useSidebarStore } from "@/store/sidebarStore";
+
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -8,16 +9,15 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
+export const DMResultsPage = ({
   questionId,
   onNext,
-}) => {
+}: QuestionnairePageProps) => {
   const { datasetKey } = useSidebarStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
   const { data, isLoading, error } = useQuestionnaire(questionId);
-  const { data: formData } = usePreprocessingHyperparameters(datasetKey);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -31,9 +31,5 @@ export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
     return <div>No data available</div>;
   }
 
-  if (!formData) {
-    return <div>No form data available</div>;
-  }
-
-  return <DataMitigation onNext={onNext} data={data} formData={formData} />;
+  return <DMResults data={data} />;
 };

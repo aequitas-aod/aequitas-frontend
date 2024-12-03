@@ -6,15 +6,20 @@ export interface IMenuItemWithState extends IMenuItem {
 
 interface MenuProps {
   items: IMenuItemWithState[];
-  currentPath: string;
   onInfoClick: (item: IMenuItem) => void;
+  onNavigate: (path: number) => void;
 }
 
-export const Menu = ({ items, onInfoClick }: MenuProps) => {
+export const Menu = ({ items, onInfoClick, onNavigate }: MenuProps) => {
   return (
     <nav className="flex flex-col space-y-4">
       {items.map((item) => (
-        <MenuItem key={item.path} item={item} onInfoClick={onInfoClick} />
+        <MenuItem
+          key={item.id}
+          item={item}
+          onInfoClick={onInfoClick}
+          onNavigate={onNavigate}
+        />
       ))}
     </nav>
   );

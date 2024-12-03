@@ -95,4 +95,9 @@ export class BackendApi {
     console.log(body);
     await sleep(500);
   }
+
+  async deleteQuestionnaire(n: number): Promise<void> {
+    console.log(`DELETE /projects/{project-name}/questionnaire/${n}`);
+    await sleep(500);
+  }
 }

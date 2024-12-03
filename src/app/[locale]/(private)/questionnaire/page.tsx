@@ -1,5 +1,5 @@
 "use client";
-import QuestionnaireContainer from "@/containers/questionnarie/questionnarie";
+import QuestionnaireContainer from "@/containers/questionnarie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function ProjectPage() {

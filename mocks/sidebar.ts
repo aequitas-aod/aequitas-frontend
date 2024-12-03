@@ -1,58 +1,66 @@
 export interface SidebarItem {
+  id: string;
   step: number;
   name: string;
-  path: string;
+
   longDescription: string;
 }
 
 export const sidebarItems: SidebarItem[] = [
   {
+    id: "dataset-choice",
     step: 1,
     name: "Dataset Choice",
-    path: `questionnaire?question=1`,
+
     longDescription:
       "This section allows you to choose different datasets for analysis.",
   },
   {
+    id: "dataset-view",
     step: 2,
     name: "Dataset View",
-    path: `questionnaire?question=2`,
+
     longDescription:
       "Here you can view the details and structure of your chosen dataset.",
   },
   {
+    id: "feature-view",
     step: 3,
     name: "Feature View",
-    path: `questionnaire?question=3`,
+
     longDescription:
       "This section provides an overview of the features within your dataset.",
   },
 
   {
+    id: "dependencies",
     step: 4,
     name: "Dependencies",
-    path: `questionnaire?question=4`,
+
     longDescription:
       "View and manage dependencies between different components in your workflow.",
   },
   {
+    id: "detection",
     step: 5,
     name: "Detection",
-    path: `questionnaire?question=5`,
+
     longDescription:
       "This section is used to detect issues or anomalies in your data.",
   },
   {
+    id: "data-mitigation",
     step: 6,
     name: "Data mitigation",
-    path: `questionnaire?question=6`,
+
     longDescription:
       "Apply strategies to mitigate data issues and improve data quality.",
   },
   {
+    id: "dm-results",
     step: 7,
     name: "DM Results",
-    path: "questionnaire?question=7",
+
     longDescription: "View the results of your data mitigation strategies.",
   },
 
