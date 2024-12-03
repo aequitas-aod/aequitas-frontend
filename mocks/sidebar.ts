@@ -2,7 +2,6 @@ export interface SidebarItem {
   id: string;
   step: number;
   name: string;
-
   longDescription: string;
 }
 
@@ -11,7 +10,6 @@ export const sidebarItems: SidebarItem[] = [
     id: "dataset-choice",
     step: 1,
     name: "Dataset Choice",
-
     longDescription:
       "This section allows you to choose different datasets for analysis.",
   },

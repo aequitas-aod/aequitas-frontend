@@ -60,7 +60,7 @@ export type PreprocessingHyperparametersValue = {
   description: string;
   type: string;
   default: number;
-  values: string[];
+  values: number[];
 };
 
 export type PreprocessingHyperparametersResponse = Record<
