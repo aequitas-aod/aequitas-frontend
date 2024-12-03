@@ -34,9 +34,17 @@ export type ProxyDataResponse = Record<
   Record<string, AttributeDataResponse>
 >;
 
+export type ConditionResponse<T> = {
+  when: {
+    [key: string]: string; // chiave
+    class: string; // classe
+  };
+  value: number | string; // valore che può essere un numero o "NaN" (stringa)
+};
+
 export type MetricsResponse<T = {}> = Record<
   string,
-  Condition<T>[] | undefined
+  ConditionResponse<T>[] | undefined
 >;
 
 export type FeaturesResponse = Record<
@@ -59,11 +67,6 @@ export type PreprocessingHyperparametersResponse = Record<
   string,
   PreprocessingHyperparametersValue
 >;
-
-type Condition<T> = {
-  when: T; // Condizione dinamica (può avere proprietà opzionali)
-  value: number | string; // valore che può essere un numero o "NaN" (stringa)
-};
 
 type AttributeDataParams = {
   correlation: number;

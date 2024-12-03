@@ -8,32 +8,12 @@
   "answers": [
     {
       "id": {
-        "code": "AverageOdds",
-        "question_code": "Detection",
-        "project_code": "p-1"
-      },
-      "text": "Average Absolute Odds",
-      "description": "The Average Absolute Odds Difference (AAOD) is a metric used ...",
-      "selected": false
-    },
-    {
-      "id": {
         "code": "DisparateImpact",
         "question_code": "Detection",
         "project_code": "p-1"
       },
       "text": "Disparate Impact",
       "description": "Disparate Impact (DI) examines ...",
-      "selected": false
-    },
-    {
-      "id": {
-        "code": "EqualOpportunity",
-        "question_code": "Detection",
-        "project_code": "p-1"
-      },
-      "text": "Equal Opportunity",
-      "description": "The Equal Opportunity Difference (EOD) measures ...",
       "selected": false
     },
     {

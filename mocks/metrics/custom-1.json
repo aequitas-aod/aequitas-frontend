@@ -1,5 +1,5 @@
 {
-  "disparate_impact": [
+  "DisparateImpact": [
     {
       "when": {
         "sex": "Male",
@@ -99,7 +99,7 @@
       "value": 0.79876472674682
     }
   ],
-  "statistical_parity_difference": [
+  "StatisticalParityDifference": [
     {
       "when": {
         "sex": "Male",

@@ -88,8 +88,6 @@ export const useStatsContext = (dataset: string) => {
 };
 
 // detection view
-
-// detection view
 export const useFeaturesContext = (dataset: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
