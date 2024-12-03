@@ -9,7 +9,7 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { DatasetPreview } from "./dataset-preview";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 export const DatasetChoice = ({
   data,
@@ -20,7 +20,7 @@ export const DatasetChoice = ({
 }) => {
   const t = useTranslations("dataset-choice");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
-  const { setDatasetKey } = useSidebarStore();
+  const { setDatasetKey } = useStore();
 
   const options = data.answers;
 
