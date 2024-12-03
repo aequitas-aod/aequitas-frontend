@@ -1,7 +1,8 @@
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/containers/layout";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { DetectionData } from "@/containers/detection";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
@@ -14,7 +15,7 @@ export const Detection = ({
   data: DetectionData;
 }) => {
   const t = useTranslations("feature-view");
-  const [selectedGraph, setSelectedGraph] = useState<string | null>(null);
+  const [graphs, setGraphs] = useState([]);
   const [featureData, setFeatureData] = useState<DetectionData>(data);
 
   const onContinue = () => {
@@ -36,11 +37,28 @@ export const Detection = ({
         },
       },
     };
+
+    if (updatedFeatureData[featureKey][attributeKey].selected === "true") {
+      handleGraphClick(featureKey, attributeKey);
+    } else {
+      removeGraph(featureKey, attributeKey);
+    }
+
     setFeatureData(updatedFeatureData);
   };
 
-  const handleGraphClick = (graphKey: string) => {
-    setSelectedGraph(selectedGraph === graphKey ? null : graphKey);
+  const removeGraph = (featureKey: string, attributeKey: string) => {
+    console.log("featureKey", featureKey);
+    console.log("attributeKey", attributeKey);
+    // TODO: il grafico della feature viene rimosso
+    setGraphs([]);
+  };
+
+  const handleGraphClick = (featureKey: string, attributeKey: string) => {
+    console.log("featureKey", featureKey);
+    console.log("attributeKey", attributeKey);
+    // TODO: il grafico della feature viene evidenziato
+    setGraphs([]);
   };
 
   return (
@@ -53,7 +71,6 @@ export const Detection = ({
           <p className="mb-6 text-neutral-800 text-base font-normal">
             Detect bias in the data
           </p>
-
           {Object.entries(featureData).map(([featureKey, attributes]) => {
             // devo prendere tutti gli attributi con selected = true
             const suggestedCount = Object.entries(attributes).filter(
@@ -91,7 +108,7 @@ export const Detection = ({
           })}
         </div>
         <div className="flex flex-1 flex-col p-4 bg-neutral-100 gap-4 rounded">
-          {/*graphs.map((graph) => (
+          {graphs?.map((graph) => (
             <div
               key={graph.key}
               onClick={() => handleGraphClick(graph.key)}
@@ -108,7 +125,7 @@ export const Detection = ({
                 Grafico Aequitas
               </div>
             </div>
-          ))*/}
+          ))}
         </div>
       </div>
     </QuestionnaireLayout>
