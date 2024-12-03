@@ -49,4 +49,10 @@ export const sidebarItems: SidebarItem[] = [
     longDescription:
       "Apply strategies to mitigate data issues and improve data quality.",
   },
+  {
+    step: 7,
+    name: "DM Results",
+    path: "questionnaire?question=7",
+    longDescription: "View the results of your data mitigation strategies.",
+  },
 ];
