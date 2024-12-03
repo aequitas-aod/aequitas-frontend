@@ -9,12 +9,12 @@ import { DatasetViewPage } from "./dataset-view";
 import { DataMitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
 import { DMResultsPage } from "./results-view";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
 
-  const { currentStep, setCurrentStep } = useSidebarStore();
+  const { currentStep, setCurrentStep } = useStore();
 
   const onNext = () => {
     setCurrentStep(currentStep + 1);
