@@ -8,6 +8,7 @@ import { DependenciesPage } from "../dependencies";
 import { DatasetViewPage } from "../dataset-view";
 import { DataMitigationPage } from "../data-mitigation";
 import { DetectionPage } from "../detection";
+import { DMResultsPage } from "../dm-results";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function QuestionnaireContainer() {
       {question === "6" && (
         <DataMitigationPage onNext={onNext} questionId={6} />
       )}
+      {question === "7" && <DMResultsPage onNext={onNext} questionId={7} />}
     </>
   );
 }
