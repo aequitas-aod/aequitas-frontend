@@ -1,6 +1,6 @@
 import { useQuestionnaire, useStatsContext } from "@/api/hooks";
 import { DMResults } from "@/features/results-view";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 import React from "react";
 
@@ -13,7 +13,7 @@ export const DMResultsPage = ({
   questionId,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useSidebarStore();
+  const { datasetKey } = useStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

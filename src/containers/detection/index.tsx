@@ -1,7 +1,7 @@
 import React from "react";
 import { Detection } from "@/features/detection/page";
 import { useDetection } from "@/api/hooks/useDetectionData";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 interface QuestionnairePageProps {
   questionId: number;
@@ -12,7 +12,7 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
   questionId,
   onNext,
 }) => {
-  const { datasetKey } = useSidebarStore();
+  const { datasetKey } = useStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

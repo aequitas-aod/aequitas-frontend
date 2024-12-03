@@ -1,7 +1,7 @@
 import { useStatsContext } from "@/api/hooks";
 import { useFeatureView } from "@/api/hooks/useFeatureView";
 import { FeaturesView } from "@/features/features-view/page";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 import React from "react";
 
@@ -14,7 +14,7 @@ export const FeaturesViewPage = ({
   questionId,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useSidebarStore();
+  const { datasetKey } = useStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
