@@ -3,19 +3,22 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/containers/layout";
-import { DetectionData } from "@/containers/detection";
+import { DetectionData, Graph, MetricGraphs } from "@/containers/detection";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
+import { Histogram } from "@/components/molecules/Histogram";
 
 export const Detection = ({
   onNext,
   data,
+  metricGraphs,
 }: {
   onNext: () => void;
   data: DetectionData;
+  metricGraphs: MetricGraphs;
 }) => {
   const t = useTranslations("feature-view");
-  const [graphs, setGraphs] = useState([]);
+  const [currentGraphs, setGraphs] = useState<Graph[]>([]);
   const [featureData, setFeatureData] = useState<DetectionData>(data);
 
   const onContinue = () => {
@@ -51,14 +54,27 @@ export const Detection = ({
     console.log("featureKey", featureKey);
     console.log("attributeKey", attributeKey);
     // TODO: il grafico della feature viene rimosso
-    setGraphs([]);
+    const find = metricGraphs[featureKey].graphs.find(
+      (graph) => graph.key === attributeKey
+    );
+    if (!find) return;
+
+    setGraphs((prev) => prev.filter((graph) => graph.key !== attributeKey));
   };
 
   const handleGraphClick = (featureKey: string, attributeKey: string) => {
     console.log("featureKey", featureKey);
     console.log("attributeKey", attributeKey);
+    console.log("metricGraphs", metricGraphs);
     // TODO: il grafico della feature viene evidenziato
-    setGraphs([]);
+    const find = metricGraphs[featureKey].graphs.find(
+      (graph) => graph.key === attributeKey
+    );
+
+    console.log("find", find);
+    if (!find) return;
+
+    setGraphs((prev) => [...prev, find]);
   };
 
   return (
@@ -107,22 +123,41 @@ export const Detection = ({
             );
           })}
         </div>
-        <div className="flex flex-1 flex-col p-4 bg-neutral-100 gap-4 rounded">
-          {graphs?.map((graph) => (
+        <div className="flex flex-1 flex-col p-4 bg-neutral-100 gap-4 rounded overflow-auto">
+          {currentGraphs?.map((graph) => (
             <div
               key={graph.key}
-              onClick={() => handleGraphClick(graph.key)}
-              className={`bg-white p-4 flex flex-col items-center rounded h-[20rem] w-full ${
-                selectedGraph === graph.key
-                  ? "shadow-2xl border-4 border-black ring-2 ring-neutral-400"
-                  : ""
-              }`}
+              className={`bg-white p-4 flex flex-col rounded h-[20rem] w-full`}
             >
               <h1 className="py-6 px-4 border-b w-full font-medium text-xl">
-                {graph.title}
+                {graph.featureKey} -{" "}
+                {graph.key.charAt(0).toUpperCase() + graph.key.slice(1)}
               </h1>
-              <div className="flex flex-1 justify-center items-center">
-                Grafico Aequitas
+              <div className="flex overflow-auto gap-4">
+                {graph.values.map((value) => (
+                  <div
+                    key={`${graph.key}-${value.label}`}
+                    className="flex flex-col items-center justify-center min-w-[25rem] p-4 "
+                  >
+                    <h2 className="text-lg font-medium">{value.label}</h2>
+                    {value.data.length > 0 ? (
+                      <Histogram
+                        data={value.data.reduce(
+                          (acc, curr) => ({
+                            ...acc,
+                            [curr.class]: curr.value,
+                          }),
+                          {}
+                        )}
+                        className="min-w-[25rem] h-[10rem]"
+                      />
+                    ) : (
+                      <p className="text-neutral-500 text-sm">
+                        No data available
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           ))}

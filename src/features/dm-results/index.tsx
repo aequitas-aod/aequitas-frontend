@@ -35,11 +35,15 @@ export const DMResults = () => {
 
   const onMitigateOutcome = () => {};
 
+  const onDownloadDataset = () => {};
+
+  const onDownloadResults = () => {};
+
   return (
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
-          <Button onClick={onMitigateDataAgain} variant="outline">
+          <Button onClick={onMitigateDataAgain} variant="outline" disabled>
             Mitigate data again
           </Button>
           <Button onClick={onMitigateModel} variant="outline">
@@ -48,19 +52,26 @@ export const DMResults = () => {
           <Button onClick={onMitigateOutcome} variant="outline">
             Mitigate outcome
           </Button>
+
+          <Button
+            onClick={onDownloadDataset}
+            variant="outline"
+            className="ml-4"
+          >
+            Download Dataset
+          </Button>
+          <Button onClick={onDownloadResults} variant="outline">
+            Download Results
+          </Button>
         </div>
       }
-      classNameWrapper="!overflow-hidden"
-      className="!bg-transparent !border-0"
+      className="!bg-transparent !border-0 !overflow-hidden"
     >
-      <div className="flex flex-col items-start p-5 bg-primary-950 text-primary-50 rounded-t-md">
+      <div className="flex items-center p-5 bg-primary-950 text-primary-50 rounded-t-md gap-4">
         <p className="text-secondary-200">
           Check the operations performed so far:
         </p>
-        <ToggleGroup
-          type="single"
-          className="mt-4 p-2 bg-primary-900 rounded-md"
-        >
+        <ToggleGroup type="single" className="p-1 bg-primary-900 rounded-md">
           {sections.map((section) => (
             <ToggleGroupItem
               key={section.id}
@@ -75,7 +86,7 @@ export const DMResults = () => {
           ))}
         </ToggleGroup>
       </div>
-      <div className="flex justify-between rounded-b-md flex-1 mt-2">
+      <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Contenuto in base alla section selezionata dal toggle*/}
         {selected === "results-view" && <ResultsView />}
         {selected === "dataset-view" && <DatasetView />}

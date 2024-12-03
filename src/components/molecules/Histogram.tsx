@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  LabelList,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   ChartConfig,
@@ -27,7 +20,15 @@ const generateChartConfig = (data: Record<string, number>): ChartConfig => {
   return config;
 };
 
-export const Histogram = ({ data }: { data: Record<string, number> }) => {
+export const Histogram = ({
+  data,
+  hideXAxis = true,
+  className,
+}: {
+  data: Record<string, number>;
+  hideXAxis?: boolean;
+  className?: string;
+}) => {
   const chartConfig = generateChartConfig(data);
 
   const chartData = Object.entries(data).map(([key, value]) => ({
@@ -36,7 +37,7 @@ export const Histogram = ({ data }: { data: Record<string, number> }) => {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="h-[120px]">
+    <ChartContainer config={chartConfig} className={`h-[120px] ${className}`}>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
@@ -47,7 +48,7 @@ export const Histogram = ({ data }: { data: Record<string, number> }) => {
           hide
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-        <Bar dataKey="value" fill="var(--chart-1)" radius={4}></Bar>{" "}
+        <Bar dataKey="value" fill="var(--chart-1)" radius={4} />
       </BarChart>
     </ChartContainer>
   );
