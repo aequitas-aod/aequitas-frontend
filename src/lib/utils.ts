@@ -97,3 +97,14 @@ export const parseBoolean = (value: string) => {
   }
   return value; // Se non è un valore booleano, ritorna il valore originale
 };
+
+export const parseFeatureKey = (featureKey: string) =>
+  featureKey
+
+    .replace(/([a-z])([A-Z])/g, "$1 $2") // Aggiunge uno spazio tra lettere minuscole e maiuscole
+    .toLowerCase() // Converte tutto in minuscolo
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Rende la prima lettera di ogni parola maiuscola
+
+export const capitalize = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

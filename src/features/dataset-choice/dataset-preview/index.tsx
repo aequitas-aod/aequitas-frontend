@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { capitalize } from "@/lib/utils";
 
 export const DatasetPreview = ({
   title,
@@ -34,7 +35,7 @@ export const DatasetPreview = ({
 
   const formatKey = (key: string) => {
     const cleanedKey = key.replace(/[-_]/g, " "); // Rimuove tutti i "-" e "_"
-    return cleanedKey.charAt(0).toUpperCase() + cleanedKey.slice(1);
+    return capitalize(cleanedKey);
   };
 
   return (

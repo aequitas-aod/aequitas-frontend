@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { parseFeatureKey } from "@/lib/utils";
 import { ReactNode } from "react";
 
 interface FeatureAccordionProps {
@@ -24,7 +25,7 @@ export const FeatureAccordion = ({
           <div className="bg-primary-400 py-1 px-2.5 rounded-lg text-white">
             {suggestedCount}
           </div>
-          {featureKey}
+          {parseFeatureKey(featureKey)}
         </div>
       </AccordionTrigger>
       <AccordionContent>{children}</AccordionContent>
