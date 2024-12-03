@@ -170,3 +170,19 @@ export const usePreprocessingHyperparameters = (dataset: string) => {
   });
   return query;
 };
+
+export const useLaunchAlgorithmMutation = ({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: (body: Record<string, unknown>) => {
+      return backendApi.putContext("project", "launch-algorithm", body);
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+  return mutation;
+};

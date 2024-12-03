@@ -1,119 +1,79 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 
-import type {
-  PreprocessingHyperparametersResponse,
-  PreprocessingHyperparametersValue,
-} from "@/api/types";
+import type { PreprocessingHyperparametersResponse } from "@/api/types";
+import { useLaunchAlgorithmMutation } from "@/api/hooks";
+import { Loader2, CheckCircle } from "lucide-react";
+import { FormInput } from "@/components/molecules/FormInput";
+import { parseFeatureKey } from "@/lib/utils";
 
 export const LaunchAlgorithm = ({
   formData,
   title,
+  algorithm,
+  onEnableContinueButton,
 }: {
   title: string;
   formData: PreprocessingHyperparametersResponse;
+  algorithm: string;
+  onEnableContinueButton: () => void;
 }) => {
   const t = useTranslations("data-mitigation");
   const { control, handleSubmit } = useForm();
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const { mutate, isPending } = useLaunchAlgorithmMutation({
+    onSuccess: () => {
+      setIsCompleted(true);
+      onEnableContinueButton();
+    },
+  });
 
   const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
-  };
-
-  const renderInput = (
-    name: string,
-    config: PreprocessingHyperparametersValue
-  ) => {
-    switch (config.type) {
-      case "integer":
-      case "float":
-        return (
-          <Controller
-            name={name}
-            control={control}
-            defaultValue={config.default}
-            render={({ field }) => (
-              <div className="space-y-2">
-                <Label htmlFor={name}>{config.label}</Label>
-                <Input
-                  {...field}
-                  id={name}
-                  type="number"
-                  step={config.type === "float" ? "any" : "1"}
-                  min={config.values[0]}
-                  max={config.values[1]}
-                />
-                <p className="text-sm text-muted-foreground">
-                  {config.description}
-                </p>
-              </div>
-            )}
-          />
-        );
-      case "categorical":
-        return (
-          <Controller
-            name={name}
-            control={control}
-            defaultValue={config.default}
-            render={({ field }) => (
-              <div className="space-y-2">
-                <Label htmlFor={name}>{config.label}</Label>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={
-                    field.value?.toString() || config.default.toString()
-                  }
-                >
-                  <SelectTrigger id={name}>
-                    <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {config.values.map((value) => (
-                      <SelectItem key={value} value={value.toString()}>
-                        {value}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <p className="text-sm text-muted-foreground">
-                  {config.description}
-                </p>
-              </div>
-            )}
-          />
-        );
-      default:
-        return null;
-    }
+    mutate({
+      $algorithm: algorithm,
+      ...data,
+    });
   };
 
   return (
     <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
-      {title ? (
-        <p className="text-2xl text-primary-950 mb-4">{title}</p>
-      ) : (
-        <p className="text-base text-neutral-300">
-          {t("launch-algorithm.no-selection")}
-        </p>
-      )}
+      <p className="text-2xl text-primary-950 mb-4 font-extrabold">
+        Launch {parseFeatureKey(title)}
+      </p>
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {Object.entries(formData).map(([key, config]) => (
-          <div key={key}>{renderInput(key, config)}</div>
+          <div key={key}>
+            <FormInput
+              name={key}
+              config={config}
+              control={control}
+              isPending={isPending}
+            />
+          </div>
         ))}
-        <Button type="submit">Run</Button>
+
+        <div className="flex justify-end">
+          {isCompleted ? (
+            <div className="flex items-center space-x-2 text-green-600">
+              <CheckCircle size={20} />
+              <span className="text-md font-bold">Completed</span>
+            </div>
+          ) : (
+            <Button
+              type="submit"
+              disabled={isPending}
+              variant={isPending ? "secondary" : "outline"}
+            >
+              {isPending && <Loader2 className="animate-spin" />}
+              {!isPending && "Run"}
+            </Button>
+          )}
+        </div>
       </form>
     </div>
   );

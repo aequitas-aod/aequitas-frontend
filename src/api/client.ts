@@ -76,9 +76,14 @@ export class BackendApi {
     return require(`../../mocks/${key}/${dataset}.json`);
   }
 
-  async putContext(project: string, contentKey: string): Promise<void> {
+  async putContext(
+    project: string,
+    contentKey: string,
+    body: Record<string, unknown>
+  ): Promise<void> {
     console.log(`PUT /projects/{project-name}/context?key=${contentKey}`);
-    await sleep(500);
+    console.log(body);
+    await sleep(5000);
   }
 
   async putQuestionnaire(
