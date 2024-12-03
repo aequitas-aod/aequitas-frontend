@@ -3,47 +3,50 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { QuestionnaireLayout } from "@/containers/layout";
 import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
+import { FeaturesView } from "./sections/feature-view";
+import { ResultsView } from "./sections/results-view";
 
-type DMResultsProps = {};
+const sections = [
+  {
+    id: "results-view",
+    name: "Results View",
+  },
+  {
+    id: "dataset-view",
+    name: "Dataset View",
+  },
+  // feature view
+  {
+    id: "features-view",
+    name: "Features View",
+  },
+  {
+    id: "detection",
+    name: "Detection",
+  },
+];
 
-export const DMResults = ({}: DMResultsProps) => {
-  const onContinue = () => {
-    // chiamata per salvare i dati (se necessario)
-  };
+export const DMResults = () => {
   const [selected, setSelected] = useState<string | null>("results-view");
 
-  const sections = [
-    {
-      id: "results-view",
-      name: "Results View",
-    },
-    {
-      id: "dataset-view",
-      name: "Dataset View",
-    },
-    // feature view
-    {
-      id: "features-view",
-      name: "Features View",
-    },
-    {
-      id: "detection",
-      name: "Detection",
-    },
-  ];
+  const onMitigateDataAgain = () => {};
+
+  const onMitigateModel = () => {};
+
+  const onMitigateOutcome = () => {};
 
   return (
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
-          <Button onClick={onContinue} variant="outline">
+          <Button onClick={onMitigateDataAgain} variant="outline">
             Mitigate data again
           </Button>
-          <Button onClick={onContinue} variant="outline">
+          <Button onClick={onMitigateModel} variant="outline">
             Mitigate model
           </Button>
-          <Button onClick={onContinue} variant="outline">
-            Mitigare outcome
+          <Button onClick={onMitigateOutcome} variant="outline">
+            Mitigate outcome
           </Button>
         </div>
       }
@@ -64,7 +67,6 @@ export const DMResults = ({}: DMResultsProps) => {
               value={section.id}
               aria-label={section.name}
               onClick={() => {
-                // seleziona
                 setSelected(section.id);
               }}
             >
@@ -75,9 +77,9 @@ export const DMResults = ({}: DMResultsProps) => {
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2">
         {/* Contenuto in base alla section selezionata dal toggle*/}
-        {selected === "results-view" && <div>Results view content</div>}
+        {selected === "results-view" && <ResultsView />}
         {selected === "dataset-view" && <DatasetView />}
-        {selected === "features-view" && <div>Features view content</div>}
+        {selected === "features-view" && <FeaturesView />}
         {selected === "detection" && <div>Detection content</div>}
       </div>
     </QuestionnaireLayout>
