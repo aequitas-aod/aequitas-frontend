@@ -8,13 +8,13 @@ import { useStatsContext } from "@/api/hooks";
 import { CsvData, ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "@/features/features-view/table";
 
-export const FeaturesView = () => {
+export const FeaturesView = ({ datasetKey }: { datasetKey: string }) => {
   const t = useTranslations("feature-view");
 
   const [data, setData] = useState<ParsedDataset[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
 
-  const { data: contextData, isLoading, error } = useStatsContext("custom-1");
+  const { data: contextData, isLoading, error } = useStatsContext(datasetKey);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {
