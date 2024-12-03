@@ -12,7 +12,7 @@ import type {
   QuestionnaireResponse,
 } from "@/api/types";
 import { LaunchAlgorithm } from "./launch-algorithm";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 export const DataMitigation = ({
   data,
@@ -25,7 +25,8 @@ export const DataMitigation = ({
 }) => {
   const t = useTranslations("data-mitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
-  const { incrementDatesetKey } = useSidebarStore();
+  const [enableContinueButton, setEnableContinueButton] = useState(false);
+  const { incrementDatesetKey } = useStore();
   const options = data.answers;
 
   const onSelect = (value: string) => {
@@ -39,7 +40,6 @@ export const DataMitigation = ({
 
   const onContinue = () => {
     incrementDatesetKey();
-    // chiamata per salvare i dati (se necessario)
     onNext();
   };
 
@@ -47,11 +47,7 @@ export const DataMitigation = ({
     <>
       <QuestionnaireLayout
         action={
-          <Button
-            onClick={onContinue}
-            disabled={!selected}
-            variant={selected ? "default" : "secondary"}
-          >
+          <Button onClick={onContinue} disabled={!enableContinueButton}>
             {t("buttons.continue")}
           </Button>
         }
@@ -75,7 +71,12 @@ export const DataMitigation = ({
           </div>
           {selected && (
             <div id="dataset-preview" className="flex-1">
-              <LaunchAlgorithm formData={formData} title={selected.text} />
+              <LaunchAlgorithm
+                formData={formData}
+                title={selected.text}
+                algorithm={selected.id.code}
+                onEnableContinueButton={() => setEnableContinueButton(true)}
+              />
             </div>
           )}
         </div>
