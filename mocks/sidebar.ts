@@ -55,4 +55,6 @@ export const sidebarItems: SidebarItem[] = [
     path: "questionnaire?question=7",
     longDescription: "View the results of your data mitigation strategies.",
   },
+
+  // mettiamo hidden per tutta la parte dinamica, che poi andiamo a
 ];
