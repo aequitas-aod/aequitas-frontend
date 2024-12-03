@@ -11,7 +11,7 @@ import {
   Graph,
   MetricGraphs,
 } from "@/api/hooks/useDetectionData";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 
 export const Detection = ({
   onNext,

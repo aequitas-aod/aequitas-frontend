@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsView } from "./sections/results-view";
-import { useSidebarStore } from "@/store/sidebarStore";
+import { useStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { Detection } from "./sections/detection";
 import { ActionButtons } from "./buttons";
@@ -32,8 +32,8 @@ const sections = [
 ];
 
 export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
-  const { menuItems: dynamicMenuItems, addMenuItem } = useSidebarStore();
-  const { datasetKey, currentStep, setCurrentStep } = useSidebarStore();
+  const { menuItems: dynamicMenuItems, addMenuItem } = useStore();
+  const { datasetKey, currentStep, setCurrentStep } = useStore();
 
   const [selected, setSelected] = useState<string | null>("results-view");
 
