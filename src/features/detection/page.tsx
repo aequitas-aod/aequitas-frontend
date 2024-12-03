@@ -64,10 +64,10 @@ export const Detection = ({
   return (
     <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
-      className="!bg-white"
+      className="!bg-white !overflow-hidden"
     >
       <div className="flex p-2 h-full">
-        <div className="w-90 p-6">
+        <div className="w-90 p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             Detect bias in the data
           </p>
