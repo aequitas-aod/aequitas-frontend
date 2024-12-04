@@ -1,5 +1,5 @@
+import { Graph } from "@/api/hooks/useDetectionData";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
-import { Graph } from "@/containers/detection";
 import { capitalize, parseFeatureKey } from "@/lib/utils";
 
 export const GraphsDisplay = ({ graphs }: { graphs: Graph[] }) => {
