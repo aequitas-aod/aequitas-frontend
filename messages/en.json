@@ -59,7 +59,11 @@
     }
   },
   "HomePage": {
-    "title": "Hello world!",
-    "questionnaire": "Go to questionnaire"
+    "title": "Welcome",
+    "subtitle": "Simplify your process with our intuitive tool. You can complete the questionnaire here or use our Google Form for convenience.",
+    "buttons": {
+      "start": "Start the questionnaire",
+      "googleForm": "Open Google Form"
+    }
   }
 }
