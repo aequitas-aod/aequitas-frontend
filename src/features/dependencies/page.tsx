@@ -4,16 +4,22 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
-import { ProxyDataParams, ProxyDataResponse } from "@/api/types";
+import {
+  ProxyDataParams,
+  ProxyDataResponse,
+  QuestionnaireResponse,
+} from "@/api/types";
 import { useMutationProxies } from "@/api/context";
 import Image from "next/image";
 
 export const Dependencies = ({
   onNext,
   data,
+  question,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
+  question: QuestionnaireResponse;
 }) => {
   const t = useTranslations("FeatureView");
 
@@ -89,7 +95,7 @@ export const Dependencies = ({
         </div>
         <div className="w-[380px] p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
-            Select possibly proxy features
+            {question.text}
           </p>
           {Object.entries(featureData).map(([featureKey, attributes]) => {
             const suggestedCount = Object.entries(attributes).filter(
