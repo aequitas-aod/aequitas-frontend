@@ -21,6 +21,16 @@ export const useQuestionnaire = (n: number) => {
   return query;
 };
 
+export const useDynamicQuestionnaire = (key: string) => {
+  const query = useQuery<QuestionnaireResponse>({
+    queryKey: ["questionnaire", key],
+    queryFn: async () => {
+      return backendApi.getDynamicQuestionnaire(key);
+    },
+  });
+  return query;
+};
+
 export type QuestionnaireMutationParams = {
   answer_ids: {
     code: string;

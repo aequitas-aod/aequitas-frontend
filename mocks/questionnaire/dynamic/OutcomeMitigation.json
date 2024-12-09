@@ -1,0 +1,54 @@
+{
+  "id": {
+    "code": "OutcomeMitigation",
+    "project_code": "p-1"
+  },
+  "text": "Which outcome mitigation technique do you want to apply?",
+  "type": "single",
+  "answers": [
+    {
+      "id": {
+        "code": "CalibratedEqualizedOdds",
+        "question_code": "OutcomeMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Calibrated Equalized Odds",
+      "description": "The Calibrated Equalized Odds algorithm is very similar to the Equalized Odds algorithm by adding a calibration component. It therefore respects 2 key concepts. Equalized Odds, the distribution of errors (false positives and false negatives) should be equal for all groups; Calibration, the predicted probabilities should correctly reflect the reality for each group.",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "EqualizedOdds",
+        "question_code": "OutcomeMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Equalized Odds",
+      "description": "Equalized Odds is a post-processing algorithm designed to correct bias in the results of a machine learning model, ensuring that false positive rates (FPR) and false negative rates (FNR) are equal among different sensitive groups (e.g., groups based on race, gender, ethnicity). The main goal is to achieve fairness in the results predicted by the model, regardless of membership in a specific group.",
+      "selected": true
+    },
+    {
+      "id": {
+        "code": "NoOutcomeMitigation",
+        "question_code": "OutcomeMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Do Not Mitigate",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "RejectOptionClassification",
+        "question_code": "OutcomeMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Reject Option Classification",
+      "description": "Reject Option Classification (ROC) is a post-processing algorithm used to improve fairness in machine learning models by intervening in areas where the model is less confident in its predictions.",
+      "selected": false
+    }
+  ],
+  "created_at": "2024-12-03T16:41:16.362530",
+  "selection_strategy": {
+    "type": "SingleSelectionStrategy"
+  }
+}

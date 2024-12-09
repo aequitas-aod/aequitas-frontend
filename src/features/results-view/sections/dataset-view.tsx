@@ -8,7 +8,7 @@ import { DatasetViewTable } from "@/features/dataset-view/table";
 import { useDatasetContext } from "@/api/hooks";
 
 export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
-  const t = useTranslations("dataset-view");
+  const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
 

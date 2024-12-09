@@ -8,7 +8,7 @@
   "answers": [
     {
       "id": {
-        "code": "MitigateDataAgain",
+        "code": "DataAgainMitigation",
         "question_code": "DataMitigationSummary",
         "project_code": "p-1"
       },
@@ -18,7 +18,7 @@
     },
     {
       "id": {
-        "code": "MitigateModel",
+        "code": "ModelMitigation",
         "question_code": "DataMitigationSummary",
         "project_code": "p-1"
       },
@@ -28,7 +28,7 @@
     },
     {
       "id": {
-        "code": "MitigateOutcome",
+        "code": "OutcomeMitigation",
         "question_code": "DataMitigationSummary",
         "project_code": "p-1"
       },

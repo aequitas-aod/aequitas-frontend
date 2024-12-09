@@ -1,0 +1,54 @@
+{
+  "id": {
+    "code": "ModelMitigation",
+    "project_code": "p-1"
+  },
+  "text": "Which model mitigation technique do you want to apply?",
+  "type": "single",
+  "answers": [
+    {
+      "id": {
+        "code": "AdversarialDebiasing",
+        "question_code": "ModelMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Adversarial Debiasing",
+      "description": "Adversarial Debiasing is based on the idea of training one main model (called the classifier), while at the same time training a second model (called the adversary). The goal of the adversary model is to try to predict the sensitive feature (e.g., race or gender) from the classifier's output.",
+      "selected": true
+    },
+    {
+      "id": {
+        "code": "MetaFairClassifier",
+        "question_code": "ModelMitigation",
+        "project_code": "p-1"
+      },
+      "text": "MetaFair Classifier",
+      "description": "Meta-Fair Classifier is algorithm that uses an optimization method based on surrogate loss functions to ensure fairness. The idea is to train a classifier that meets specific equity metrics defined during training. This is done by incorporating a surrogate loss function that takes equity metrics into account in the optimization process. Equity metrics are translated into optimization constraints during model training.",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "NoModelMitigation",
+        "question_code": "ModelMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Do Not Mitigate",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "PrejudiceRemover",
+        "question_code": "ModelMitigation",
+        "project_code": "p-1"
+      },
+      "text": "Prejudice Remover",
+      "description": "Prejudice Remover is a method that modifies the objective function of the classifier by inserting a term that penalizes discrimination based on a sensitive feature. This term is added to the loss function of the model, and its weight can be controlled by a parameter that defines the degree of penalty.",
+      "selected": false
+    }
+  ],
+  "created_at": "2024-12-03T16:41:16.362530",
+  "selection_strategy": {
+    "type": "SingleSelectionStrategy"
+  }
+}

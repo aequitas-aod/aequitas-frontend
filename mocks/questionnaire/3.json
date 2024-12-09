@@ -20,5 +20,8 @@
       "description": null,
       "selected": false
     }
-  ]
+  ],
+  "selection_strategy": {
+    "type": "MultipleSelectionStrategy"
+  }
 }

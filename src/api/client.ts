@@ -7,14 +7,18 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "./types";
-import fs from "fs";
-import path from "path";
 
 export class BackendApi {
   async getQuestionnaire(n: number): Promise<QuestionnaireResponse> {
     await sleep(500);
     console.log(`GET /projects/{project-name}/questionnaire/${n}`);
     return require(`../../mocks/questionnaire/${n}.json`);
+  }
+
+  async getDynamicQuestionnaire(key: string): Promise<QuestionnaireResponse> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/questionnaire/dynamic/${key}`);
+    return require(`../../mocks/questionnaire/dynamic/${key}.json`);
   }
 
   async getSuggestedProxies(
@@ -83,7 +87,7 @@ export class BackendApi {
   ): Promise<void> {
     console.log(`PUT /projects/{project-name}/context?key=${contentKey}`);
     console.log(body);
-    await sleep(5000);
+    await sleep(500);
   }
 
   async putQuestionnaire(

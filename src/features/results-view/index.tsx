@@ -13,20 +13,20 @@ import { QuestionnaireResponse } from "@/api/types";
 
 const sections = [
   {
-    id: "results-view",
+    id: "ResultsView",
     name: "Results View",
   },
   {
-    id: "dataset-view",
+    id: "DatasetView",
     name: "Dataset View",
   },
   // feature view
   {
-    id: "features-view",
+    id: "FeatureView",
     name: "Features View",
   },
   {
-    id: "detection",
+    id: "Detection",
     name: "Detection",
   },
 ];
@@ -35,14 +35,14 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
   const { menuItems: dynamicMenuItems, addMenuItem } = useStore();
   const { datasetKey, currentStep, setCurrentStep } = useStore();
 
-  const [selected, setSelected] = useState<string | null>("results-view");
+  const [selected, setSelected] = useState<string | null>("ResultsView");
 
   const handleAction = (answerId: string, answerText: string) => {
     // Creiamo dinamicamente l'item per il menu usando direttamente i parametri passati
     const newAction = {
-      id: `${answerId}-mitigation`,
+      id: `${answerId}`,
       step: dynamicMenuItems.length + 1,
-      name: "MM Mitigation", // Usando answerText come nome del bottone
+      name: `${answerId}`,
       longDescription: "This is a dynamically added item.",
     };
 
@@ -51,9 +51,9 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
 
     // e aggiungo anche la results
     addMenuItem({
-      id: `${answerId}-results`,
+      id: `${answerId}Summary`,
       step: dynamicMenuItems.length + 2,
-      name: "MM Results",
+      name: `${answerId}`,
       longDescription: "This is a dynamically added item.",
     });
     setCurrentStep(currentStep + 1);
@@ -107,12 +107,10 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Contenuto in base alla section selezionata dal toggle*/}
-        {selected === "results-view" && <ResultsView datasetKey={datasetKey} />}
-        {selected === "dataset-view" && <DatasetView datasetKey={datasetKey} />}
-        {selected === "features-view" && (
-          <FeaturesView datasetKey={datasetKey} />
-        )}
-        {selected === "detection" && <Detection datasetKey={datasetKey} />}
+        {selected === "ResultsView" && <ResultsView datasetKey={datasetKey} />}
+        {selected === "DatasetView" && <DatasetView datasetKey={datasetKey} />}
+        {selected === "FeatureView" && <FeaturesView datasetKey={datasetKey} />}
+        {selected === "Detection" && <Detection datasetKey={datasetKey} />}
       </div>
     </QuestionnaireLayout>
   );

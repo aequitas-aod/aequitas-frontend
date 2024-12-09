@@ -9,7 +9,7 @@ import { CsvData, ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "@/features/features-view/table";
 
 export const FeaturesView = ({ datasetKey }: { datasetKey: string }) => {
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
 
   const [data, setData] = useState<ParsedDataset[]>([]);
   const [columns, setColumns] = useState<string[]>([]);

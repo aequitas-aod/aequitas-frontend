@@ -15,7 +15,7 @@ export const FeaturesView = ({
   onNext: () => void;
   features: ParsedDataset[];
 }) => {
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
 
   const { mutate, isPending } = useUpdateQuestionnaireMutation({
     onSuccess: () => {

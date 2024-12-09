@@ -15,7 +15,7 @@ export const DatasetView = ({
   onNext: () => void;
   contextData: string;
 }) => {
-  const t = useTranslations("dataset-view");
+  const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
 

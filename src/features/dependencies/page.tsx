@@ -15,7 +15,7 @@ export const Dependencies = ({
   onNext: () => void;
   data: ProxyDataResponse;
 }) => {
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
 
   const { mutate, isPending } = useMutationProxies({
     onSuccess: () => {
@@ -80,7 +80,7 @@ export const Dependencies = ({
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
             <Image
               src="/images/4_2_correlation_matrix.png"
-              alt="Dependencies"
+              alt="Proxies"
               layout="fill"
               objectFit="contain"
               className="rounded"

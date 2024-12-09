@@ -7,14 +7,14 @@ export interface SidebarItem {
 
 export const sidebarItems: SidebarItem[] = [
   {
-    id: "dataset-choice",
+    id: "DatasetSelection",
     step: 1,
     name: "Dataset Choice",
     longDescription:
       "This section allows you to choose different datasets for analysis.",
   },
   {
-    id: "dataset-view",
+    id: "DatasetView",
     step: 2,
     name: "Dataset View",
 
@@ -22,7 +22,7 @@ export const sidebarItems: SidebarItem[] = [
       "Here you can view the details and structure of your chosen dataset.",
   },
   {
-    id: "feature-view",
+    id: "FeatureView",
     step: 3,
     name: "Feature View",
 
@@ -31,15 +31,15 @@ export const sidebarItems: SidebarItem[] = [
   },
 
   {
-    id: "dependencies",
+    id: "Proxies",
     step: 4,
-    name: "Dependencies",
+    name: "Proxies",
 
     longDescription:
       "View and manage dependencies between different components in your workflow.",
   },
   {
-    id: "detection",
+    id: "Detection",
     step: 5,
     name: "Detection",
 

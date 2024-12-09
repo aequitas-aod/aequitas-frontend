@@ -7,23 +7,23 @@ import { ConditionResponse, MetricsResponse } from "@/api/types";
 import { useCallback, useMemo } from "react";
 
 // ------------------------------
-// Types and Interfaces
+// Types
 // ------------------------------
-export interface Graph {
+export type Graph = {
   key: string;
   featureKey: string;
   values: GraphValue[];
-}
+};
 
-interface GraphValue {
+type GraphValue = {
   label: string;
   data: ClassValue[];
-}
+};
 
-interface ClassValue {
+type ClassValue = {
   class: string;
   value: number;
-}
+};
 
 export type MetricGraphs = Record<
   string,

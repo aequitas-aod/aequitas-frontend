@@ -31,7 +31,7 @@ export const CreateDatasetDialog = ({
 }: {
   onContinue: () => void;
 }) => {
-  const t = useTranslations("dataset-choice");
+  const t = useTranslations("DatasetSelection");
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);

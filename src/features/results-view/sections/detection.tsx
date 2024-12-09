@@ -5,7 +5,7 @@ import { Graph, useMetricsData } from "@/api/hooks/useDetectionData";
 import { GraphsDisplay } from "@/features/detection/graphs";
 
 export const Detection = ({ datasetKey }: { datasetKey: string }) => {
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
 
   const { metrics, isLoading, error } = useMetricsData(datasetKey);

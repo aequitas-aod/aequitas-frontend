@@ -22,7 +22,7 @@ export const Detection = ({
   data: DetectionData;
   metricGraphs: MetricGraphs;
 }) => {
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
   const [featureData, setFeatureData] = useState<DetectionData>(data);
 

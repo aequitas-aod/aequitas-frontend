@@ -1,0 +1,13 @@
+{
+  "id": {
+    "code": "DatasetView",
+    "project_code": "p-1"
+  },
+  "text": "This is the dataset view.",
+  "type": "multiple",
+  "answers": [],
+  "created_at": "2024-12-03T16:41:16.362530",
+  "selection_strategy": {
+    "type": "MultipleSelectionStrategy"
+  }
+}

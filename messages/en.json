@@ -4,14 +4,14 @@
     "continue": "Continue"
   },
   "breadcrumb": {
-    "dataset-choice": "Scelta del dataset",
-    "dataset-view": "Dataset view",
-    "feature-view": "Feature view",
-    "dependencies": "Dependencies",
-    "detection": "Detection",
+    "DatasetSelection": "Scelta del dataset",
+    "DatasetView": "Dataset view",
+    "FeatureView": "Feature view",
+    "Proxies": "Proxies",
+    "Detection": "Detection",
     "data-migration": "Data migration"
   },
-  "dataset-choice": {
+  "DatasetSelection": {
     "title": "Select a dataset",
     "subtitle": "Available datasets",
     "create-custom-dataset": "Do you have your own dataset?",
@@ -45,7 +45,7 @@
       "no-selection": "Select an algorithm first."
     }
   },
-  "dataset-view": {
+  "DatasetView": {
     "buttons": {
       "continue": "Continue"
     },
@@ -53,7 +53,7 @@
       "parsing-csv": "Error parsing CSV file"
     }
   },
-  "feature-view": {
+  "FeatureView": {
     "buttons": {
       "continue": "Continue"
     }

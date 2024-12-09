@@ -1,11 +1,11 @@
 "use client";
 import QuestionnaireContainer from "@/containers/questionnarie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { sidebarItems } from "../../../../../mocks/sidebar";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
+import { useStore } from "@/store/store";
 
 export default function ProjectPage() {
-  const menuItems = sidebarItems;
+  const { menuItems } = useStore();
   return (
     <QueryClientProvider client={new QueryClient()}>
       <Sidebar menuItems={menuItems} />

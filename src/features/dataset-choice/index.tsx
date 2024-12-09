@@ -18,7 +18,7 @@ export const DatasetChoice = ({
   data: QuestionnaireResponse;
   onNext: () => void;
 }) => {
-  const t = useTranslations("dataset-choice");
+  const t = useTranslations("DatasetSelection");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const { setDatasetKey } = useStore();
 

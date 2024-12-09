@@ -1,5 +1,6 @@
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { create } from "zustand";
+import { sidebarItems } from "../../mocks/sidebar";
 
 interface SidebarState {
   currentStep: number;
@@ -10,25 +11,30 @@ interface SidebarState {
   deleteMenuItem: (item: IMenuItem) => void;
   datasetKey: string | null; // Ora può essere anche null
   setDatasetKey: (name: string | null) => void;
-  incrementDatesetKey: () => void; // Funzione per incrementare il nome del dataset
+  incrementDatasetKey: () => void;
 }
 
 export const useStore = create<SidebarState>((set, get) => ({
   currentStep: 1,
   setCurrentStep: (step) => set({ currentStep: step }),
-  menuItems: [],
+
+  menuItems: sidebarItems,
   setInitialMenuItems: (items) => set({ menuItems: items }),
+
   addMenuItem: (item) =>
     set((state) => ({
       menuItems: [...state.menuItems, item],
     })),
+
   deleteMenuItem: (item) =>
     set((state) => ({
       menuItems: state.menuItems.filter((i) => i.id !== item.id),
     })),
+
   datasetKey: "custom-1",
   setDatasetKey: (name) => set({ datasetKey: name }),
-  incrementDatesetKey: () => {
+
+  incrementDatasetKey: () => {
     set((state) => {
       const datasetPrefix = "custom-";
       // Se il valore è null o vuoto, inizializza con "custom-1"
@@ -42,9 +48,9 @@ export const useStore = create<SidebarState>((set, get) => ({
       );
       // Controlla se il parsing ha avuto successo, altrimenti inizia da 1
       const newNumber = isNaN(currentNumber) ? 1 : currentNumber + 1;
-      const newDatesetKey = `${datasetPrefix}${newNumber}`;
+      const newDatasetKey = `${datasetPrefix}${newNumber}`;
 
-      return { datasetKey: newDatesetKey };
+      return { datasetKey: newDatasetKey };
     });
   },
 }));

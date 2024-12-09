@@ -1,0 +1,104 @@
+{
+  "id": {
+    "code": "TestSetChoice",
+    "project_code": "p-1"
+  },
+  "text": "Choose the Test Data according to your Training Data.",
+  "type": "single",
+  "answers": [
+    {
+      "id": {
+        "code": "Test-AdultDataset",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Adult Census Income Dataset",
+      "description": null,
+      "selected": true
+    },
+    {
+      "id": {
+        "code": "Test-BankDataset",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Bank Marketing Dataset",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-CompasDataset",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "ProPublica COMPAS Dataset",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-Custom",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Custom",
+      "description": "Load your own dataset.",
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-GermanDataset",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "German credit Dataset",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-LawSchoolGPADataset",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Law School GPA Dataset",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-MEPSDataset19",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Medical Expenditure Panel Survey Dataset 2019",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-MEPSDataset20",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Medical Expenditure Panel Survey Dataset 2020",
+      "description": null,
+      "selected": false
+    },
+    {
+      "id": {
+        "code": "Test-MEPSDataset21",
+        "question_code": "TestSetChoice",
+        "project_code": "p-1"
+      },
+      "text": "Medical Expenditure Panel Survey Dataset 2021",
+      "description": null,
+      "selected": false
+    }
+  ],
+  "created_at": "2024-12-03T16:41:16.362530",
+  "selection_strategy": {
+    "type": "SingleSelectionStrategy"
+  }
+}

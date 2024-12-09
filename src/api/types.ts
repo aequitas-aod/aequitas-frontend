@@ -1,52 +1,70 @@
-// move json types here
+// Type to represent an answer ID
+type AnswerId = {
+  code: string; // Answer ID on the backend
+  question_code?: string; // Question ID on the backend
+  project_code?: string; // Project code
+};
+
+// Type for the answer to a questionnaire question
 
 export type AnswerResponse = {
-  id: {
-    code: string; // ID della risposta lato backend
-    question_code?: string; // ID della domanda lato backend
-    project_code?: string; // Codice del progetto
-  };
-  text: string; // Nome intelleggibile del dataset
-  description: string | null; // Descrizione breve del dataset
-  selected: boolean; // Indica se è selezionato
-  details: {
-    [key: string]: string | number; // Dettagli del dataset
-  };
+  id: AnswerId;
+  text: string; // Human-readable name of the dataset
+  description: string | null; // Short description of the dataset
+  selected: boolean; // Indicates if it is selected
+  details: Record<string, string | number>; // Dataset details (currently unused, but kept for backward compatibility)
 };
 
+// Type to represent the ID of a questionnaire
+export type QuestionnaireId = {
+  code: string; // Question ID on the backend
+  project_code: string; // Project code
+  dataset_code: string | null; // Dataset code
+};
+
+// Type for the questionnaire response
 export type QuestionnaireResponse = {
-  id: {
-    code: string; // ID della view lato backend
-    project_code: string; // Codice del progetto
-  };
-  text: string; // Titolo della pagina
-  type: string; // Metadato che indica che alla fine verrà selezionato un solo elemento
-  answers: AnswerResponse[]; // Array di risposte
+  id: QuestionnaireId;
+  text: string; // Title of the page
+  type: string; // Type of response (metadata indicating that only one item will be selected at the end)
+  answers: AnswerResponse[]; // Array of answers
+  created_at: string; // Creation date
+  selection_strategy: SelectionStrategy; // Selection strategy
 };
 
-type AttributeDataResponse = {
+// Type for the selection strategy
+type SelectionStrategy = {
+  type: string; // Selection type
+};
+
+// Type for correlation data and suggestions related to a proxy
+export type AttributeDataResponse = {
   correlation: number;
   suggested_proxy: string;
 };
 
+// Type for proxy data, mapped to attributes
 export type ProxyDataResponse = Record<
   string,
   Record<string, AttributeDataResponse>
 >;
 
+// Type for a condition (related to metrics or other conditions)
 export type ConditionResponse<T> = {
   when: {
-    [key: string]: string; // chiave
-    class: string; // classe
+    [key: string]: string; // Condition key
+    class: string; // Condition class
   };
-  value: number | string; // valore che può essere un numero o "NaN" (stringa)
+  value: number | string; // Value that can be a number or "NaN" (as a string)
 };
 
+// Type for metrics, supporting generic conditions
 export type MetricsResponse<T = {}> = Record<
   string,
   ConditionResponse<T>[] | undefined
 >;
 
+// Type for features with information on target and sensitive attributes
 export type FeaturesResponse = Record<
   string,
   {
@@ -55,24 +73,28 @@ export type FeaturesResponse = Record<
   }
 >;
 
+// Type for preprocessing parameters (used for hyperparameter values)
 export type PreprocessingHyperparametersValue = {
-  label: string;
-  description: string;
-  type: string;
-  default: number;
-  values: number[];
+  label: string; // Parameter label
+  description: string; // Parameter description
+  type: string; // Parameter type (e.g., "integer", "float")
+  default: number; // Default value
+  values: number[]; // Possible values for the hyperparameter
 };
 
+// Type for a collection of preprocessing parameters
 export type PreprocessingHyperparametersResponse = Record<
   string,
   PreprocessingHyperparametersValue
 >;
 
+// Type for parameters related to attribute data and proxy
 type AttributeDataParams = {
   correlation: number;
-  proxy: string;
+  proxy: string; // Proxy associated with the attribute
 };
 
+// Type for proxy parameters mapped to attributes
 export type ProxyDataParams = Record<
   string,
   Record<string, AttributeDataParams>

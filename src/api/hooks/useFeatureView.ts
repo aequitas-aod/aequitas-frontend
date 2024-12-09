@@ -8,7 +8,7 @@ import Papa from "papaparse";
 
 export const useFeatureView = (datasetKey: string) => {
   const { data: contextData, isLoading, error } = useStatsContext(datasetKey);
-  const t = useTranslations("feature-view");
+  const t = useTranslations("FeatureView");
   const [data, setData] = useState<ParsedDataset[]>([]);
 
   useEffect(() => {
