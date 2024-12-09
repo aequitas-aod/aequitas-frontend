@@ -12,7 +12,7 @@ import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { useStore } from "@/store/store";
-import { useDeleteQuestionnaireMutation } from "@/api/hooks";
+import { useDeleteQuestionnaireMutation } from "@/api/questionnaire";
 
 type SidebarProps = {
   menuItems: IMenuItem[];
@@ -30,7 +30,11 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
   const [dialogTitle, setDialogTitle] = useState<string>("");
   const [dialogContent, setDialogContent] = useState<string>("");
 
-  const { menuItems: dynamicMenuItems, setInitialMenuItems } = useStore();
+  const {
+    menuItems: dynamicMenuItems,
+    setInitialMenuItems,
+    resetMenuItems,
+  } = useStore();
 
   useEffect(() => {
     setInitialMenuItems(menuItems);
@@ -68,9 +72,14 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
 
     try {
       for (const step of stepsToDelete) {
-        mutate(step);
+        mutate({ n: step });
       }
       setCurrentStep(path);
+      // If navigating before step 7, reset menuItems to initial state
+      if (path <= 7) {
+        useStore.getState().resetMenuItems(); // Reset the store's menuItems to the initial state
+      }
+      setCurrentStep(path); // Set current step
     } catch (error) {
       console.error("An error occurred while deleting steps: ", error);
     }
