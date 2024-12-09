@@ -1,23 +1,23 @@
-import { useQuestionnaire, useStatsContext } from "@/api/hooks";
-import { DMResults } from "@/features/results-view";
+import { useQuestionnaire } from "@/api/questionnaire";
+import { ResultsView } from "@/features/results-view";
 import { useStore } from "@/store/store";
 
 import React from "react";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
-export const DMResultsPage = ({
-  questionId,
+export const ResultsViewPage = ({
+  questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
   const { datasetKey } = useStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { data, isLoading, error } = useQuestionnaire(questionId);
+  const { data, isLoading, error } = useQuestionnaire({ n: questionNumber });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -31,5 +31,5 @@ export const DMResultsPage = ({
     return <div>No data available</div>;
   }
 
-  return <DMResults data={data} />;
+  return <ResultsView data={data} />;
 };

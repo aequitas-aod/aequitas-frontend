@@ -1,15 +1,19 @@
-import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
-import { ResultsView } from "./sections/results-view";
+import { ResultsViewSection } from "./sections/results-view";
 import { useStore } from "@/store/store";
-import { useRouter } from "next/navigation";
 import { Detection } from "./sections/detection";
 import { ActionButtons } from "./buttons";
 import { QuestionnaireResponse } from "@/api/types";
+import {
+  parseAnswerId,
+  parseAnswerIdName,
+  parseAnswerIdNameSummary,
+} from "./utils";
+import { QUESTIONNAIRE_KEYS } from "@/config/constants";
 
 const sections = [
   {
@@ -31,18 +35,21 @@ const sections = [
   },
 ];
 
-export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
+export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
   const { menuItems: dynamicMenuItems, addMenuItem } = useStore();
   const { datasetKey, currentStep, setCurrentStep } = useStore();
 
   const [selected, setSelected] = useState<string | null>("ResultsView");
 
-  const handleAction = (answerId: string, answerText: string) => {
+  const handleAction = (id: string) => {
+    // Usa il parser per convertire answerId
+    const answerId = parseAnswerId(id);
+
     // Creiamo dinamicamente l'item per il menu usando direttamente i parametri passati
     const newAction = {
       id: `${answerId}`,
       step: dynamicMenuItems.length + 1,
-      name: `${answerId}`,
+      name: parseAnswerIdName(answerId),
       longDescription: "This is a dynamically added item.",
     };
 
@@ -53,7 +60,7 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
     addMenuItem({
       id: `${answerId}Summary`,
       step: dynamicMenuItems.length + 2,
-      name: `${answerId}`,
+      name: `${parseAnswerIdNameSummary(answerId)}`,
       longDescription: "This is a dynamically added item.",
     });
     setCurrentStep(currentStep + 1);
@@ -64,7 +71,35 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
 
   const onDownloadResults = () => {};
 
-  const onTest = () => {};
+  const onTest = () => {
+    const testActions = [
+      {
+        id: QUESTIONNAIRE_KEYS.TEST_SET_CHOICE,
+        step: dynamicMenuItems.length + 1,
+        name: "Test Set Choice",
+        longDescription: "This is a test action.",
+      },
+      //  POLARIZATION: "Polarization", TEST_SUMMARY: "TestSummary",
+      {
+        id: QUESTIONNAIRE_KEYS.POLARIZATION,
+        step: dynamicMenuItems.length + 2,
+        name: "Polarization",
+        longDescription: "This is a test action.",
+      },
+      {
+        id: QUESTIONNAIRE_KEYS.TEST_SUMMARY,
+        step: dynamicMenuItems.length + 3,
+        name: "Test Summary",
+        longDescription: "This is a test action.",
+      },
+    ];
+
+    testActions.forEach((action) => {
+      addMenuItem(action);
+    });
+
+    setCurrentStep(currentStep + 1);
+  };
 
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
@@ -107,7 +142,9 @@ export const DMResults = ({ data }: { data: QuestionnaireResponse }) => {
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Contenuto in base alla section selezionata dal toggle*/}
-        {selected === "ResultsView" && <ResultsView datasetKey={datasetKey} />}
+        {selected === "ResultsView" && (
+          <ResultsViewSection datasetKey={datasetKey} />
+        )}
         {selected === "DatasetView" && <DatasetView datasetKey={datasetKey} />}
         {selected === "FeatureView" && <FeaturesView datasetKey={datasetKey} />}
         {selected === "Detection" && <Detection datasetKey={datasetKey} />}

@@ -6,11 +6,7 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckboxList } from "./accordion";
 import { GraphsDisplay } from "./graphs";
-import {
-  DetectionData,
-  Graph,
-  MetricGraphs,
-} from "@/api/hooks/useDetectionData";
+import { DetectionData, Graph, MetricGraphs } from "@/hooks/useDetectionData";
 import { useStore } from "@/store/store";
 
 export const Detection = ({

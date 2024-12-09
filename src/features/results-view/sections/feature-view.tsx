@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import Papa from "papaparse";
 import { toast } from "@/hooks/use-toast";
 import { processDataset } from "@/lib/utils";
-import { useStatsContext } from "@/api/hooks";
+import { useStatsContext } from "@/api/context";
+
 import { CsvData, ParsedDataset } from "@/types/types";
-import { FeatureViewTable } from "@/features/features-view/table";
+import { FeatureViewTable } from "@/features/feature-view/table";
 
 export const FeaturesView = ({ datasetKey }: { datasetKey: string }) => {
   const t = useTranslations("FeatureView");

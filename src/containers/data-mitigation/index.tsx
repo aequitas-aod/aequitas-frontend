@@ -1,22 +1,25 @@
-import { usePreprocessingHyperparameters, useQuestionnaire } from "@/api/hooks";
+import { usePreprocessingHyperparameters } from "@/api/context";
+import { useQuestionnaire } from "@/api/questionnaire";
+
 import { DataMitigation } from "@/features/data-mitigation";
 import { useStore } from "@/store/store";
 import React from "react";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
 export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
-  questionId,
+  questionNumber,
   onNext,
 }) => {
+  console.log("DataMitigationPage");
   const { datasetKey } = useStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { data, isLoading, error } = useQuestionnaire(questionId);
+  const { data, isLoading, error } = useQuestionnaire({ n: questionNumber });
   const { data: formData } = usePreprocessingHyperparameters(datasetKey);
 
   if (isLoading) {

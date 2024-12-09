@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Graph, useMetricsData } from "@/api/hooks/useDetectionData";
+import { Graph, useMetricsData } from "@/hooks/useDetectionData";
 import { GraphsDisplay } from "@/features/detection/graphs";
 
 export const Detection = ({ datasetKey }: { datasetKey: string }) => {

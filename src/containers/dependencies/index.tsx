@@ -1,15 +1,15 @@
-import { useSuggestedProxies } from "@/api/hooks";
+import { useSuggestedProxies } from "@/api/context";
 import { Dependencies } from "@/features/dependencies/page";
 import { useStore } from "@/store/store";
 import React from "react";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
 export const DependenciesPage: React.FC<QuestionnairePageProps> = ({
-  questionId,
+  questionNumber,
   onNext,
 }) => {
   const { datasetKey } = useStore();

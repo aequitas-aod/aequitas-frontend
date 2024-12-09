@@ -1,17 +1,16 @@
-import { useStatsContext } from "@/api/hooks";
-import { useFeatureView } from "@/api/hooks/useFeatureView";
-import { FeaturesView } from "@/features/features-view/page";
+import { FeaturesView } from "@/features/feature-view/page";
+import { useFeatureView } from "@/hooks/useFeatureView";
 import { useStore } from "@/store/store";
 
 import React from "react";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
-export const FeaturesViewPage = ({
-  questionId,
+export const FeatureViewPage = ({
+  questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
   const { datasetKey } = useStore();
@@ -32,5 +31,11 @@ export const FeaturesViewPage = ({
     return <div>No data available</div>;
   }
 
-  return <FeaturesView onNext={onNext} features={data} />;
+  return (
+    <FeaturesView
+      onNext={onNext}
+      features={data}
+      questionNumber={questionNumber}
+    />
+  );
 };

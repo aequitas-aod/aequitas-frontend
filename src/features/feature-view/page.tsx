@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
-import { useUpdateQuestionnaireMutation } from "@/api/hooks";
+import { useUpdateQuestionnaireMutation } from "@/api/questionnaire";
 import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
+import { AnswerId } from "@/api/questionnaire/types";
 
 export const FeaturesView = ({
+  questionNumber,
   onNext,
   features,
 }: {
+  questionNumber: number;
   onNext: () => void;
   features: ParsedDataset[];
 }) => {
@@ -22,8 +25,6 @@ export const FeaturesView = ({
       onNext();
     },
   });
-  console.log(features);
-
   const [data, setData] = useState<ParsedDataset[]>(features);
   const columns = features.length > 0 ? Object.keys(features[0]) : [];
 
@@ -51,10 +52,15 @@ export const FeaturesView = ({
         code: `${feature.feature}-target`,
       }));
 
-    const answerIds = {
+    const answerIds: {
+      answer_ids: AnswerId[];
+    } = {
       answer_ids: { ...sensitiveFeatures, ...targetFeatures },
     };
-    mutate(answerIds);
+    mutate({
+      n: questionNumber,
+      answer_ids: answerIds.answer_ids,
+    });
   };
 
   return (

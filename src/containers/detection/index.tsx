@@ -1,15 +1,15 @@
 import React from "react";
 import { Detection } from "@/features/detection/page";
-import { useDetection } from "@/api/hooks/useDetectionData";
+import { useDetection } from "@/hooks/useDetectionData";
 import { useStore } from "@/store/store";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
 export const DetectionPage: React.FC<QuestionnairePageProps> = ({
-  questionId,
+  questionNumber,
   onNext,
 }) => {
   const { datasetKey } = useStore();
@@ -17,7 +17,7 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
     throw new Error("Dataset key is missing");
   }
   const { isLoading, error, data, metrics } = useDetection(
-    questionId,
+    questionNumber,
     datasetKey
   );
 

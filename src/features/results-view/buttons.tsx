@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 interface ActionButtonsProps {
   datasetKey: string;
   answers: AnswerResponse[];
-  onAction: (actionId: string, text: string) => void;
+  onAction: (actionId: string) => void;
   onDownloadDataset: () => void;
   onDownloadResults: () => void;
   onTest: () => void;
@@ -23,9 +23,8 @@ export const ActionButtons = ({
       {answers.map((answer) => (
         <Button
           key={answer.id.code}
-          onClick={() => onAction(answer.id.code, answer.text)} // Quando cliccato, chiama onAction con l'id dell'azione
+          onClick={() => onAction(answer.id.code)} // Quando cliccato, chiama onAction con l'id dell'azione
           variant="outline"
-          disabled={answer.selected} // Disabilita il bottone se la risposta è già selezionata
         >
           {answer.text}
         </Button>

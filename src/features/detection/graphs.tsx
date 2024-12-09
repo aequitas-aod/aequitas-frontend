@@ -1,4 +1,4 @@
-import { Graph } from "@/api/hooks/useDetectionData";
+import { Graph } from "@/hooks/useDetectionData";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
 import { capitalize, parseFeatureKey } from "@/lib/utils";
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { ProxyDataParams, ProxyDataResponse } from "@/api/types";
-import { useMutationProxies } from "@/api/hooks";
+import { useMutationProxies } from "@/api/context";
 import Image from "next/image";
 
 export const Dependencies = ({

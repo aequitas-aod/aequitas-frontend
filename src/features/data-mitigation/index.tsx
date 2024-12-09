@@ -55,7 +55,7 @@ export const DataMitigation = ({
         <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
           <div id="dataset-selection" className="flex-1">
             <p className="text-base text-primary-950 font-extrabold">
-              {t("title")}
+              {data.text}
             </p>
             <p className="text-[#64748B] text-sm">{t("subtitle")}</p>
             <RadioGroup className="mt-4">

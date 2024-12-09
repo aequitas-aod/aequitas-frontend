@@ -1,16 +1,16 @@
-import { useDatasetContext } from "@/api/hooks";
+import { useDatasetContext } from "@/api/context";
 import { DatasetView } from "@/features/dataset-view/page";
 import { useStore } from "@/store/store";
 
 import React from "react";
 
 interface QuestionnairePageProps {
-  questionId: number;
+  questionNumber: number;
   onNext: () => void;
 }
 
 export const DatasetViewPage = ({
-  questionId,
+  questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
   const { datasetKey } = useStore();
