@@ -11,7 +11,7 @@ export const GraphsDisplay = ({ graphs }: { graphs: Graph[] }) => {
           className="bg-white p-4 flex flex-col rounded h-[20rem] w-full"
         >
           <h1 className="py-6 px-4 border-b w-full font-medium text-xl">
-            {`${parseFeatureKey(graph.featureKey)} - ${capitalize(graph.key)}`}
+            {`${parseFeatureKey(graph.featureKey)} - Class/${capitalize(graph.key)}`}
           </h1>
           <div className="flex overflow-auto gap-4">
             {graph.values.map((value) => (
