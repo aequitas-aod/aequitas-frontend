@@ -7,26 +7,45 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "./types";
+import {
+  DeleteQuestionnaireParams,
+  PutQuestionnaireParams,
+  QuestionnaireParams,
+} from "./questionnaire/types";
 
 export class BackendApi {
-  async getQuestionnaire(n: number): Promise<QuestionnaireResponse> {
+  /* Questionnaire */
+
+  async getQuestionnaire(
+    params: QuestionnaireParams
+  ): Promise<QuestionnaireResponse> {
+    const { n } = params;
     await sleep(500);
     console.log(`GET /projects/{project-name}/questionnaire/${n}`);
     return require(`../../mocks/questionnaire/${n}.json`);
   }
 
-  async getDynamicQuestionnaire(key: string): Promise<QuestionnaireResponse> {
+  async putQuestionnaire(params: PutQuestionnaireParams): Promise<void> {
+    const { n, answer_ids } = params;
+    console.log(`PUT /projects/{project-name}/questionnaire/${n}`);
+    console.log(params);
     await sleep(500);
-    console.log(`GET /projects/{project-name}/questionnaire/dynamic/${key}`);
-    return require(`../../mocks/questionnaire/dynamic/${key}.json`);
   }
+
+  async deleteQuestionnaire(params: DeleteQuestionnaireParams): Promise<void> {
+    const { n } = params;
+    console.log(`DELETE /projects/{project-name}/questionnaire/${n}`);
+    await sleep(500);
+  }
+
+  /* Context */
 
   async getSuggestedProxies(
     dataset: string,
     key: string
   ): Promise<ProxyDataResponse> {
     await sleep(500);
-    console.log("GET /projects/{project-name}/proxies");
+    console.log(`GET /projects/{project-name}/proxies?key=${key}__${dataset}`);
     return require(`../../mocks/${key}/${dataset}.json`);
   }
 
@@ -46,7 +65,7 @@ export class BackendApi {
     return csvData;
   }
 
-  async getVectorialData(dataset: string, key: string): Promise<string> {
+  async getContextVectorialData(dataset: string, key: string): Promise<string> {
     await sleep(500);
     console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
     const csvData = (await import(`../../mocks/${key}/${dataset}.ts`)).default;
@@ -80,6 +99,16 @@ export class BackendApi {
     return require(`../../mocks/${key}/${dataset}.json`);
   }
 
+  async getContext(
+    // project: string,
+    dataset: string,
+    key: string
+  ): Promise<Record<string, unknown>> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/context?key=${key}__${dataset}`);
+    return require(`../../mocks/${key}/${dataset}.json`);
+  }
+
   async putContext(
     project: string,
     contentKey: string,
@@ -89,24 +118,6 @@ export class BackendApi {
     console.log(body);
     await sleep(500);
   }
-
-  async putQuestionnaire(
-    n: number,
-    body: {
-      answer_ids: {
-        code: string;
-        question_code?: string;
-        project_code?: string;
-      }[];
-    }
-  ): Promise<void> {
-    console.log(`PUT /projects/{project-name}/questionnaire/${n}`);
-    console.log(body);
-    await sleep(500);
-  }
-
-  async deleteQuestionnaire(n: number): Promise<void> {
-    console.log(`DELETE /projects/{project-name}/questionnaire/${n}`);
-    await sleep(500);
-  }
 }
+
+export const backendApi = new BackendApi();

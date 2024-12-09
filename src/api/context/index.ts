@@ -1,75 +1,14 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { BackendApi } from "./client";
+import { BackendApi } from "../api";
 import {
   FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
-  QuestionnaireResponse,
-} from "./types";
+} from "../types";
 
 const backendApi = new BackendApi();
-
-export const useQuestionnaire = (n: number) => {
-  const query = useQuery<QuestionnaireResponse>({
-    queryKey: ["questionnaire", n],
-    queryFn: async () => {
-      return backendApi.getQuestionnaire(n);
-    },
-  });
-  return query;
-};
-
-export const useDynamicQuestionnaire = (key: string) => {
-  const query = useQuery<QuestionnaireResponse>({
-    queryKey: ["questionnaire", key],
-    queryFn: async () => {
-      return backendApi.getDynamicQuestionnaire(key);
-    },
-  });
-  return query;
-};
-
-export type QuestionnaireMutationParams = {
-  answer_ids: {
-    code: string;
-    question_code?: string;
-    project_code?: string;
-  }[];
-};
-
-export const useUpdateQuestionnaireMutation = ({
-  onSuccess,
-}: {
-  onSuccess: () => void;
-}) => {
-  const mutation = useMutation({
-    mutationFn: (body: QuestionnaireMutationParams) => {
-      return backendApi.putQuestionnaire(1, body);
-    },
-    onSuccess: () => {
-      onSuccess();
-    },
-  });
-  return mutation;
-};
-
-export const useDeleteQuestionnaireMutation = ({
-  onSuccess,
-}: {
-  onSuccess: () => void;
-}) => {
-  const mutation = useMutation({
-    mutationFn: (nth: number) => {
-      return backendApi.deleteQuestionnaire(nth);
-    },
-    onSuccess: () => {
-      onSuccess();
-    },
-  });
-  return mutation;
-};
 
 export const useMutationProxies = ({
   onSuccess,
@@ -150,7 +89,7 @@ export const useCorrelationMatrix = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["correlation-matrix", dataset],
     queryFn: async () => {
-      return backendApi.getVectorialData(dataset, "correlation_matrix");
+      return backendApi.getContextVectorialData(dataset, "correlation_matrix");
     },
   });
   return query;
@@ -160,7 +99,7 @@ export const useDependencyGraph = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
-      return backendApi.getVectorialData(dataset, "dependency_graph");
+      return backendApi.getContextVectorialData(dataset, "dependency_graph");
     },
   });
   return query;
