@@ -47,18 +47,17 @@ export const sidebarItems: SidebarItem[] = [
       "This section is used to detect issues or anomalies in your data.",
   },
   {
-    id: "data-mitigation",
+    id: "DataMitigation",
     step: 6,
-    name: "Data mitigation",
+    name: "Data Mitigation",
 
     longDescription:
       "Apply strategies to mitigate data issues and improve data quality.",
   },
   {
-    id: "dm-results",
+    id: "DataMitigationSummary",
     step: 7,
     name: "DM Results",
-
     longDescription: "View the results of your data mitigation strategies.",
   },
 
