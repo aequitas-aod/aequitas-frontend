@@ -8,10 +8,10 @@ jobs:
   release:
     name: Release
     concurrency:
-      # Only one release job at a time. Strictly sequential.
       group: deploy
     runs-on: ubuntu-latest
-    # skip if tag workflow
+    env:
+      IMAGE_TAG: 'aequitaseu/frontend'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -21,14 +21,14 @@ jobs:
       - name: Restore Dependencies
         run: npm install
 
-      - name: Test Build
+      - name: Build
         run: npm run build
+        
+      - name: Compute Version
+        run: echo "IMAGE_VERSION=$(jq -r .version package.json)-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
 
       - name: Login on DockerHub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Compute Version
-        run: echo "IMAGE_VERSION=$(jq -r .version package.json)-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
 
       - name: Build Docker Image
         run: |
