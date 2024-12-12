@@ -1,0 +1,47 @@
+name: CI/CD
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+    paths-ignore:
+      - '.gitignore'
+      - '.mergify.yml'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'README.md'
+      - 'renovate.json'
+  pull_request:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Check and Release on GitHub
+    env:
+      IMAGE_TAG: 'aequitaseu/frontend'
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0 # all history
+
+        - name: Restore Dependencies
+          run: npm install
+
+        - name: Test Build
+          run: npm run build
+
+        - name: Compute Version
+          run: echo "IMAGE_VERSION=$(jq -r .version package.json)-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
+
+        - name: Login on DockerHub
+          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+        - name: Build Docker Image
+          run: |
+            docker build -t $IMAGE_TAG .
+            docker tag $IMAGE_TAG $IMAGE_TAG:$IMAGE_VERSION
+
+        - name: Push Docker Image
+          run: |
+            docker push $IMAGE_TAG:$IMAGE_VERSION
+            docker push $IMAGE_TAG:latest
