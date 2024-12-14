@@ -9,7 +9,7 @@ export const FEATURE_NAME = "feature";
 export const NO_MITIGATION_KEY = "NoMitigation";
 
 // TODO: add constants with questionnaire ids
-
+export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!
 export const GOOGLE_FORM_LINK = "";
 
 // cpstante mappa per le chiavi del questionario

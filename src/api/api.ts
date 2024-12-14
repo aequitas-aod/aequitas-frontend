@@ -7,12 +7,11 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "./types";
-import {
-  DeleteQuestionnaireParams,
-  PutQuestionnaireParams,
-  QuestionnaireParams,
-} from "./questionnaire/types";
+import { DeleteQuestionnaireParams, PutQuestionnaireParams, QuestionnaireParams } from "./questionnaire/types";
+import axios from "axios";
+import { BACKEND_URL } from "@/config/constants";
 
+// Handle the response data
 export class BackendApi {
   /* Questionnaire */
 
@@ -26,9 +25,15 @@ export class BackendApi {
     params: QuestionnaireParams
   ): Promise<QuestionnaireResponse> {
     const { n } = params;
-    await sleep(500);
-    console.log(`GET /projects/{project-name}/questionnaire/${n}`);
-    return require(`../../mocks/questionnaire/${n}.json`);
+    const res = await axios.get(`http://${BACKEND_URL}/projects/p-1/questionnaire/${n}`)
+    if (res.status === 200) {
+      console.log("RESPONSE", res.data);
+      return res.data;
+    }
+    throw new Error("Failed to fetch questionnaire");
+    // await sleep(500);
+    // console.log(`GET /projects/{project-name}/questionnaire/${n}`);
+    // return require(`../../mocks/questionnaire/${n}.json`);
   }
 
   async putQuestionnaire(params: PutQuestionnaireParams): Promise<void> {
