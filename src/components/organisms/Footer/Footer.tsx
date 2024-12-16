@@ -2,9 +2,7 @@ import { AequitasLogoImage } from "@/components/contents/images";
 
 const ApiUrlInfo = () => {
   return (
-    <span>
-      Backend URL: {process.env.NEXT_PUBLIC_BACKEND_URL || "not set"}
-    </span>
+    <span>Backend URL: {process.env.NEXT_PUBLIC_BACKEND_URL || "not set"}</span>
   );
 };
 

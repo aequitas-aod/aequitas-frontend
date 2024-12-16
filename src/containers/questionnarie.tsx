@@ -27,12 +27,12 @@ export default function QuestionnaireContainer() {
     return null;
   }
 
-  console.log("selectedStep", selectedStep);
+  // console.log("selectedStep", selectedStep);
   const questionKey = selectedStep?.id || "";
   const questionNumber = selectedStep?.step || 0;
 
-  console.log("questionKey", questionKey);
-  console.log("questionNumber", questionNumber);
+  // console.log("questionKey", questionKey);
+  // console.log("questionNumber", questionNumber);
 
   return (
     <>

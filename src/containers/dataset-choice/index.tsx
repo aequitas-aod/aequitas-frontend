@@ -25,5 +25,11 @@ export const DatasetChoicePage: React.FC<QuestionnairePageProps> = ({
     return <div>No data available</div>;
   }
 
-  return <DatasetChoice onNext={onNext} data={data} />;
+  return (
+    <DatasetChoice
+      onNext={onNext}
+      questionNumber={questionNumber}
+      data={data}
+    />
+  );
 };

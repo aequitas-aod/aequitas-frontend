@@ -6,12 +6,13 @@ import {
   PutQuestionnaireParams,
   QuestionnaireParams,
 } from "./types";
+import { PROJECT_CODE } from "@/config/constants";
 
 export const useQuestionnaire = (params: QuestionnaireParams) => {
   const query = useQuery<QuestionnaireResponse>({
     queryKey: ["questionnaire", params],
     queryFn: async () => {
-      return backendApi.getQuestionnaire(params);
+      return backendApi.getQuestionnaire(PROJECT_CODE, params);
     },
   });
   return query;
@@ -24,7 +25,7 @@ export const useUpdateQuestionnaireMutation = ({
 }) => {
   const mutation = useMutation({
     mutationFn: (params: PutQuestionnaireParams) => {
-      return backendApi.putQuestionnaire(params);
+      return backendApi.putQuestionnaire(PROJECT_CODE, params);
     },
     onSuccess: () => {
       onSuccess();
@@ -40,7 +41,7 @@ export const useDeleteQuestionnaireMutation = ({
 }) => {
   const mutation = useMutation({
     mutationFn: (params: DeleteQuestionnaireParams) => {
-      return backendApi.deleteQuestionnaire(params);
+      return backendApi.deleteQuestionnaire(PROJECT_CODE, params);
     },
     onSuccess: () => {
       onSuccess();
