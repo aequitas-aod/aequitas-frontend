@@ -6,6 +6,8 @@ export const SENSITIVE = "sensitive";
 export const DISTRIBUTION = "distribution";
 export const FEATURE_NAME = "feature";
 
+export const NO_MITIGATION_KEY = "NoMitigation";
+
 // TODO: add constants with questionnaire ids
 
 export const GOOGLE_FORM_LINK = "";
