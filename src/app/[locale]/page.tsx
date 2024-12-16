@@ -14,12 +14,6 @@ export default function HomePage() {
           {t("subtitle")}
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Button
-            className="bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold text-lg hover:bg-primary-600 transition duration-300"
-            onClick={() => redirect("/en/questionnaire")}
-          >
-            {t("buttons.start")}
-          </Button>
           <a
             href={GOOGLE_FORM_LINK}
             target="_blank"
@@ -33,6 +27,12 @@ export default function HomePage() {
               {t("buttons.googleForm")}
             </Button>
           </a>
+          <Button
+            className="bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold text-lg hover:bg-primary-600 transition duration-300"
+            onClick={() => redirect("/en/questionnaire")}
+          >
+            {t("buttons.start")}
+          </Button>
         </div>
       </div>
     </div>
