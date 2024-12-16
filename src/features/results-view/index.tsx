@@ -50,7 +50,6 @@ export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
       id: `${answerId}`,
       step: dynamicMenuItems.length + 1,
       name: parseAnswerIdName(answerId),
-      longDescription: "This is a dynamically added item.",
     };
 
     // Aggiungiamo la nuova voce al menu
@@ -61,7 +60,6 @@ export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
       id: `${answerId}Summary`,
       step: dynamicMenuItems.length + 2,
       name: `${parseAnswerIdNameSummary(answerId)}`,
-      longDescription: "This is a dynamically added item.",
     });
     setCurrentStep(currentStep + 1);
     // Eseguiamo la navigazione
@@ -77,20 +75,17 @@ export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
         id: QUESTIONNAIRE_KEYS.TEST_SET_CHOICE,
         step: dynamicMenuItems.length + 1,
         name: "Test Set Choice",
-        longDescription: "This is a test action.",
       },
       //  POLARIZATION: "Polarization", TEST_SUMMARY: "TestSummary",
       {
         id: QUESTIONNAIRE_KEYS.POLARIZATION,
         step: dynamicMenuItems.length + 2,
         name: "Polarization",
-        longDescription: "This is a test action.",
       },
       {
         id: QUESTIONNAIRE_KEYS.TEST_SUMMARY,
         step: dynamicMenuItems.length + 3,
         name: "Test Summary",
-        longDescription: "This is a test action.",
       },
     ];
 
