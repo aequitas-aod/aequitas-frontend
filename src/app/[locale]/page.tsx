@@ -10,9 +10,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
       <div className="text-center max-w-2xl p-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-          {t("title")}
-        </h1>
         <p className="text-lg md:text-xl mb-8 text-muted-foreground">
           {t("subtitle")}
         </p>
