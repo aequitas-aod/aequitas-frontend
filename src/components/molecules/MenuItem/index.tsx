@@ -6,7 +6,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import Link from "next/link";
 import { IMenuItemWithState } from "../Menu";
 import { SidebarItem } from "../../../../mocks/sidebar";
 
@@ -66,14 +65,6 @@ export const MenuItem = ({ item, onInfoClick, onNavigate }: MenuItemProps) => {
   return (
     <>
       <div className="flex items-center space-x-2 justify-end">
-        {item.state === "current" && onInfoClick && (
-          <div
-            className="cursor-pointer text-lg hover:text-blue-400"
-            onClick={() => onInfoClick(item)}
-          >
-            {item.icon}
-          </div>
-        )}
         {isDisabled ? (
           <div
             className={`w-32 text-sm text-center py-3.5 rounded-md border-2 ${bg} ${text} ${border} ${fontWeight} cursor-not-allowed opacity-50`}

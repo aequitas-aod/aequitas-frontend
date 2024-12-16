@@ -1,13 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useEffect, useMemo } from "react";
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { IoInformationCircleOutline } from "react-icons/io5";
@@ -26,25 +19,11 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
     },
   });
 
-  const [open, setOpen] = useState(false);
-  const [dialogTitle, setDialogTitle] = useState<string>("");
-  const [dialogContent, setDialogContent] = useState<string>("");
-
-  const {
-    menuItems: dynamicMenuItems,
-    setInitialMenuItems,
-    resetMenuItems,
-  } = useStore();
+  const { menuItems: dynamicMenuItems, setInitialMenuItems } = useStore();
 
   useEffect(() => {
     setInitialMenuItems(menuItems);
   }, [menuItems, setInitialMenuItems]);
-
-  const handleInfoClick = (item: IMenuItem) => {
-    setDialogTitle(item.name || "Info");
-    setDialogContent(item.longDescription || "No description available.");
-    setOpen(true);
-  };
 
   const currentIndex = useMemo(
     () => dynamicMenuItems.findIndex((item) => item.step === currentStep) + 1,
@@ -87,19 +66,7 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
 
   return (
     <div className="h-full flex flex-col">
-      <Menu
-        items={parsedMenuItems}
-        onInfoClick={handleInfoClick}
-        onNavigate={handlePastClick}
-      />
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogTitle>{dialogTitle}</DialogTitle>
-          <DialogDescription>{dialogContent}</DialogDescription>
-          <DialogClose className="mt-4">Close</DialogClose>
-        </DialogContent>
-      </Dialog>
+      <Menu items={parsedMenuItems} onNavigate={handlePastClick} />
     </div>
   );
 };
