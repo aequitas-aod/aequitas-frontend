@@ -7,6 +7,7 @@ import { processDataset } from "@/lib/utils";
 import { CsvData, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "./table";
+import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 export const DatasetView = ({
   onNext,
@@ -52,8 +53,18 @@ export const DatasetView = ({
   return (
     <QuestionnaireLayout
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      classNameWrapper="!overflow-hidden"
       className="!bg-neutral-50"
     >
+      <QuestionnaireBanner>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum
+      </QuestionnaireBanner>
       <DatasetViewTable data={data} columns={columns} />
     </QuestionnaireLayout>
   );

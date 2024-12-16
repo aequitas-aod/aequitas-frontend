@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import { DatasetChoicePage } from "./dataset-choice";
+import { DatasetSelectionPage } from "./dataset-selection";
 import { FeatureViewPage } from "./feature-view";
-import { DependenciesPage } from "./dependencies";
+import { ProxiesPage } from "./proxies";
 import { DatasetViewPage } from "./dataset-view";
 import { DataMitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
@@ -38,7 +38,7 @@ export default function QuestionnaireContainer() {
     <>
       {/* questionKey as string */}
       {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
-        <DatasetChoicePage onNext={onNext} questionNumber={questionNumber} />
+        <DatasetSelectionPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.DATASET_VIEW && (
         <DatasetViewPage onNext={onNext} questionNumber={questionNumber} />
@@ -47,7 +47,7 @@ export default function QuestionnaireContainer() {
         <FeatureViewPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.PROXIES && (
-        <DependenciesPage onNext={onNext} questionNumber={questionNumber} />
+        <ProxiesPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.DETECTION && (
         <DetectionPage onNext={onNext} questionNumber={questionNumber} />

@@ -1,6 +1,6 @@
 import { useSuggestedProxies } from "@/api/context";
 import { useQuestionnaire } from "@/api/questionnaire";
-import { Dependencies } from "@/features/dependencies/page";
+import { Proxies } from "@/features/proxies/page";
 import { useStore } from "@/store/store";
 import React from "react";
 
@@ -9,7 +9,7 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const DependenciesPage: React.FC<QuestionnairePageProps> = ({
+export const ProxiesPage: React.FC<QuestionnairePageProps> = ({
   questionNumber,
   onNext,
 }) => {
@@ -45,5 +45,5 @@ export const DependenciesPage: React.FC<QuestionnairePageProps> = ({
     return <div>No question available</div>;
   }
 
-  return <Dependencies onNext={onNext} data={data} question={question} />;
+  return <Proxies onNext={onNext} data={data} question={question} />;
 };

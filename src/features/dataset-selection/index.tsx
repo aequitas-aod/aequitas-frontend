@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { CreateDatasetDialog } from "./create-dataset-dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
@@ -10,8 +9,9 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { DatasetPreview } from "./dataset-preview";
 import { useStore } from "@/store/store";
+import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
-export const DatasetChoice = ({
+export const DatasetSelection = ({
   data,
   onNext,
 }: {
@@ -57,10 +57,17 @@ export const DatasetChoice = ({
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50"
       >
-        <div className="flex space-x-4 items-center justify-center py-5 bg-primary-600 text-primary-50 rounded-t-md">
-          <p>{t("create-custom-dataset")}</p>
-          <CreateDatasetDialog onContinue={onNext} />
-        </div>
+        <QuestionnaireBanner>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum
+          {/*<p>{t("create-custom-dataset")}</p>
+          <CreateDatasetDialog onContinue={onNext} />*/}
+        </QuestionnaireBanner>
         <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
           <div id="dataset-selection" className="flex-1">
             <p className="text-base text-primary-950 font-extrabold">

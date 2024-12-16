@@ -1,5 +1,5 @@
 import { useQuestionnaire } from "@/api/questionnaire";
-import { DatasetChoice } from "@/features/dataset-choice";
+import { DatasetSelection } from "@/features/dataset-selection";
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -7,7 +7,7 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const DatasetChoicePage: React.FC<QuestionnairePageProps> = ({
+export const DatasetSelectionPage: React.FC<QuestionnairePageProps> = ({
   questionNumber,
   onNext,
 }) => {
@@ -25,5 +25,5 @@ export const DatasetChoicePage: React.FC<QuestionnairePageProps> = ({
     return <div>No data available</div>;
   }
 
-  return <DatasetChoice onNext={onNext} data={data} />;
+  return <DatasetSelection onNext={onNext} data={data} />;
 };
