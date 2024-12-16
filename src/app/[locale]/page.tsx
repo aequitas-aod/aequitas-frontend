@@ -3,16 +3,22 @@ import { Button } from "@/components/ui/button";
 import { GOOGLE_FORM_LINK } from "@/config/constants";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+    <div className="min-h-screen flex items-center justify-center bg-primary-600 text-white">
       <div className="text-center max-w-2xl p-6">
-        <p className="text-lg md:text-xl mb-8 text-muted-foreground">
-          {t("subtitle")}
-        </p>
+        <Image
+          src="/images/aequitas-color.png"
+          alt="Aequitas logo"
+          width={400}
+          height={400}
+          className="mx-auto mb-4"
+        />
+        <p className="text-lg md:text-xl mb-8">{t("subtitle")}</p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <a
             href={GOOGLE_FORM_LINK}
@@ -20,17 +26,11 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <Button
-              variant="outline"
-              className="py-3 px-6 rounded-lg font-semibold text-lg"
-            >
+            <Button variant="outline" size="lg">
               {t("buttons.googleForm")}
             </Button>
           </a>
-          <Button
-            className="bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold text-lg hover:bg-primary-600 transition duration-300"
-            onClick={() => redirect("/en/questionnaire")}
-          >
+          <Button onClick={() => redirect("/en/questionnaire")}>
             {t("buttons.start")}
           </Button>
         </div>
