@@ -27,4 +27,5 @@ export const QUESTIONNAIRE_KEYS = {
   TEST_SET_CHOICE: "TestSetChoice",
   POLARIZATION: "Polarization",
   TEST_SUMMARY: "TestSummary",
+  END_TEST: "Done",
 };
