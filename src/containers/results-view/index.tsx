@@ -1,4 +1,4 @@
-import { useQuestionnaire } from "@/api/questionnaire";
+import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 import { useStore } from "@/store/store";
 
@@ -17,7 +17,9 @@ export const ResultsViewPage = ({
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { data, isLoading, error } = useQuestionnaire({ n: questionNumber });
+  const { data, isLoading, error } = useQuestionnaireById({
+    n: questionNumber,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;

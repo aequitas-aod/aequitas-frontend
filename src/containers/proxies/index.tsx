@@ -1,5 +1,5 @@
 import { useSuggestedProxies } from "@/api/context";
-import { useQuestionnaire } from "@/api/questionnaire";
+import { useQuestionnaireById } from "@/api/questionnaire";
 import { Proxies } from "@/features/proxies/page";
 import { useStore } from "@/store/store";
 import React from "react";
@@ -21,7 +21,7 @@ export const ProxiesPage: React.FC<QuestionnairePageProps> = ({
     data: question,
     isLoading: questionIsLoading,
     error: questionError,
-  } = useQuestionnaire({ n: questionNumber });
+  } = useQuestionnaireById({ n: questionNumber });
 
   const { data, isLoading, error } = useSuggestedProxies(datasetKey);
 

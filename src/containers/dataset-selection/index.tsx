@@ -1,4 +1,4 @@
-import { useQuestionnaire } from "@/api/questionnaire";
+import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetSelection } from "@/features/dataset-selection";
 import React from "react";
 
@@ -11,7 +11,9 @@ export const DatasetSelectionPage: React.FC<QuestionnairePageProps> = ({
   questionNumber,
   onNext,
 }) => {
-  const { data, isLoading, error } = useQuestionnaire({ n: questionNumber });
+  const { data, isLoading, error } = useQuestionnaireById({
+    n: questionNumber,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;

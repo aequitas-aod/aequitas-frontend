@@ -1,4 +1,5 @@
 import { useDatasetContext } from "@/api/context";
+import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
 import { useStore } from "@/store/store";
 
@@ -17,18 +18,30 @@ export const DatasetViewPage = ({
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { data: contextData, isLoading, error } = useDatasetContext(datasetKey);
+  const { data, isLoading, error } = useQuestionnaireById({
+    n: questionNumber,
+  });
 
-  if (isLoading) {
+  const {
+    data: contextData,
+    isLoading: isLoadingContextData,
+    error: errorContextData,
+  } = useDatasetContext(datasetKey);
+
+  if (isLoading || isLoadingContextData) {
     return <div>Loading...</div>;
   }
 
-  if (error instanceof Error) {
-    return <div>Error: {error.message}</div>;
+  if (error || errorContextData) {
+    return <div>Error: {error?.message}</div>;
+  }
+
+  if (!data) {
+    return <div>No Questionnaire available</div>;
   }
 
   if (!contextData) {
-    return <div>No data available</div>;
+    return <div>No ContextData available</div>;
   }
 
   return <DatasetView onNext={onNext} contextData={contextData} />;
