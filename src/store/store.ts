@@ -6,7 +6,7 @@ interface SidebarState {
   currentStep: number;
   setCurrentStep: (step: number) => void;
   menuItems: IMenuItem[];
-  setInitialMenuItems: (items: IMenuItem[]) => void;
+  setMenuItems: (items: IMenuItem[]) => void;
   resetMenuItems: () => void;
   addMenuItem: (item: IMenuItem) => void;
   deleteMenuItem: (item: IMenuItem) => void;
@@ -19,7 +19,7 @@ export const useStore = create<SidebarState>((set, get) => ({
   currentStep: 1,
   setCurrentStep: (step) => set({ currentStep: step }),
   menuItems: sidebarItems,
-  setInitialMenuItems: (items) => set({ menuItems: items }),
+  setMenuItems: (items) => set({ menuItems: items }),
   resetMenuItems: () => set({ menuItems: sidebarItems }),
   addMenuItem: (item) =>
     set((state) => ({

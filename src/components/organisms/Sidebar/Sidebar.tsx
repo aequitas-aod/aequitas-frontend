@@ -19,7 +19,8 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
     },
   });
 
-  const { menuItems: dynamicMenuItems, setInitialMenuItems } = useStore();
+  const { menuItems: dynamicMenuItems, setMenuItems: setInitialMenuItems } =
+    useStore();
 
   useEffect(() => {
     setInitialMenuItems(menuItems);

@@ -14,7 +14,11 @@ export const Menu = ({ items, onNavigate }: MenuProps) => {
   return (
     <nav className="flex flex-col space-y-4">
       {items.map((item) => (
-        <MenuItem key={item.id} item={item} onNavigate={onNavigate} />
+        <MenuItem
+          key={`${item.id}-${item.step}`}
+          item={item}
+          onNavigate={onNavigate}
+        />
       ))}
     </nav>
   );
