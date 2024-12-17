@@ -8,28 +8,21 @@ import { DatasetViewPage } from "./dataset-view";
 import { DataMitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
 import { ResultsViewPage } from "./results-view";
-import { useStore } from "@/store/store";
 import { QUESTIONNAIRE_KEYS } from "@/config/constants";
+import { useQuestionnaireData } from "@/hooks/useQuestionnaireData";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
+  const { onNext, currentQuestion } = useQuestionnaireData();
 
-  const { currentStep, setCurrentStep, menuItems } = useStore();
-
-  const onNext = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const selectedStep = menuItems.find((step) => step.step === currentStep);
-
-  if (!selectedStep) {
+  if (!currentQuestion) {
     router.push("/en");
     return null;
   }
 
-  console.log("selectedStep", selectedStep);
-  const questionKey = selectedStep?.id || "";
-  const questionNumber = selectedStep?.step || 0;
+  console.log("selectedStep", currentQuestion);
+  const questionKey = currentQuestion?.id || "";
+  const questionNumber = currentQuestion?.step || 0;
 
   console.log("questionKey", questionKey);
   console.log("questionNumber", questionNumber);

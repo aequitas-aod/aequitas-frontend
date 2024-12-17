@@ -7,11 +7,21 @@ import {
   QuestionnaireParams,
 } from "./types";
 
-export const useQuestionnaire = (params: QuestionnaireParams) => {
+export const useQuestionnaireList = () => {
+  const query = useQuery<QuestionnaireResponse[]>({
+    queryKey: ["questionnaire", "full"],
+    queryFn: async () => {
+      return backendApi.getQuestionnaireList();
+    },
+  });
+  return query;
+};
+
+export const useQuestionnaireById = (params: QuestionnaireParams) => {
   const query = useQuery<QuestionnaireResponse>({
     queryKey: ["questionnaire", params],
     queryFn: async () => {
-      return backendApi.getQuestionnaire(params);
+      return backendApi.getQuestionnaireById(params);
     },
   });
   return query;
