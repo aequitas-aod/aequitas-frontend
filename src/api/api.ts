@@ -16,7 +16,13 @@ import {
 export class BackendApi {
   /* Questionnaire */
 
-  async getQuestionnaire(
+  async getQuestionnaireList(): Promise<QuestionnaireResponse[]> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/questionnaire/full`);
+    return require(`../../mocks/questionnaire/full.json`);
+  }
+
+  async getQuestionnaireById(
     params: QuestionnaireParams
   ): Promise<QuestionnaireResponse> {
     const { n } = params;
