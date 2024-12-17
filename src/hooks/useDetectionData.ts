@@ -1,5 +1,5 @@
 import { useFeaturesContext, useMetricsContext } from "@/api/context";
-import { useQuestionnaire } from "@/api/questionnaire";
+import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { ConditionResponse, MetricsResponse } from "@/api/types";
 import { useCallback, useMemo } from "react";
@@ -148,7 +148,7 @@ const useQuestionnaireData = (
     data: questionnaireData,
     isLoading: isLoadingQuestionnaireData,
     error: errorQuestionnaireData,
-  } = useQuestionnaire({ n: questionId });
+  } = useQuestionnaireById({ n: questionId });
 
   const questionnaireKeys = useMemo(() => {
     if (!questionnaireData) return null;
