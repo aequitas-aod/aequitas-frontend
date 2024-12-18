@@ -72,5 +72,11 @@ export const DatasetSelectionPage: React.FC<QuestionnairePageProps> = ({
 
   console.log(nextData);
 
-  return <DatasetSelection onNext={onNext} data={nextData} />;
+  return (
+    <DatasetSelection
+      onNext={onNext}
+      questionNumber={questionNumber}
+      data={nextData}
+    />
+  );
 };

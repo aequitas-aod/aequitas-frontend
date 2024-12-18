@@ -14,26 +14,23 @@ import {
   Questionnaire,
 } from "@/containers/dataset-selection";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { AnswerId } from "@/api/questionnaire/types";
 
 export const DatasetSelection = ({
   data,
+  questionNumber,
   onNext,
 }: {
   data: Questionnaire;
+  questionNumber: number;
   onNext: () => void;
 }) => {
+  const { mutate, isPending } = useUpdateQuestionnaire({
+    onSuccess: () => { onNext(); },
+  });
   const t = useTranslations("DatasetSelection");
   const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
   const { setDatasetKey, currentStep } = useAequitasStore();
-
-  const { mutate, isPending } = useUpdateQuestionnaire({
-    onSuccess: () => {
-      // TODO: remove when the API is ready
-      setDatasetKey("custom-1");
-      //
-      onNext();
-    },
-  });
   const options = data.answers;
 
   const onSelect = (value: string) => {
@@ -53,6 +50,20 @@ export const DatasetSelection = ({
       n: currentStep,
       answer_ids: [selected.id],
     });
+    const answerIds: {
+      answer_ids: AnswerId[];
+    } = {
+      answer_ids: [selected!.id],
+    };
+    mutate({
+      n: questionNumber,
+      answer_ids: answerIds.answer_ids,
+    });
+    const datasetKey: string = selected!.id.code.replace("Dataset", "") + "-1";
+    setDatasetKey(datasetKey);
+    // here i need to uplo
+    // chiamata per salvare i dati (se necessario)
+    onNext();
   };
 
   return (
@@ -94,7 +105,7 @@ export const DatasetSelection = ({
                 <RadioItem
                   key={option.id.code}
                   option={option}
-                  selected={selected?.text === option.text}
+                  selected={selected?.id.code === option.id.code}
                   onSelect={onSelect}
                 />
               ))}
