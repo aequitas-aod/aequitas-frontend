@@ -82,15 +82,15 @@ export const Proxies = ({
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-white !overflow-hidden"
     >
-      <QuestionnaireBanner>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum
-      </QuestionnaireBanner>
+      <QuestionnaireBanner
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum"
+      />
       <div className="flex p-2 h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">

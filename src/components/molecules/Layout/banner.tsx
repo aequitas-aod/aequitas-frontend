@@ -1,9 +1,12 @@
 export const QuestionnaireBanner = ({
   children,
+  text,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  text: string;
 }) => (
-  <div className="flex space-x-4 items-center justify-center p-3 bg-primary-600 text-primary-50 rounded-t-md">
-    {children}
+  <div className="flex items-center justify-between p-3 bg-primary-600 text-primary-50 rounded-t-md">
+    <span className="text-left">{text}</span>
+    <div>{children}</div>
   </div>
 );

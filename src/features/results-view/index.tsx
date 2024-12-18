@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 import { Detection } from "./sections/detection";
 import { ActionButtons } from "./buttons";
 import { QuestionnaireResponse } from "@/api/types";
@@ -37,8 +37,8 @@ const sections = [
 ];
 
 export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
-  const { menuItems: dynamicMenuItems, addMenuItem } = useStore();
-  const { datasetKey, currentStep, setCurrentStep } = useStore();
+  const { menuItems: dynamicMenuItems, addMenuItem } = useAequitasStore();
+  const { datasetKey, currentStep, setCurrentStep } = useAequitasStore();
 
   const [selected, setSelected] = useState<string | null>("ResultsView");
 
@@ -117,17 +117,15 @@ export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
       }
       className="!bg-transparent !border-0 !overflow-hidden"
     >
-      <QuestionnaireBanner>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      <QuestionnaireBanner
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </p>
-      </QuestionnaireBanner>
+          culpa qui officia deserunt mollit anim id est laborum"
+      />
 
       <div className="flex items-center p-3 bg-primary-950 text-primary-50 gap-4">
         <p className="text-full-white">

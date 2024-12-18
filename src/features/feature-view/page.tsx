@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
-import { useUpdateQuestionnaireMutation } from "@/api/questionnaire";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
 import { AnswerId } from "@/api/questionnaire/types";
@@ -21,7 +21,7 @@ export const FeaturesView = ({
 }) => {
   const t = useTranslations("FeatureView");
 
-  const { mutate, isPending } = useUpdateQuestionnaireMutation({
+  const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },
@@ -69,15 +69,15 @@ export const FeaturesView = ({
       action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
       className="!bg-neutral-50"
     >
-      <QuestionnaireBanner>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum
-      </QuestionnaireBanner>
+      <QuestionnaireBanner
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum"
+      />
       <FeatureViewTable
         data={data}
         columns={columns}
