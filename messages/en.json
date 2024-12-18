@@ -16,7 +16,8 @@
     "subtitle": "Available datasets",
     "create-custom-dataset": "Do you have your own dataset?",
     "buttons": {
-      "continue": "Continue"
+      "continue": "Continue",
+      "feedback": "Feedback"
     },
     "details": {
       "size": "Size",
