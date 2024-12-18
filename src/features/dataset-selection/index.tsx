@@ -103,7 +103,6 @@ export const DatasetSelection = ({
           {selected && (
             <div className="flex-1 h-full">
               <DatasetPreview
-                questionNumber={questionNumber}
                 selected={selected}
                 title={selected.text}
                 description={selected.description || ""}

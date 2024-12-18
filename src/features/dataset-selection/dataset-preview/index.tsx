@@ -7,14 +7,12 @@ import { CreateDatasetDialog } from "../create-dataset-dialog";
 import { EnhancedAnswerResponse } from "@/containers/dataset-selection";
 
 export const DatasetPreview = ({
-  questionNumber,
   title,
   description,
   details,
   onNext,
   selected,
 }: {
-  questionNumber: number;
   selected: EnhancedAnswerResponse;
   title: string;
   description: string;
