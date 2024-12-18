@@ -7,12 +7,13 @@ type AnswerId = {
 
 // Type for the answer to a questionnaire question
 
+export type AnswerContextResponse = Record<string, string | number>;
+
 export type AnswerResponse = {
   id: AnswerId;
   text: string; // Human-readable name of the dataset
   description: string | null; // Short description of the dataset
   selected: boolean; // Indicates if it is selected
-  details: Record<string, string | number>; // Dataset details (currently unused, but kept for backward compatibility)
 };
 
 // Type to represent the ID of a questionnaire

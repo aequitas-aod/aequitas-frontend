@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/utils";
 import {
+  AnswerContextResponse,
   FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
@@ -45,6 +46,14 @@ export class BackendApi {
   }
 
   /* Context */
+
+  // Per ottenere le informazioni sui datasets disponibili.
+
+  async getDatasetInfo(): Promise<AnswerContextResponse[]> {
+    await sleep(500);
+    console.log(`GET /projects/{project-name}/context?key=datasets`);
+    return require(`../../mocks/datasets/index.json`);
+  }
 
   async getSuggestedProxies(
     dataset: string,
@@ -121,6 +130,18 @@ export class BackendApi {
     body: Record<string, unknown>
   ): Promise<void> {
     console.log(`PUT /projects/{project-name}/context?key=${contentKey}`);
+    console.log(body);
+    await sleep(500);
+  }
+
+  async putContextCsv(
+    //project: string,
+    key: string,
+    dataset: string,
+    // body come csv
+    body: string
+  ): Promise<void> {
+    console.log(`PUT /projects/{project-name}/context?key=${key}__${dataset}}`);
     console.log(body);
     await sleep(500);
   }

@@ -24,22 +24,6 @@
     },
     {
       "id": {
-        "code": "BreastCancerDataset",
-        "question_code": "DatasetSelection",
-        "project_code": "p-1"
-      },
-      "text": "Breast Cancer Dataset",
-      "description": null,
-      "selected": false,
-      "details": {
-        "size": 4.8,
-        "rows": 48842,
-        "columns": 15,
-        "created-at": "2024-11-12T10:00:09.611719"
-      }
-    },
-    {
-      "id": {
         "code": "Custom",
         "question_code": "DatasetSelection",
         "project_code": "p-1"
