@@ -1,17 +1,27 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button"; // Per il bottone Create
+import { CUSTOM_DATASET_KEY } from "@/config/constants";
 import { capitalize } from "@/lib/utils";
+import { CreateDatasetDialog } from "../create-dataset-dialog";
+import { EnhancedAnswerResponse } from "@/containers/dataset-selection";
 
 export const DatasetPreview = ({
+  questionNumber,
   title,
   description,
   details,
+  onNext,
+  selected,
 }: {
+  questionNumber: number;
+  selected: EnhancedAnswerResponse;
   title: string;
   description: string;
   details: {
-    [key: string]: string | number; // Dettagli del dataset
+    [key: string]: string | number;
   };
+  onNext: () => void;
 }) => {
   const isValidDate = (date: string) => {
     const parsedDate = new Date(date);
@@ -38,8 +48,24 @@ export const DatasetPreview = ({
     return capitalize(cleanedKey);
   };
 
+  // Se è un custom dataset
+  if (title === CUSTOM_DATASET_KEY) {
+    return (
+      <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
+        <p className="text-2xl text-primary-950">{title}</p>
+        {description && (
+          <p className="text-neutral-400 text-sm mt-2">{description}</p>
+        )}
+        <div className="mt-auto flex justify-end">
+          <CreateDatasetDialog onNext={onNext} selected={selected} />
+        </div>
+      </div>
+    );
+  }
+
+  // Comportamento standard per dataset non custom
   return (
-    <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
+    <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
       <p className="text-2xl text-primary-950">{title}</p>
       {description && (
         <p className="text-neutral-400 text-sm mt-2">{description}</p>

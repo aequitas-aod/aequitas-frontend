@@ -25,16 +25,28 @@ import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
 import { CheckIcon, PlusIcon, TrashIcon } from "lucide-react";
+import { EnhancedAnswerResponse } from "@/containers/dataset-selection";
+import { useAequitasStore } from "@/store/store";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { useUpdateContextCsv } from "@/api/context/dataset-selection";
+import { convertCSVToString } from "@/lib/utils";
 
 export const CreateDatasetDialog = ({
-  onContinue,
+  selected,
+  onNext,
 }: {
-  onContinue: () => void;
+  selected: EnhancedAnswerResponse;
+  onNext: () => void;
 }) => {
+  const { setDatasetKey, currentStep } = useAequitasStore();
+
   const t = useTranslations("DatasetSelection");
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({});
+  const { mutateAsync: updateContext } = useUpdateContextCsv({});
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
@@ -64,10 +76,41 @@ export const CreateDatasetDialog = ({
     }
   }, [file, form]);
 
+  const handleCreate = async () => {
+    if (!selected || !file) {
+      return;
+    }
+    const csvString = await convertCSVToString(file);
+    try {
+      // Chiamata 1: PUT /questionnaire
+      await updateQuestionnaire({
+        n: currentStep,
+        answer_ids: [
+          {
+            code: selected.id.code,
+            question_code: selected.id.question_code,
+            project_code: selected.id.project_code,
+          },
+        ],
+      });
+
+      // Chiamata 2: PUT /context
+      await updateContext({
+        dataset: `custom-1`,
+        body: csvString,
+      });
+
+      console.log("Operazioni completate con successo!");
+    } catch (error) {
+      console.error("Errore durante la creazione:", error);
+    }
+  };
+
   const onSubmit = (data: FormValues) => {
+    handleCreate();
     setOpen(false);
-    // chiamata per salvare i dati (se necessario)
-    onContinue();
+    setDatasetKey("custom-1");
+    onNext();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
