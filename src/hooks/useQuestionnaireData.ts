@@ -8,10 +8,11 @@ import {
   useQuestionnaireById,
   useQuestionnaireList,
 } from "@/api/questionnaire";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 
 export const useQuestionnaireData = () => {
-  const { currentStep, setCurrentStep, menuItems, setDatasetKey } = useStore();
+  const { currentStep, setCurrentStep, menuItems, setDatasetKey } =
+    useAequitasStore();
 
   // 1: AGGIORNO LA SIDEBAR
   const {

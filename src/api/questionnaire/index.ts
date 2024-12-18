@@ -27,7 +27,25 @@ export const useQuestionnaireById = (params: QuestionnaireParams) => {
   return query;
 };
 
-export const useUpdateQuestionnaireMutation = ({
+export const useUpdateQuestionnaire = ({
+  onSuccess,
+}: {
+  onSuccess?: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: (params: PutQuestionnaireParams) => {
+      return backendApi.putQuestionnaire(params);
+    },
+    onSuccess: () => {
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+  return mutation;
+};
+
+export const useUpdateCustomQuestionnaire = ({
   onSuccess,
 }: {
   onSuccess: () => void;
@@ -43,7 +61,7 @@ export const useUpdateQuestionnaireMutation = ({
   return mutation;
 };
 
-export const useDeleteQuestionnaireMutation = ({
+export const useDeleteQuestionnaire = ({
   onSuccess,
 }: {
   onSuccess: () => void;

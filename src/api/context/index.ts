@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackendApi } from "../api";
 import {
+  AnswerContextResponse,
   FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
@@ -33,7 +34,24 @@ export const useMutationProxies = ({
 };
 
 // dataset view
-export const useDatasetContext = (dataset: string) => {
+
+export const useDatasetSelectionAnswersInfo = ({
+  nth,
+  //projectName,
+}: {
+  nth: number;
+  //projectName: string;
+}) => {
+  const query = useQuery<AnswerContextResponse[]>({
+    queryKey: ["questionnaire", nth],
+    queryFn: async () => {
+      return backendApi.getDatasetInfo();
+    },
+  });
+  return query;
+};
+
+export const useDatasetViewContext = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["dataset", dataset],
     queryFn: async () => {

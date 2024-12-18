@@ -7,6 +7,7 @@ export const DISTRIBUTION = "distribution";
 export const FEATURE_NAME = "feature";
 
 export const NO_MITIGATION_KEY = "NoMitigation";
+export const CUSTOM_DATASET_KEY = "Custom";
 
 // TODO: add constants with questionnaire ids
 
