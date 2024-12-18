@@ -4,23 +4,23 @@ import { useEffect, useMemo } from "react";
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { IoInformationCircleOutline } from "react-icons/io5";
-import { useStore } from "@/store/store";
-import { useDeleteQuestionnaireMutation } from "@/api/questionnaire";
+import { useAequitasStore } from "@/store/store";
+import { useDeleteQuestionnaire } from "@/api/questionnaire";
 
 type SidebarProps = {
   menuItems: IMenuItem[];
 };
 
 export const Sidebar = ({ menuItems }: SidebarProps) => {
-  const { currentStep, setCurrentStep } = useStore();
-  const { mutate } = useDeleteQuestionnaireMutation({
+  const { currentStep, setCurrentStep } = useAequitasStore();
+  const { mutate } = useDeleteQuestionnaire({
     onSuccess: () => {
       console.log("Step deleted successfully");
     },
   });
 
   const { menuItems: dynamicMenuItems, setMenuItems: setInitialMenuItems } =
-    useStore();
+    useAequitasStore();
 
   useEffect(() => {
     setInitialMenuItems(menuItems);
@@ -57,7 +57,7 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
       setCurrentStep(path);
       // If navigating before step 7, reset menuItems to initial state
       if (path <= 7) {
-        useStore.getState().resetMenuItems(); // Reset the store's menuItems to the initial state
+        useAequitasStore.getState().resetMenuItems(); // Reset the store's menuItems to the initial state
       }
       setCurrentStep(path); // Set current step
     } catch (error) {
