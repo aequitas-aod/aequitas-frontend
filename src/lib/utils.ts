@@ -1,6 +1,7 @@
 import { CsvData, ParsedDataset } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import Papa from "papaparse";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -107,4 +108,17 @@ export const parseFeatureKey = (featureKey: string) =>
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export const convertCSVToString = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    Papa.parse(file, {
+      complete: (result) => {
+        // Converte il risultato in stringa CSV
+        const csvString = Papa.unparse(result.data);
+        resolve(csvString);
+      },
+      error: (error) => reject(error),
+    });
+  });
 };
