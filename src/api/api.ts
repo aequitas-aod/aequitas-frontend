@@ -53,6 +53,8 @@ export class BackendApi {
     params: PutQuestionnaireParams
   ): Promise<void> {
     const { n, answer_ids } = params;
+    console.log(`PUT /projects/${project}/questionnaire/${n}`);
+    console.log(params);
     const res = await axios.put(
       `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`,
       { answer_ids }
