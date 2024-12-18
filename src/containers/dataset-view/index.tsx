@@ -44,5 +44,5 @@ export const DatasetViewPage = ({
     return <div>No ContextData available</div>;
   }
 
-  return <DatasetView onNext={onNext} contextData={contextData} />;
+  return <DatasetView onNext={onNext} questionNumber={questionNumber} answers={data.answers} contextData={contextData} />;
 };
