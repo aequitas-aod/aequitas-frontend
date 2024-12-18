@@ -1,7 +1,7 @@
-import { useDatasetContext } from "@/api/context";
+import { useDatasetViewContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 
 import React from "react";
 
@@ -14,7 +14,7 @@ export const DatasetViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useStore();
+  const { datasetKey } = useAequitasStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
@@ -26,7 +26,7 @@ export const DatasetViewPage = ({
     data: contextData,
     isLoading: isLoadingContextData,
     error: errorContextData,
-  } = useDatasetContext(datasetKey);
+  } = useDatasetViewContext(datasetKey);
 
   if (isLoading || isLoadingContextData) {
     return <div>Loading...</div>;

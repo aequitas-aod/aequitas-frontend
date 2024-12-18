@@ -15,7 +15,7 @@ interface SidebarState {
   incrementDatasetKey: () => void;
 }
 
-export const useStore = create<SidebarState>((set, get) => ({
+export const useAequitasStore = create<SidebarState>((set, get) => ({
   currentStep: 1,
   setCurrentStep: (step) => set({ currentStep: step }),
   menuItems: sidebarItems,

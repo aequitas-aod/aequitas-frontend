@@ -2,7 +2,7 @@ import { usePreprocessingHyperparameters } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { DataMitigation } from "@/features/data-mitigation";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -15,7 +15,7 @@ export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
   onNext,
 }) => {
   console.log("DataMitigationPage");
-  const { datasetKey } = useStore();
+  const { datasetKey } = useAequitasStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

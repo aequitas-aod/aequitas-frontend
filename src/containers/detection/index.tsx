@@ -1,7 +1,7 @@
 import React from "react";
 import { Detection } from "@/features/detection/page";
 import { useDetection } from "@/hooks/useDetectionData";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -12,7 +12,7 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
   questionNumber,
   onNext,
 }) => {
-  const { datasetKey } = useStore();
+  const { datasetKey } = useAequitasStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

@@ -1,7 +1,7 @@
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { FeaturesView } from "@/features/feature-view/page";
 import { useFeatureView } from "@/hooks/useFeatureView";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 
 import React from "react";
 
@@ -14,7 +14,7 @@ export const FeatureViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useStore();
+  const { datasetKey } = useAequitasStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

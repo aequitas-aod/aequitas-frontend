@@ -12,7 +12,7 @@ import type {
   QuestionnaireResponse,
 } from "@/api/types";
 import { LaunchAlgorithm } from "./launch-algorithm";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 export const DataMitigation = ({
@@ -27,7 +27,7 @@ export const DataMitigation = ({
   const t = useTranslations("data-mitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
-  const { incrementDatasetKey } = useStore();
+  const { incrementDatasetKey } = useAequitasStore();
   const options = data.answers;
 
   const onSelect = (value: string) => {
@@ -55,15 +55,15 @@ export const DataMitigation = ({
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50"
       >
-        <QuestionnaireBanner>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <QuestionnaireBanner
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </QuestionnaireBanner>
+          culpa qui officia deserunt mollit anim id est laborum"
+        />
         <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
           <div id="dataset-selection" className="flex-1">
             <p className="text-base text-primary-950 font-extrabold">

@@ -1,6 +1,6 @@
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
-import { useStore } from "@/store/store";
+import { useAequitasStore } from "@/store/store";
 
 import React from "react";
 
@@ -13,7 +13,7 @@ export const ResultsViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useStore();
+  const { datasetKey } = useAequitasStore();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
