@@ -24,8 +24,8 @@ export default function QuestionnaireContainer() {
   const questionKey = currentQuestion?.id || "";
   const questionNumber = currentQuestion?.step || 0;
 
-  console.log("questionKey", questionKey);
-  console.log("questionNumber", questionNumber);
+  // console.log("questionKey", questionKey);
+  // console.log("questionNumber", questionNumber);
 
   return (
     <>

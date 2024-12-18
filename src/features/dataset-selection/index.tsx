@@ -10,14 +10,23 @@ import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { DatasetPreview } from "./dataset-preview";
 import { useStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { useUpdateQuestionnaireMutation } from "@/api/questionnaire";
+import { AnswerId } from "@/api/questionnaire/types";
 
 export const DatasetSelection = ({
   data,
+  questionNumber,
   onNext,
 }: {
   data: QuestionnaireResponse;
+  questionNumber: number;
   onNext: () => void;
 }) => {
+  const { mutate, isPending } = useUpdateQuestionnaireMutation({
+    onSuccess: () => {
+      onNext();
+    },
+  });
   const t = useTranslations("DatasetSelection");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const { setDatasetKey } = useStore();
@@ -37,7 +46,18 @@ export const DatasetSelection = ({
     if (!selected) {
       return;
     }
-    setDatasetKey("custom-1");
+    const answerIds: {
+      answer_ids: AnswerId[];
+    } = {
+      answer_ids: [selected!.id],
+    };
+    mutate({
+      n: questionNumber,
+      answer_ids: answerIds.answer_ids,
+    });
+    const datasetKey: string = selected!.id.code.replace("Dataset", "") + "-1";
+    setDatasetKey(datasetKey);
+    // here i need to uplo
     // chiamata per salvare i dati (se necessario)
     onNext();
   };

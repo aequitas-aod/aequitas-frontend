@@ -7,6 +7,7 @@ import {
   ProxyDataParams,
   ProxyDataResponse,
 } from "../types";
+import { PROJECT_CODE } from "@/config/constants";
 
 const backendApi = new BackendApi();
 
@@ -23,7 +24,7 @@ export const useMutationProxies = ({
       dataset: string;
       body: ProxyDataParams;
     }) => {
-      return backendApi.putSuggestedProxies(dataset, "proxies", body);
+      return backendApi.putSuggestedProxies(PROJECT_CODE, dataset, "proxies", body);
     },
     onSuccess: () => {
       onSuccess();
@@ -37,7 +38,7 @@ export const useDatasetContext = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["dataset", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(dataset, "dataset");
+      return backendApi.getContextCsv(PROJECT_CODE, dataset, "dataset_head");
     },
   });
   return query;
@@ -48,7 +49,7 @@ export const useStatsContext = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["stats", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(dataset, "stats");
+      return backendApi.getContextCsv(PROJECT_CODE, dataset, "stats");
     },
   });
   return query;
@@ -59,7 +60,7 @@ export const useFeaturesContext = (dataset: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
     queryFn: async () => {
-      return backendApi.getFeaturesContext(dataset, "features");
+      return backendApi.getFeaturesContext(PROJECT_CODE, dataset, "features");
     },
   });
   return query;
@@ -68,7 +69,7 @@ export const useMetricsContext = (dataset: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
-      return backendApi.getMetricsContext(dataset, "metrics");
+      return backendApi.getMetricsContext(PROJECT_CODE, dataset, "metrics");
     },
   });
   return query;
@@ -79,7 +80,7 @@ export const useSuggestedProxies = (dataset: string) => {
   const query = useQuery<ProxyDataResponse>({
     queryKey: ["suggested-proxies", dataset],
     queryFn: async () => {
-      return backendApi.getSuggestedProxies(dataset, "suggested_proxies");
+      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset, "suggested_proxies");
     },
   });
   return query;
@@ -89,7 +90,7 @@ export const useCorrelationMatrix = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["correlation-matrix", dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(dataset, "correlation_matrix");
+      return backendApi.getContextVectorialData(PROJECT_CODE, dataset, "correlation_matrix");
     },
   });
   return query;
@@ -99,7 +100,7 @@ export const useDependencyGraph = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(dataset, "dependency_graph");
+      return backendApi.getContextVectorialData(PROJECT_CODE, dataset, "dependency_graph");
     },
   });
   return query;
@@ -111,6 +112,7 @@ export const usePreprocessingHyperparameters = (dataset: string) => {
     queryKey: ["preprocessing-hyperparameters", dataset],
     queryFn: async () => {
       return backendApi.getPreprocessingHyperparametersContext(
+        PROJECT_CODE,
         dataset,
         "preprocessing-hyperparameters"
       );
@@ -126,7 +128,7 @@ export const useLaunchAlgorithmMutation = ({
 }) => {
   const mutation = useMutation({
     mutationFn: (body: Record<string, unknown>) => {
-      return backendApi.putContext("project", "launch-algorithm", body);
+      return backendApi.putContext(PROJECT_CODE, "launch-algorithm", body);
     },
     onSuccess: () => {
       onSuccess();
