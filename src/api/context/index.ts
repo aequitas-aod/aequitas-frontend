@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackendApi } from "../api";
 import {
+  FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
@@ -10,6 +11,28 @@ import {
 import { PROJECT_CODE } from "@/config/constants";
 
 const backendApi = new BackendApi();
+
+export const useMutationFeatures = ({
+                                     onSuccess,
+                                   }: {
+  onSuccess: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: ({
+                   dataset,
+                   body,
+                 }: {
+      dataset: string;
+      body: FeaturesParams;
+    }) => {
+      return backendApi.putFeatures(PROJECT_CODE, dataset, body);
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+  return mutation;
+};
 
 export const useMutationProxies = ({
   onSuccess,
@@ -24,7 +47,7 @@ export const useMutationProxies = ({
       dataset: string;
       body: ProxyDataParams;
     }) => {
-      return backendApi.putSuggestedProxies(PROJECT_CODE, dataset, "proxies", body);
+      return backendApi.putProxies(PROJECT_CODE, dataset, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -80,7 +103,7 @@ export const useSuggestedProxies = (dataset: string) => {
   const query = useQuery<ProxyDataResponse>({
     queryKey: ["suggested-proxies", dataset],
     queryFn: async () => {
-      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset, "suggested_proxies");
+      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset);
     },
   });
   return query;

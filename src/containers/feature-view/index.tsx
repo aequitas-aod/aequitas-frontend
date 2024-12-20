@@ -35,6 +35,10 @@ export const FeatureViewPage = ({
     return <div>Error: {error.message}</div>;
   }
 
+  if (!data) {
+    return <div>No Questionnaire available</div>;
+  }
+
   if (!featureViewData || featureViewData.length === 0) {
     return <div>No data available</div>;
   }
@@ -43,6 +47,7 @@ export const FeatureViewPage = ({
     <FeaturesView
       onNext={onNext}
       features={featureViewData}
+      answers={data.answers}
       questionNumber={questionNumber}
     />
   );
