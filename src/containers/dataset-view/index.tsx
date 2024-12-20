@@ -1,4 +1,4 @@
-import { useDatasetViewContext } from "@/api/context";
+import { useDatasetContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
 import { useAequitasStore } from "@/store/store";
@@ -26,7 +26,7 @@ export const DatasetViewPage = ({
     data: contextData,
     isLoading: isLoadingContextData,
     error: errorContextData,
-  } = useDatasetViewContext(datasetKey);
+  } = useDatasetContext(datasetKey);
 
   if (isLoading || isLoadingContextData) {
     return <div>Loading...</div>;

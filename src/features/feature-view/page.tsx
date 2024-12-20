@@ -7,27 +7,47 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
-import { AnswerId } from "@/api/questionnaire/types";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import type { AnswerResponse, FeaturesParams } from "@/api/types";
+import { useMutationFeatures } from "@/api/context";
+import { useAequitasStore } from "@/store/store";
 
 export const FeaturesView = ({
   questionNumber,
   onNext,
+  answers,
   features,
 }: {
   questionNumber: number;
   onNext: () => void;
+  answers: AnswerResponse[];
   features: ParsedDataset[];
 }) => {
   const t = useTranslations("FeatureView");
 
-  const { mutate, isPending } = useUpdateQuestionnaire({
+  const {
+    mutate: mutateFeatures,
+    isPending: isPendingFeatures,
+  } = useMutationFeatures({
     onSuccess: () => {
+      console.log("MUTATION SUCCESS");
       onNext();
+    },
+  });
+
+  const {
+    mutate: mutateQuestionnaire,
+    isPending: isPendingQuestionnaire,
+  } = useUpdateQuestionnaire({
+    onSuccess: async () => {
+      console.log(data);
+      // onNext();
+      onMutateQuestionnaire();
     },
   });
   const [data, setData] = useState<ParsedDataset[]>(features);
   const columns = features.length > 0 ? Object.keys(features[0]) : [];
+  const { datasetKey } = useAequitasStore();
 
   const handleCheckboxChange = (index: number, key: string) => {
     setData((prevData) => {
@@ -40,28 +60,32 @@ export const FeaturesView = ({
     });
   };
 
-  const onContinue = () => {
-    const sensitiveFeatures = data
-      .filter((feature) => feature.sensitive)
-      .map((feature) => ({
-        code: `${feature.feature}-sensitive`,
-      }));
-
-    const targetFeatures = data
-      .filter((feature) => feature.target)
-      .map((feature) => ({
-        code: `${feature.feature}-target`,
-      }));
-
-    const answerIds: {
-      answer_ids: AnswerId[];
-    } = {
-      answer_ids: { ...sensitiveFeatures, ...targetFeatures },
-    };
-    mutate({
-      n: questionNumber,
-      answer_ids: answerIds.answer_ids,
+  const onMutateQuestionnaire = () => {
+    const features: FeaturesParams = {};
+    data.forEach(record => {
+      const { feature, sensitive, target } = record;
+      features[feature.toString()] = {
+        sensitive: sensitive === true,
+        target: target === true,
+        drop: false
+      }
     });
+    console.log(features);
+    console.log("DATASET KEY");
+    console.log(datasetKey);
+    mutateFeatures({
+      dataset: datasetKey!,
+      body: features
+    })
+
+  };
+
+  const onContinue = () => {
+    mutateQuestionnaire({
+      n: questionNumber,
+      answer_ids: [answers[0].id],
+    });
+
   };
 
   return (
@@ -82,7 +106,7 @@ export const FeaturesView = ({
         data={data}
         columns={columns}
         handleCheckboxChange={handleCheckboxChange}
-        disabled={isPending}
+        disabled={isPendingQuestionnaire}
       />
     </QuestionnaireLayout>
   );

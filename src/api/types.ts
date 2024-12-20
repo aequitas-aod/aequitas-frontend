@@ -100,3 +100,13 @@ export type ProxyDataParams = Record<
   string,
   Record<string, AttributeDataParams>
 >;
+
+//
+
+
+type FeatureData = {
+  target: boolean;
+  sensitive: boolean;
+  drop: boolean;
+};
+export type FeaturesParams = Record<string, FeatureData>;

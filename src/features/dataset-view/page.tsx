@@ -8,7 +8,7 @@ import { CsvData, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
-import { useUpdateQuestionnaireMutation } from "@/api/questionnaire";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { AnswerId } from "@/api/questionnaire/types";
 
@@ -26,7 +26,7 @@ export const DatasetView = ({
   const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
-  const { mutate, isPending } = useUpdateQuestionnaireMutation({
+  const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },

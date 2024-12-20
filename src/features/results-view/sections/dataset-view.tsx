@@ -5,7 +5,7 @@ import { processDataset } from "@/lib/utils";
 import { CsvData, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "@/features/dataset-view/table";
-import { useDatasetViewContext } from "@/api/context";
+import { useDatasetContext } from "@/api/context";
 
 export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
   const t = useTranslations("DatasetView");
@@ -16,7 +16,7 @@ export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
     data: contextData,
     isLoading,
     error,
-  } = useDatasetViewContext(datasetKey);
+  } = useDatasetContext(datasetKey);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {

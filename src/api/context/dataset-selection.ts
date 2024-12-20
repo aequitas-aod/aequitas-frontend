@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { backendApi } from "../api";
+import { PROJECT_CODE } from "@/config/constants";
 
 // PUT /projects/{project-code}/context?key=dataset__custom-1
 
@@ -10,15 +11,13 @@ export const useUpdateContextCsv = ({
 }) => {
   const mutation = useMutation({
     mutationFn: (params: {
-      // project: string;
       dataset: string;
       body: string;
     }) => {
-      return backendApi.putContextCsv(
-        // params.project,
-        "dataset",
-        params.dataset,
-        params.body
+      return backendApi.putContext(
+        PROJECT_CODE,
+        "dataset__" + params.dataset,
+        params.body,
       );
     },
     onSuccess: () => {

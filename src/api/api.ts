@@ -1,6 +1,7 @@
 import { sleep } from "@/lib/utils";
 import {
   AnswerContextResponse,
+  FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
   PreprocessingHyperparametersResponse,
@@ -83,34 +84,57 @@ export class BackendApi {
 
   /* Context */
 
+  // TODO: @Mala1180 implement this function
   // Per ottenere le informazioni sui datasets disponibili.
-
   async getDatasetInfo(): Promise<AnswerContextResponse[]> {
     await sleep(500);
     console.log(`GET /projects/{project-name}/context?key=datasets`);
     return require(`../../mocks/datasets/index.json`);
   }
 
+  async putFeatures(
+    project: string,
+    dataset: string,
+    body: FeaturesParams
+  ): Promise<void> {
+    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`);
+    console.log(body);
+    const res = await axios.put(
+      `http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`,
+      body
+    );
+    if (res.status === 200) {
+      console.log("PUT SUCCESS");
+    } else {
+      console.log("PUT FAILED");
+    }
+  }
+
+
   async getSuggestedProxies(
     project: string,
     dataset: string,
-    key: string
   ): Promise<ProxyDataResponse> {
     await sleep(500);
-    console.log(`GET /projects/${project}/proxies?key=${key}__${dataset}`);
-    return require(`../../mocks/${key}/${dataset}.json`);
+    const res = await axios.get(
+      `http://${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`
+    );
+    if (res.status === 200) {
+      console.log("RESPONSE", res.data);
+      return res.data;
+    }
+    throw new Error("Failed to fetch questionnaire");
   }
 
-  async putSuggestedProxies(
+  async putProxies(
     project: string,
     dataset: string,
-    key: string,
     body: ProxyDataParams
   ): Promise<void> {
-    console.log(`PUT /projects/{project-name}/proxies?key=${key}__${dataset}`);
+    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`);
     console.log(body);
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/proxies?key=${key}__${dataset}`,
+      `http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`,
       body
     );
     if (res.status === 200) {
@@ -185,10 +209,10 @@ export class BackendApi {
   async putContext(
     project: string,
     key: string,
-    body: Record<string, unknown>
+    body: unknown
   ): Promise<void> {
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/proxies?key=${key}`,
+      `http://${BACKEND_URL}/projects/${project}/context?key=${key}`,
       body
     );
     if (res.status === 200) {
@@ -196,18 +220,6 @@ export class BackendApi {
     } else {
       console.log("PUT FAILED");
     }
-  }
-
-  async putContextCsv(
-    //project: string,
-    key: string,
-    dataset: string,
-    // body come csv
-    body: string
-  ): Promise<void> {
-    console.log(`PUT /projects/{project-name}/context?key=${key}__${dataset}}`);
-    console.log(body);
-    await sleep(500);
   }
 }
 
