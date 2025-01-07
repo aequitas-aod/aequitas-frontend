@@ -65,8 +65,8 @@ export const FeaturesView = ({
     data.forEach(record => {
       const { feature, sensitive, target } = record;
       features[feature.toString()] = {
-        sensitive: sensitive === true,
-        target: target === true,
+        sensitive: sensitive == true,
+        target: target == true,
         drop: false
       }
     });
