@@ -24,30 +24,32 @@ export const FeaturesView = ({
   features: ParsedDataset[];
 }) => {
   const t = useTranslations("FeatureView");
-
-  const {
-    mutate: mutateFeatures,
-    isPending: isPendingFeatures,
-  } = useMutationFeatures({
-    onSuccess: () => {
-      console.log("MUTATION SUCCESS");
-      onNext();
-    },
-  });
-
-  const {
-    mutate: mutateQuestionnaire,
-    isPending: isPendingQuestionnaire,
-  } = useUpdateQuestionnaire({
-    onSuccess: async () => {
-      console.log(data);
-      // onNext();
-      onMutateQuestionnaire();
-    },
-  });
-  const [data, setData] = useState<ParsedDataset[]>(features);
-  const columns = features.length > 0 ? Object.keys(features[0]) : [];
   const { datasetKey } = useAequitasStore();
+
+  /* default: all rows are selected */
+  const [selectedRows, setSelectedRows] = useState<number[]>(
+    Array.from({ length: features.length }, (_, index) => index)
+  );
+  const [data, setData] = useState<ParsedDataset[]>(features);
+
+  const columns = features.length > 0 ? Object.keys(features[0]) : [];
+
+  const { mutate: mutateFeatures, isPending: isPendingFeatures } =
+    useMutationFeatures({
+      onSuccess: () => {
+        console.log("MUTATION SUCCESS");
+        onNext();
+      },
+    });
+
+  const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
+    useUpdateQuestionnaire({
+      onSuccess: async () => {
+        console.log(data);
+        // onNext();
+        onMutateQuestionnaire();
+      },
+    });
 
   const handleCheckboxChange = (index: number, key: string) => {
     setData((prevData) => {
@@ -62,22 +64,31 @@ export const FeaturesView = ({
 
   const onMutateQuestionnaire = () => {
     const features: FeaturesParams = {};
-    data.forEach(record => {
+
+    data.forEach((record) => {
       const { feature, sensitive, target } = record;
       features[feature.toString()] = {
         sensitive: sensitive == true,
         target: target == true,
-        drop: false
-      }
+        drop: false /* TODO: filter the selectedRows */,
+      };
     });
     console.log(features);
     console.log("DATASET KEY");
     console.log(datasetKey);
     mutateFeatures({
       dataset: datasetKey!,
-      body: features
-    })
+      body: features,
+    });
+  };
 
+  const handleSelectRow = (index: number) => {
+    setSelectedRows((prevSelectedRows) => {
+      if (prevSelectedRows.includes(index)) {
+        return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
+      }
+      return [...prevSelectedRows, index];
+    });
   };
 
   const onContinue = () => {
@@ -85,12 +96,20 @@ export const FeaturesView = ({
       n: questionNumber,
       answer_ids: [answers[0].id],
     });
-
   };
+
+  const isPending = isPendingFeatures || isPendingQuestionnaire;
 
   return (
     <QuestionnaireLayout
-      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      action={
+        <Button
+          onClick={onContinue}
+          disabled={selectedRows.length === 0 || isPending}
+        >
+          {t("buttons.continue")}
+        </Button>
+      }
       className="!bg-neutral-50"
     >
       <QuestionnaireBanner
@@ -105,6 +124,8 @@ export const FeaturesView = ({
       <FeatureViewTable
         data={data}
         columns={columns}
+        selectedRows={selectedRows}
+        handleSelectRow={handleSelectRow}
         handleCheckboxChange={handleCheckboxChange}
         disabled={isPendingQuestionnaire}
       />
