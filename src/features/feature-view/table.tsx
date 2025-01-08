@@ -28,16 +28,19 @@ export const FeatureViewTable = ({
 }: {
   columns: string[];
   data: ParsedDataset[];
-  handleSelectRow: (index: number) => void;
+  handleSelectRow?: (index: number) => void;
   selectedRows?: number[];
   handleCheckboxChange?: (index: number, key: string) => void;
   disabled?: boolean;
 }) => {
+  const showSelectRow = selectedRows && handleSelectRow;
   return (
     <Table>
       <TableHeader className="sticky top-0 z-10 bg-neutral-50">
         <TableRow>
-          <TableHead className="text-center bg-neutral-50 text-neutral-400 border-b-2 border-neutral-200 px-6 border-r-2"></TableHead>
+          {showSelectRow && (
+            <TableHead className="text-center bg-neutral-50 text-neutral-400 border-b-2 border-neutral-200 px-6 border-r-2"></TableHead>
+          )}
           {columns.map((key, colIndex) => (
             <TableHead
               key={key}
@@ -59,15 +62,17 @@ export const FeatureViewTable = ({
       <TableBody>
         {data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
-            <TableCell className="font-medium text-sm  border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">
-              <Checkbox
-                checked={selectedRows?.includes(rowIndex)}
-                onCheckedChange={() => handleSelectRow(rowIndex)}
-                disabled={disabled}
-                className="ml-1.5"
-                variant="outlined-black"
-              />
-            </TableCell>
+            {showSelectRow && (
+              <TableCell className="font-medium text-sm  border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">
+                <Checkbox
+                  checked={selectedRows?.includes(rowIndex)}
+                  onCheckedChange={() => handleSelectRow(rowIndex)}
+                  disabled={disabled}
+                  className="ml-1.5"
+                  variant="outlined-black"
+                />
+              </TableCell>
+            )}
             {columns.map((col, colIndex) => {
               const cellContent = Array.isArray(row[col])
                 ? row[col].join(", ")
