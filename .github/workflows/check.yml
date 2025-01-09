@@ -33,7 +33,7 @@ jobs:
     name: Deploy
     needs:
       - check
-    if: github.ref == 'refs/heads/main' && github.repository_owner == 'aequitas-aod'
+    if: github.ref == 'refs/heads/main' && github.repository_owner == 'aequitas-aod' && github.event_name == 'push'
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
 
