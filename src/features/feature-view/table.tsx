@@ -21,32 +21,40 @@ import {
 export const FeatureViewTable = ({
   columns,
   data,
+  selectedRows,
+  handleSelectRow,
   handleCheckboxChange,
   disabled = false,
 }: {
   columns: string[];
   data: ParsedDataset[];
+  handleSelectRow?: (index: number) => void;
+  selectedRows?: number[];
   handleCheckboxChange?: (index: number, key: string) => void;
   disabled?: boolean;
 }) => {
+  const showSelectRow = selectedRows && handleSelectRow;
   return (
     <Table>
-      <TableHeader>
+      <TableHeader className="sticky top-0 z-10 bg-neutral-50">
         <TableRow>
+          {showSelectRow && (
+            <TableHead className="text-center bg-neutral-50 text-neutral-400 border-b-2 border-neutral-200 px-6 border-r-2"></TableHead>
+          )}
           {columns.map((key, colIndex) => (
             <TableHead
               key={key}
+              id={key}
               className={`text-center bg-neutral-100 text-neutral-400 border-b-2 border-neutral-200 px-6 ${
                 key === TARGET && "!bg-primary-950 !text-white !px-0 !w-16"
               } ${
                 key === SENSITIVE && "!bg-primary-900 !text-white !w-16 !px-0"
               } 
                   ${key === DISTRIBUTION && "!w-[600px]"}
-                ${
-                  key === "feature" && "!bg-neutral-50"
-                } ${colIndex !== columns.length - 1 && "border-r-2"}`}
+                ${colIndex !== columns.length - 1 && "border-r-2"}
+                `}
             >
-              {key === "feature" ? "" : key}
+              {key}
             </TableHead>
           ))}
         </TableRow>
@@ -54,6 +62,17 @@ export const FeatureViewTable = ({
       <TableBody>
         {data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
+            {showSelectRow && (
+              <TableCell className="font-medium text-sm  border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">
+                <Checkbox
+                  checked={selectedRows?.includes(rowIndex)}
+                  onCheckedChange={() => handleSelectRow(rowIndex)}
+                  disabled={disabled}
+                  className="ml-1.5"
+                  variant="outlined-black"
+                />
+              </TableCell>
+            )}
             {columns.map((col, colIndex) => {
               const cellContent = Array.isArray(row[col])
                 ? row[col].join(", ")
@@ -77,14 +96,13 @@ export const FeatureViewTable = ({
                     col === TARGET && "!bg-primary-200"
                   } 
             ${col === SENSITIVE && "!bg-primary-300"}
-            ${col === FEATURE_NAME && "!bg-neutral-100 !text-neutral-600 !border-neutral-200"} ${
-              colIndex !== columns.length - 1 && "border-r-2"
-            }
+            ${colIndex !== columns.length - 1 && "border-r-2"}
             ${col === DISTRIBUTION && "!px-1"}
 
            ${(typeof row[col] === "number" || row[col] === "-") && "!text-right"}
             ${typeof row[col] === "boolean" && "!text-center"}
             `}
+                  id={col}
                   title={isTruncated ? cellContent : ""}
                 >
                   {col === TARGET || col === SENSITIVE ? (

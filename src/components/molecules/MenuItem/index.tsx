@@ -15,7 +15,6 @@ export interface IMenuItem extends SidebarItem {
 
 interface MenuItemProps {
   item: IMenuItemWithState;
-  onInfoClick?: (item: IMenuItem) => void;
   onNavigate: (path: number) => void;
 }
 
@@ -43,9 +42,8 @@ const stateStyles = {
   },
 };
 
-export const MenuItem = ({ item, onInfoClick, onNavigate }: MenuItemProps) => {
+export const MenuItem = ({ item, onNavigate }: MenuItemProps) => {
   const { bg, border, text, hoverBg, fontWeight } = stateStyles[item.state];
-  const isDisabled = item.state === "future";
 
   const [open, setOpen] = useState(false); // Stato per la dialog
   const [navigateTo, setNavigateTo] = useState<number | null>(null); // URL di navigazione dopo conferma
@@ -65,12 +63,10 @@ export const MenuItem = ({ item, onInfoClick, onNavigate }: MenuItemProps) => {
   return (
     <>
       <div className="flex items-center space-x-2 justify-end">
-        {isDisabled ? (
-          <div
-            className={`w-32 text-sm text-center py-3.5 rounded-md border-2 ${bg} ${text} ${border} ${fontWeight} cursor-not-allowed opacity-50`}
-          >
-            {item.name}
-          </div>
+        {item.state === "future" ? (
+          <>
+            {/* Currently, we have hidden the future section. Once the backend is integrated, the reference to future can be removed */}
+          </>
         ) : item.state === "past" ? (
           <div
             className={`w-32 text-sm text-center py-3.5 rounded-md transition-colors border-2 ${bg} ${text} ${hoverBg} ${border} ${fontWeight} cursor-pointer`}

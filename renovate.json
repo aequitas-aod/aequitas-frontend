@@ -21,6 +21,13 @@
           ".github/workflows/*.yaml"
         ],
         "semanticCommitType": "ci"
+      },
+      {
+        "description": "Disable updates for dependencies react and react-dom",
+        "matchPackagePatterns": [
+          "^(@types/)?react(-dom)?$"
+        ],
+        "enabled": false
       }
     ],
     "prConcurrentLimit": 25,
