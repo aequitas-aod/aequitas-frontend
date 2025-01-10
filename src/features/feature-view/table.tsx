@@ -19,6 +19,16 @@ import {
 } from "@/config/constants";
 import { FeatureViewTableHeader } from "./table-header";
 
+type FeatureViewTableProps = {
+  columns: string[];
+  data: ParsedDataset[];
+  selectedRows?: number[];
+  handleSelectRow?: (index: number) => void;
+  handleTargetCheckboxChange?: (index: number, key: string) => void;
+  handleSensitiveCheckboxChange?: (index: number, key: string) => void;
+  disabled?: boolean;
+};
+
 export const FeatureViewTable = ({
   columns,
   data,
@@ -27,15 +37,7 @@ export const FeatureViewTable = ({
   handleTargetCheckboxChange,
   handleSensitiveCheckboxChange,
   disabled = false,
-}: {
-  columns: string[];
-  data: ParsedDataset[];
-  handleSelectRow?: (index: number) => void;
-  selectedRows?: number[];
-  handleTargetCheckboxChange?: (index: number, key: string) => void;
-  handleSensitiveCheckboxChange?: (index: number, key: string) => void;
-  disabled?: boolean;
-}) => {
+}: FeatureViewTableProps) => {
   const showSelectRow = !!selectedRows && !!handleSelectRow;
   return (
     <Table>
