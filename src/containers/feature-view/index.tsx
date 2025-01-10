@@ -18,7 +18,11 @@ export const FeatureViewPage = ({
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { data, isLoading, error } = useQuestionnaireById({
+  const {
+    data,
+    isLoading: isLoadingQuestionnaireData,
+    error: errorQuestionnaireData,
+  } = useQuestionnaireById({
     n: questionNumber,
   });
   const {
@@ -26,6 +30,9 @@ export const FeatureViewPage = ({
     isLoading: isLoadingFeatureViewData,
     error: errorFeatureViewData,
   } = useFeatureView(datasetKey);
+
+  const isLoading = isLoadingQuestionnaireData || isLoadingFeatureViewData;
+  const error = errorQuestionnaireData || errorFeatureViewData;
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -40,12 +47,13 @@ export const FeatureViewPage = ({
   }
 
   if (!featureViewData || featureViewData.length === 0) {
-    return <div>No data available</div>;
+    return <div>No features available</div>;
   }
 
   return (
     <FeaturesView
       onNext={onNext}
+      question={data}
       features={featureViewData}
       answers={data.answers}
       questionNumber={questionNumber}

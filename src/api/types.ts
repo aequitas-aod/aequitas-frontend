@@ -27,6 +27,7 @@ export type QuestionnaireId = {
 export type QuestionnaireResponse = {
   id: QuestionnaireId;
   text: string; // Title of the page
+  description: string; // Description of the page
   type: string; // Type of response (metadata indicating that only one item will be selected at the end)
   answers: AnswerResponse[]; // Array of answers
   created_at: string; // Creation date
@@ -102,7 +103,6 @@ export type ProxyDataParams = Record<
 >;
 
 //
-
 
 type FeatureData = {
   target: boolean;
