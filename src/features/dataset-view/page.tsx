@@ -9,8 +9,8 @@ import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
-import { AnswerId } from "@/api/questionnaire/types";
+import type { AnswerResponse } from "@/api/types";
+import { isMocked } from "@/api/api";
 
 export const DatasetView = ({
   onNext,
@@ -33,9 +33,16 @@ export const DatasetView = ({
   });
 
   const onContinue = () => {
+    if (isMocked()) {
+      console.log("Using mocked response for putQuestionnaire");
+      onNext();
+      return;
+    }
     mutate({
       n: questionNumber,
-      answer_ids: [answers.find((answer) => answer.id.code.includes("Yes"))!.id],
+      answer_ids: [
+        answers.find((answer) => answer.id.code.includes("Yes"))!.id,
+      ],
     });
     onNext();
   };
@@ -68,7 +75,11 @@ export const DatasetView = ({
 
   return (
     <QuestionnaireLayout
-      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      action={
+        <Button onClick={onContinue} disabled={isPending}>
+          {t("buttons.continue")}
+        </Button>
+      }
       classNameWrapper="!overflow-hidden"
       className="!bg-neutral-50"
     >

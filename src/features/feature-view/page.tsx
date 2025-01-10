@@ -3,21 +3,27 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
-
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
-import type { AnswerResponse, FeaturesParams } from "@/api/types";
 import { useMutationFeatures } from "@/api/context";
 import { useAequitasStore } from "@/store/store";
 
+import type {
+  AnswerResponse,
+  FeaturesParams,
+  QuestionnaireResponse,
+} from "@/api/types";
+
 export const FeaturesView = ({
+  question,
   questionNumber,
   onNext,
   answers,
   features,
 }: {
+  question: QuestionnaireResponse;
   questionNumber: number;
   onNext: () => void;
   answers: AnswerResponse[];
@@ -26,7 +32,6 @@ export const FeaturesView = ({
   const t = useTranslations("FeatureView");
   const { datasetKey } = useAequitasStore();
 
-  /* default: all rows are selected */
   const [selectedRows, setSelectedRows] = useState<number[]>(
     Array.from({ length: features.length }, (_, index) => index)
   );
@@ -37,21 +42,38 @@ export const FeaturesView = ({
   const { mutate: mutateFeatures, isPending: isPendingFeatures } =
     useMutationFeatures({
       onSuccess: () => {
-        console.log("MUTATION SUCCESS");
+        // todo: invalidate questionnaire: queryKey: ["questionnaire", "full"],
         onNext();
       },
     });
 
   const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
     useUpdateQuestionnaire({
-      onSuccess: async () => {
-        console.log(data);
-        // onNext();
-        onMutateQuestionnaire();
+      onSuccess: () => {
+        onMutateFeatures();
       },
     });
 
-  const handleCheckboxChange = (index: number, key: string) => {
+  const handleTargetCheckboxChange = (index: number, key: string) => {
+    /* only one target can be selected */
+    setData((prevData) => {
+      const updatedData = prevData.map((record, i) => {
+        if (i === index) {
+          return {
+            ...record,
+            target: true,
+          };
+        }
+        return {
+          ...record,
+          target: false,
+        };
+      });
+      return updatedData;
+    });
+  };
+
+  const handleSensitiveCheckboxChange = (index: number, key: string) => {
     setData((prevData) => {
       const updatedData = [...prevData];
       updatedData[index] = {
@@ -62,17 +84,27 @@ export const FeaturesView = ({
     });
   };
 
-  const onMutateQuestionnaire = () => {
+  const handleSelectRow = (index: number) => {
+    setSelectedRows((prev) =>
+      prev.includes(index)
+        ? prev.filter((row) => row !== index)
+        : [...prev, index]
+    );
+  };
+
+  const onMutateFeatures = () => {
     const features: FeaturesParams = {};
 
-    data.forEach((record) => {
+    /* it can be improved with a reduce function */
+    data.forEach((record, idx) => {
       const { feature, sensitive, target } = record;
       features[feature.toString()] = {
         sensitive: sensitive == true,
         target: target == true,
-        drop: false /* TODO: filter the selectedRows */,
+        drop: !selectedRows.includes(idx),
       };
     });
+
     console.log(features);
     console.log("DATASET KEY");
     console.log(datasetKey);
@@ -82,51 +114,51 @@ export const FeaturesView = ({
     });
   };
 
-  const handleSelectRow = (index: number) => {
-    setSelectedRows((prevSelectedRows) => {
-      if (prevSelectedRows.includes(index)) {
-        return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
-      }
-      return [...prevSelectedRows, index];
-    });
-  };
-
   const onContinue = () => {
     mutateQuestionnaire({
       n: questionNumber,
-      answer_ids: [answers[0].id],
+      answer_ids: [answers[0]?.id],
     });
   };
 
   const isPending = isPendingFeatures || isPendingQuestionnaire;
+  const selectedTarget = data.find((record) => record.target)?.feature as
+    | string
+    | undefined;
 
   return (
     <QuestionnaireLayout
       action={
-        <Button
-          onClick={onContinue}
-          disabled={selectedRows.length === 0 || isPending}
-        >
-          {t("buttons.continue")}
-        </Button>
+        <div className="flex justify-end gap-4">
+          <span>
+            {t("selected-features", {
+              selected: selectedRows.length,
+              total: features.length,
+            })}
+          </span>
+          <span>
+            {t("selected-target", {
+              target: selectedTarget || "None",
+            })}
+          </span>
+          <Button
+            onClick={onContinue}
+            disabled={selectedRows.length === 0 || isPending}
+          >
+            {t("buttons.continue")}
+          </Button>
+        </div>
       }
       className="!bg-neutral-50"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={question.text} />
       <FeatureViewTable
         data={data}
         columns={columns}
         selectedRows={selectedRows}
         handleSelectRow={handleSelectRow}
-        handleCheckboxChange={handleCheckboxChange}
+        handleTargetCheckboxChange={handleTargetCheckboxChange}
+        handleSensitiveCheckboxChange={handleSensitiveCheckboxChange}
         disabled={isPendingQuestionnaire}
       />
     </QuestionnaireLayout>

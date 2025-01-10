@@ -17,15 +17,24 @@ import {
 import axios from "axios";
 import { BACKEND_URL } from "@/config/constants";
 
+// Funzione per verificare se utilizzare i mock
+export const isMocked = (): boolean => {
+  return process.env.NEXT_PUBLIC_USE_MOCKS === "true";
+};
+
 // Handle the response data
 export class BackendApi {
   /* Questionnaire */
 
   async getQuestionnaireList(
-    project: string,
+    project: string
   ): Promise<QuestionnaireResponse[]> {
+    if (isMocked()) {
+      console.log("Using mocked response for getQuestionnaireList");
+      return require(`../../mocks/questionnaire/full.json`);
+    }
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire`
+      `${BACKEND_URL}/projects/${project}/questionnaire`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -39,8 +48,12 @@ export class BackendApi {
     params: QuestionnaireParams
   ): Promise<QuestionnaireResponse> {
     const { n } = params;
+    if (isMocked()) {
+      console.log("Using mocked response for getQuestionnaireById");
+      return require(`../../mocks/questionnaire/${n}.json`);
+    }
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -56,8 +69,12 @@ export class BackendApi {
     const { n, answer_ids } = params;
     console.log(`PUT /projects/${project}/questionnaire/${n}`);
     console.log(params);
+    if (isMocked()) {
+      console.log("Using mocked response for putQuestionnaire");
+      return;
+    }
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`,
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`,
       { answer_ids }
     );
     if (res.status === 200) {
@@ -67,13 +84,17 @@ export class BackendApi {
     }
   }
 
-  async deleteQuestionnaire(
+  async deleteQuestionnaireById(
     project: string,
     params: DeleteQuestionnaireParams
   ): Promise<void> {
     const { n } = params;
+    if (isMocked()) {
+      console.log("Using mocked response for deleteQuestionnaireById");
+      return;
+    }
     const res = await axios.delete(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`
     );
     if (res.status === 200) {
       console.log("DELETE SUCCESS");
@@ -97,10 +118,16 @@ export class BackendApi {
     dataset: string,
     body: FeaturesParams
   ): Promise<void> {
-    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`);
+    console.log(
+      `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`
+    );
     console.log(body);
+    if (isMocked()) {
+      console.log("Using mocked response for putFeatures");
+      return;
+    }
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`,
+      `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`,
       body
     );
     if (res.status === 200) {
@@ -110,14 +137,17 @@ export class BackendApi {
     }
   }
 
-
   async getSuggestedProxies(
     project: string,
-    dataset: string,
+    dataset: string
   ): Promise<ProxyDataResponse> {
     await sleep(500);
+    if (isMocked()) {
+      console.log("Using mocked response for getSuggestedProxies");
+      return require(`../../mocks/suggested_proxies/custom-1.json`);
+    }
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`
+      `${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -131,10 +161,16 @@ export class BackendApi {
     dataset: string,
     body: ProxyDataParams
   ): Promise<void> {
-    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`);
+    if (isMocked()) {
+      console.log("Using mocked response for putProxies");
+      return;
+    }
+    console.log(
+      `${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`
+    );
     console.log(body);
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`,
+      `${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`,
       body
     );
     if (res.status === 200) {
@@ -144,9 +180,19 @@ export class BackendApi {
     }
   }
 
-  async getContextCsv(project: string, dataset: string, key: string): Promise<string> {
+  async getContextCsv(
+    project: string,
+    dataset: string,
+    key: string
+  ): Promise<string> {
+    if (isMocked()) {
+      console.log("Using mocked response for getContextCsv");
+      console.log(`../../mocks/${key}/${dataset}.ts`);
+      const csvData = (await import(`../../mocks/${key}/custom-1.ts`)).default;
+      return csvData;
+    }
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
+      `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
     );
     if (res.status === 200) {
       console.log("RETRIEVED CSV");
@@ -206,13 +252,14 @@ export class BackendApi {
     return require(`../../mocks/${key}/${dataset}.json`);
   }
 
-  async putContext(
-    project: string,
-    key: string,
-    body: unknown
-  ): Promise<void> {
+  async putContext(project: string, key: string, body: unknown): Promise<void> {
+    if (isMocked()) {
+      console.log("Using mocked response for putContext");
+      await sleep(2000);
+      return;
+    }
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=${key}`,
+      `${BACKEND_URL}/projects/${project}/context?key=${key}`,
       body
     );
     if (res.status === 200) {

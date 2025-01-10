@@ -5,7 +5,7 @@ import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { useAequitasStore } from "@/store/store";
-import { useDeleteQuestionnaire } from "@/api/questionnaire";
+import { useDeleteQuestionnaireById } from "@/api/questionnaire";
 
 type SidebarProps = {
   menuItems: IMenuItem[];
@@ -13,7 +13,7 @@ type SidebarProps = {
 
 export const Sidebar = ({ menuItems }: SidebarProps) => {
   const { currentStep, setCurrentStep } = useAequitasStore();
-  const { mutate } = useDeleteQuestionnaire({
+  const { mutate } = useDeleteQuestionnaireById({
     onSuccess: () => {
       console.log("Step deleted successfully");
     },
