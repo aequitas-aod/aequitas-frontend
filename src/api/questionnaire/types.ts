@@ -1,5 +1,6 @@
 export type QuestionnaireParams = {
   n: number;
+  project_code?: string;
 };
 
 export type AnswerId = {
