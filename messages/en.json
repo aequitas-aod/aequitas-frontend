@@ -36,14 +36,17 @@
       "submit": "Continue"
     }
   },
-  "data-mitigation": {
+  "DataMitigation": {
     "title": "Choose your X-processing algorithm:",
     "subtitle": "Available algorithms",
+    "completed": "Completed",
     "buttons": {
       "continue": "Continue"
     },
     "launch-algorithm": {
-      "no-selection": "Select an algorithm first."
+      "no-selection": "Select an algorithm first.",
+      "title": "Launch {algorithm}",
+      "completed": "Completed"
     }
   },
   "DatasetView": {

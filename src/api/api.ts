@@ -253,6 +253,11 @@ export class BackendApi {
   }
 
   async putContext(project: string, key: string, body: unknown): Promise<void> {
+    if (isMocked()) {
+      console.log("Using mocked response for putContext");
+      await sleep(2000);
+      return;
+    }
     const res = await axios.put(
       `${BACKEND_URL}/projects/${project}/context?key=${key}`,
       body
