@@ -62,14 +62,14 @@ export const useUpdateCustomQuestionnaire = ({
   return mutation;
 };
 
-export const useDeleteQuestionnaire = ({
+export const useDeleteQuestionnaireById = ({
   onSuccess,
 }: {
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
     mutationFn: (params: DeleteQuestionnaireParams) => {
-      return backendApi.deleteQuestionnaire(PROJECT_CODE, params);
+      return backendApi.deleteQuestionnaireById(PROJECT_CODE, params);
     },
     onSuccess: () => {
       onSuccess();
