@@ -15,6 +15,7 @@ import {
 } from "@/containers/dataset-selection";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { AnswerId } from "@/api/questionnaire/types";
+import { isMocked } from "@/api/api";
 
 export const DatasetSelection = ({
   data,
@@ -26,7 +27,9 @@ export const DatasetSelection = ({
   onNext: () => void;
 }) => {
   const { mutate, isPending } = useUpdateQuestionnaire({
-    onSuccess: () => { onNext(); },
+    onSuccess: () => {
+      onNext();
+    },
   });
   const t = useTranslations("DatasetSelection");
   const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
@@ -44,6 +47,12 @@ export const DatasetSelection = ({
 
   const onContinue = () => {
     if (!selected) {
+      return;
+    }
+    if (isMocked()) {
+      console.log("Using mocked response for putQuestionnaire");
+      setDatasetKey("custom-1");
+      onNext();
       return;
     }
     mutate({
