@@ -6,7 +6,11 @@ export const FeatureCheckboxList = ({
   onCheckboxChange,
 }: {
   featureKey: string;
-  attributes: { [key: string]: any };
+  attributes: {
+    [key: string]: {
+      selected: string;
+    };
+  };
   onCheckboxChange: (featureKey: string, attributeKey: string) => void;
 }) => {
   return (

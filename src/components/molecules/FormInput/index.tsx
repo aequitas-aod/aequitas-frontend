@@ -1,5 +1,5 @@
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues } from "react-hook-form";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import {
@@ -20,7 +20,7 @@ export const FormInput = ({
 }: {
   name: string;
   config: PreprocessingHyperparametersValue;
-  control: any;
+  control: Control<FieldValues> | undefined;
   isPending: boolean;
 }) => {
   switch (config.type) {
