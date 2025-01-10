@@ -1,11 +1,4 @@
-import {
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-  Table,
-} from "@/components/ui/table";
+import { TableRow, TableBody, TableCell, Table } from "@/components/ui/table";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
