@@ -24,12 +24,8 @@ export default function QuestionnaireContainer() {
   const questionKey = currentQuestion?.id || "";
   const questionNumber = currentQuestion?.step || 0;
 
-  // console.log("questionKey", questionKey);
-  // console.log("questionNumber", questionNumber);
-
   return (
     <>
-      {/* questionKey as string */}
       {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
         <DatasetSelectionPage onNext={onNext} questionNumber={questionNumber} />
       )}
