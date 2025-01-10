@@ -57,7 +57,9 @@
   "FeatureView": {
     "buttons": {
       "continue": "Continue"
-    }
+    },
+    "selected-features": "Selected {selected} out of {total} features",
+    "selected-target": "Selected target: {target}"
   },
   "HomePage": {
     "subtitle": "Fill out the questionnaire or start a new project",
