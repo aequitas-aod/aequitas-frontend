@@ -17,48 +17,29 @@ import {
   DISTRIBUTION,
   FEATURE_NAME,
 } from "@/config/constants";
+import { FeatureViewTableHeader } from "./table-header";
 
 export const FeatureViewTable = ({
   columns,
   data,
   selectedRows,
   handleSelectRow,
-  handleCheckboxChange,
+  handleTargetCheckboxChange,
+  handleSensitiveCheckboxChange,
   disabled = false,
 }: {
   columns: string[];
   data: ParsedDataset[];
   handleSelectRow?: (index: number) => void;
   selectedRows?: number[];
-  handleCheckboxChange?: (index: number, key: string) => void;
+  handleTargetCheckboxChange?: (index: number, key: string) => void;
+  handleSensitiveCheckboxChange?: (index: number, key: string) => void;
   disabled?: boolean;
 }) => {
-  const showSelectRow = selectedRows && handleSelectRow;
+  const showSelectRow = !!selectedRows && !!handleSelectRow;
   return (
     <Table>
-      <TableHeader className="sticky top-0 z-10 bg-neutral-50">
-        <TableRow>
-          {showSelectRow && (
-            <TableHead className="text-center bg-neutral-50 text-neutral-400 border-b-2 border-neutral-200 px-6 border-r-2"></TableHead>
-          )}
-          {columns.map((key, colIndex) => (
-            <TableHead
-              key={key}
-              id={key}
-              className={`text-center bg-neutral-100 text-neutral-400 border-b-2 border-neutral-200 px-6 ${
-                key === TARGET && "!bg-primary-950 !text-white !px-0 !w-16"
-              } ${
-                key === SENSITIVE && "!bg-primary-900 !text-white !w-16 !px-0"
-              } 
-                  ${key === DISTRIBUTION && "!w-[600px]"}
-                ${colIndex !== columns.length - 1 && "border-r-2"}
-                `}
-            >
-              {key}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
+      <FeatureViewTableHeader columns={columns} showSelectRow={showSelectRow} />
       <TableBody>
         {data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
@@ -105,12 +86,23 @@ export const FeatureViewTable = ({
                   id={col}
                   title={isTruncated ? cellContent : ""}
                 >
-                  {col === TARGET || col === SENSITIVE ? (
+                  {col === TARGET ? (
                     <Checkbox
                       checked={row[col] as boolean}
                       onCheckedChange={() =>
-                        handleCheckboxChange &&
-                        handleCheckboxChange(rowIndex, col)
+                        handleTargetCheckboxChange &&
+                        handleTargetCheckboxChange(rowIndex, col)
+                      }
+                      disabled={disabled}
+                      className="mr-4"
+                      variant="outlined-black"
+                    />
+                  ) : col === SENSITIVE ? (
+                    <Checkbox
+                      checked={row[col] as boolean}
+                      onCheckedChange={() =>
+                        handleSensitiveCheckboxChange &&
+                        handleSensitiveCheckboxChange(rowIndex, col)
                       }
                       disabled={disabled}
                       className="mr-4"
