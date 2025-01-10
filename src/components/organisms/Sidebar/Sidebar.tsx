@@ -66,7 +66,7 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col overflow-auto">
       <Menu items={parsedMenuItems} onNavigate={handlePastClick} />
     </div>
   );
