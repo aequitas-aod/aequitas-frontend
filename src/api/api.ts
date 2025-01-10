@@ -22,10 +22,10 @@ export class BackendApi {
   /* Questionnaire */
 
   async getQuestionnaireList(
-    project: string,
+    project: string
   ): Promise<QuestionnaireResponse[]> {
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire`
+      `${BACKEND_URL}/projects/${project}/questionnaire`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -40,7 +40,7 @@ export class BackendApi {
   ): Promise<QuestionnaireResponse> {
     const { n } = params;
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -57,7 +57,7 @@ export class BackendApi {
     console.log(`PUT /projects/${project}/questionnaire/${n}`);
     console.log(params);
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`,
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`,
       { answer_ids }
     );
     if (res.status === 200) {
@@ -73,7 +73,7 @@ export class BackendApi {
   ): Promise<void> {
     const { n } = params;
     const res = await axios.delete(
-      `http://${BACKEND_URL}/projects/${project}/questionnaire/${n}`
+      `${BACKEND_URL}/projects/${project}/questionnaire/${n}`
     );
     if (res.status === 200) {
       console.log("DELETE SUCCESS");
@@ -97,10 +97,12 @@ export class BackendApi {
     dataset: string,
     body: FeaturesParams
   ): Promise<void> {
-    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`);
+    console.log(
+      `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`
+    );
     console.log(body);
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`,
+      `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`,
       body
     );
     if (res.status === 200) {
@@ -110,14 +112,13 @@ export class BackendApi {
     }
   }
 
-
   async getSuggestedProxies(
     project: string,
-    dataset: string,
+    dataset: string
   ): Promise<ProxyDataResponse> {
     await sleep(500);
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`
+      `${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`
     );
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -131,10 +132,12 @@ export class BackendApi {
     dataset: string,
     body: ProxyDataParams
   ): Promise<void> {
-    console.log(`http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`);
+    console.log(
+      `${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`
+    );
     console.log(body);
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`,
+      `${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`,
       body
     );
     if (res.status === 200) {
@@ -144,9 +147,13 @@ export class BackendApi {
     }
   }
 
-  async getContextCsv(project: string, dataset: string, key: string): Promise<string> {
+  async getContextCsv(
+    project: string,
+    dataset: string,
+    key: string
+  ): Promise<string> {
     const res = await axios.get(
-      `http://${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
+      `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
     );
     if (res.status === 200) {
       console.log("RETRIEVED CSV");
@@ -206,13 +213,9 @@ export class BackendApi {
     return require(`../../mocks/${key}/${dataset}.json`);
   }
 
-  async putContext(
-    project: string,
-    key: string,
-    body: unknown
-  ): Promise<void> {
+  async putContext(project: string, key: string, body: unknown): Promise<void> {
     const res = await axios.put(
-      `http://${BACKEND_URL}/projects/${project}/context?key=${key}`,
+      `${BACKEND_URL}/projects/${project}/context?key=${key}`,
       body
     );
     if (res.status === 200) {
