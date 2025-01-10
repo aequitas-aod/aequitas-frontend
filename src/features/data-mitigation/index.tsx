@@ -24,7 +24,7 @@ export const DataMitigation = ({
   onNext: () => void;
   formData: PreprocessingHyperparametersResponse;
 }) => {
-  const t = useTranslations("data-mitigation");
+  const t = useTranslations("DataMitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
   const { incrementDatasetKey } = useAequitasStore();
@@ -36,6 +36,7 @@ export const DataMitigation = ({
     if (!selectedOption) {
       return;
     }
+    setEnableContinueButton(false);
     setSelected(selectedOption);
   };
 
@@ -44,11 +45,14 @@ export const DataMitigation = ({
     onNext();
   };
 
+  const isDisabled =
+    (selected && selected.id.code === "NoMitigation") || enableContinueButton;
+
   return (
     <>
       <QuestionnaireLayout
         action={
-          <Button onClick={onContinue} disabled={!enableContinueButton}>
+          <Button onClick={onContinue} disabled={!isDisabled}>
             {t("buttons.continue")}
           </Button>
         }
@@ -86,8 +90,10 @@ export const DataMitigation = ({
               <LaunchAlgorithm
                 formData={formData}
                 title={selected.text}
+                description={selected.description ?? ""}
                 algorithm={selected.id.code}
                 onEnableContinueButton={() => setEnableContinueButton(true)}
+                enableContinueButton={enableContinueButton}
               />
             </div>
           )}
