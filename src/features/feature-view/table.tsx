@@ -1,5 +1,4 @@
 import { TableRow, TableBody, TableCell, Table } from "@/components/ui/table";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
 import { ParsedDataset } from "@/types/types";
@@ -37,13 +36,13 @@ export const FeatureViewTable = ({
       <FeatureViewTableHeader columns={columns} showSelectRow={showSelectRow} />
       <TableBody>
         {data.map((row, rowIndex) => {
-          // Controlla se la riga è selezionata
           const isRowSelected = selectedRows?.includes(rowIndex);
           return (
             <TableRow
               key={rowIndex}
-              // Applica la classe "opacity-50" se la riga non è selezionata
-              className={`transition-opacity ${!isRowSelected ? "opacity-20" : ""}`}
+              className={`transition-opacity ${
+                disabled ? "opacity-50" : !isRowSelected && "opacity-10"
+              }`}
             >
               {showSelectRow && (
                 <TableCell className="font-medium text-sm border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">

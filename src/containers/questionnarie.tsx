@@ -26,7 +26,8 @@ export default function QuestionnaireContainer() {
 
   return (
     <>
-      {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
+      {(questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION ||
+        questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE) && (
         <DatasetSelectionPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.DATASET_VIEW && (
@@ -43,17 +44,17 @@ export default function QuestionnaireContainer() {
       )}
       {(questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION ||
         questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION ||
-        questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION) && (
+        questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION ||
+        questionKey === QUESTIONNAIRE_KEYS.POLARIZATION) && (
         <DataMitigationPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {(questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION_SUMMARY ||
         questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION_SUMMARY ||
-        questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY) && (
+        questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY ||
+        questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY) && (
         <ResultsViewPage onNext={onNext} questionNumber={questionNumber} />
       )}
-      {questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE && <>TestSetChoice</>}
-      {questionKey === QUESTIONNAIRE_KEYS.POLARIZATION && <>Polarization</>}
-      {questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY && <>TestSummary</>}
+      {questionKey === QUESTIONNAIRE_KEYS.END_TEST && <>DONE</>}
     </>
   );
 }

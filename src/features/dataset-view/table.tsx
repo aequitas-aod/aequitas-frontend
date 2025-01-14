@@ -18,7 +18,7 @@ export const DatasetViewTable = ({
 }) => {
   return (
     <Table>
-      <TableHeader>
+      <TableHeader className="sticky top-0 z-10 bg-neutral-50">
         <TableRow className="h-14">
           {columns.map((column, index) => (
             <TableHead

@@ -81,7 +81,7 @@ export const Detection = ({
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum"
       />
-      <div className="flex p-2 h-full">
+      <div className="flex p-2 h-full overflow-auto">
         <div className="w-90 p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             Detect bias in the data

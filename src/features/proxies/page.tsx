@@ -91,7 +91,7 @@ export const Proxies = ({
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum"
       />
-      <div className="flex p-2 h-full">
+      <div className="flex p-2 overflow-auto">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
             <Image
