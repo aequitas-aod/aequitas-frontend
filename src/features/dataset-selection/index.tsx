@@ -88,7 +88,7 @@ export const DatasetSelection = ({
           </Button>
         }
         classNameWrapper="!overflow-hidden"
-        className="!bg-neutral-50"
+        className="!bg-neutral-50 !overflow-hidden"
       >
         <QuestionnaireBanner
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -103,8 +103,8 @@ export const DatasetSelection = ({
             {t("buttons.feedback")}
           </Button>
         </QuestionnaireBanner>
-        <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1">
-          <div id="dataset-selection" className="flex-1">
+        <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1 overflow-auto">
+          <div id="dataset-selection" className="flex-1 overflow-auto">
             <p className="text-base text-primary-950 font-extrabold">
               {data.text}
             </p>
