@@ -136,7 +136,6 @@ export class BackendApi {
   ): Promise<ProxyDataResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`;
     console.log(`GET URL: ${url}`);
-    await sleep(500);
     if (isMocked()) {
       console.log("Using mocked response for getSuggestedProxies");
       return require(`../../mocks/suggested_proxies/custom-1.json`);
@@ -209,8 +208,16 @@ export class BackendApi {
   ): Promise<FeaturesResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
     console.log(`GET URL: ${url}`);
-    await sleep(500);
-    return require(`../../mocks/${key}/${dataset}.json`);
+    if (isMocked()) {
+      return require(`../../mocks/${key}/${dataset}.json`);
+    }
+    const res = await axios.get(
+      `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
+    );
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch context");
   }
 
   async getMetricsContext(
