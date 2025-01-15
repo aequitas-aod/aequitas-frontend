@@ -9,15 +9,17 @@ import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import type { AnswerResponse } from "@/api/types";
+import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { isMocked } from "@/api/api";
 
 export const DatasetView = ({
+  questionnaire,
   onNext,
   answers,
   questionNumber,
   contextData,
 }: {
+  questionnaire: QuestionnaireResponse;
   onNext: () => void;
   answers: AnswerResponse[];
   questionNumber: number;
@@ -41,7 +43,8 @@ export const DatasetView = ({
     mutate({
       n: questionNumber,
       answer_ids: [
-        answers.find((answer) => answer.id.code.includes("Yes"))!.id,
+        questionnaire.answers.find((answer) => answer.id.code.includes("Yes"))!
+          .id,
       ],
     });
     onNext();
@@ -83,15 +86,7 @@ export const DatasetView = ({
       classNameWrapper="!overflow-hidden"
       className="!bg-neutral-50"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={questionnaire.description} />
       <DatasetViewTable data={data} columns={columns} />
     </QuestionnaireLayout>
   );

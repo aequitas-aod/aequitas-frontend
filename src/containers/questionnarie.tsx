@@ -20,7 +20,6 @@ export default function QuestionnaireContainer() {
     return null;
   }
 
-  console.log("selectedStep", currentQuestion);
   const questionKey = currentQuestion?.id || "";
   const questionNumber = currentQuestion?.step || 0;
 
