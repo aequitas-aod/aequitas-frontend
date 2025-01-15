@@ -100,7 +100,7 @@ export const useFeaturesContext = (dataset: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
     queryFn: async () => {
-      return backendApi.getFeaturesContext(PROJECT_CODE, dataset, "features");
+      return backendApi.getFeaturesContext(PROJECT_CODE, dataset);
     },
   });
   return query;
@@ -109,7 +109,7 @@ export const useMetricsContext = (dataset: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
-      return backendApi.getMetricsContext(PROJECT_CODE, dataset, "metrics");
+      return backendApi.getMetricsContext(PROJECT_CODE, dataset);
     },
   });
   return query;

@@ -204,15 +204,14 @@ export class BackendApi {
   async getFeaturesContext(
     project: string,
     dataset: string,
-    key: string
   ): Promise<FeaturesResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`;
     console.log(`GET URL: ${url}`);
     if (isMocked()) {
-      return require(`../../mocks/${key}/${dataset}.json`);
+      return require(`../../mocks/features/${dataset}.json`);
     }
     const res = await axios.get(
-      `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`
+      `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`
     );
     if (res.status === 200) {
       return res.data;
@@ -223,12 +222,11 @@ export class BackendApi {
   async getMetricsContext(
     project: string,
     dataset: string,
-    key: string
   ): Promise<MetricsResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
     await sleep(500);
-    return require(`../../mocks/${key}/${dataset}.json`);
+    return require(`../../mocks/metrics/${dataset}.json`);
   }
 
   async getPreprocessingHyperparametersContext(
