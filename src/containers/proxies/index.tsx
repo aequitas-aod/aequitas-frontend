@@ -45,5 +45,5 @@ export const ProxiesPage: React.FC<QuestionnairePageProps> = ({
     return <div>No question available</div>;
   }
 
-  return <Proxies onNext={onNext} data={data} question={question} />;
+  return <Proxies onNext={onNext} data={data} question={question} questionNumber={questionNumber} answers={question.answers} />;
 };

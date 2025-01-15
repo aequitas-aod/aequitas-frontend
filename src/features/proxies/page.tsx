@@ -4,7 +4,10 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
+
 import {
+  type AnswerResponse,
   ProxyDataParams,
   ProxyDataResponse,
   QuestionnaireResponse,
@@ -17,18 +20,31 @@ export const Proxies = ({
   onNext,
   data,
   question,
+  questionNumber,
+  answers
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
   question: QuestionnaireResponse;
+  questionNumber: number;
+  answers: AnswerResponse[];
 }) => {
   const t = useTranslations("FeatureView");
 
-  const { mutate, isPending } = useMutationProxies({
+  const { mutate: mutateProxies, isPending: isPendingProxies } = useMutationProxies({
     onSuccess: () => {
-      onNext();
+      mutateQuestionnaire({
+        n: questionNumber,
+        answer_ids: [answers[0]?.id],
+      });
     },
   });
+  const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
+    useUpdateQuestionnaire({
+      onSuccess: () => {
+        onNext();
+      },
+    });
 
   const [featureData, setFeatureData] = useState<ProxyDataResponse>(data);
 
@@ -74,7 +90,8 @@ export const Proxies = ({
   const onContinue = () => {
     const body = transformProxyData(featureData);
     console.log(body);
-    mutate({ dataset: "custom-1", body });
+    // TODO replace with "current_dataset"
+    mutateProxies({ dataset: "Adult-1", body });
   };
 
   return (
