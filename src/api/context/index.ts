@@ -20,9 +20,9 @@ export const useMutationFeatures = ({
 }) => {
   const mutation = useMutation({
     mutationFn: ({
-                   dataset,
-                   body,
-                 }: {
+      dataset,
+      body,
+    }: {
       dataset: string;
       body: FeaturesParams;
     }) => {
@@ -59,8 +59,8 @@ export const useMutationProxies = ({
 
 // dataset view
 export const useDatasetSelectionAnswersInfo = ({
-   nth,
-   //projectName,
+  nth,
+  //projectName,
 }: {
   nth: number;
   //projectName: string;
@@ -130,7 +130,11 @@ export const useCorrelationMatrix = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["correlation-matrix", dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(PROJECT_CODE, dataset, "correlation_matrix");
+      return backendApi.getContextVectorialData(
+        PROJECT_CODE,
+        dataset,
+        "correlation_matrix"
+      );
     },
   });
   return query;
@@ -140,23 +144,31 @@ export const useDependencyGraph = (dataset: string) => {
   const query = useQuery<string>({
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(PROJECT_CODE, dataset, "dependency_graph");
+      return backendApi.getContextVectorialData(
+        PROJECT_CODE,
+        dataset,
+        "dependency_graph"
+      );
     },
   });
   return query;
 };
 
 // data-mitigation
-export const usePreprocessingHyperparameters = (dataset: string) => {
+export const usePreprocessingHyperparameters = (
+  dataset: string | null,
+  enabled: boolean = true
+) => {
   const query = useQuery<PreprocessingHyperparametersResponse>({
     queryKey: ["preprocessing-hyperparameters", dataset],
     queryFn: async () => {
       return backendApi.getPreprocessingHyperparametersContext(
         PROJECT_CODE,
-        dataset,
+        dataset!,
         "preprocessing-hyperparameters"
       );
     },
+    enabled: enabled && !!dataset,
   });
   return query;
 };

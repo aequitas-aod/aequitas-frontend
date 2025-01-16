@@ -1,4 +1,3 @@
-import { usePreprocessingHyperparameters } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { DataMitigation } from "@/features/data-mitigation";
@@ -23,8 +22,6 @@ export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
     n: questionNumber,
   });
 
-  const { data: formData } = usePreprocessingHyperparameters(datasetKey);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -37,9 +34,5 @@ export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
     return <div>No data available</div>;
   }
 
-  if (!formData) {
-    return <div>No form data available</div>;
-  }
-
-  return <DataMitigation onNext={onNext} data={data} formData={formData} />;
+  return <DataMitigation onNext={onNext} data={data} />;
 };

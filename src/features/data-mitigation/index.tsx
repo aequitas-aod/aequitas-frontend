@@ -6,31 +6,39 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
-import type {
-  AnswerResponse,
-  PreprocessingHyperparametersResponse,
-  QuestionnaireResponse,
-} from "@/api/types";
+import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { LaunchAlgorithm } from "./launch-algorithm";
 import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { usePreprocessingHyperparameters } from "@/api/context";
 
 export const DataMitigation = ({
   data,
   onNext,
-  formData,
 }: {
   data: QuestionnaireResponse;
   onNext: () => void;
-  formData: PreprocessingHyperparametersResponse;
 }) => {
   const t = useTranslations("DataMitigation");
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
-  const { incrementDatasetKey } = useAequitasStore();
+  const { incrementDatasetKey, currentStep, datasetKey } = useAequitasStore();
   const options = data.answers;
 
-  const onSelect = (value: string) => {
+  const { data: formData } = usePreprocessingHyperparameters(
+    datasetKey,
+    !!selected
+  );
+
+  const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({
+    onSuccess: () => {
+      console.log("updateQuestionnaire completed, get Hyperparameters");
+      // faccio la get degli hyperparameters
+    },
+  });
+
+  const onSelect = async (value: string) => {
     const selectedOption =
       options.find((option) => option.id.code === value) || null;
     if (!selectedOption) {
@@ -38,6 +46,20 @@ export const DataMitigation = ({
     }
     setEnableContinueButton(false);
     setSelected(selectedOption);
+    try {
+      await updateQuestionnaire({
+        n: currentStep,
+        answer_ids: [
+          {
+            code: selectedOption.id.code,
+            question_code: selectedOption.id.question_code,
+            project_code: selectedOption.id.project_code,
+          },
+        ],
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const onContinue = () => {
