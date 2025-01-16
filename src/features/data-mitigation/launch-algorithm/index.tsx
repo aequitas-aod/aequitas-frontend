@@ -7,6 +7,7 @@ import { FormInput } from "@/components/molecules/FormInput";
 import { parseFeatureKey } from "@/lib/utils";
 import { useLaunchAlgorithmMutation } from "@/api/context";
 import type { PreprocessingHyperparametersResponse } from "@/api/types";
+import { useAequitasStore } from "@/store/store";
 
 type LaunchAlgorithmProps = {
   title: string;
@@ -27,6 +28,7 @@ export const LaunchAlgorithm: React.FC<LaunchAlgorithmProps> = ({
 }) => {
   const t = useTranslations("DataMitigation");
   const { control, handleSubmit } = useForm();
+  const { datasetKey } = useAequitasStore();
 
   const { mutate, isPending } = useLaunchAlgorithmMutation({
     onSuccess: () => {
@@ -35,7 +37,16 @@ export const LaunchAlgorithm: React.FC<LaunchAlgorithmProps> = ({
   });
 
   const onSubmit = (data: Record<string, unknown>) => {
-    mutate({ $algorithm: algorithm, ...data });
+    if (!datasetKey) {
+      return;
+    }
+    mutate({
+      dataset: datasetKey,
+      body: {
+        $algorithm: algorithm,
+        ...data,
+      },
+    });
   };
 
   const renderFormInputs = () => {

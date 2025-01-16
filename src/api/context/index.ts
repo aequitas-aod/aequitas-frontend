@@ -155,20 +155,16 @@ export const useDependencyGraph = (dataset: string) => {
 };
 
 // data-mitigation
-export const usePreprocessingHyperparameters = (
-  dataset: string | null,
-  enabled: boolean = true
-) => {
+export const usePreprocessingHyperparameters = (algorithm: string | null) => {
   const query = useQuery<PreprocessingHyperparametersResponse>({
-    queryKey: ["preprocessing-hyperparameters", dataset],
+    queryKey: ["preprocessing-hyperparameters", algorithm],
     queryFn: async () => {
       return backendApi.getPreprocessingHyperparametersContext(
         PROJECT_CODE,
-        dataset!,
-        "preprocessing-hyperparameters"
+        algorithm!
       );
     },
-    enabled: enabled && !!dataset,
+    enabled: !!algorithm,
   });
   return query;
 };
@@ -179,8 +175,14 @@ export const useLaunchAlgorithmMutation = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (body: Record<string, unknown>) => {
-      return backendApi.putContext(PROJECT_CODE, "launch-algorithm", body);
+    mutationFn: ({
+      dataset,
+      body,
+    }: {
+      dataset: string;
+      body: Record<string, unknown>;
+    }) => {
+      return backendApi.putPreprocessingContext(PROJECT_CODE, dataset, body);
     },
     onSuccess: () => {
       onSuccess();

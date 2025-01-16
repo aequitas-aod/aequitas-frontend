@@ -6,12 +6,13 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
-import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { LaunchAlgorithm } from "./launch-algorithm";
 import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { usePreprocessingHyperparameters } from "@/api/context";
+
+import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 
 export const DataMitigation = ({
   data,
@@ -21,20 +22,19 @@ export const DataMitigation = ({
   onNext: () => void;
 }) => {
   const t = useTranslations("DataMitigation");
+  const { incrementDatasetKey, currentStep } = useAequitasStore();
+
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
-  const { incrementDatasetKey, currentStep, datasetKey } = useAequitasStore();
   const options = data.answers;
 
   const { data: formData } = usePreprocessingHyperparameters(
-    datasetKey,
-    !!selected
+    selected?.id.code ?? null
   );
 
   const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({
     onSuccess: () => {
-      console.log("updateQuestionnaire completed, get Hyperparameters");
-      // faccio la get degli hyperparameters
+      onNext();
     },
   });
 
@@ -46,25 +46,27 @@ export const DataMitigation = ({
     }
     setEnableContinueButton(false);
     setSelected(selectedOption);
+  };
+
+  const onContinue = async () => {
+    incrementDatasetKey();
+    if (!selected) {
+      return;
+    }
     try {
       await updateQuestionnaire({
         n: currentStep,
         answer_ids: [
           {
-            code: selectedOption.id.code,
-            question_code: selectedOption.id.question_code,
-            project_code: selectedOption.id.project_code,
+            code: selected.id.code,
+            question_code: selected.id.question_code,
+            project_code: selected.id.project_code,
           },
         ],
       });
     } catch (e) {
       console.error(e);
     }
-  };
-
-  const onContinue = () => {
-    incrementDatasetKey();
-    onNext();
   };
 
   const isDisabled =
@@ -99,7 +101,7 @@ export const DataMitigation = ({
               ))}
             </RadioGroup>
           </div>
-          {selected && (
+          {selected && formData && (
             <div id="dataset-preview" className="flex-1">
               <LaunchAlgorithm
                 formData={formData}
