@@ -168,6 +168,26 @@ export class BackendApi {
     }
   }
 
+  async putPreprocessingContext(
+    project: string,
+    dataset: string,
+    body: unknown
+  ): Promise<void> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=preprocessing__${dataset}`;
+    console.log(`PUT URL: ${url}`);
+    if (isMocked()) {
+      console.log("Using mocked response for putContext");
+      await sleep(2000);
+      return;
+    }
+    const res = await axios.put(url, body);
+    if (res.status === 200) {
+      console.log("PUT SUCCESS");
+    } else {
+      console.log("PUT FAILED");
+    }
+  }
+
   async getContextCsv(
     project: string,
     dataset: string,
@@ -203,7 +223,7 @@ export class BackendApi {
 
   async getFeaturesContext(
     project: string,
-    dataset: string,
+    dataset: string
   ): Promise<FeaturesResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`;
     console.log(`GET URL: ${url}`);
@@ -221,7 +241,7 @@ export class BackendApi {
 
   async getMetricsContext(
     project: string,
-    dataset: string,
+    dataset: string
   ): Promise<MetricsResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
@@ -232,13 +252,15 @@ export class BackendApi {
 
   async getPreprocessingHyperparametersContext(
     project: string,
-    dataset: string,
-    key: string
+    algorithm: string
   ): Promise<PreprocessingHyperparametersResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
-    console.log(`GET URL: ${url}`);
-    await sleep(500);
-    return require(`../../mocks/${key}/${dataset}.json`);
+    const url = `${BACKEND_URL}/projects/${project}/context?key=mpreprocessing-hyperparameters__${algorithm}`;
+
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch context");
   }
 
   async getContext(
