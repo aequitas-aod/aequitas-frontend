@@ -163,6 +163,7 @@ const useQuestionnaireData = (
     isLoading: isLoadingQuestionnaireData,
     error: errorQuestionnaireData,
     questionnaireKeys,
+    answers: questionnaireData?.answers,
   };
 };
 
@@ -184,8 +185,8 @@ export const useDetection = (questionId: number, dataset: string) => {
     isLoading: questionnaireLoading,
     error: questionnaireError,
     questionnaireKeys,
+    answers,
   } = useQuestionnaireData(questionId, sensitiveFeatures);
-
   const isLoading = metricsLoading || featuresLoading || questionnaireLoading;
   const error = metricsError || featuresError || questionnaireError;
 
@@ -194,5 +195,6 @@ export const useDetection = (questionId: number, dataset: string) => {
     error,
     metrics,
     data: questionnaireKeys,
+    answers,
   };
 };

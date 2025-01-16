@@ -16,7 +16,7 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
-  const { isLoading, error, data, metrics } = useDetection(
+  const { isLoading, error, data, metrics, answers } = useDetection(
     questionNumber,
     datasetKey
   );
@@ -32,9 +32,10 @@ export const DetectionPage: React.FC<QuestionnairePageProps> = ({
   if (!data) {
     return <div>No data available</div>;
   }
+
   if (!metrics) {
     return <div>No metrics available</div>;
   }
 
-  return <Detection onNext={onNext} data={data} metricGraphs={metrics} />;
+  return <Detection onNext={onNext} data={data} metricGraphs={metrics} questionNumber={questionNumber} questionAnswers={answers} />;
 };

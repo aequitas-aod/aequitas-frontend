@@ -226,7 +226,8 @@ export class BackendApi {
     const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
     await sleep(500);
-    return require(`../../mocks/metrics/${dataset}.json`);
+    // TODO remove mock
+    return require(`../../mocks/metrics/custom-1.json`);
   }
 
   async getPreprocessingHyperparametersContext(

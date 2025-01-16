@@ -9,22 +9,48 @@ import { GraphsDisplay } from "./graphs";
 import { DetectionData, Graph, MetricGraphs } from "@/hooks/useDetectionData";
 import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { AnswerId } from "@/api/questionnaire/types";
+import { AnswerResponse } from "@/api/types";
 
 export const Detection = ({
   onNext,
   data,
   metricGraphs,
+  questionNumber,
+  questionAnswers,
 }: {
   onNext: () => void;
   data: DetectionData;
   metricGraphs: MetricGraphs;
+  questionNumber: number;
+  questionAnswers: AnswerResponse[] | undefined;
 }) => {
   const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
   const [featureData, setFeatureData] = useState<DetectionData>(data);
 
+  const { mutate, isPending } = useUpdateQuestionnaire({
+    onSuccess: () => {
+      onNext();
+    },
+  });
+
   const onContinue = () => {
-    onNext();
+    const keysWithSelectedAttributes: string[] = Object.keys(featureData).filter(
+      (key) =>
+        Object.values(featureData[key]).some(
+          (attributeData) => attributeData.selected === "true"
+        )
+    );
+    const answerIds: AnswerId[] = questionAnswers!
+      .map((answer) => answer.id)
+      .filter((id) => keysWithSelectedAttributes.includes(id.code));
+
+    mutate({
+      n: questionNumber,
+      answer_ids: answerIds,
+    });
   };
 
   const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
