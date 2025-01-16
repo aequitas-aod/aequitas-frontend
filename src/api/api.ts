@@ -245,9 +245,14 @@ export class BackendApi {
   ): Promise<MetricsResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
-    await sleep(500);
-    // TODO remove mock
-    return require(`../../mocks/metrics/custom-1.json`);
+    if (isMocked()) {
+      return require(`../../mocks/metrics/custom-1.json`);
+    }
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch context");
   }
 
   async getPreprocessingHyperparametersContext(
