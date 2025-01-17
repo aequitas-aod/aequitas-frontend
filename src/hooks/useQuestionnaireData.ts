@@ -9,6 +9,7 @@ import {
   useQuestionnaireList,
 } from "@/api/questionnaire";
 import { useAequitasStore } from "@/store/store";
+import { useCurrentDataset } from "@/api/context";
 
 export const useQuestionnaireData = () => {
   const { currentStep, setCurrentStep, menuItems, setDatasetKey } =
@@ -26,7 +27,6 @@ export const useQuestionnaireData = () => {
   // setMenuItems(questions)
 
   // TODO: 2: PRENDO IL DATASET CORRENTE DALLA CONTEXT
-
   // per prendere
 
   const onNext = () => {

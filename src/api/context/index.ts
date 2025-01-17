@@ -13,6 +13,16 @@ import { PROJECT_CODE } from "@/config/constants";
 
 const backendApi = new BackendApi();
 
+export const useCurrentDataset = () => {
+  const query = useQuery<string>({
+    queryKey: ["current_dataset"],
+    queryFn: async () => {
+      return backendApi.getCurrentDataset(PROJECT_CODE);
+    },
+  });
+  return query;
+}
+
 export const useMutationFeatures = ({
   onSuccess,
 }: {

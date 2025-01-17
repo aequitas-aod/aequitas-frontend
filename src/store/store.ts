@@ -30,7 +30,7 @@ export const useAequitasStore = create<SidebarState>((set, get) => ({
       menuItems: state.menuItems.filter((i) => i.id !== item.id),
     })),
 
-  datasetKey: "custom-1",
+  datasetKey: "",
   setDatasetKey: (name) => set({ datasetKey: name }),
   incrementDatasetKey: () => {
     set((state) => {

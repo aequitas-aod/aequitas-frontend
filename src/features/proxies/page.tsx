@@ -12,7 +12,7 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useMutationProxies } from "@/api/context";
+import { useCurrentDataset, useDatasetContext, useMutationProxies } from "@/api/context";
 import Image from "next/image";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
@@ -91,7 +91,13 @@ export const Proxies = ({
     const body = transformProxyData(featureData);
     console.log(body);
     // TODO replace with "current_dataset"
-    mutateProxies({ dataset: "Adult-1", body });
+    // const {
+    //   data: currentDataset,
+    //   isLoading: isLoadingContextData,
+    //   error: errorContextData,
+    // } = useCurrentDataset();
+    // console.log("currentDataset", currentDataset);
+    mutateProxies({ dataset: "AdultDataset-1", body });
   };
 
   return (

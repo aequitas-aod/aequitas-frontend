@@ -68,7 +68,7 @@ export const DatasetSelection = ({
       n: questionNumber,
       answer_ids: answerIds.answer_ids,
     });
-    const datasetKey: string = selected!.id.code.replace("Dataset", "") + "-1";
+    const datasetKey: string = selected!.id.code + "-1";
     setDatasetKey(datasetKey);
     // here i need to uplo
     // chiamata per salvare i dati (se necessario)
