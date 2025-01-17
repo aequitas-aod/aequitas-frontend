@@ -78,7 +78,7 @@ export const useDatasetSelectionAnswersInfo = ({
   const query = useQuery<AnswerContextResponse[]>({
     queryKey: ["questionnaire", nth],
     queryFn: async () => {
-      return backendApi.getDatasetInfo();
+      return backendApi.getDatasetsInfo(PROJECT_CODE);
     },
   });
   return query;

@@ -118,11 +118,18 @@ export class BackendApi {
     throw new Error("Failed to fetch current dataset");
   }
 
-  async getDatasetInfo(): Promise<AnswerContextResponse[]> {
-    const url = `GET /projects/{project-name}/context?key=datasets`;
+  async getDatasetsInfo(project: string): Promise<AnswerContextResponse[]> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=datasets`;
     console.log(`GET URL: ${url}`);
-    await sleep(500);
-    return require(`../../mocks/datasets/index.json`);
+    if (isMocked()) {
+      await sleep(500);
+      return require(`../../mocks/datasets/index.json`);
+    }
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch datasets info");
   }
 
   async putFeatures(
