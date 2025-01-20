@@ -21,7 +21,7 @@ export const useCurrentDataset = () => {
     },
   });
   return query;
-}
+};
 
 export const useMutationFeatures = ({
   onSuccess,
@@ -196,6 +196,28 @@ export const useLaunchAlgorithmMutation = ({
     },
     onSuccess: () => {
       onSuccess();
+    },
+  });
+  return mutation;
+};
+
+export const useUpdateContextCsv = ({
+  onSuccess,
+}: {
+  onSuccess?: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: (params: { dataset: string; body: string }) => {
+      return backendApi.putContext(
+        PROJECT_CODE,
+        "dataset__" + params.dataset,
+        params.body
+      );
+    },
+    onSuccess: () => {
+      if (onSuccess) {
+        onSuccess();
+      }
     },
   });
   return mutation;
