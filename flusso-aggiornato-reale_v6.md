@@ -1015,7 +1015,7 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 
 - dopodiché appare un popup o un'altra schermata per selezionare gli iperparametri:
 
-  `GET /projects/{project-code}/context?key=preprocessing-hyperparameters__custom-1` per popolare popup/vista con gli input di un form per la selezione degli iperparametri.
+  `GET /projects/{project-code}/context?key=preprocessing-hyperparameters__selectedalg` per popolare popup/vista con gli input di un form per la selezione degli iperparametri.
 
   - risposta:
 
