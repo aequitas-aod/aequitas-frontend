@@ -1,5 +1,6 @@
 "use client";
-import QuestionnaireContainer from "@/containers/questionnarie";
+
+import QuestionnaireContainer from "@/containers/questionnaire";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 import { useAequitasStore } from "@/store/store";

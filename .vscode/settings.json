@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "i18n-ally.localesPaths": ["messages", "src/modules/i18n"]
+  "i18n-ally.localesPaths": ["messages", "src/modules/i18n"],
+  "cSpell.words": ["Aequitas"]
 }

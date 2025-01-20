@@ -22,7 +22,7 @@ export const DataMitigation = ({
   onNext: () => void;
 }) => {
   const t = useTranslations("DataMitigation");
-  const { incrementDatasetKey, currentStep } = useAequitasStore();
+  const { currentStep } = useAequitasStore();
 
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
@@ -49,7 +49,6 @@ export const DataMitigation = ({
   };
 
   const onContinue = async () => {
-    incrementDatasetKey();
     if (!selected) {
       return;
     }

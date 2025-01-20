@@ -7,8 +7,7 @@ import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
-import { useMutationFeatures } from "@/api/context";
-import { useAequitasStore } from "@/store/store";
+import { useCurrentDataset, useMutationFeatures } from "@/api/context";
 
 import type {
   AnswerResponse,
@@ -16,21 +15,23 @@ import type {
   QuestionnaireResponse,
 } from "@/api/types";
 
+interface FeatureViewProps {
+  question: QuestionnaireResponse;
+  questionNumber: number;
+  onNext: () => void;
+  answers: AnswerResponse[];
+  features: ParsedDataset[];
+}
+
 export const FeaturesView = ({
   question,
   questionNumber,
   onNext,
   answers,
   features,
-}: {
-  question: QuestionnaireResponse;
-  questionNumber: number;
-  onNext: () => void;
-  answers: AnswerResponse[];
-  features: ParsedDataset[];
-}) => {
+}: FeatureViewProps) => {
   const t = useTranslations("FeatureView");
-  const { datasetKey } = useAequitasStore();
+  const { data: datasetKey } = useCurrentDataset();
 
   const [selectedRows, setSelectedRows] = useState<number[]>(
     Array.from({ length: features.length }, (_, index) => index)

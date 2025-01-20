@@ -1,6 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 
+import { QUESTIONNAIRE_KEYS } from "@/config/constants";
+import { useQuestionnaireData } from "@/hooks/useQuestionnaireData";
+
 import { DatasetSelectionPage } from "./dataset-selection";
 import { FeatureViewPage } from "./feature-view";
 import { ProxiesPage } from "./proxies";
@@ -8,8 +11,7 @@ import { DatasetViewPage } from "./dataset-view";
 import { DataMitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
 import { ResultsViewPage } from "./results-view";
-import { QUESTIONNAIRE_KEYS } from "@/config/constants";
-import { useQuestionnaireData } from "@/hooks/useQuestionnaireData";
+import { TestSelectionPage } from "./test-selection";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
@@ -25,8 +27,7 @@ export default function QuestionnaireContainer() {
 
   return (
     <>
-      {(questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION ||
-        questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE) && (
+      {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
         <DatasetSelectionPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.DATASET_VIEW && (
@@ -52,6 +53,9 @@ export default function QuestionnaireContainer() {
         questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY ||
         questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY) && (
         <ResultsViewPage onNext={onNext} questionNumber={questionNumber} />
+      )}
+      {questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE && (
+        <TestSelectionPage onNext={onNext} questionNumber={questionNumber} />
       )}
       {questionKey === QUESTIONNAIRE_KEYS.END_TEST && <>DONE</>}
     </>

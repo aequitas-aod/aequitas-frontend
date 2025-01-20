@@ -1,5 +1,6 @@
 import { useDatasetSelectionAnswersInfo } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
+
 import { DatasetSelection } from "@/features/dataset-selection";
 import { Questionnaire } from "@/types/types";
 import React from "react";
@@ -9,7 +10,7 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const DatasetSelectionPage = ({
+export const TestSelectionPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {

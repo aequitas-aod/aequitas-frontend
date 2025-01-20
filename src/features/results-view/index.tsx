@@ -12,35 +12,26 @@ import {
   parseAnswerId,
   parseAnswerIdName,
   parseAnswerIdNameSummary,
+  RESULT_SECTIONS,
 } from "./utils";
 import { QUESTIONNAIRE_KEYS } from "@/config/constants";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
-const sections = [
-  {
-    id: "ResultsView",
-    name: "Results View",
-  },
-  {
-    id: "DatasetView",
-    name: "Dataset View",
-  },
-  // feature view
-  {
-    id: "FeatureView",
-    name: "Features View",
-  },
-  {
-    id: "Detection",
-    name: "Detection",
-  },
-];
+interface ResultsViewProps {
+  data: QuestionnaireResponse;
+  datasetKey: string;
+}
 
-export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
-  const { menuItems: dynamicMenuItems, addMenuItem } = useAequitasStore();
-  const { datasetKey, currentStep, setCurrentStep } = useAequitasStore();
-
+export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
+  const {
+    menuItems: dynamicMenuItems,
+    addMenuItem,
+    currentStep,
+    setCurrentStep,
+  } = useAequitasStore();
   const [selected, setSelected] = useState<string | null>("ResultsView");
+
+  const sections = RESULT_SECTIONS;
 
   const handleAction = (id: string) => {
     // Usa il parser per convertire answerId
@@ -77,7 +68,6 @@ export const ResultsView = ({ data }: { data: QuestionnaireResponse }) => {
         step: dynamicMenuItems.length + 1,
         name: "Test Set Choice",
       },
-      //  POLARIZATION: "Polarization", TEST_SUMMARY: "TestSummary",
       {
         id: QUESTIONNAIRE_KEYS.POLARIZATION,
         step: dynamicMenuItems.length + 2,

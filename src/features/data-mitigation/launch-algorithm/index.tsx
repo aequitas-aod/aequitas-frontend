@@ -1,34 +1,35 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/molecules/FormInput";
 import { parseFeatureKey } from "@/lib/utils";
-import { useLaunchAlgorithmMutation } from "@/api/context";
-import type { PreprocessingHyperparametersResponse } from "@/api/types";
-import { useAequitasStore } from "@/store/store";
+import { useCurrentDataset, useLaunchAlgorithmMutation } from "@/api/context";
 
-type LaunchAlgorithmProps = {
+import type { PreprocessingHyperparametersResponse } from "@/api/types";
+
+interface LaunchAlgorithmProps {
   title: string;
   description: string;
   formData: PreprocessingHyperparametersResponse;
   algorithm: string;
   onEnableContinueButton: () => void;
   enableContinueButton: boolean;
-};
+}
 
-export const LaunchAlgorithm: React.FC<LaunchAlgorithmProps> = ({
+export const LaunchAlgorithm = ({
   title,
   description,
   formData,
   algorithm,
   onEnableContinueButton,
   enableContinueButton,
-}) => {
+}: LaunchAlgorithmProps) => {
   const t = useTranslations("DataMitigation");
   const { control, handleSubmit } = useForm();
-  const { datasetKey } = useAequitasStore();
+  const { data: datasetKey } = useCurrentDataset();
 
   const { mutate, isPending } = useLaunchAlgorithmMutation({
     onSuccess: () => {

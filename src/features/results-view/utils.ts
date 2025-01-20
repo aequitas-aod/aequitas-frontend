@@ -1,5 +1,3 @@
-// utils/parseAnswerId.ts
-
 export const parseAnswerId = (answerId: string): string => {
   if (answerId.includes("Mitigate")) {
     const parts = answerId.split("Mitigate");
@@ -19,3 +17,23 @@ export const parseAnswerIdNameSummary = (answerId: string): string => {
   const next = parts[0].slice(0, 1).toUpperCase() + parts[0].slice(1);
   return `${next}M Summary`;
 };
+
+export const RESULT_SECTIONS = [
+  {
+    id: "ResultsView",
+    name: "Results View",
+  },
+  {
+    id: "DatasetView",
+    name: "Dataset View",
+  },
+  // feature view
+  {
+    id: "FeatureView",
+    name: "Features View",
+  },
+  {
+    id: "Detection",
+    name: "Detection",
+  },
+];
