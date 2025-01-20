@@ -4,16 +4,11 @@
  prendo anche l'ultimo step e faccio la get context relativa alla 
 */
 
-import {
-  useQuestionnaireById,
-  useQuestionnaireList,
-} from "@/api/questionnaire";
+import { useQuestionnaireList } from "@/api/questionnaire";
 import { useAequitasStore } from "@/store/store";
-import { useCurrentDataset } from "@/api/context";
 
 export const useQuestionnaireData = () => {
-  const { currentStep, setCurrentStep, menuItems, setDatasetKey } =
-    useAequitasStore();
+  const { currentStep, setCurrentStep, menuItems } = useAequitasStore();
 
   // 1: AGGIORNO LA SIDEBAR
   const {
