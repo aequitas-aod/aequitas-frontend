@@ -6,7 +6,6 @@ export interface IMenuItemWithState extends IMenuItem {
 
 interface MenuProps {
   items: IMenuItemWithState[];
-
   onNavigate: (path: number) => void;
 }
 
