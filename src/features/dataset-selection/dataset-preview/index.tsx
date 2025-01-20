@@ -1,10 +1,19 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button"; // Per il bottone Create
 import { CUSTOM_DATASET_KEY } from "@/config/constants";
 import { capitalize } from "@/lib/utils";
 import { CreateDatasetDialog } from "../create-dataset-dialog";
-import { EnhancedAnswerResponse } from "@/containers/dataset-selection";
+import type { EnhancedAnswerResponse } from "@/types/types";
+
+type DatasetPreviewProps = {
+  title: string;
+  description: string;
+  details: {
+    [key: string]: string | number;
+  };
+  onNext: () => void;
+  selected: EnhancedAnswerResponse;
+};
 
 export const DatasetPreview = ({
   title,
@@ -12,15 +21,7 @@ export const DatasetPreview = ({
   details,
   onNext,
   selected,
-}: {
-  selected: EnhancedAnswerResponse;
-  title: string;
-  description: string;
-  details: {
-    [key: string]: string | number;
-  };
-  onNext: () => void;
-}) => {
+}: DatasetPreviewProps) => {
   const isValidDate = (date: string) => {
     const parsedDate = new Date(date);
     return !isNaN(parsedDate.getTime());
