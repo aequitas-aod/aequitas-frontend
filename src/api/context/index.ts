@@ -115,6 +115,7 @@ export const useFeaturesContext = (dataset: string) => {
   });
   return query;
 };
+
 export const useMetricsContext = (dataset: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
