@@ -1,9 +1,8 @@
-import { useDatasetContext } from "@/api/context";
+import React from "react";
+
+import { useCurrentDataset, useDatasetContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
-import { useAequitasStore } from "@/store/store";
-
-import React from "react";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -14,7 +13,7 @@ export const DatasetViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { datasetKey } = useAequitasStore();
+  const { data: datasetKey } = useCurrentDataset();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

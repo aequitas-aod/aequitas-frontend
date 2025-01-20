@@ -1,7 +1,7 @@
-import { useSuggestedProxies } from "@/api/context";
+import { useCurrentDataset, useSuggestedProxies } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { Proxies } from "@/features/proxies/page";
-import { useAequitasStore } from "@/store/store";
+
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -9,11 +9,11 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const ProxiesPage: React.FC<QuestionnairePageProps> = ({
+export const ProxiesPage = ({
   questionNumber,
   onNext,
-}) => {
-  const { datasetKey } = useAequitasStore();
+}: QuestionnairePageProps) => {
+  const { data: datasetKey } = useCurrentDataset();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }
@@ -45,5 +45,13 @@ export const ProxiesPage: React.FC<QuestionnairePageProps> = ({
     return <div>No question available</div>;
   }
 
-  return <Proxies onNext={onNext} data={data} question={question} questionNumber={questionNumber} answers={question.answers} />;
+  return (
+    <Proxies
+      onNext={onNext}
+      data={data}
+      question={question}
+      questionNumber={questionNumber}
+      answers={question.answers}
+    />
+  );
 };

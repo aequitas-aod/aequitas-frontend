@@ -1,20 +1,19 @@
-import { useQuestionnaireById } from "@/api/questionnaire";
-
-import { DataMitigation } from "@/features/data-mitigation";
-import { useAequitasStore } from "@/store/store";
 import React from "react";
+
+import { useCurrentDataset } from "@/api/context";
+import { useQuestionnaireById } from "@/api/questionnaire";
+import { DataMitigation } from "@/features/data-mitigation";
 
 interface QuestionnairePageProps {
   questionNumber: number;
   onNext: () => void;
 }
 
-export const DataMitigationPage: React.FC<QuestionnairePageProps> = ({
+export const DataMitigationPage = ({
   questionNumber,
   onNext,
-}) => {
-  console.log("DataMitigationPage");
-  const { datasetKey } = useAequitasStore();
+}: QuestionnairePageProps) => {
+  const { data: datasetKey } = useCurrentDataset();
   if (!datasetKey) {
     throw new Error("Dataset key is missing");
   }

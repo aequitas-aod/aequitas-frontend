@@ -1,11 +1,7 @@
 import { useDatasetSelectionAnswersInfo } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
-import {
-  AnswerContextResponse,
-  AnswerResponse,
-  QuestionnaireResponse,
-} from "@/api/types";
 import { DatasetSelection } from "@/features/dataset-selection";
+import { Questionnaire } from "@/types/types";
 import React from "react";
 
 interface QuestionnairePageProps {
@@ -13,17 +9,10 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export type Questionnaire = Omit<QuestionnaireResponse, "answers"> & {
-  answers: EnhancedAnswerResponse[] | undefined;
-};
-
-export type EnhancedAnswerResponse = AnswerResponse & {
-  details: AnswerContextResponse | {}; // Dataset details (now utilized)
-};
-export const DatasetSelectionPage: React.FC<QuestionnairePageProps> = ({
+export const DatasetSelectionPage = ({
   questionNumber,
   onNext,
-}) => {
+}: QuestionnairePageProps) => {
   const { data, isLoading, error } = useQuestionnaireById({
     n: questionNumber,
   });
