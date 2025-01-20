@@ -16,6 +16,7 @@ import {
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { AnswerId } from "@/api/questionnaire/types";
 import { isMocked } from "@/api/api";
+import { FEEDBACK_LINK } from "@/config/constants";
 
 export const DatasetSelection = ({
   data,
@@ -91,9 +92,6 @@ export const DatasetSelection = ({
         className="!bg-neutral-50 !overflow-hidden"
       >
         <QuestionnaireBanner text={data.description}>
-          <Button onClick={() => alert("feedback")} variant="secondary">
-            {t("buttons.feedback")}
-          </Button>
         </QuestionnaireBanner>
         <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1 overflow-auto">
           <div id="dataset-selection" className="flex-1 overflow-auto">

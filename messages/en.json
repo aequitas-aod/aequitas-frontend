@@ -1,7 +1,8 @@
 {
   "common": {
     "create": "Create",
-    "continue": "Continue"
+    "continue": "Continue",
+    "feedback": "Feedback"
   },
   "breadcrumb": {
     "DatasetSelection": "Scelta del dataset",
@@ -16,8 +17,7 @@
     "subtitle": "Available datasets",
     "create-custom-dataset": "Do you have your own dataset?",
     "buttons": {
-      "continue": "Continue",
-      "feedback": "Feedback"
+      "continue": "Continue"
     },
     "details": {
       "size": "Size",

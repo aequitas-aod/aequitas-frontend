@@ -13,6 +13,7 @@ export const CUSTOM_DATASET_KEY = "Custom";
 export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!;
 export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
 export const PROJECT_CODE = "p-1";
+export const FEEDBACK_LINK = "https://google.com";
 
 // cpstante mappa per le chiavi del questionario
 export const QUESTIONNAIRE_KEYS = {
