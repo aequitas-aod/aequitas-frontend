@@ -9,14 +9,12 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { DatasetPreview } from "./dataset-preview";
 import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
-import {
-  EnhancedAnswerResponse,
-  Questionnaire,
-} from "@/containers/dataset-selection";
+
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { AnswerId } from "@/api/questionnaire/types";
 import { isMocked } from "@/api/api";
-import { FEEDBACK_LINK } from "@/config/constants";
+
+import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 
 export const DatasetSelection = ({
   data,
@@ -27,14 +25,16 @@ export const DatasetSelection = ({
   questionNumber: number;
   onNext: () => void;
 }) => {
+  const t = useTranslations("DatasetSelection");
+
+  const { currentStep } = useAequitasStore();
+  const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
+
   const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },
   });
-  const t = useTranslations("DatasetSelection");
-  const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
-  const { setDatasetKey, currentStep } = useAequitasStore();
   const options = data.answers;
 
   const onSelect = (value: string) => {
@@ -52,7 +52,6 @@ export const DatasetSelection = ({
     }
     if (isMocked()) {
       console.log("Using mocked response for putQuestionnaire");
-      setDatasetKey("custom-1");
       onNext();
       return;
     }
@@ -70,8 +69,7 @@ export const DatasetSelection = ({
       answer_ids: answerIds.answer_ids,
     });
     const datasetKey: string = selected!.id.code + "-1";
-    setDatasetKey(datasetKey);
-    // here i need to uplo
+
     // chiamata per salvare i dati (se necessario)
     onNext();
   };
@@ -91,8 +89,7 @@ export const DatasetSelection = ({
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50 !overflow-hidden"
       >
-        <QuestionnaireBanner text={data.description}>
-        </QuestionnaireBanner>
+        <QuestionnaireBanner text={data.description}></QuestionnaireBanner>
         <div className="flex justify-between space-x-4 p-8 bg-neutral-50 rounded-b-md flex-1 overflow-auto">
           <div id="dataset-selection" className="flex-1 overflow-auto">
             <p className="text-base text-primary-950 font-extrabold">

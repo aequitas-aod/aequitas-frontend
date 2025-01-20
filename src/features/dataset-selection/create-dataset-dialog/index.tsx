@@ -25,11 +25,11 @@ import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
 import { CheckIcon, PlusIcon, TrashIcon } from "lucide-react";
-import { EnhancedAnswerResponse } from "@/containers/dataset-selection";
 import { useAequitasStore } from "@/store/store";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { useUpdateContextCsv } from "@/api/context/dataset-selection";
 import { convertCSVToString } from "@/lib/utils";
+import { useUpdateContextCsv } from "@/api/context";
+import { EnhancedAnswerResponse } from "@/types/types";
 
 export const CreateDatasetDialog = ({
   selected,
@@ -38,7 +38,7 @@ export const CreateDatasetDialog = ({
   selected: EnhancedAnswerResponse;
   onNext: () => void;
 }) => {
-  const { setDatasetKey, currentStep } = useAequitasStore();
+  const { currentStep } = useAequitasStore();
 
   const t = useTranslations("DatasetSelection");
   const [open, setOpen] = useState(false);
@@ -93,7 +93,6 @@ export const CreateDatasetDialog = ({
           },
         ],
       });
-
       // Chiamata 2: PUT /context
       await updateContext({
         dataset: `custom-1`,
@@ -109,7 +108,6 @@ export const CreateDatasetDialog = ({
   const onSubmit = (data: FormValues) => {
     handleCreate();
     setOpen(false);
-    setDatasetKey("custom-1");
     onNext();
   };
 
