@@ -7,7 +7,6 @@ import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckboxList } from "./accordion";
 import { GraphsDisplay } from "./graphs";
 import { DetectionData, Graph, MetricGraphs } from "@/hooks/useDetectionData";
-import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { AnswerId } from "@/api/questionnaire/types";
@@ -37,11 +36,12 @@ export const Detection = ({
   });
 
   const onContinue = () => {
-    const keysWithSelectedAttributes: string[] = Object.keys(featureData).filter(
-      (key) =>
-        Object.values(featureData[key]).some(
-          (attributeData) => attributeData.selected === "true"
-        )
+    const keysWithSelectedAttributes: string[] = Object.keys(
+      featureData
+    ).filter((key) =>
+      Object.values(featureData[key]).some(
+        (attributeData) => attributeData.selected === "true"
+      )
     );
     const answerIds: AnswerId[] = questionAnswers!
       .map((answer) => answer.id)

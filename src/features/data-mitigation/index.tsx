@@ -7,7 +7,6 @@ import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import { LaunchAlgorithm } from "./launch-algorithm";
-import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { usePreprocessingHyperparameters } from "@/api/context";
@@ -15,14 +14,15 @@ import { usePreprocessingHyperparameters } from "@/api/context";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 
 export const DataMitigation = ({
+  questionNumber,
   data,
   onNext,
 }: {
+  questionNumber: number;
   data: QuestionnaireResponse;
   onNext: () => void;
 }) => {
   const t = useTranslations("DataMitigation");
-  const { currentStep } = useAequitasStore();
 
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
@@ -54,7 +54,7 @@ export const DataMitigation = ({
     }
     try {
       await updateQuestionnaire({
-        n: currentStep,
+        n: questionNumber,
         answer_ids: [
           {
             code: selected.id.code,
