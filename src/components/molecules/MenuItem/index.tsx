@@ -9,9 +9,7 @@ import {
 import { IMenuItemWithState } from "../Menu";
 import { SidebarItem } from "../../../../mocks/sidebar";
 
-export interface IMenuItem extends SidebarItem {
-  icon?: React.ReactNode;
-}
+export interface IMenuItem extends SidebarItem {}
 
 interface MenuItemProps {
   item: IMenuItemWithState;
