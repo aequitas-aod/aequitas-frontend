@@ -14,9 +14,7 @@ export const DataMitigationPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  if (!datasetKey) {
-    throw new Error("Dataset key is missing");
-  }
+  
   const { data, isLoading, error } = useQuestionnaireById({
     n: questionNumber,
   });

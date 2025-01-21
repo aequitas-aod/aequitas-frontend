@@ -13,9 +13,7 @@ export const DetectionPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  if (!datasetKey) {
-    throw new Error("Dataset key is missing");
-  }
+  
   const { isLoading, error, data, metrics, answers } = useDetection(
     questionNumber,
     datasetKey

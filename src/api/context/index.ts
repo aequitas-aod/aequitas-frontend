@@ -84,12 +84,13 @@ export const useDatasetSelectionAnswersInfo = ({
   return query;
 };
 
-export const useDatasetContext = (dataset: string) => {
+export const useDatasetContext = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["dataset", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(PROJECT_CODE, dataset, "dataset_head");
+      return backendApi.getContextCsv(PROJECT_CODE, dataset!, "dataset_head");
     },
+    enabled: !!dataset,
   });
   return query;
 };

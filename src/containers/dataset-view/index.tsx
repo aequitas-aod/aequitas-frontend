@@ -3,6 +3,7 @@ import React from "react";
 import { useCurrentDataset, useDatasetContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
+import { sleep } from "@/lib/utils";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -14,9 +15,7 @@ export const DatasetViewPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  if (!datasetKey) {
-    throw new Error("Dataset key is missing");
-  }
+
   const { data, isLoading, error } = useQuestionnaireById({
     n: questionNumber,
   });

@@ -87,9 +87,7 @@ export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
     setCurrentStep(currentStep + 1);
   };
 
-  if (!datasetKey) {
-    throw new Error("Dataset key is missing");
-  }
+  
 
   return (
     <QuestionnaireLayout

@@ -108,7 +108,7 @@ export class BackendApi {
     console.log(`GET URL: ${url}`);
     if (isMocked()) {
       console.log("Using mocked response for getCurrentDataset");
-      return "AdultDataset-1";
+      return "custom-1";
     }
     const res = await axios.get(url);
     if (res.status === 200) {
