@@ -4,99 +4,56 @@ import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
-import { useAequitasStore } from "@/store/store";
 import { Detection } from "./sections/detection";
 import { ActionButtons } from "./buttons";
-import { QuestionnaireResponse } from "@/api/types";
-import {
-  parseAnswerId,
-  parseAnswerIdName,
-  parseAnswerIdNameSummary,
-  RESULT_SECTIONS,
-} from "./utils";
-import { QUESTIONNAIRE_KEYS } from "@/config/constants";
+import { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { RESULT_SECTIONS } from "./utils";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
 
 interface ResultsViewProps {
   data: QuestionnaireResponse;
   datasetKey: string;
+  questionNumber: number;
+  onNext: () => void;
 }
 
-export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
-  const {
-    menuItems: dynamicMenuItems,
-    addMenuItem,
-    currentStep,
-    setCurrentStep,
-  } = useAequitasStore();
+export const ResultsView = ({
+  data,
+  datasetKey,
+  questionNumber,
+  onNext,
+}: ResultsViewProps) => {
   const [selected, setSelected] = useState<string | null>("ResultsView");
 
   const sections = RESULT_SECTIONS;
 
-  const handleAction = (id: string) => {
-    // Usa il parser per convertire answerId
-    const answerId = parseAnswerId(id);
+  const { mutate } = useUpdateQuestionnaire({
+    onSuccess: () => {
+      onNext();
+    },
+  });
 
-    // Creiamo dinamicamente l'item per il menu usando direttamente i parametri passati
-    const newAction = {
-      id: `${answerId}`,
-      step: dynamicMenuItems.length + 1,
-      name: parseAnswerIdName(answerId),
-    };
-
-    // Aggiungiamo la nuova voce al menu
-    addMenuItem(newAction);
-
-    // e aggiungo anche la results
-    addMenuItem({
-      id: `${answerId}Summary`,
-      step: dynamicMenuItems.length + 2,
-      name: `${parseAnswerIdNameSummary(answerId)}`,
+  const handleAction = (answer: AnswerResponse) => {
+    mutate({
+      n: questionNumber,
+      answer_ids: [answer.id],
     });
-    setCurrentStep(currentStep + 1);
-    // Eseguiamo la navigazione
   };
 
   const onDownloadDataset = () => {};
 
   const onDownloadResults = () => {};
 
-  const onTest = () => {
-    const testActions = [
-      {
-        id: QUESTIONNAIRE_KEYS.TEST_SET_CHOICE,
-        step: dynamicMenuItems.length + 1,
-        name: "Test Set Choice",
-      },
-      {
-        id: QUESTIONNAIRE_KEYS.POLARIZATION,
-        step: dynamicMenuItems.length + 2,
-        name: "Polarization",
-      },
-      {
-        id: QUESTIONNAIRE_KEYS.TEST_SUMMARY,
-        step: dynamicMenuItems.length + 3,
-        name: "Test Summary",
-      },
-    ];
-
-    testActions.forEach((action) => {
-      addMenuItem(action);
-    });
-
-    setCurrentStep(currentStep + 1);
-  };
-
-  
+  const onTest = () => {};
 
   return (
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
           <ActionButtons
-            datasetKey={datasetKey}
-            answers={data.answers} // Passiamo le risposte dinamiche
-            onAction={handleAction} // Funzione che gestisce l'azione selezionata
+            answers={data.answers}
+            onAction={handleAction}
             onDownloadDataset={onDownloadDataset}
             onDownloadResults={onDownloadResults}
             onTest={onTest}
@@ -105,15 +62,7 @@ export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
       }
       className="!bg-transparent !border-0 !overflow-hidden"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={data.description} />
 
       <div className="flex items-center p-3 bg-primary-950 text-primary-50 gap-4">
         <p className="text-full-white">
@@ -135,7 +84,7 @@ export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
         </ToggleGroup>
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
-        {/* Contenuto in base alla section selezionata dal toggle*/}
+        {/* Content based on the selected section */}
         {selected === "ResultsView" && (
           <ResultsViewSection datasetKey={datasetKey} />
         )}
