@@ -13,6 +13,7 @@ import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { isMocked } from "@/api/api";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DatasetSelection = ({
   data,
@@ -27,7 +28,7 @@ export const DatasetSelection = ({
 
   const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
 
-  const { mutate } = useUpdateQuestionnaire({
+  const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },
@@ -62,13 +63,14 @@ export const DatasetSelection = ({
     <>
       <QuestionnaireLayout
         action={
-          <Button
+          <ButtonLoading
             onClick={onContinue}
             disabled={!selected}
             variant={selected ? "default" : "secondary"}
+            isLoading={isPending}
           >
             {t("buttons.continue")}
-          </Button>
+          </ButtonLoading>
         }
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50 !overflow-hidden"

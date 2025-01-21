@@ -12,6 +12,7 @@ import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { usePreprocessingHyperparameters } from "@/api/context";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DataMitigation = ({
   questionNumber,
@@ -32,11 +33,12 @@ export const DataMitigation = ({
     selected?.id.code ?? null
   );
 
-  const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({
-    onSuccess: () => {
-      onNext();
-    },
-  });
+  const { mutateAsync: updateQuestionnaire, isPending } =
+    useUpdateQuestionnaire({
+      onSuccess: () => {
+        onNext();
+      },
+    });
 
   const onSelect = async (value: string) => {
     const selectedOption =
@@ -75,9 +77,13 @@ export const DataMitigation = ({
     <>
       <QuestionnaireLayout
         action={
-          <Button onClick={onContinue} disabled={!isDisabled}>
+          <ButtonLoading
+            onClick={onContinue}
+            disabled={!isDisabled}
+            isLoading={isPending}
+          >
             {t("buttons.continue")}
-          </Button>
+          </ButtonLoading>
         }
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50"

@@ -9,8 +9,10 @@ import { GraphsDisplay } from "./graphs";
 import { DetectionData, Graph, MetricGraphs } from "@/hooks/useDetectionData";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { AnswerId } from "@/api/questionnaire/types";
-import { AnswerResponse } from "@/api/types";
+
+import type { AnswerId } from "@/api/questionnaire/types";
+import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const Detection = ({
   onNext,
@@ -18,9 +20,11 @@ export const Detection = ({
   metricGraphs,
   questionNumber,
   questionAnswers,
+  questionnaireData,
 }: {
   onNext: () => void;
   data: DetectionData;
+  questionnaireData: QuestionnaireResponse;
   metricGraphs: MetricGraphs;
   questionNumber: number;
   questionAnswers: AnswerResponse[] | undefined;
@@ -95,18 +99,14 @@ export const Detection = ({
 
   return (
     <QuestionnaireLayout
-      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      action={
+        <ButtonLoading onClick={onContinue} isLoading={isPending}>
+          {t("buttons.continue")}
+        </ButtonLoading>
+      }
       className="!bg-white !overflow-hidden"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={questionnaireData.description} />
       <div className="flex p-2 h-full overflow-auto">
         <div className="w-90 p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">

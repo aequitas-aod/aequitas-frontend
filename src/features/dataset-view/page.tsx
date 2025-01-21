@@ -11,6 +11,7 @@ import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { isMocked } from "@/api/api";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DatasetView = ({
   questionnaire,
@@ -26,8 +27,8 @@ export const DatasetView = ({
   contextData: string;
 }) => {
   const t = useTranslations("DatasetView");
-  const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
-  const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
+  const [data, setData] = useState<ParsedDataset[]>([]);
+  const [columns, setColumns] = useState<string[]>([]);
   const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
@@ -79,9 +80,13 @@ export const DatasetView = ({
   return (
     <QuestionnaireLayout
       action={
-        <Button onClick={onContinue} disabled={isPending}>
+        <ButtonLoading
+          onClick={onContinue}
+          disabled={isPending}
+          isLoading={isPending}
+        >
           {t("buttons.continue")}
-        </Button>
+        </ButtonLoading>
       }
       classNameWrapper="!overflow-hidden"
       className="!bg-neutral-50"

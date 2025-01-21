@@ -16,7 +16,8 @@ import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 
 export default function QuestionnaireContainer() {
   const router = useRouter();
-  const { onNext, currentQuestion, menuItems } = useQuestionnaireData();
+  const { onNext, currentQuestion, menuItems, onDelete } =
+    useQuestionnaireData();
 
   if (!currentQuestion) {
     return <div>Loading...</div>;
@@ -27,7 +28,7 @@ export default function QuestionnaireContainer() {
 
   return (
     <>
-      <Sidebar menuItems={menuItems} />
+      <Sidebar menuItems={menuItems} onDelete={onDelete} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <>
           {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (

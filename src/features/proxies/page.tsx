@@ -12,16 +12,17 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useCurrentDataset, useDatasetContext, useMutationProxies } from "@/api/context";
+import { useCurrentDataset, useMutationProxies } from "@/api/context";
 import Image from "next/image";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const Proxies = ({
   onNext,
   data,
   question,
   questionNumber,
-  answers
+  answers,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
@@ -31,14 +32,15 @@ export const Proxies = ({
 }) => {
   const t = useTranslations("FeatureView");
 
-  const { mutate: mutateProxies, isPending: isPendingProxies } = useMutationProxies({
-    onSuccess: () => {
-      mutateQuestionnaire({
-        n: questionNumber,
-        answer_ids: [answers[0]?.id],
-      });
-    },
-  });
+  const { mutate: mutateProxies, isPending: isPendingProxies } =
+    useMutationProxies({
+      onSuccess: () => {
+        mutateQuestionnaire({
+          n: questionNumber,
+          answer_ids: [answers[0]?.id],
+        });
+      },
+    });
   const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
     useUpdateQuestionnaire({
       onSuccess: () => {
@@ -97,18 +99,17 @@ export const Proxies = ({
 
   return (
     <QuestionnaireLayout
-      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      action={
+        <ButtonLoading
+          onClick={onContinue}
+          isLoading={isPendingProxies || isPendingQuestionnaire}
+        >
+          {t("buttons.continue")}
+        </ButtonLoading>
+      }
       className="!bg-white !overflow-hidden"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={question.description} />
       <div className="flex p-2 overflow-auto">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
