@@ -11,7 +11,6 @@ import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { AnswerId } from "@/api/questionnaire/types";
 import { isMocked } from "@/api/api";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
@@ -27,7 +26,6 @@ export const DatasetSelection = ({
 }) => {
   const t = useTranslations("DatasetSelection");
 
-  const { currentStep } = useAequitasStore();
   const [selected, setSelected] = useState<EnhancedAnswerResponse | null>(null);
 
   const { mutate, isPending } = useUpdateQuestionnaire({
@@ -56,21 +54,9 @@ export const DatasetSelection = ({
       return;
     }
     mutate({
-      n: currentStep,
+      n: questionNumber,
       answer_ids: [selected.id],
     });
-    const answerIds: {
-      answer_ids: AnswerId[];
-    } = {
-      answer_ids: [selected!.id],
-    };
-    mutate({
-      n: questionNumber,
-      answer_ids: answerIds.answer_ids,
-    });
-    const datasetKey: string = selected!.id.code + "-1";
-
-    // chiamata per salvare i dati (se necessario)
     onNext();
   };
 
