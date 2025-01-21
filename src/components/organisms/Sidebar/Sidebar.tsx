@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
 import { IMenuItem } from "@/components/molecules/MenuItem";
 import { Menu, IMenuItemWithState } from "@/components/molecules/Menu";
 import { IoInformationCircleOutline } from "react-icons/io5";
-import { useAequitasStore } from "@/store/store";
 import { useDeleteQuestionnaireById } from "@/api/questionnaire";
 import { useQuestionnaireData } from "@/hooks/useQuestionnaireData";
 
@@ -13,7 +11,7 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ menuItems }: SidebarProps) => {
-  const { onNext, currentQuestion } = useQuestionnaireData();
+  const { onDelete } = useQuestionnaireData();
 
   const { mutate } = useDeleteQuestionnaireById({
     onSuccess: () => {
@@ -39,11 +37,11 @@ export const Sidebar = ({ menuItems }: SidebarProps) => {
     for (let step = currentIndex; step > path; step--) {
       stepsToDelete.push(step);
     }
-
     try {
       for (const step of stepsToDelete) {
         mutate({ n: step });
       }
+      onDelete();
     } catch (error) {
       console.error("An error occurred while deleting steps: ", error);
     }
