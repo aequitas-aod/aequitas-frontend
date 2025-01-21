@@ -14,7 +14,6 @@ export const ResultsViewPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  
   const { data, isLoading, error } = useQuestionnaireById({
     n: questionNumber,
   });
@@ -31,5 +30,12 @@ export const ResultsViewPage = ({
     return <div>No data available</div>;
   }
 
-  return <ResultsView data={data} datasetKey={datasetKey} />;
+  return (
+    <ResultsView
+      data={data}
+      onNext={onNext}
+      datasetKey={datasetKey!}
+      questionNumber={questionNumber}
+    />
+  );
 };

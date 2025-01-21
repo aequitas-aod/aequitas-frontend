@@ -1,42 +1,41 @@
 import { useQuestionnaireList } from "@/api/questionnaire";
-import { SidebarItem } from "../../mocks/sidebar";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useQuestionnaireData = () => {
-  // Ottieni le domande dal server
-  const {
-    data: questions,
-    isLoading: questionsLoading,
-    error: questionsError,
-  } = useQuestionnaireList();
+  const queryClient = useQueryClient();
+  const { data: questions, isLoading, error } = useQuestionnaireList();
 
-  let sidebarItems: SidebarItem[] = [];
-
-  if (questions && questions.length > 0) {
-    sidebarItems = questions.map((question, index) => ({
+  const sidebarItems =
+    questions?.map((question, index) => ({
       id: question.id.code,
       step: index + 1,
       name: question.id.code,
-    }));
-    // setMenuItems(sidebarItems);
-  }
+    })) || [];
 
-  const currentStep = questions ? questions.length : 0;
-
-  // Funzione per andare alla prossima domanda
-  const onNext = () => {
-    if (questions && currentStep < questions.length) {
-      // setCurrentStep(currentStep + 1);
-    }
+  const invalidateQuestionnaire = () => {
+    queryClient.invalidateQueries({ queryKey: ["questionnaire", "full"] });
   };
 
-  // current question è l'ultimo elemento dell'array
-  const currentQuestion = sidebarItems[currentStep - 1];
+  const onNext = () => {
+    // Placeholder for additional logic
+    invalidateQuestionnaire();
+  };
+
+  const onDelete = () => {
+    // Placeholder for additional logic
+    invalidateQuestionnaire();
+  };
+
+  const currentQuestion = questions?.length
+    ? sidebarItems[questions.length - 1]
+    : null;
+
   return {
     onNext,
-    questions,
+    onDelete,
     currentQuestion,
-    questionsLoading,
-    questionsError,
+    isLoading,
+    error,
     menuItems: sidebarItems,
   };
 };
