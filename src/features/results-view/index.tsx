@@ -5,11 +5,11 @@ import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
 import { Detection } from "./sections/detection";
-import { ActionButtons } from "./buttons";
 import { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { RESULT_SECTIONS } from "./utils";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 interface ResultsViewProps {
   data: QuestionnaireResponse;
@@ -24,40 +24,41 @@ export const ResultsView = ({
   questionNumber,
   onNext,
 }: ResultsViewProps) => {
-  const [selected, setSelected] = useState<string | null>("ResultsView");
-
+  const [selectedSection, setSelectedSection] = useState<string | null>(
+    "ResultsView"
+  );
+  const [selectedAnswer, setSelectedAnswer] = useState<string>();
   const sections = RESULT_SECTIONS;
 
-  const { mutate } = useUpdateQuestionnaire({
+  const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },
   });
 
   const handleAction = (answer: AnswerResponse) => {
+    setSelectedAnswer(answer.id.code);
     mutate({
       n: questionNumber,
       answer_ids: [answer.id],
     });
   };
 
-  const onDownloadDataset = () => {};
-
-  const onDownloadResults = () => {};
-
-  const onTest = () => {};
-
   return (
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
-          <ActionButtons
-            answers={data.answers}
-            onAction={handleAction}
-            onDownloadDataset={onDownloadDataset}
-            onDownloadResults={onDownloadResults}
-            onTest={onTest}
-          />
+          {data.answers.map((answer) => (
+            <ButtonLoading
+              key={answer.id.code}
+              onClick={() => handleAction(answer)}
+              variant="outline"
+              disabled={isPending}
+              isLoading={isPending && selectedAnswer === answer.id.code}
+            >
+              {answer.text}
+            </ButtonLoading>
+          ))}
         </div>
       }
       className="!bg-transparent !border-0 !overflow-hidden"
@@ -75,7 +76,7 @@ export const ResultsView = ({
               value={section.id}
               aria-label={section.name}
               onClick={() => {
-                setSelected(section.id);
+                setSelectedSection(section.id);
               }}
             >
               {section.name}
@@ -85,12 +86,18 @@ export const ResultsView = ({
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Content based on the selected section */}
-        {selected === "ResultsView" && (
+        {selectedSection === "ResultsView" && (
           <ResultsViewSection datasetKey={datasetKey} />
         )}
-        {selected === "DatasetView" && <DatasetView datasetKey={datasetKey} />}
-        {selected === "FeatureView" && <FeaturesView datasetKey={datasetKey} />}
-        {selected === "Detection" && <Detection datasetKey={datasetKey} />}
+        {selectedSection === "DatasetView" && (
+          <DatasetView datasetKey={datasetKey} />
+        )}
+        {selectedSection === "FeatureView" && (
+          <FeaturesView datasetKey={datasetKey} />
+        )}
+        {selectedSection === "Detection" && (
+          <Detection datasetKey={datasetKey} />
+        )}
       </div>
     </QuestionnaireLayout>
   );
