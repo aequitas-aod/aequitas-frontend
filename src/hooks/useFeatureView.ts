@@ -6,7 +6,7 @@ import { CsvData, ParsedDataset } from "@/types/types";
 import Papa from "papaparse";
 import { useStatsContext } from "@/api/context";
 
-export const useFeatureView = (datasetKey: string) => {
+export const useFeatureView = (datasetKey?: string) => {
   const { data: contextData, isLoading, error } = useStatsContext(datasetKey);
   const t = useTranslations("FeatureView");
   const [data, setData] = useState<ParsedDataset[]>([]);
@@ -19,7 +19,7 @@ export const useFeatureView = (datasetKey: string) => {
       const result = Papa.parse<CsvData>(csv, {
         header: true,
         skipEmptyLines: true,
-        quoteChar: '\'',
+        quoteChar: "'",
       });
 
       if (result.errors.length > 0) {
