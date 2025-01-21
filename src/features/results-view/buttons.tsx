@@ -2,16 +2,14 @@ import { AnswerResponse } from "@/api/types";
 import { Button } from "@/components/ui/button";
 
 interface ActionButtonsProps {
-  datasetKey: string;
   answers: AnswerResponse[];
-  onAction: (actionId: string) => void;
+  onAction: (answer: AnswerResponse) => void;
   onDownloadDataset: () => void;
   onDownloadResults: () => void;
   onTest: () => void;
 }
 
 export const ActionButtons = ({
-  datasetKey,
   answers,
   onAction,
   onDownloadDataset,
@@ -23,7 +21,7 @@ export const ActionButtons = ({
       {answers.map((answer) => (
         <Button
           key={answer.id.code}
-          onClick={() => onAction(answer.id.code)} // Quando cliccato, chiama onAction con l'id dell'azione
+          onClick={() => onAction(answer)}
           variant="outline"
         >
           {answer.text}
