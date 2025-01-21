@@ -8,8 +8,13 @@ export type CsvData = {
   [key: string]: string;
 };
 
+export type ParsedDistribution = {
+  keys: string[];
+  values: number[];
+}
+
 export type ParsedDataset = {
-  [key: string]: string | boolean | string[] | Record<string, number>;
+  [key: string]: string | boolean | string[] | ParsedDistribution;
 };
 
 export type Dataset = {

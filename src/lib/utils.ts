@@ -50,12 +50,7 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
  */
 export const parseDistributionField = (value: string): object | string => {
   try {
-    const sanitizedValue = value
-      .replace(/array\(/g, "") // Rimuove "array("
-      .replace(/\)/g, "") // Rimuove ")"
-      .replace(/'/g, '"'); // Sostituisce apici singoli con doppi per JSON
-
-    return JSON.parse(sanitizedValue);
+    return JSON.parse(value);
   } catch (e) {
     console.error("Errore nel parsing del campo distribution:", e);
     return value; // Restituisce il valore originale se il parsing fallisce
@@ -98,7 +93,6 @@ export const parseDatasetString = (value: string) => {
     try {
       // Pre-processamento: sostituire gli apici singoli con quelli doppi (per oggetti)
       let correctedValue = trimmedValue.replace(/'/g, '"');
-
       // Inoltre, per evitare errori specifici con oggetti, correggi anche il formato
       correctedValue = correctedValue.replace(/([a-zA-Z0-9]+):/g, '"$1":'); // Aggiunge le virgolette alle chiavi
 
