@@ -29,6 +29,12 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
         return;
       }
 
+      // Specifico per "distribution"
+      if (key === "distribution") {
+        updatedRow[key] = parseDistributionField(value as string);
+        return;
+      }
+
       // Converte stringhe in array/oggetti, se necessario
       if (typeof value === "string") {
         const parsedValue = parseDatasetString(value);
@@ -37,6 +43,23 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
     });
     return updatedRow;
   });
+};
+
+/**
+ * Parsea il campo "distribution" rimuovendo "array()" e adattando a JSON valido.
+ */
+export const parseDistributionField = (value: string): object | string => {
+  try {
+    const sanitizedValue = value
+      .replace(/array\(/g, "") // Rimuove "array("
+      .replace(/\)/g, "") // Rimuove ")"
+      .replace(/'/g, '"'); // Sostituisce apici singoli con doppi per JSON
+
+    return JSON.parse(sanitizedValue);
+  } catch (e) {
+    console.error("Errore nel parsing del campo distribution:", e);
+    return value; // Restituisce il valore originale se il parsing fallisce
+  }
 };
 
 export const parseDatasetString = (value: string) => {
