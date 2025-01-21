@@ -6,13 +6,9 @@ import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 import { useAequitasStore } from "@/store/store";
 
 export default function ProjectPage() {
-  const { menuItems } = useAequitasStore();
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <Sidebar menuItems={menuItems} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <QuestionnaireContainer />
-      </div>
+      <QuestionnaireContainer />
     </QueryClientProvider>
   );
 }
