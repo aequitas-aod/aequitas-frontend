@@ -43,7 +43,6 @@ export const FeaturesView = ({
   const { mutate: mutateFeatures, isPending: isPendingFeatures } =
     useMutationFeatures({
       onSuccess: () => {
-        // todo: invalidate questionnaire: queryKey: ["questionnaire", "full"],
         onNext();
       },
     });
@@ -51,6 +50,7 @@ export const FeaturesView = ({
   const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
     useUpdateQuestionnaire({
       onSuccess: () => {
+        // todo: invalidate questionnaire: queryKey: ["questionnaire", "full"],
         onMutateFeatures();
       },
     });

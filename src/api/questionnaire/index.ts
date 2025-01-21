@@ -42,6 +42,7 @@ export const useUpdateQuestionnaire = ({
         onSuccess();
       }
     },
+    retry: false, // failed mutations will not retry.
   });
   return mutation;
 };
@@ -58,6 +59,7 @@ export const useUpdateCustomQuestionnaire = ({
     onSuccess: () => {
       onSuccess();
     },
+    retry: false, // failed mutations will not retry.
   });
   return mutation;
 };
@@ -74,6 +76,7 @@ export const useDeleteQuestionnaireById = ({
     onSuccess: () => {
       onSuccess();
     },
+    retry: false, // failed mutations will not retry.
   });
   return mutation;
 };

@@ -33,10 +33,10 @@ export const useMutationFeatures = ({
       dataset,
       body,
     }: {
-      dataset: string;
+      dataset?: string;
       body: FeaturesParams;
     }) => {
-      return backendApi.putFeatures(PROJECT_CODE, dataset, body);
+      return backendApi.putFeatures(PROJECT_CODE, dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -55,10 +55,10 @@ export const useMutationProxies = ({
       dataset,
       body,
     }: {
-      dataset: string;
+      dataset?: string;
       body: ProxyDataParams;
     }) => {
-      return backendApi.putProxies(PROJECT_CODE, dataset, body);
+      return backendApi.putProxies(PROJECT_CODE, dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -96,72 +96,78 @@ export const useDatasetContext = (dataset?: string) => {
 };
 
 // features-view
-export const useStatsContext = (dataset: string) => {
+export const useStatsContext = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["stats", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(PROJECT_CODE, dataset, "stats");
+      return backendApi.getContextCsv(PROJECT_CODE, dataset!, "stats");
     },
+    enabled: !!dataset,
   });
   return query;
 };
 
 // detection view
-export const useFeaturesContext = (dataset: string) => {
+export const useFeaturesContext = (dataset?: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
     queryFn: async () => {
-      return backendApi.getFeaturesContext(PROJECT_CODE, dataset);
+      return backendApi.getFeaturesContext(PROJECT_CODE, dataset!);
     },
+    enabled: !!dataset,
   });
   return query;
 };
 
-export const useMetricsContext = (dataset: string) => {
+export const useMetricsContext = (dataset?: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
-      return backendApi.getMetricsContext(PROJECT_CODE, dataset);
+      return backendApi.getMetricsContext(PROJECT_CODE, dataset!);
     },
+    enabled: !!dataset,
   });
   return query;
 };
 
 // dependencies
-export const useSuggestedProxies = (dataset: string) => {
+export const useSuggestedProxies = (dataset?: string) => {
   const query = useQuery<ProxyDataResponse>({
     queryKey: ["suggested-proxies", dataset],
     queryFn: async () => {
-      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset);
+      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset!);
     },
+    enabled: !!dataset,
   });
   return query;
 };
 
-export const useCorrelationMatrix = (dataset: string) => {
+export const useCorrelationMatrix = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["correlation-matrix", dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(
         PROJECT_CODE,
-        dataset,
+        dataset!,
         "correlation_matrix"
       );
     },
+    enabled: !!dataset,
   });
   return query;
 };
 
-export const useDependencyGraph = (dataset: string) => {
+export const useDependencyGraph = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(
         PROJECT_CODE,
-        dataset,
+        dataset!,
         "dependency_graph"
       );
     },
+    enabled: !!dataset,
   });
   return query;
 };
@@ -191,14 +197,15 @@ export const useLaunchAlgorithmMutation = ({
       dataset,
       body,
     }: {
-      dataset: string;
+      dataset?: string;
       body: Record<string, unknown>;
     }) => {
-      return backendApi.putPreprocessingContext(PROJECT_CODE, dataset, body);
+      return backendApi.putPreprocessingContext(PROJECT_CODE, dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
     },
+    retry: false, // failed mutations will not retry.
   });
   return mutation;
 };
@@ -209,7 +216,7 @@ export const useUpdateContextCsv = ({
   onSuccess?: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (params: { dataset: string; body: string }) => {
+    mutationFn: (params: { dataset?: string; body: string }) => {
       return backendApi.putContext(
         PROJECT_CODE,
         "dataset__" + params.dataset,
@@ -221,6 +228,7 @@ export const useUpdateContextCsv = ({
         onSuccess();
       }
     },
+    retry: false, // failed mutations will not retry.
   });
   return mutation;
 };

@@ -17,7 +17,7 @@ export const useAequitasStore = create<SidebarState>((set, get) => ({
   setCurrentStep: (step) => set({ currentStep: step }),
   menuItems: sidebarItems,
   setMenuItems: (items) => set({ menuItems: items }),
-  resetMenuItems: () => set({ menuItems: sidebarItems }),
+  resetMenuItems: () => set({ menuItems: [] }),
   addMenuItem: (item) =>
     set((state) => ({
       menuItems: [...state.menuItems, item],
