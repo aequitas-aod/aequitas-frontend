@@ -46,6 +46,8 @@ export const Proxies = ({
       },
     });
 
+  const { data: currentDataset } = useCurrentDataset();
+
   const [featureData, setFeatureData] = useState<ProxyDataResponse>(data);
 
   const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
@@ -90,14 +92,7 @@ export const Proxies = ({
   const onContinue = () => {
     const body = transformProxyData(featureData);
     console.log(body);
-    // TODO replace with "current_dataset"
-    // const {
-    //   data: currentDataset,
-    //   isLoading: isLoadingContextData,
-    //   error: errorContextData,
-    // } = useCurrentDataset();
-    // console.log("currentDataset", currentDataset);
-    mutateProxies({ dataset: "AdultDataset-1", body });
+    mutateProxies({ dataset: currentDataset, body });
   };
 
   return (
