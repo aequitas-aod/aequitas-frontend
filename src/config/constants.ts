@@ -18,8 +18,8 @@ export const FEEDBACK_LINK = "https://google.com";
 // cpstante mappa per le chiavi del questionario
 export const QUESTIONNAIRE_KEYS = {
   DATASET_SELECTION: "DatasetSelection",
-  DATASET_VIEW: "DatasetView",
-  FEATURE_VIEW: "FeatureView",
+  DATASET_VIEW: "DatasetConfirmation",
+  FEATURE_VIEW: "FeaturesSelection",
   PROXIES: "Proxies",
   DETECTION: "Detection",
   DATA_MITIGATION: "DataMitigation",
