@@ -1,39 +1,42 @@
-/*
- faccio la questionnaire: ti dice tutto il questionario
- da questa popolo la menuItems
- prendo anche l'ultimo step e faccio la get context relativa alla 
-*/
-
 import { useQuestionnaireList } from "@/api/questionnaire";
-import { useAequitasStore } from "@/store/store";
+import { SidebarItem } from "../../mocks/sidebar";
 
 export const useQuestionnaireData = () => {
-  const { currentStep, setCurrentStep, menuItems } = useAequitasStore();
-
-  // 1: AGGIORNO LA SIDEBAR
+  // Ottieni le domande dal server
   const {
     data: questions,
     isLoading: questionsLoading,
     error: questionsError,
   } = useQuestionnaireList();
 
-  const questionNumber = currentStep; // questions.length
+  let sidebarItems: SidebarItem[] = [];
 
-  // setMenuItems(questions)
+  if (questions && questions.length > 0) {
+    sidebarItems = questions.map((question, index) => ({
+      id: question.id.code,
+      step: index + 1,
+      name: question.id.code,
+    }));
+    // setMenuItems(sidebarItems);
+  }
 
-  // TODO: 2: PRENDO IL DATASET CORRENTE DALLA CONTEXT
-  // per prendere
+  const currentStep = questions ? questions.length : 0;
 
+  // Funzione per andare alla prossima domanda
   const onNext = () => {
-    setCurrentStep(currentStep + 1);
-    // dopo andiamo a rifare la chiamata della useQuestionnaireList
+    if (questions && currentStep < questions.length) {
+      // setCurrentStep(currentStep + 1);
+    }
   };
 
-  const currentQuestion = menuItems.find((step) => step.step === currentStep);
-
+  // current question è l'ultimo elemento dell'array
+  const currentQuestion = sidebarItems[currentStep - 1];
   return {
     onNext,
-    menuItems,
+    questions,
     currentQuestion,
+    questionsLoading,
+    questionsError,
+    menuItems: sidebarItems,
   };
 };
