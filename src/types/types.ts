@@ -14,7 +14,7 @@ export type DataDistributions = {
 }
 
 export type ParsedDataset = {
-  [key: string]: string | boolean | string[] | Record<string, number>;
+  [key: string]: string | boolean | string[] | DataDistributions;
 };
 
 export type Dataset = {

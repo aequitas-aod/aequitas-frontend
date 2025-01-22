@@ -30,16 +30,11 @@ export const Histogram = ({
   hideXAxis?: boolean;
   className?: string;
 }) => {
-
-  console.log("row[col]");
-  console.log(data);
   const chartConfig = generateChartConfig(data);
   const chartData = Object.entries(data).map(([key, value]) => ({
     key,
     value,
   }));
-
-  console.log("CHART DATA ", chartData);
   return (
     <ChartContainer config={chartConfig} className={`h-[120px] ${className}`}>
       <BarChart accessibilityLayer data={chartData}>

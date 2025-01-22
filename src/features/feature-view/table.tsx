@@ -31,7 +31,6 @@ export const FeatureViewTable = ({
   disabled = false,
 }: FeatureViewTableProps) => {
   const showSelectRow = !!selectedRows && !!handleSelectRow;
-
   const convertDistributionsInHistogramData = (data: DataDistributions): Record<string, number> => {
     const keys: string[] = data.keys
     const values: number[] = data.values
@@ -121,7 +120,7 @@ export const FeatureViewTable = ({
                         variant="outlined-black"
                       />
                     ) : col === DISTRIBUTION ? (
-                      <Histogram data={convertDistributionsInHistogramData(row[col])} />
+                      <Histogram data={convertDistributionsInHistogramData(row[col] as DataDistributions)} />
                     ) : (
                       displayedContent
                     )}

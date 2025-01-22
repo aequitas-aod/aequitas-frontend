@@ -49,10 +49,10 @@ export const useMetricsData = (dataset?: string, target?: string) => {
     isLoading: metricsLoading,
     error: metricsError,
   } = useMetricsContext(dataset, target);
-
   const parseGraphs = useCallback(
     <T>(items: ConditionResponse<T>[], mainKey: string): Graph[] => {
       const grouped: { [key: string]: { [label: string]: ClassValue[] } } = {};
+      console.log("TARGET", target);
       if (!target) return [];
       const feature = target;
 
@@ -85,21 +85,25 @@ export const useMetricsData = (dataset?: string, target?: string) => {
   const parseMetricsData = useCallback(
     <T>(data: MetricsResponse<T>): MetricGraphs => {
       const parsed: MetricGraphs = {};
-
+      console.log(data);
+      // const parsedData = JSON.parse(data.replaceAll("Infinity", "\"Infinity\""));
+      // console.log(data);
       Object.keys(data).forEach((mainKey) => {
         parsed[mainKey] = {
           graphs: parseGraphs(data[mainKey]!, mainKey),
         };
       });
+      console.log(parsed);
       return parsed;
     },
     [parseGraphs]
   );
 
   const parsedData = useMemo(() => {
+    if (!target) return null;
     if (!metricsData) return null;
     return parseMetricsData(metricsData);
-  }, [metricsData, parseMetricsData]);
+  }, [target, metricsData, parseMetricsData]);
 
   return {
     isLoading: metricsLoading,
