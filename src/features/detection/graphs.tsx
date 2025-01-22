@@ -1,6 +1,7 @@
 import { Graph } from "@/hooks/useDetectionData";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
 import { capitalize, parseFeatureKey } from "@/lib/utils";
+import { Histogram2 } from "@/components/molecules/Histogram/Histogram2";
 
 export const GraphsDisplay = ({ graphs }: { graphs: Graph[] }) => {
   return (
@@ -21,7 +22,7 @@ export const GraphsDisplay = ({ graphs }: { graphs: Graph[] }) => {
               >
                 <h2 className="text-lg font-medium">{value.label}</h2>
                 {value.data.length > 0 ? (
-                  <Histogram
+                  <Histogram2
                     data={value.data.reduce(
                       (acc, curr) => ({
                         ...acc,
