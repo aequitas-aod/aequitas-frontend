@@ -16,6 +16,7 @@ import { useMutationProxies } from "@/api/context";
 import Image from "next/image";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import DOMPurify from 'dompurify';
 
 export const Proxies = ({
   onNext,
@@ -34,6 +35,11 @@ export const Proxies = ({
   answers: AnswerResponse[];
   correlationMatrix?: string;
 }) => {
+  let secureCorrelationMatrix = correlationMatrix
+  if (correlationMatrix){
+    secureCorrelationMatrix = DOMPurify.sanitize(correlationMatrix);
+  }
+
   const t = useTranslations("FeatureView");
 
   const { mutate: mutateProxies, isPending: isPendingProxies } =
@@ -113,14 +119,10 @@ export const Proxies = ({
       <div className="flex p-2 overflow-auto h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
           <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
-            {correlationMatrix ? (
-              <Image
-                src={correlationMatrix}
-                alt="Correlation Matrix"
-                layout="fill"
-                objectFit="contain"
-                className="rounded"
-              />
+            {secureCorrelationMatrix ? (
+                <div className="fill this pls"
+                  dangerouslySetInnerHTML={{ __html: secureCorrelationMatrix }}
+                />
             ) : (
               <p className="text-neutral-600">
                 Correlation matrix not available
