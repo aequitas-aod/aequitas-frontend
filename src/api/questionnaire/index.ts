@@ -10,7 +10,7 @@ import { PROJECT_CODE } from "@/config/constants";
 
 export const useQuestionnaireList = () => {
   const query = useQuery<QuestionnaireResponse[]>({
-    queryKey: ["questionnaire", "full"],
+    queryKey: ["questionnaireFull"],
     queryFn: async () => {
       return backendApi.getQuestionnaireList(PROJECT_CODE);
     },

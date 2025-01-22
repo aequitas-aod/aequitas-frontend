@@ -90,7 +90,7 @@ export const DatasetView = ({
       classNameWrapper="!overflow-hidden"
       className="!bg-neutral-50"
     >
-      <QuestionnaireBanner text={questionnaire.description} />
+      <QuestionnaireBanner text={questionnaire.text} />
       <DatasetViewTable data={data} columns={columns} />
     </QuestionnaireLayout>
   );

@@ -51,7 +51,6 @@ export const FeaturesView = ({
   const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
     useUpdateQuestionnaire({
       onSuccess: () => {
-        // todo: invalidate questionnaire: queryKey: ["questionnaire", "full"],
         onMutateFeatures();
       },
     });
