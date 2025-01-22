@@ -43,7 +43,7 @@ export type DetectionData = Record<
 // ------------------------------
 // Hook: useMetricsData
 // ------------------------------
-export const useMetricsData = (dataset: string) => {
+export const useMetricsData = (dataset?: string) => {
   const {
     data: metricsData,
     isLoading: metricsLoading,
@@ -109,7 +109,7 @@ export const useMetricsData = (dataset: string) => {
 // ------------------------------
 // Hook: useFeaturesData
 // ------------------------------
-const useFeaturesData = (dataset: string) => {
+const useFeaturesData = (dataset?: string) => {
   const {
     data: featuresData,
     isLoading: featuresLoading,
@@ -164,13 +164,14 @@ const useQuestionnaireData = (
     error: errorQuestionnaireData,
     questionnaireKeys,
     answers: questionnaireData?.answers,
+    questionnaireData,
   };
 };
 
 // ------------------------------
 // Hook: useDetection (Combines all hooks)
 // ------------------------------
-export const useDetection = (questionId: number, dataset: string) => {
+export const useDetection = (questionId: number, dataset?: string) => {
   const {
     isLoading: metricsLoading,
     error: metricsError,
@@ -185,6 +186,7 @@ export const useDetection = (questionId: number, dataset: string) => {
     isLoading: questionnaireLoading,
     error: questionnaireError,
     questionnaireKeys,
+    questionnaireData,
     answers,
   } = useQuestionnaireData(questionId, sensitiveFeatures);
   const isLoading = metricsLoading || featuresLoading || questionnaireLoading;
@@ -196,5 +198,6 @@ export const useDetection = (questionId: number, dataset: string) => {
     metrics,
     data: questionnaireKeys,
     answers,
+    questionnaireData,
   };
 };

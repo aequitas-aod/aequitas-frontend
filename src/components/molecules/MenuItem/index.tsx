@@ -7,15 +7,16 @@ import {
 } from "@/components/ui/dialog";
 
 import { IMenuItemWithState } from "../Menu";
-import { SidebarItem } from "../../../../mocks/sidebar";
 
-export interface IMenuItem extends SidebarItem {
-  icon?: React.ReactNode;
+export interface IMenuItem {
+  id: string;
+  step: number;
+  name: string;
 }
 
 interface MenuItemProps {
   item: IMenuItemWithState;
-  onNavigate: (path: number) => void;
+  onNavigateBack: (path: number) => void;
 }
 
 const stateStyles = {
@@ -33,16 +34,9 @@ const stateStyles = {
     hoverBg: "hover:bg-primary-300",
     fontWeight: "font-normal",
   },
-  future: {
-    bg: "bg-neutral-100",
-    border: "border-neutral-200",
-    text: "text-neutral-700",
-    hoverBg: "hover:bg-neutral-100",
-    fontWeight: "font-normal",
-  },
 };
 
-export const MenuItem = ({ item, onNavigate }: MenuItemProps) => {
+export const MenuItem = ({ item, onNavigateBack }: MenuItemProps) => {
   const { bg, border, text, hoverBg, fontWeight } = stateStyles[item.state];
 
   const [open, setOpen] = useState(false); // Stato per la dialog
@@ -56,18 +50,14 @@ export const MenuItem = ({ item, onNavigate }: MenuItemProps) => {
   const handleConfirmNavigation = () => {
     if (navigateTo) {
       setOpen(false);
-      onNavigate(navigateTo);
+      onNavigateBack(navigateTo);
     }
   };
 
   return (
     <>
       <div className="flex items-center space-x-2 justify-end">
-        {item.state === "future" ? (
-          <>
-            {/* Currently, we have hidden the future section. Once the backend is integrated, the reference to future can be removed */}
-          </>
-        ) : item.state === "past" ? (
+        {item.state === "past" ? (
           <div
             className={`w-32 text-sm text-center py-3.5 rounded-md transition-colors border-2 ${bg} ${text} ${hoverBg} ${border} ${fontWeight} cursor-pointer`}
             onClick={() => handlePastClick(item.step)}

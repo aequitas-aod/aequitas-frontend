@@ -12,41 +12,51 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useCurrentDataset, useDatasetContext, useMutationProxies } from "@/api/context";
+import { useMutationProxies } from "@/api/context";
 import Image from "next/image";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { ButtonLoading } from "@/components/ui/loading-button";
+import DOMPurify from 'dompurify';
 
 export const Proxies = ({
   onNext,
   data,
   question,
+  datasetKey,
   questionNumber,
-  answers
+  answers,
+  correlationMatrix,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
   question: QuestionnaireResponse;
   questionNumber: number;
+  datasetKey: string;
   answers: AnswerResponse[];
+  correlationMatrix?: string;
 }) => {
+  let secureCorrelationMatrix = correlationMatrix
+  if (correlationMatrix){
+    secureCorrelationMatrix = DOMPurify.sanitize(correlationMatrix);
+  }
+
   const t = useTranslations("FeatureView");
 
-  const { mutate: mutateProxies, isPending: isPendingProxies } = useMutationProxies({
-    onSuccess: () => {
-      mutateQuestionnaire({
-        n: questionNumber,
-        answer_ids: [answers[0]?.id],
-      });
-    },
-  });
+  const { mutate: mutateProxies, isPending: isPendingProxies } =
+    useMutationProxies({
+      onSuccess: () => {
+        mutateQuestionnaire({
+          n: questionNumber,
+          answer_ids: [answers[0]?.id],
+        });
+      },
+    });
   const { mutate: mutateQuestionnaire, isPending: isPendingQuestionnaire } =
     useUpdateQuestionnaire({
       onSuccess: () => {
         onNext();
       },
     });
-
-  const { data: currentDataset } = useCurrentDataset();
 
   const [featureData, setFeatureData] = useState<ProxyDataResponse>(data);
 
@@ -67,8 +77,6 @@ export const Proxies = ({
             : "true",
       };
     }
-
-    // Imposta il nuovo stato
     setFeatureData(updatedFeatureData);
   };
 
@@ -92,33 +100,34 @@ export const Proxies = ({
   const onContinue = () => {
     const body = transformProxyData(featureData);
     console.log(body);
-    mutateProxies({ dataset: currentDataset, body });
+    mutateProxies({ dataset: datasetKey, body });
   };
 
   return (
     <QuestionnaireLayout
-      action={<Button onClick={onContinue}>{t("buttons.continue")}</Button>}
+      action={
+        <ButtonLoading
+          onClick={onContinue}
+          isLoading={isPendingProxies || isPendingQuestionnaire}
+        >
+          {t("buttons.continue")}
+        </ButtonLoading>
+      }
       className="!bg-white !overflow-hidden"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
-      <div className="flex p-2 overflow-auto">
+      <QuestionnaireBanner text={question.description} />
+      <div className="flex p-2 overflow-auto h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
-            <Image
-              src="/images/4_2_correlation_matrix.png"
-              alt="Proxies"
-              layout="fill"
-              objectFit="contain"
-              className="rounded"
-            />
+          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
+            {secureCorrelationMatrix ? (
+                <div className="fill this pls"
+                  dangerouslySetInnerHTML={{ __html: secureCorrelationMatrix }}
+                />
+            ) : (
+              <p className="text-neutral-600">
+                Correlation matrix not available
+              </p>
+            )}
           </div>
         </div>
         <div className="w-[380px] p-6 overflow-auto">

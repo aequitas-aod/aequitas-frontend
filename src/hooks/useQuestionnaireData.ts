@@ -1,39 +1,72 @@
-/*
- faccio la questionnaire: ti dice tutto il questionario
- da questa popolo la menuItems
- prendo anche l'ultimo step e faccio la get context relativa alla 
-*/
-
-import { useQuestionnaireList } from "@/api/questionnaire";
-import { useAequitasStore } from "@/store/store";
+import {
+  useDeleteQuestionnaireById,
+  useQuestionnaireList,
+} from "@/api/questionnaire";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useQuestionnaireData = () => {
-  const { currentStep, setCurrentStep, menuItems } = useAequitasStore();
+  const queryClient = useQueryClient();
+  const { data: questions, isLoading, error } = useQuestionnaireList();
 
-  // 1: AGGIORNO LA SIDEBAR
-  const {
-    data: questions,
-    isLoading: questionsLoading,
-    error: questionsError,
-  } = useQuestionnaireList();
+  const { mutate } = useDeleteQuestionnaireById({
+    onSuccess: () => {
+      console.log("Step deleted successfully");
+      invalidateQuestionnaire();
+    },
+  });
 
-  const questionNumber = currentStep; // questions.length
+  const sidebarItems =
+    questions?.map((question, index) => ({
+      id: question.id.code,
+      step: index + 1,
+      name: question.id.code
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (str) => str.toUpperCase()),
+    })) || [];
 
-  // setMenuItems(questions)
-
-  // TODO: 2: PRENDO IL DATASET CORRENTE DALLA CONTEXT
-  // per prendere
-
-  const onNext = () => {
-    setCurrentStep(currentStep + 1);
-    // dopo andiamo a rifare la chiamata della useQuestionnaireList
+  const invalidateQuestionnaire = () => {
+    queryClient.invalidateQueries({ queryKey: ["questionnaire", "full"] });
   };
 
-  const currentQuestion = menuItems.find((step) => step.step === currentStep);
+  const onNext = () => {
+    // Placeholder for additional logic
+    invalidateQuestionnaire();
+  };
+
+  const currentIndex = questions?.length || 0;
+
+  const onDelete = (path: number) => {
+    if (path === currentIndex) {
+      return;
+    }
+    // TODO: Check if this is the correct behavior
+    if (!questions || !questions.length) {
+      return;
+    }
+    const stepsToDelete = [];
+    for (let step = currentIndex; step > path; step--) {
+      stepsToDelete.push(step);
+    }
+    try {
+      for (const step of stepsToDelete) {
+        mutate({ n: step });
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting steps: ", error);
+    }
+    // Placeholder for additional logic
+  };
+
+  const currentQuestion = questions?.length
+    ? sidebarItems[questions.length - 1]
+    : null;
 
   return {
     onNext,
-    menuItems,
+    onDelete,
     currentQuestion,
+    isLoading,
+    error,
+    menuItems: sidebarItems,
   };
 };

@@ -13,11 +13,9 @@ export const DetectionPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  
-  const { isLoading, error, data, metrics, answers } = useDetection(
-    questionNumber,
-    datasetKey
-  );
+
+  const { isLoading, error, data, metrics, answers, questionnaireData } =
+    useDetection(questionNumber, datasetKey);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -42,6 +40,7 @@ export const DetectionPage = ({
       metricGraphs={metrics}
       questionNumber={questionNumber}
       questionAnswers={answers}
+      questionnaireData={questionnaireData!}
     />
   );
 };

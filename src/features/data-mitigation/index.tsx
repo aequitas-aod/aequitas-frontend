@@ -7,22 +7,23 @@ import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import { LaunchAlgorithm } from "./launch-algorithm";
-import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { usePreprocessingHyperparameters } from "@/api/context";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DataMitigation = ({
+  questionNumber,
   data,
   onNext,
 }: {
+  questionNumber: number;
   data: QuestionnaireResponse;
   onNext: () => void;
 }) => {
   const t = useTranslations("DataMitigation");
-  const { currentStep } = useAequitasStore();
 
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
@@ -32,11 +33,12 @@ export const DataMitigation = ({
     selected?.id.code ?? null
   );
 
-  const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({
-    onSuccess: () => {
-      onNext();
-    },
-  });
+  const { mutateAsync: updateQuestionnaire, isPending } =
+    useUpdateQuestionnaire({
+      onSuccess: () => {
+        onNext();
+      },
+    });
 
   const onSelect = async (value: string) => {
     const selectedOption =
@@ -54,7 +56,7 @@ export const DataMitigation = ({
     }
     try {
       await updateQuestionnaire({
-        n: currentStep,
+        n: questionNumber,
         answer_ids: [
           {
             code: selected.id.code,
@@ -75,9 +77,13 @@ export const DataMitigation = ({
     <>
       <QuestionnaireLayout
         action={
-          <Button onClick={onContinue} disabled={!isDisabled}>
+          <ButtonLoading
+            onClick={onContinue}
+            disabled={!isDisabled}
+            isLoading={isPending}
+          >
             {t("buttons.continue")}
-          </Button>
+          </ButtonLoading>
         }
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50"

@@ -7,19 +7,13 @@ import { CreateDatasetDialog } from "../create-dataset-dialog";
 import type { EnhancedAnswerResponse } from "@/types/types";
 
 type DatasetPreviewProps = {
-  title: string;
-  description: string;
-  details: {
-    [key: string]: string | number;
-  };
+  questionNumber: number;
   onNext: () => void;
   selected: EnhancedAnswerResponse;
 };
 
 export const DatasetPreview = ({
-  title,
-  description,
-  details,
+  questionNumber,
   onNext,
   selected,
 }: DatasetPreviewProps) => {
@@ -49,15 +43,21 @@ export const DatasetPreview = ({
   };
 
   // Se è un custom dataset
-  if (title === CUSTOM_DATASET_KEY) {
+  if (selected.text === CUSTOM_DATASET_KEY) {
     return (
       <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
-        <p className="text-2xl text-primary-950">{title}</p>
-        {description && (
-          <p className="text-neutral-400 text-sm mt-2">{description}</p>
+        <p className="text-2xl text-primary-950">{selected.text}</p>
+        {selected.description && (
+          <p className="text-neutral-400 text-sm mt-2">
+            {selected.description}
+          </p>
         )}
         <div className="mt-auto flex justify-end">
-          <CreateDatasetDialog onNext={onNext} selected={selected} />
+          <CreateDatasetDialog
+            onNext={onNext}
+            selected={selected}
+            questionNumber={questionNumber}
+          />
         </div>
       </div>
     );
@@ -66,14 +66,14 @@ export const DatasetPreview = ({
   // Comportamento standard per dataset non custom
   return (
     <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
-      <p className="text-2xl text-primary-950">{title}</p>
-      {description && (
-        <p className="text-neutral-400 text-sm mt-2">{description}</p>
+      <p className="text-2xl text-primary-950">{selected.text}</p>
+      {selected.description && (
+        <p className="text-neutral-400 text-sm mt-2">{selected.description}</p>
       )}
       <div className="flex flex-col mt-auto">
-        {details && (
+        {selected.details && (
           <>
-            {Object.entries(details).map(([key, value]) => (
+            {Object.entries(selected.details).map(([key, value]) => (
               <div
                 key={key}
                 className="flex justify-start items-center gap-8 mt-4"

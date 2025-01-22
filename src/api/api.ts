@@ -236,11 +236,21 @@ export class BackendApi {
     dataset: string,
     key: string
   ): Promise<string> {
-    const url = `GET /projects/${project}/context?key=${key}__${dataset}`;
-    console.log(`GET URL: ${url}`);
-    await sleep(500);
-    const csvData = (await import(`../../mocks/${key}/${dataset}.ts`)).default;
-    return csvData;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
+
+    console.log(`Fetching vectorial data from URL: ${url}`);
+    const response = await axios.get<string>(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 200) {
+      console.log("RESPONSE", response.data);
+      return response.data;
+    }
+
+    throw new Error("Failed to fetch vectorial data");
   }
 
   async getFeaturesContext(

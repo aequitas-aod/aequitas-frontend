@@ -1,4 +1,8 @@
-import { useCurrentDataset, useSuggestedProxies } from "@/api/context";
+import {
+  useCorrelationMatrix,
+  useCurrentDataset,
+  useSuggestedProxies,
+} from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { Proxies } from "@/features/proxies/page";
 
@@ -14,14 +18,20 @@ export const ProxiesPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  
+
   const {
     data: question,
     isLoading: questionIsLoading,
     error: questionError,
   } = useQuestionnaireById({ n: questionNumber });
 
-  const { data, isLoading, error } = useSuggestedProxies(datasetKey);
+  const {
+    data: proxiesData,
+    isLoading,
+    error,
+  } = useSuggestedProxies(datasetKey);
+
+  const { data: correlationMatrix } = useCorrelationMatrix(datasetKey);
 
   if (isLoading || questionIsLoading) {
     return <div>Loading...</div>;
@@ -35,7 +45,7 @@ export const ProxiesPage = ({
     return <div>Error: {questionError.message}</div>;
   }
 
-  if (!data) {
+  if (!proxiesData) {
     return <div>No proxies available</div>;
   }
 
@@ -46,10 +56,12 @@ export const ProxiesPage = ({
   return (
     <Proxies
       onNext={onNext}
-      data={data}
+      data={proxiesData}
       question={question}
       questionNumber={questionNumber}
       answers={question.answers}
+      correlationMatrix={correlationMatrix}
+      datasetKey={datasetKey!}
     />
   );
 };

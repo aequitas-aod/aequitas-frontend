@@ -4,116 +4,66 @@ import { useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
-import { useAequitasStore } from "@/store/store";
 import { Detection } from "./sections/detection";
-import { ActionButtons } from "./buttons";
-import { QuestionnaireResponse } from "@/api/types";
-import {
-  parseAnswerId,
-  parseAnswerIdName,
-  parseAnswerIdNameSummary,
-  RESULT_SECTIONS,
-} from "./utils";
-import { QUESTIONNAIRE_KEYS } from "@/config/constants";
+import { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import { RESULT_SECTIONS } from "./utils";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 interface ResultsViewProps {
   data: QuestionnaireResponse;
   datasetKey: string;
+  questionNumber: number;
+  onNext: () => void;
 }
 
-export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
-  const {
-    menuItems: dynamicMenuItems,
-    addMenuItem,
-    currentStep,
-    setCurrentStep,
-  } = useAequitasStore();
-  const [selected, setSelected] = useState<string | null>("ResultsView");
-
+export const ResultsView = ({
+  data,
+  datasetKey,
+  questionNumber,
+  onNext,
+}: ResultsViewProps) => {
+  const [selectedSection, setSelectedSection] = useState<string | null>(
+    "ResultsView"
+  );
+  const [selectedAnswer, setSelectedAnswer] = useState<string>();
   const sections = RESULT_SECTIONS;
 
-  const handleAction = (id: string) => {
-    // Usa il parser per convertire answerId
-    const answerId = parseAnswerId(id);
+  const { mutate, isPending } = useUpdateQuestionnaire({
+    onSuccess: () => {
+      onNext();
+    },
+  });
 
-    // Creiamo dinamicamente l'item per il menu usando direttamente i parametri passati
-    const newAction = {
-      id: `${answerId}`,
-      step: dynamicMenuItems.length + 1,
-      name: parseAnswerIdName(answerId),
-    };
-
-    // Aggiungiamo la nuova voce al menu
-    addMenuItem(newAction);
-
-    // e aggiungo anche la results
-    addMenuItem({
-      id: `${answerId}Summary`,
-      step: dynamicMenuItems.length + 2,
-      name: `${parseAnswerIdNameSummary(answerId)}`,
+  const handleAction = (answer: AnswerResponse) => {
+    setSelectedAnswer(answer.id.code);
+    mutate({
+      n: questionNumber,
+      answer_ids: [answer.id],
     });
-    setCurrentStep(currentStep + 1);
-    // Eseguiamo la navigazione
   };
-
-  const onDownloadDataset = () => {};
-
-  const onDownloadResults = () => {};
-
-  const onTest = () => {
-    const testActions = [
-      {
-        id: QUESTIONNAIRE_KEYS.TEST_SET_CHOICE,
-        step: dynamicMenuItems.length + 1,
-        name: "Test Set Choice",
-      },
-      {
-        id: QUESTIONNAIRE_KEYS.POLARIZATION,
-        step: dynamicMenuItems.length + 2,
-        name: "Polarization",
-      },
-      {
-        id: QUESTIONNAIRE_KEYS.TEST_SUMMARY,
-        step: dynamicMenuItems.length + 3,
-        name: "Test Summary",
-      },
-    ];
-
-    testActions.forEach((action) => {
-      addMenuItem(action);
-    });
-
-    setCurrentStep(currentStep + 1);
-  };
-
-  
 
   return (
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
-          <ActionButtons
-            datasetKey={datasetKey}
-            answers={data.answers} // Passiamo le risposte dinamiche
-            onAction={handleAction} // Funzione che gestisce l'azione selezionata
-            onDownloadDataset={onDownloadDataset}
-            onDownloadResults={onDownloadResults}
-            onTest={onTest}
-          />
+          {data.answers.map((answer) => (
+            <ButtonLoading
+              key={answer.id.code}
+              onClick={() => handleAction(answer)}
+              variant="outline"
+              disabled={isPending}
+              isLoading={isPending && selectedAnswer === answer.id.code}
+            >
+              {answer.text}
+            </ButtonLoading>
+          ))}
         </div>
       }
       className="!bg-transparent !border-0 !overflow-hidden"
     >
-      <QuestionnaireBanner
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum"
-      />
+      <QuestionnaireBanner text={data.description} />
 
       <div className="flex items-center p-3 bg-primary-950 text-primary-50 gap-4">
         <p className="text-full-white">
@@ -126,7 +76,7 @@ export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
               value={section.id}
               aria-label={section.name}
               onClick={() => {
-                setSelected(section.id);
+                setSelectedSection(section.id);
               }}
             >
               {section.name}
@@ -135,13 +85,19 @@ export const ResultsView = ({ data, datasetKey }: ResultsViewProps) => {
         </ToggleGroup>
       </div>
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
-        {/* Contenuto in base alla section selezionata dal toggle*/}
-        {selected === "ResultsView" && (
+        {/* Content based on the selected section */}
+        {selectedSection === "ResultsView" && (
           <ResultsViewSection datasetKey={datasetKey} />
         )}
-        {selected === "DatasetView" && <DatasetView datasetKey={datasetKey} />}
-        {selected === "FeatureView" && <FeaturesView datasetKey={datasetKey} />}
-        {selected === "Detection" && <Detection datasetKey={datasetKey} />}
+        {selectedSection === "DatasetView" && (
+          <DatasetView datasetKey={datasetKey} />
+        )}
+        {selectedSection === "FeatureView" && (
+          <FeaturesView datasetKey={datasetKey} />
+        )}
+        {selectedSection === "Detection" && (
+          <Detection datasetKey={datasetKey} />
+        )}
       </div>
     </QuestionnaireLayout>
   );

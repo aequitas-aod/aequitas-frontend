@@ -14,6 +14,7 @@ import type {
   FeaturesParams,
   QuestionnaireResponse,
 } from "@/api/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 interface FeatureViewProps {
   question: QuestionnaireResponse;
@@ -142,12 +143,13 @@ export const FeaturesView = ({
               target: selectedTarget || "None",
             })}
           </span>
-          <Button
+          <ButtonLoading
             onClick={onContinue}
-            disabled={selectedRows.length === 0 || isPending}
+            disabled={selectedRows.length === 0}
+            isLoading={isPending}
           >
             {t("buttons.continue")}
-          </Button>
+          </ButtonLoading>
         </div>
       }
       className="!bg-neutral-50"

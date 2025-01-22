@@ -7,13 +7,13 @@ import { RadioItem } from "@/components/molecules/RadioItem";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 
 import { DatasetPreview } from "./dataset-preview";
-import { useAequitasStore } from "@/store/store";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { isMocked } from "@/api/api";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DatasetSelection = ({
   data,
@@ -57,20 +57,20 @@ export const DatasetSelection = ({
       n: questionNumber,
       answer_ids: [selected.id],
     });
-    onNext();
   };
 
   return (
     <>
       <QuestionnaireLayout
         action={
-          <Button
+          <ButtonLoading
             onClick={onContinue}
             disabled={!selected}
             variant={selected ? "default" : "secondary"}
+            isLoading={isPending}
           >
             {t("buttons.continue")}
-          </Button>
+          </ButtonLoading>
         }
         classNameWrapper="!overflow-hidden"
         className="!bg-neutral-50 !overflow-hidden"
@@ -97,9 +97,7 @@ export const DatasetSelection = ({
             <div className="flex-1 h-full">
               <DatasetPreview
                 selected={selected}
-                title={selected.text}
-                description={selected.description || ""}
-                details={selected.details}
+                questionNumber={questionNumber}
                 onNext={onNext}
               />
             </div>

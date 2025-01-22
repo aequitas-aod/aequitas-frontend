@@ -25,21 +25,21 @@ import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
 import { CheckIcon, PlusIcon, TrashIcon } from "lucide-react";
-import { useAequitasStore } from "@/store/store";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { convertCSVToString } from "@/lib/utils";
 import { useUpdateContextCsv } from "@/api/context";
 import { EnhancedAnswerResponse } from "@/types/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const CreateDatasetDialog = ({
+  questionNumber,
   selected,
   onNext,
 }: {
+  questionNumber: number;
   selected: EnhancedAnswerResponse;
   onNext: () => void;
 }) => {
-  const { currentStep } = useAequitasStore();
-
   const t = useTranslations("DatasetSelection");
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -84,7 +84,7 @@ export const CreateDatasetDialog = ({
     try {
       // Chiamata 1: PUT /questionnaire
       await updateQuestionnaire({
-        n: currentStep,
+        n: questionNumber,
         answer_ids: [
           {
             code: selected.id.code,
@@ -233,9 +233,13 @@ export const CreateDatasetDialog = ({
               />
 
               <div className="flex justify-end">
-                <Button type="submit" disabled={isDisabled}>
+                <ButtonLoading
+                  type="submit"
+                  disabled={isDisabled}
+                  isLoading={form.formState.isSubmitting}
+                >
                   {t("create-custom-dataset-dialog.submit")}
-                </Button>
+                </ButtonLoading>
               </div>
             </form>
           </Form>
