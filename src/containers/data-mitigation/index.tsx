@@ -31,5 +31,5 @@ export const DataMitigationPage = ({
     return <div>No data available</div>;
   }
 
-  return <DataMitigation onNext={onNext} data={data} />;
+  return <DataMitigation onNext={onNext} data={data} questionNumber={questionNumber} />;
 };

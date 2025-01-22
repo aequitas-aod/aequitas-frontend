@@ -119,13 +119,13 @@ export const useFeaturesContext = (dataset?: string) => {
   return query;
 };
 
-export const useMetricsContext = (dataset?: string) => {
+export const useMetricsContext = (dataset?: string, feature?: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
       return backendApi.getMetricsContext(PROJECT_CODE, dataset!);
     },
-    enabled: !!dataset,
+    enabled: !!dataset && !!feature,
   });
   return query;
 };
