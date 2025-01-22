@@ -59,8 +59,6 @@ export const DatasetSelectionPage = ({
     }),
   };
 
-  console.log(nextData);
-
   return (
     <DatasetSelection
       onNext={onNext}

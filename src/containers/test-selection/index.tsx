@@ -60,8 +60,6 @@ export const TestSelectionPage = ({
     }),
   };
 
-  console.log(nextData);
-
   return (
     <DatasetSelection
       onNext={onNext}

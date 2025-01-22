@@ -11,6 +11,7 @@ export const useQuestionnaireData = () => {
   const { mutate } = useDeleteQuestionnaireById({
     onSuccess: () => {
       console.log("Step deleted successfully");
+      invalidateQuestionnaire();
     },
   });
 
@@ -54,7 +55,6 @@ export const useQuestionnaireData = () => {
       console.error("An error occurred while deleting steps: ", error);
     }
     // Placeholder for additional logic
-    invalidateQuestionnaire();
   };
 
   const currentQuestion = questions?.length
