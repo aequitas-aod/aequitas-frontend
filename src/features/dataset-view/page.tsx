@@ -29,7 +29,7 @@ export const DatasetView = ({
   const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
-  const { mutate, isPending } = useUpdateQuestionnaire({
+  const { mutate: updateQuestionnaire, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
     },
@@ -41,14 +41,13 @@ export const DatasetView = ({
       onNext();
       return;
     }
-    mutate({
+    updateQuestionnaire({
       n: questionNumber,
       answer_ids: [
         questionnaire.answers.find((answer) => answer.id.code.includes("Yes"))!
           .id,
       ],
     });
-    onNext();
   };
 
   useEffect(() => {
