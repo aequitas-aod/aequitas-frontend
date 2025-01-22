@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import { QUESTIONNAIRE_KEYS } from "@/config/constants";
 import { useQuestionnaireData } from "@/hooks/useQuestionnaireData";
@@ -15,7 +14,6 @@ import { TestSelectionPage } from "./test-selection";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 
 export default function QuestionnaireContainer() {
-  const router = useRouter();
   const { onNext, currentQuestion, menuItems, onDelete } =
     useQuestionnaireData();
 
