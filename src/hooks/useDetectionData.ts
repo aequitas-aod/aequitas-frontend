@@ -133,7 +133,7 @@ const useFeaturesData = (dataset?: string) => {
   }, [featuresData]);
 
   const target = useMemo(() => {
-    if (!featuresData) return null;
+    if (!featuresData) return undefined;
 
     return Object.keys(featuresData).find(
       (key) => featuresData[key].target === true
@@ -189,6 +189,8 @@ export const useDetection = (questionId: number, dataset?: string) => {
     sensitiveFeatures,
     target,
   } = useFeaturesData(dataset);
+
+  console.log({ target });
   const {
     isLoading: metricsLoading,
     error: metricsError,
