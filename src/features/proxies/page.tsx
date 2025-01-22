@@ -12,7 +12,7 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useCurrentDataset, useMutationProxies } from "@/api/context";
+import { useMutationProxies } from "@/api/context";
 import Image from "next/image";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
@@ -21,14 +21,18 @@ export const Proxies = ({
   onNext,
   data,
   question,
+  datasetKey,
   questionNumber,
   answers,
+  correlationMatrix,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
   question: QuestionnaireResponse;
   questionNumber: number;
+  datasetKey: string;
   answers: AnswerResponse[];
+  correlationMatrix?: string;
 }) => {
   const t = useTranslations("FeatureView");
 
@@ -47,8 +51,6 @@ export const Proxies = ({
         onNext();
       },
     });
-
-  const { data: currentDataset } = useCurrentDataset();
 
   const [featureData, setFeatureData] = useState<ProxyDataResponse>(data);
 
@@ -69,8 +71,6 @@ export const Proxies = ({
             : "true",
       };
     }
-
-    // Imposta il nuovo stato
     setFeatureData(updatedFeatureData);
   };
 
@@ -94,7 +94,7 @@ export const Proxies = ({
   const onContinue = () => {
     const body = transformProxyData(featureData);
     console.log(body);
-    mutateProxies({ dataset: currentDataset, body });
+    mutateProxies({ dataset: datasetKey, body });
   };
 
   return (
@@ -110,16 +110,22 @@ export const Proxies = ({
       className="!bg-white !overflow-hidden"
     >
       <QuestionnaireBanner text={question.description} />
-      <div className="flex p-2 overflow-auto">
+      <div className="flex p-2 overflow-auto h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-[200px] relative">
-            <Image
-              src="/images/4_2_correlation_matrix.png"
-              alt="Proxies"
-              layout="fill"
-              objectFit="contain"
-              className="rounded"
-            />
+          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
+            {correlationMatrix ? (
+              <Image
+                src={correlationMatrix}
+                alt="Correlation Matrix"
+                layout="fill"
+                objectFit="contain"
+                className="rounded"
+              />
+            ) : (
+              <p className="text-neutral-600">
+                Correlation matrix not available
+              </p>
+            )}
           </div>
         </div>
         <div className="w-[380px] p-6 overflow-auto">
