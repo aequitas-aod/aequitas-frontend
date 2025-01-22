@@ -8,9 +8,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ParsedDistribution } from "@/types/types";
+import { DataDistributions } from "@/types/types";
 
-const generateChartConfig = (data: ParsedDistribution): ChartConfig => {
+const generateChartConfig = (data: Record<string, number>): ChartConfig => {
   const config: ChartConfig = {};
   Object.keys(data).forEach((key) => {
     config[key] = {
@@ -26,19 +26,18 @@ export const Histogram = ({
   hideXAxis = true,
   className,
 }: {
-  data: ParsedDistribution;
+  data: Record<string, number>;
   hideXAxis?: boolean;
   className?: string;
 }) => {
-  const chartConfig = generateChartConfig(data);
-  const keys: string[] = data.keys
-  const values: number[] = data.values
-  const chartData: { key: string; value: number }[] = []
 
-  for (const [index, key] of keys.entries()) {
-    console.log(`INDEX: ${index}, KEY: ${key}`);
-    chartData.push({ key, value: values[index] });
-  }
+  console.log("row[col]");
+  console.log(data);
+  const chartConfig = generateChartConfig(data);
+  const chartData = Object.entries(data).map(([key, value]) => ({
+    key,
+    value,
+  }));
 
   console.log("CHART DATA ", chartData);
   return (

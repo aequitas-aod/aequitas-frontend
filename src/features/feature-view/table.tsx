@@ -1,7 +1,6 @@
 import { TableRow, TableBody, TableCell, Table } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Histogram } from "@/components/molecules/Histogram/Histogram";
-import { ParsedDataset } from "@/types/types";
+import { ParsedDataset, DataDistributions } from "@/types/types";
 import {
   TARGET,
   TRUNCATE_TEXT,
@@ -10,6 +9,7 @@ import {
   FEATURE_NAME,
 } from "@/config/constants";
 import { FeatureViewTableHeader } from "./table-header";
+import { Histogram } from "@/components/molecules/Histogram/Histogram";
 
 type FeatureViewTableProps = {
   columns: string[];
@@ -31,6 +31,17 @@ export const FeatureViewTable = ({
   disabled = false,
 }: FeatureViewTableProps) => {
   const showSelectRow = !!selectedRows && !!handleSelectRow;
+
+  const convertDistributionsInHistogramData = (data: DataDistributions): Record<string, number> => {
+    const keys: string[] = data.keys
+    const values: number[] = data.values
+    const chartData: Record<string, number> = {}
+
+    for (const [index, key] of keys.entries()) {
+      chartData[key] = values[index]
+    }
+    return chartData
+  }
   return (
     <Table>
       <FeatureViewTableHeader columns={columns} showSelectRow={showSelectRow} />
@@ -110,7 +121,7 @@ export const FeatureViewTable = ({
                         variant="outlined-black"
                       />
                     ) : col === DISTRIBUTION ? (
-                      <Histogram data={row[col] as Record<string, number>} />
+                      <Histogram data={convertDistributionsInHistogramData(row[col])} />
                     ) : (
                       displayedContent
                     )}
