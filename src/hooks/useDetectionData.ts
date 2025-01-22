@@ -43,20 +43,22 @@ export type DetectionData = Record<
 // ------------------------------
 // Hook: useMetricsData
 // ------------------------------
-export const useMetricsData = (dataset?: string) => {
+export const useMetricsData = (dataset?: string, target?: string) => {
   const {
     data: metricsData,
     isLoading: metricsLoading,
     error: metricsError,
-  } = useMetricsContext(dataset);
+  } = useMetricsContext(dataset, target);
 
   const parseGraphs = useCallback(
     <T>(items: ConditionResponse<T>[], mainKey: string): Graph[] => {
       const grouped: { [key: string]: { [label: string]: ClassValue[] } } = {};
+      if (!target) return [];
+      const feature = target;
 
       items.forEach((item) => {
-        const key = Object.keys(item.when).find((k) => k !== "class")!;
-        const label = item.when["class"];
+        const key = Object.keys(item.when).find((k) => k !== feature)!;
+        const label = item.when[feature];
         const classType = item.when[key];
 
         if (!grouped[key]) grouped[key] = {};
@@ -130,10 +132,19 @@ const useFeaturesData = (dataset?: string) => {
       );
   }, [featuresData]);
 
+  const target = useMemo(() => {
+    if (!featuresData) return null;
+
+    return Object.keys(featuresData).find(
+      (key) => featuresData[key].target === true
+    )!;
+  }, [featuresData]);
+
   return {
     isLoading: featuresLoading,
     error: featuresError,
     sensitiveFeatures,
+    target,
   };
 };
 
@@ -173,15 +184,17 @@ const useQuestionnaireData = (
 // ------------------------------
 export const useDetection = (questionId: number, dataset?: string) => {
   const {
-    isLoading: metricsLoading,
-    error: metricsError,
-    metrics,
-  } = useMetricsData(dataset);
-  const {
     isLoading: featuresLoading,
     error: featuresError,
     sensitiveFeatures,
+    target,
   } = useFeaturesData(dataset);
+  const {
+    isLoading: metricsLoading,
+    error: metricsError,
+    metrics,
+  } = useMetricsData(dataset, target);
+
   const {
     isLoading: questionnaireLoading,
     error: questionnaireError,
