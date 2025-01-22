@@ -190,7 +190,6 @@ export const useDetection = (questionId: number, dataset?: string) => {
     target,
   } = useFeaturesData(dataset);
 
-  console.log({ target });
   const {
     isLoading: metricsLoading,
     error: metricsError,
