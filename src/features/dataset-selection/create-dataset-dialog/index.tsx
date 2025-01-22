@@ -29,6 +29,7 @@ import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { convertCSVToString } from "@/lib/utils";
 import { useUpdateContextCsv } from "@/api/context";
 import { EnhancedAnswerResponse } from "@/types/types";
+import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const CreateDatasetDialog = ({
   questionNumber,
@@ -232,9 +233,13 @@ export const CreateDatasetDialog = ({
               />
 
               <div className="flex justify-end">
-                <Button type="submit" disabled={isDisabled}>
+                <ButtonLoading
+                  type="submit"
+                  disabled={isDisabled}
+                  isLoading={form.formState.isSubmitting}
+                >
                   {t("create-custom-dataset-dialog.submit")}
-                </Button>
+                </ButtonLoading>
               </div>
             </form>
           </Form>
