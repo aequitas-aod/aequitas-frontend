@@ -13,10 +13,22 @@ export const ResultsViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { data: datasetKey } = useCurrentDataset();
-  const { data, isLoading, error } = useQuestionnaireById({
+  const {
+    data: datasetKey,
+    isLoading: datasetLoading,
+    error: datasetError,
+  } = useCurrentDataset();
+
+  const {
+    data: questionnaireData,
+    isLoading: isLoadingQuestionnaire,
+    error: errorQuestionnaire,
+  } = useQuestionnaireById({
     n: questionNumber,
   });
+
+  const isLoading = datasetLoading || isLoadingQuestionnaire;
+  const error = datasetError || errorQuestionnaire;
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,16 +38,20 @@ export const ResultsViewPage = ({
     return <div>Error: {error.message}</div>;
   }
 
-  if (!data) {
-    return <div>No data available</div>;
+  if (!questionnaireData) {
+    return <div>No questionnaire data available</div>;
+  }
+
+  if (!datasetKey) {
+    return <div>No dataset available</div>;
   }
 
   return (
     <ResultsView
-      data={data}
-      onNext={onNext}
-      datasetKey={datasetKey!}
       questionNumber={questionNumber}
+      questionnaire={questionnaireData}
+      datasetKey={datasetKey}
+      onNext={onNext}
     />
   );
 };
