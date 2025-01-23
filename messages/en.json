@@ -65,10 +65,10 @@
     "selected-target": "Selected target: {target}"
   },
   "HomePage": {
-    "subtitle": "Fill out the questionnaire or start a new project",
+    "subtitle": "",
     "buttons": {
-      "start": "Start a new project",
-      "googleForm": "Open the questionnaire"
+      "start": "Start experimenting",
+      "googleForm": "Create ST Graph"
     }
   }
 }
