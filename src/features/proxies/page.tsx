@@ -114,12 +114,12 @@ export const Proxies = ({
       className="!bg-white !overflow-hidden"
     >
       <QuestionnaireBanner text={question.description} />
-      <div className="flex p-2 overflow-auto h-full">
-        <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded">
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
+      <div className="flex p-2 overflow-y-auto overflow-x-hidden h-full">
+        <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
+          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded min-h-auto relative">
             {secureCorrelationMatrix ? (
               <div
-                className="flex-1 overflow-auto h-full"
+                className="flex-1 overflow-y-auto h-full"
                 dangerouslySetInnerHTML={{ __html: secureCorrelationMatrix }}
               />
             ) : (
@@ -129,7 +129,7 @@ export const Proxies = ({
             )}
           </div>
         </div>
-        <div className="w-[380px] p-6 overflow-auto">
+        <div className="min-w-40rem p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             {question.text}
           </p>
