@@ -10,20 +10,22 @@ import { RESULT_SECTIONS } from "./utils";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import { useTranslations } from "next-intl";
 
 interface ResultsViewProps {
-  data: QuestionnaireResponse;
+  questionnaire: QuestionnaireResponse;
   datasetKey: string;
   questionNumber: number;
   onNext: () => void;
 }
 
 export const ResultsView = ({
-  data,
+  questionnaire,
   datasetKey,
   questionNumber,
   onNext,
 }: ResultsViewProps) => {
+  const t = useTranslations("ResultsView");
   const [selectedSection, setSelectedSection] = useState<string | null>(
     "ResultsView"
   );
@@ -48,7 +50,7 @@ export const ResultsView = ({
     <QuestionnaireLayout
       action={
         <div className="flex space-x-2">
-          {data.answers.map((answer) => (
+          {questionnaire.answers.map((answer) => (
             <ButtonLoading
               key={answer.id.code}
               onClick={() => handleAction(answer)}
@@ -63,12 +65,10 @@ export const ResultsView = ({
       }
       className="!bg-transparent !border-0 !overflow-hidden"
     >
-      <QuestionnaireBanner text={data.description} />
+      <QuestionnaireBanner text={questionnaire.description} />
 
       <div className="flex items-center p-3 bg-primary-950 text-primary-50 gap-4">
-        <p className="text-full-white">
-          Check the operations performed so far:
-        </p>
+        <p className="text-full-white">{t("subtitle")}</p>
         <ToggleGroup type="single" className="p-1 bg-primary-900 rounded-md">
           {sections.map((section) => (
             <ToggleGroupItem
