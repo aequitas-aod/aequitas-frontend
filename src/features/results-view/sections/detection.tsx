@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Graph, useMetricsData } from "@/hooks/useDetectionData";
+import { useMetricsData } from "@/hooks/useDetectionData";
 import { GraphsDisplay } from "@/features/detection/graphs";
 
-export const Detection = ({ datasetKey }: { datasetKey: string }) => {
+import type { Graph } from "@/types/types";
+
+type DetectionProps = {
+  datasetKey: string;
+};
+
+export const Detection = ({ datasetKey }: DetectionProps) => {
   const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
 
@@ -15,7 +21,7 @@ export const Detection = ({ datasetKey }: { datasetKey: string }) => {
       return;
     }
 
-    // Combinare i grafici in un unico array
+    // Integrate the graphs into a single array
     const nextGraphs = Object.values(metrics).reduce<Graph[]>((acc, metric) => {
       if (metric && metric.graphs) {
         acc.push(...metric.graphs);
@@ -23,8 +29,8 @@ export const Detection = ({ datasetKey }: { datasetKey: string }) => {
       return acc;
     }, []);
 
-    setGraphs(nextGraphs); // Imposta correttamente l'array combinato
-  }, [metrics]); // Solo dipende da metrics
+    setGraphs(nextGraphs);
+  }, [metrics]);
 
   if (isLoading) {
     return <div>Loading...</div>;
