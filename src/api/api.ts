@@ -1,21 +1,24 @@
+import axios from "axios";
+
 import { sleep } from "@/lib/utils";
-import {
+import { BACKEND_URL } from "@/config/constants";
+
+import type { ProcessingType } from "@/types/types";
+import type {
   AnswerContextResponse,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
-  PreprocessingHyperparametersResponse,
+  ProcessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "./types";
-import {
+import type {
   DeleteQuestionnaireParams,
   PutQuestionnaireParams,
   QuestionnaireParams,
 } from "./questionnaire/types";
-import axios from "axios";
-import { BACKEND_URL } from "@/config/constants";
 
 // Funzione per verificare se utilizzare i mock
 export const isMocked = (): boolean => {
@@ -118,6 +121,16 @@ export class BackendApi {
     throw new Error("Failed to fetch current dataset");
   }
 
+  async getTestCurrentDataset(project: string): Promise<string> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=test_current_dataset`;
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      console.log("RETRIEVED CURRENT DATASET");
+      return res.data;
+    }
+    throw new Error("Failed to fetch current dataset");
+  }
+
   async getDatasetsInfo(project: string): Promise<AnswerContextResponse[]> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=datasets`;
     console.log(`GET URL: ${url}`);
@@ -190,12 +203,13 @@ export class BackendApi {
     }
   }
 
-  async putPreprocessingContext(
+  async putProcessingContext(
     project: string,
     dataset: string,
-    body: unknown
+    body: unknown,
+    hyperparameterType: ProcessingType
   ): Promise<void> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=preprocessing__${dataset}`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=${hyperparameterType}__${dataset}`;
     console.log(`PUT URL: ${url}`);
     if (isMocked()) {
       console.log("Using mocked response for putContext");
@@ -287,11 +301,12 @@ export class BackendApi {
     throw new Error("Failed to fetch context");
   }
 
-  async getPreprocessingHyperparametersContext(
+  async getProcessingHyperparametersContext(
     project: string,
-    algorithm: string
-  ): Promise<PreprocessingHyperparametersResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=preprocessing-hyperparameters__${algorithm}&timeout=10`;
+    algorithm: string,
+    hyperparameterType: ProcessingType
+  ): Promise<ProcessingHyperparametersResponse> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=${hyperparameterType}-hyperparameters__${algorithm}&timeout=10`;
     console.log(`GET URL: ${url}`);
     const res = await axios.get(url);
     if (res.status === 200) {

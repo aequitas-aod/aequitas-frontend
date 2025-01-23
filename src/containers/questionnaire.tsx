@@ -12,6 +12,7 @@ import { DetectionPage } from "./detection";
 import { ResultsViewPage } from "./results-view";
 import { TestSelectionPage } from "./test-selection";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
+import { TestResultsViewPage } from "./test-results-view";
 
 export default function QuestionnaireContainer() {
   const { onNext, currentQuestion, menuItems, onDelete } =
@@ -47,20 +48,44 @@ export default function QuestionnaireContainer() {
           {questionKey === QUESTIONNAIRE_KEYS.DETECTION && (
             <DetectionPage onNext={onNext} questionNumber={questionNumber} />
           )}
-          {(questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION ||
-            questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION ||
-            questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION ||
-            questionKey === QUESTIONNAIRE_KEYS.POLARIZATION) && (
+          {questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION && (
             <DataMitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
+              type={"preprocessing"}
+            />
+          )}
+          {questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION && (
+            <DataMitigationPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+              type="postprocessing"
+            />
+          )}
+          {questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION && (
+            <DataMitigationPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+              type="postprocessing"
+            />
+          )}
+          {questionKey === QUESTIONNAIRE_KEYS.POLARIZATION && (
+            <DataMitigationPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+              type="inprocessing"
             />
           )}
           {(questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION_SUMMARY ||
             questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION_SUMMARY ||
-            questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY ||
-            questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY) && (
+            questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY) && (
             <ResultsViewPage onNext={onNext} questionNumber={questionNumber} />
+          )}
+          {questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY && (
+            <TestResultsViewPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+            />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE && (
             <TestSelectionPage

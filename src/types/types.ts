@@ -62,3 +62,8 @@ export type DetectionData = Record<
     }
   >
 >;
+
+export type ProcessingType =
+  | "preprocessing"
+  | "inprocessing"
+  | "postprocessing";
