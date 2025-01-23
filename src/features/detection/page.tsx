@@ -17,14 +17,14 @@ import type { DetectionData, Graph, MetricGraphs } from "@/types/types";
 
 export const Detection = ({
   onNext,
-  data,
+  questionnaireKeys,
   metricGraphs,
   questionNumber,
   questionAnswers,
   questionnaireData,
 }: {
   onNext: () => void;
-  data: DetectionData;
+  questionnaireKeys: DetectionData;
   questionnaireData: QuestionnaireResponse;
   metricGraphs: MetricGraphs;
   questionNumber: number;
@@ -32,7 +32,8 @@ export const Detection = ({
 }) => {
   const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
-  const [featureData, setFeatureData] = useState<DetectionData>(data);
+  const [featureData, setFeatureData] =
+    useState<DetectionData>(questionnaireKeys);
 
   const { mutate, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
