@@ -291,7 +291,7 @@ export class BackendApi {
     project: string,
     algorithm: string
   ): Promise<PreprocessingHyperparametersResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=preprocessing-hyperparameters__${algorithm}`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=preprocessing-hyperparameters__${algorithm}&timeout=10`;
     console.log(`GET URL: ${url}`);
     const res = await axios.get(url);
     if (res.status === 200) {

@@ -85,15 +85,11 @@ export const useMetricsData = (dataset?: string, target?: string) => {
   const parseMetricsData = useCallback(
     <T>(data: MetricsResponse<T>): MetricGraphs => {
       const parsed: MetricGraphs = {};
-      console.log(data);
-      // const parsedData = JSON.parse(data.replaceAll("Infinity", "\"Infinity\""));
-      // console.log(data);
       Object.keys(data).forEach((mainKey) => {
         parsed[mainKey] = {
           graphs: parseGraphs(data[mainKey]!, mainKey),
         };
       });
-      console.log(parsed);
       return parsed;
     },
     [parseGraphs]

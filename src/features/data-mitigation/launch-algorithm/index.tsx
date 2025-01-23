@@ -41,11 +41,17 @@ export const LaunchAlgorithm = ({
     if (!datasetKey) {
       return;
     }
+    const parsedHyperparameters = Object.fromEntries(
+      Object.entries(data).map(([key, value]) =>
+        [key, !isNaN(parseFloat(value as string)) ? parseFloat(value as string) : value]
+      )
+    )
+    console.log("Parsed Hyperparameters", parsedHyperparameters);
     mutate({
       dataset: datasetKey,
       body: {
         $algorithm: algorithm,
-        ...data,
+        ...parsedHyperparameters,
       },
     });
   };
