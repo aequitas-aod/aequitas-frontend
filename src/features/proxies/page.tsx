@@ -11,7 +11,7 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useMutationProxies } from "@/api/context";
+import { useCorrelationMatrix, useMutationProxies } from "@/api/context";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import DOMPurify from "dompurify";
@@ -23,7 +23,6 @@ export const Proxies = ({
   datasetKey,
   questionNumber,
   answers,
-  correlationMatrix,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
@@ -31,14 +30,13 @@ export const Proxies = ({
   questionNumber: number;
   datasetKey: string;
   answers: AnswerResponse[];
-  correlationMatrix?: string;
 }) => {
-  let secureCorrelationMatrix = correlationMatrix;
-  if (correlationMatrix) {
-    secureCorrelationMatrix = DOMPurify.sanitize(correlationMatrix);
-  }
-
   const t = useTranslations("FeatureView");
+  const {
+    data: correlationMatrix,
+    isLoading: isCorrelationMatrixLoading,
+    error: correlationMatrixError,
+  } = useCorrelationMatrix(datasetKey);
 
   const { mutate: mutateProxies, isPending: isPendingProxies } =
     useMutationProxies({
@@ -100,6 +98,11 @@ export const Proxies = ({
     console.log(body);
     mutateProxies({ dataset: datasetKey, body });
   };
+
+  let secureCorrelationMatrix = correlationMatrix;
+  if (correlationMatrix) {
+    secureCorrelationMatrix = DOMPurify.sanitize(correlationMatrix);
+  }
 
   return (
     <QuestionnaireLayout
