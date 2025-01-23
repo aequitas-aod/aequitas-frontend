@@ -1,60 +1,34 @@
+import { useCallback, useMemo } from "react";
+
 import { useFeaturesContext, useMetricsContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { ConditionResponse, MetricsResponse } from "@/api/types";
-import { useCallback, useMemo } from "react";
-
-// ------------------------------
-// Types
-// ------------------------------
-export type Graph = {
-  key: string;
-  featureKey: string;
-  values: GraphValue[];
-};
-
-type GraphValue = {
-  label: string;
-  data: ClassValue[];
-};
-
-type ClassValue = {
-  class: string;
-  value: number;
-};
-
-export type MetricGraphs = Record<
-  string,
-  {
-    graphs: Graph[];
-  }
->;
-
-export type DetectionData = Record<
-  string,
-  Record<
-    string,
-    {
-      selected: string;
-    }
-  >
->;
+import type {
+  ClassValue,
+  DetectionData,
+  Graph,
+  MetricGraphs,
+} from "@/types/types";
 
 // ------------------------------
 // Hook: useMetricsData
 // ------------------------------
-export const useMetricsData = (dataset?: string, target?: string) => {
+export const useMetricsData = (dataset?: string, selectedTarget?: string) => {
   const {
     data: metricsData,
     isLoading: metricsLoading,
     error: metricsError,
-  } = useMetricsContext(dataset, target);
+  } = useMetricsContext(dataset, selectedTarget);
   const parseGraphs = useCallback(
-    <T>(items: ConditionResponse<T>[], mainKey: string): Graph[] => {
+    <T>(
+      items: ConditionResponse<T>[],
+      mainKey: string,
+      targetFeature: string
+    ): Graph[] => {
       const grouped: { [key: string]: { [label: string]: ClassValue[] } } = {};
-      console.log("TARGET", target);
-      if (!target) return [];
-      const feature = target;
+      if (!targetFeature) return [];
+      const feature = targetFeature;
 
       items.forEach((item) => {
         const key = Object.keys(item.when).find((k) => k !== feature)!;
@@ -72,6 +46,7 @@ export const useMetricsData = (dataset?: string, target?: string) => {
 
       return Object.keys(grouped).map((key) => ({
         key,
+        targetFeature: feature,
         featureKey: mainKey,
         values: Object.keys(grouped[key]).map((label) => ({
           label,
@@ -83,11 +58,11 @@ export const useMetricsData = (dataset?: string, target?: string) => {
   );
 
   const parseMetricsData = useCallback(
-    <T>(data: MetricsResponse<T>): MetricGraphs => {
+    <T>(data: MetricsResponse<T>, targetFeature: string): MetricGraphs => {
       const parsed: MetricGraphs = {};
       Object.keys(data).forEach((mainKey) => {
         parsed[mainKey] = {
-          graphs: parseGraphs(data[mainKey]!, mainKey),
+          graphs: parseGraphs(data[mainKey]!, mainKey, targetFeature),
         };
       });
       return parsed;
@@ -96,10 +71,13 @@ export const useMetricsData = (dataset?: string, target?: string) => {
   );
 
   const parsedData = useMemo(() => {
-    if (!target) return null;
+    // If no target is selected, return null
+    if (!selectedTarget) return null;
+    // If no metrics data is available
     if (!metricsData) return null;
-    return parseMetricsData(metricsData);
-  }, [target, metricsData, parseMetricsData]);
+    // Parse the metrics data with the selected target
+    return parseMetricsData(metricsData, selectedTarget);
+  }, [selectedTarget, metricsData, parseMetricsData]);
 
   return {
     isLoading: metricsLoading,
@@ -111,7 +89,7 @@ export const useMetricsData = (dataset?: string, target?: string) => {
 // ------------------------------
 // Hook: useFeaturesData
 // ------------------------------
-const useFeaturesData = (dataset?: string) => {
+export const useFeaturesData = (dataset?: string) => {
   const {
     data: featuresData,
     isLoading: featuresLoading,
@@ -151,7 +129,7 @@ const useFeaturesData = (dataset?: string) => {
 // ------------------------------
 // Hook: useQuestionnaireData
 // ------------------------------
-const useQuestionnaireData = (
+export const useQuestionnaireData = (
   questionId: number,
   sensitiveFeatures: Record<string, { selected: string }>
 ) => {
@@ -175,43 +153,6 @@ const useQuestionnaireData = (
     error: errorQuestionnaireData,
     questionnaireKeys,
     answers: questionnaireData?.answers,
-    questionnaireData,
-  };
-};
-
-// ------------------------------
-// Hook: useDetection (Combines all hooks)
-// ------------------------------
-export const useDetection = (questionId: number, dataset?: string) => {
-  const {
-    isLoading: featuresLoading,
-    error: featuresError,
-    sensitiveFeatures,
-    target,
-  } = useFeaturesData(dataset);
-
-  const {
-    isLoading: metricsLoading,
-    error: metricsError,
-    metrics,
-  } = useMetricsData(dataset, target);
-
-  const {
-    isLoading: questionnaireLoading,
-    error: questionnaireError,
-    questionnaireKeys,
-    questionnaireData,
-    answers,
-  } = useQuestionnaireData(questionId, sensitiveFeatures);
-  const isLoading = metricsLoading || featuresLoading || questionnaireLoading;
-  const error = metricsError || featuresError || questionnaireError;
-
-  return {
-    isLoading,
-    error,
-    metrics,
-    data: questionnaireKeys,
-    answers,
     questionnaireData,
   };
 };
