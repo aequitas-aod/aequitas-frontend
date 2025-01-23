@@ -1,4 +1,4 @@
-import { CsvData, ParsedDataset } from "@/types/types";
+import { CsvData, DataDistributions, ParsedDataset } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Papa from "papaparse";
@@ -31,6 +31,7 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
 
       // Specifico per "distribution"
       if (key === "distribution") {
+        console.log("VALUEEEEEEEEEEEEEEE", value);
         updatedRow[key] = parseDistributionField(value as string);
         return;
       }
@@ -46,15 +47,10 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
 };
 
 /**
- * Parsea il campo "distribution" rimuovendo "array()" e adattando a JSON valido.
+ * Parsa il campo "distribution"
  */
-export const parseDistributionField = (value: string): object | string => {
-  try {
-    return JSON.parse(value);
-  } catch (e) {
-    console.error("Errore nel parsing del campo distribution:", e);
-    return value; // Restituisce il valore originale se il parsing fallisce
-  }
+export const parseDistributionField = (value: string): DataDistributions => {
+  return JSON.parse(value);
 };
 
 export const parseDatasetString = (value: string) => {
