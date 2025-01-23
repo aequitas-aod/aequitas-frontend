@@ -59,10 +59,14 @@ export const DetectionPage = ({
     return <div>No metrics available</div>;
   }
 
+  if (!questionnaireKeys) {
+    return <div>No questionnaire keys available</div>;
+  }
+
   return (
     <Detection
       onNext={onNext}
-      data={questionnaireKeys}
+      questionnaireKeys={questionnaireKeys}
       metricGraphs={metrics}
       questionNumber={questionNumber}
       questionAnswers={answers}
