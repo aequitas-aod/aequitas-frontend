@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN rm /etc/nginx/conf.d/*.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 ENV NEXT_PRIVATE_VERBOSE_LOGGING=1
 ENV NEXT_PUBLIC_GOOGLE_FORM_LINK=https://github.com/aequitas-aod/aequitas-flow
 EXPOSE 80
