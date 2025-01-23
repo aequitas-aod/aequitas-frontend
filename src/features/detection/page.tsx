@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
+import { ButtonLoading } from "@/components/ui/loading-button";
+import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+
 import { FeatureCheckboxList } from "./accordion";
 import { GraphsDisplay } from "./graphs";
-import { DetectionData, Graph, MetricGraphs } from "@/hooks/useDetectionData";
-import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
+
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 
 import type { AnswerId } from "@/api/questionnaire/types";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
-import { ButtonLoading } from "@/components/ui/loading-button";
+import type { DetectionData, Graph, MetricGraphs } from "@/types/types";
 
 export const Detection = ({
   onNext,
@@ -90,7 +91,7 @@ export const Detection = ({
   };
 
   const handleGraphClick = (featureKey: string, attributeKey: string) => {
-    const find = metricGraphs[featureKey].graphs.find(
+    const find = metricGraphs[featureKey].graphs?.find(
       (graph) => graph.key === attributeKey
     );
     if (!find) return;
