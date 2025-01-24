@@ -4,20 +4,23 @@ import {
   useQuestionnaireById,
 } from "@/api/questionnaire";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMemo, useCallback, useEffect } from "react";
+import { useMemo, useCallback, useEffect, useState } from "react";
 
 export const useFullQuestionnaire = () => {
   const queryClient = useQueryClient();
   const { data: questions, isLoading, error, refetch } = useQuestionnaireList();
-
-  const questionNumber = questions?.length ? questions.length : 1;
-
+  const { mutateAsync: deleteStep } = useDeleteQuestionnaireById({
+    onSuccess: () => {},
+  });
   const {
     data: questionData,
     isLoading: questionLoading,
     isError: questionError,
   } = useQuestionnaireById({
-    n: questionNumber,
+    params: {
+      n: 1,
+    },
+    enabled: questions?.length === 0,
   });
 
   useEffect(() => {
@@ -27,23 +30,18 @@ export const useFullQuestionnaire = () => {
     }
   }, [questionData, questionError, questionLoading, queryClient]);
 
-  const { mutateAsync: deleteStep } = useDeleteQuestionnaireById({
-    onSuccess: () => {},
-  });
-
   const onNext = () => {
     console.log("Next question ready");
     refetch();
   };
 
-  const currentIndex = questions?.length || 0;
-
   const onDelete = useCallback(
     async (path: number) => {
+      const currentIndex = questions.length;
       if (path === currentIndex) {
         return;
       }
-      if (!questions || !questions.length) {
+      if (questions.length === 0) {
         return;
       }
 
@@ -63,7 +61,7 @@ export const useFullQuestionnaire = () => {
         console.error("Error on delete question", error);
       }
     },
-    [currentIndex, deleteStep, questions]
+    [deleteStep, questions]
   );
 
   const sidebarItems = useMemo(() => {
