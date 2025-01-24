@@ -1,19 +1,26 @@
+export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!;
+
+export const PROJECT_CODE = "p-1";
+
+/* Constants */
+export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
+export const FEEDBACK_LINK = "https://google.com";
 export const TRUNCATE_TEXT = 20;
 
-export const TARGET = "target";
-export const SENSITIVE = "sensitive";
-
-export const DISTRIBUTION = "distribution";
-export const FEATURE_NAME = "feature";
-
-export const NO_MITIGATION_KEY = "NoDataMitigation";
+/* Dataset View */
 export const CUSTOM_DATASET_KEY = "Custom";
 
-export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!;
-export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
-export const PROJECT_CODE = "p-1";
-export const FEEDBACK_LINK = "https://google.com";
+/* Feature View */
+export const TARGET_COLUMN = "target";
+export const SENSITIVE_COLUMN = "sensitive";
 
+export const DISTRIBUTION_COLUMN = "distribution";
+export const FEATURE_COLUMN = "feature";
+
+/* Data Mitigation */
+export const NO_MITIGATION_KEY = "NoDataMitigation";
+
+/* Questionnaire */
 export const QUESTIONNAIRE_KEYS = {
   DATASET_SELECTION: "DatasetSelection",
   DATASET_VIEW: "DatasetConfirmation",
