@@ -106,9 +106,8 @@ export const CreateDatasetDialog = ({
     }
   };
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = () => {
     handleCreate();
-    setOpen(false);
     onNext();
   };
 
