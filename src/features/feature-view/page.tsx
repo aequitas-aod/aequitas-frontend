@@ -123,9 +123,18 @@ export const FeaturesView = ({
   };
 
   const isPending = isPendingFeatures || isPendingQuestionnaire;
+
   const selectedTarget = data.find((record) => record.target)?.feature as
     | string
     | undefined;
+
+  const isDisabled =
+    // no rows is selected
+    selectedRows.length === 0 ||
+    // no feature is selected as target
+    selectedTarget;
+  // no feature is selected as sensitive
+  data.filter((record) => record.sensitive).length === 0;
 
   return (
     <QuestionnaireLayout
@@ -144,7 +153,7 @@ export const FeaturesView = ({
           </span>
           <ButtonLoading
             onClick={onContinue}
-            disabled={selectedRows.length === 0}
+            disabled={isDisabled || isPending}
             isLoading={isPending}
           >
             {t("buttons.continue")}
