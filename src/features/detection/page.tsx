@@ -12,32 +12,44 @@ import { GraphsDisplay } from "./graphs";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 
 import type { AnswerId } from "@/api/questionnaire/types";
-import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
+import type { AnswerResponse, DetectionDataParams, QuestionnaireResponse } from "@/api/types";
 import type { DetectionData, Graph, MetricGraphs } from "@/types/types";
+import { useMutationDetected } from "@/api/context";
 
 export const Detection = ({
   onNext,
   questionnaireKeys,
   metricGraphs,
+  datasetKey,
   questionNumber,
   questionAnswers,
   questionnaireData,
+  targetFeature,
 }: {
   onNext: () => void;
   questionnaireKeys: DetectionData;
   questionnaireData: QuestionnaireResponse;
+  datasetKey: string;
   metricGraphs: MetricGraphs;
   questionNumber: number;
   questionAnswers: AnswerResponse[] | undefined;
+  targetFeature: string;
 }) => {
   const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
   const [featureData, setFeatureData] =
     useState<DetectionData>(questionnaireKeys);
 
-  const { mutate, isPending } = useUpdateQuestionnaire({
+  const { mutate: mutateQuestionnaire, isPending } = useUpdateQuestionnaire({
     onSuccess: () => {
       onNext();
+    },
+  });
+
+  // useMutationDetected
+  const { mutate: mutateDetected } = useMutationDetected({
+    onSuccess: () => {
+      // onNext();
     },
   });
 
@@ -53,10 +65,29 @@ export const Detection = ({
       .map((answer) => answer.id)
       .filter((id) => keysWithSelectedAttributes.includes(id.code));
 
-    mutate({
+    const body: DetectionDataParams = {}
+
+    keysWithSelectedAttributes.forEach((key) => {
+      body[key] = Object.entries(featureData[key]).filter(([attributeKey, attributeData]) => {
+        return attributeData.selected === "true";
+      }).map(([attributeKey, attributeData]) => {
+        return {
+          sensitive: attributeKey,
+          target: targetFeature
+        }
+      })
+    })
+
+    mutateDetected({
+      dataset: datasetKey,
+      body: body,
+    });
+
+    mutateQuestionnaire({
       n: questionNumber,
       answer_ids: answerIds,
     });
+
   };
 
   const handleCheckboxChange = (featureKey: string, attributeKey: string) => {

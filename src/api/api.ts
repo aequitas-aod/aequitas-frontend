@@ -4,8 +4,8 @@ import { sleep } from "@/lib/utils";
 import { BACKEND_URL } from "@/config/constants";
 
 import type { ProcessingType } from "@/types/types";
-import type {
-  AnswerContextResponse,
+import {
+  AnswerContextResponse, DetectionDataParams,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
@@ -193,6 +193,26 @@ export class BackendApi {
     console.log(body);
     if (isMocked()) {
       console.log("Using mocked response for putProxies");
+      return;
+    }
+    const res = await axios.put(url, body);
+    if (res.status === 200) {
+      console.log("PUT SUCCESS");
+    } else {
+      console.log("PUT FAILED");
+    }
+  }
+
+  async putDetected(
+    project: string,
+    dataset: string,
+    body: DetectionDataParams
+  ): Promise<void> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=detected__${dataset}`;
+    console.log(`PUT URL: ${url}`);
+    console.log(body);
+    if (isMocked()) {
+      console.log("Using mocked response for putDetected");
       return;
     }
     const res = await axios.put(url, body);

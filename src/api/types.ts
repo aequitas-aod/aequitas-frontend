@@ -102,6 +102,14 @@ export type ProxyDataParams = Record<
   Record<string, AttributeDataParams>
 >;
 
+export type DetectionDataParams = Record<
+  string,
+  Array<{
+    sensitive: string;
+    target: string;
+  }>
+>;
+
 //
 
 type FeatureData = {
