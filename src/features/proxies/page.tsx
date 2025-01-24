@@ -32,6 +32,13 @@ export const Proxies = ({
   datasetKey: string;
   answers: AnswerResponse[];
 }) => {
+  const t = useTranslations("FeatureView");
+  const {
+    data: correlationMatrix,
+    isLoading: isCorrelationMatrixLoading,
+    error: correlationMatrixError,
+  } = useCorrelationMatrix(datasetKey);
+
   const parsingOptions = {
     replace: (domNode) => {
       if (domNode.tagName === 'svg') {
@@ -48,13 +55,6 @@ export const Proxies = ({
       return svg.substring(svg.indexOf("<svg"));
     }).map((svg) => parse(svg, parsingOptions))
   }
-
-  const t = useTranslations("FeatureView");
-  const {
-    data: correlationMatrix,
-    isLoading: isCorrelationMatrixLoading,
-    error: correlationMatrixError,
-  } = useCorrelationMatrix(datasetKey);
 
   const { mutate: mutateProxies, isPending: isPendingProxies } =
     useMutationProxies({
