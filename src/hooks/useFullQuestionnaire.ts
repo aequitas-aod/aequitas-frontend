@@ -6,7 +6,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { useMemo, useCallback, useEffect } from "react";
 
-export const useQuestionnaireFull = () => {
+export const useFullQuestionnaire = () => {
   const queryClient = useQueryClient();
   const { data: questions, isLoading, error, refetch } = useQuestionnaireList();
 
@@ -32,6 +32,7 @@ export const useQuestionnaireFull = () => {
   });
 
   const onNext = () => {
+    console.log("Next question ready");
     refetch();
   };
 

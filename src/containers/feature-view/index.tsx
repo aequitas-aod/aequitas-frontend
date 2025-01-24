@@ -15,7 +15,7 @@ export const FeatureViewPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data: datasetKey } = useCurrentDataset();
-  
+
   const {
     data,
     isLoading: isLoadingQuestionnaireData,

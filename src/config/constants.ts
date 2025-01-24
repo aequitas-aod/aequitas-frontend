@@ -12,7 +12,6 @@ export const INFINITY_VALUE = "infinity";
 export const CUSTOM_DATASET_KEY = "CustomDataset";
 export const DEFAULT_CUSTOM_DATASET_NAME = "Custom-1";
 
-
 /* Feature View */
 export const TARGET_COLUMN = "target";
 export const SENSITIVE_COLUMN = "sensitive";

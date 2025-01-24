@@ -47,7 +47,9 @@ export const CreateDatasetDialog = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({});
-  const { mutateAsync: updateContext } = useUpdateContextCsv({});
+  const { mutateAsync: updateContext } = useUpdateContextCsv({
+    onSuccess: onNext,
+  });
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
@@ -99,8 +101,6 @@ export const CreateDatasetDialog = ({
         dataset: DEFAULT_CUSTOM_DATASET_NAME,
         body: csvString,
       });
-
-      console.log("Operazioni completate con successo!");
     } catch (error) {
       console.error("Errore durante la creazione:", error);
     }
@@ -108,7 +108,6 @@ export const CreateDatasetDialog = ({
 
   const onSubmit = () => {
     handleCreate();
-    onNext();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

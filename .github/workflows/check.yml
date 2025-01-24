@@ -2,14 +2,14 @@ name: CI/CD
 on:
   push:
     branches-ignore:
-      - 'dependabot/**'
+      - "dependabot/**"
     paths-ignore:
-      - '.gitignore'
-      - '.mergify.yml'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'README.md'
-      - 'renovate.json'
+      - ".gitignore"
+      - ".mergify.yml"
+      - "CHANGELOG.md"
+      - "LICENSE"
+      - "README.md"
+      - "renovate.json"
   pull_request:
   workflow_dispatch:
 
@@ -18,16 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Check
     steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 0 # all history
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # all history
 
-        - name: Restore Dependencies
-          run: npm install
+      - name: Restore Dependencies
+        run: npm install
 
-        - name: Test Build
-          run: npm run build
+      - name: Test Build
+        run: npm run build
 
   deploy:
     name: Deploy
@@ -36,4 +36,3 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.repository_owner == 'aequitas-aod' && github.event_name == 'push'
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
-
