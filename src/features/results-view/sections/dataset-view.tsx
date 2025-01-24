@@ -5,14 +5,18 @@ import { processDataset } from "@/lib/utils";
 import { CsvData, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "@/features/dataset-view/table";
-import { useDatasetContext } from "@/api/context";
+import { useDatasetHeadContext } from "@/api/context";
 
 export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
   const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
 
-  const { data: contextData, isLoading, error } = useDatasetContext(datasetKey);
+  const {
+    data: contextData,
+    isLoading,
+    error,
+  } = useDatasetHeadContext(datasetKey);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {
