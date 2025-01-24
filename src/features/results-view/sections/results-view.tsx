@@ -1,34 +1,40 @@
-import { useCorrelationMatrix } from "@/api/context";
-import Image from "next/image";
-import DOMPurify from "dompurify";
+import { useMemo } from "react";
+import parse from "html-react-parser";
 
-export const ResultsViewSection = ({ datasetKey }: { datasetKey: string }) => {
-  const {
-    data: correlationMatrix,
-    isLoading: isCorrelationMatrixLoading,
-    error: correlationMatrixError,
-  } = useCorrelationMatrix(datasetKey);
+export const ResultsViewSection = ({
+  images,
+}: {
+  images: string[] | undefined;
+}) => {
+  const parsingOptions = {
+    replace: (domNode) => {
+      if (domNode.tagName === "svg") {
+        domNode.attribs.class = "w-full h-auto";
+      }
+      return domNode;
+    },
+  };
 
-  const secureCorrelationMatrix =
-    !isCorrelationMatrixLoading && correlationMatrix
-      ? DOMPurify.sanitize(correlationMatrix)
-      : null;
+  const imagesToShow = useMemo(() => {
+    if (images && images.length > 0) {
+      const parsedImages: string[] = images;
+      return parsedImages
+        .map((svg) => svg.substring(svg.indexOf("<svg")))
+        .map((svg) => parse(svg, parsingOptions));
+    }
+    return [];
+  }, [images]);
 
   return (
     <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
       <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
-        {correlationMatrixError ? (
-          <p className="text-red-600">Failed to load correlation matrix</p>
-        ) : isCorrelationMatrixLoading ? (
-          <p className="text-neutral-600">Loading correlation matrix...</p>
-        ) : secureCorrelationMatrix ? (
-          <div
-            className="flex-1 overflow-y-auto h-full"
-            dangerouslySetInnerHTML={{ __html: secureCorrelationMatrix }}
-          />
-        ) : (
-          <p className="text-neutral-600">Correlation matrix not available</p>
-        )}
+        <div className="flex flex-wrap p-4 mx-auto">
+          {imagesToShow.map((svg, index) => (
+            <div key={index} className="w-full xl:w-1/2 p-2">
+              {svg}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

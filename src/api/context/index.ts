@@ -172,15 +172,11 @@ export const useSuggestedProxies = (dataset?: string) => {
   return query;
 };
 
-export const useCorrelationMatrix = (dataset?: string) => {
+export const useContextVectorialData = (key: string, dataset?: string) => {
   const query = useQuery<string>({
-    queryKey: ["correlation-matrix", dataset],
+    queryKey: [key, dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(
-        PROJECT_CODE,
-        dataset!,
-        "correlation_matrix"
-      );
+      return backendApi.getContextVectorialData(PROJECT_CODE, dataset!, key);
     },
     enabled: !!dataset,
   });

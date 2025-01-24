@@ -16,6 +16,7 @@ interface ResultsViewProps {
   questionnaire: QuestionnaireResponse;
   datasetKey: string;
   questionNumber: number;
+  images: string[] | undefined;
   onNext: () => void;
 }
 
@@ -23,6 +24,7 @@ export const ResultsView = ({
   questionnaire,
   datasetKey,
   questionNumber,
+  images,
   onNext,
 }: ResultsViewProps) => {
   const t = useTranslations("ResultsView");
@@ -87,7 +89,7 @@ export const ResultsView = ({
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Content based on the selected section */}
         {selectedSection === "ResultsView" && (
-          <ResultsViewSection datasetKey={datasetKey} />
+          <ResultsViewSection images={images} />
         )}
         {selectedSection === "DatasetView" && (
           <DatasetView datasetKey={datasetKey} />

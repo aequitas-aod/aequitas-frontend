@@ -9,10 +9,12 @@ import { ProxiesPage } from "./proxies";
 import { DatasetViewPage } from "./dataset-view";
 import { DataMitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
-import { ResultsViewPage } from "./results-view";
+import { DataMitigationResultsViewPage } from "./results-view/data-mitigation";
 import { TestSelectionPage } from "./test-selection";
 import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
-import { TestResultsViewPage } from "./test-results-view";
+import { TestResultsViewPage } from "./results-view/test";
+import { OutcomeResultsViewPage } from "./results-view/outcome-mitigation";
+import { ModelResultsViewPage } from "./results-view/model-mitigation";
 
 export default function QuestionnaireContainer() {
   const { onNext, currentQuestion, menuItems, onDelete } =
@@ -76,11 +78,26 @@ export default function QuestionnaireContainer() {
               type="inprocessing"
             />
           )}
-          {(questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION_SUMMARY ||
-            questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION_SUMMARY ||
-            questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY) && (
-            <ResultsViewPage onNext={onNext} questionNumber={questionNumber} />
+          {/* Results */}
+          {questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION_SUMMARY && (
+            <DataMitigationResultsViewPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+            />
           )}
+          {questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION_SUMMARY && (
+            <ModelResultsViewPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+            />
+          )}
+          {questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION_SUMMARY && (
+            <OutcomeResultsViewPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+            />
+          )}
+          {/* Test */}
           {questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY && (
             <TestResultsViewPage
               onNext={onNext}

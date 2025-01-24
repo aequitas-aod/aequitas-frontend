@@ -5,7 +5,8 @@ import { BACKEND_URL } from "@/config/constants";
 
 import type { ProcessingType } from "@/types/types";
 import {
-  AnswerContextResponse, DetectionDataParams,
+  AnswerContextResponse,
+  DetectionDataParams,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,

@@ -1,8 +1,4 @@
-import {
-  useCorrelationMatrix,
-  useCurrentDataset,
-  useSuggestedProxies,
-} from "@/api/context";
+import { useCurrentDataset, useSuggestedProxies } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { Proxies } from "@/features/proxies/page";
 

@@ -1,4 +1,4 @@
-import { useCurrentTestDataset } from "@/api/context";
+import { useContextVectorialData, useCurrentTestDataset } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
@@ -9,7 +9,7 @@ interface QuestionnairePageProps {
   onNext: () => void;
 }
 
-export const TestResultsViewPage = ({
+export const ModelResultsViewPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
@@ -26,6 +26,16 @@ export const TestResultsViewPage = ({
   } = useQuestionnaireById({
     params: { n: questionNumber },
   });
+
+  const { data: correlationMatrix } = useContextVectorialData(
+    "correlation_matrix",
+    datasetKey
+  );
+
+  const { data: performancePlot } = useContextVectorialData(
+    "performance_plot",
+    datasetKey
+  );
 
   const isLoading = datasetLoading || isLoadingQuestionnaire;
   const error = datasetError || errorQuestionnaire;
@@ -46,11 +56,17 @@ export const TestResultsViewPage = ({
     return <div>No dataset available</div>;
   }
 
+  const imagesToShow =
+    correlationMatrix && performancePlot
+      ? [correlationMatrix, performancePlot]
+      : undefined;
+
   return (
     <ResultsView
       questionNumber={questionNumber}
       questionnaire={questionnaireData}
       datasetKey={datasetKey}
+      images={imagesToShow}
       onNext={onNext}
     />
   );

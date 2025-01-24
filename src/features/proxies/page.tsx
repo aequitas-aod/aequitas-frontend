@@ -12,10 +12,9 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useCorrelationMatrix, useMutationProxies } from "@/api/context";
+import { useContextVectorialData, useMutationProxies } from "@/api/context";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
-import DOMPurify from "dompurify";
 
 export const Proxies = ({
   onNext,
@@ -33,11 +32,10 @@ export const Proxies = ({
   answers: AnswerResponse[];
 }) => {
   const t = useTranslations("FeatureView");
-  const {
-    data: correlationMatrix,
-    isLoading: isCorrelationMatrixLoading,
-    error: correlationMatrixError,
-  } = useCorrelationMatrix(datasetKey);
+  const { data: correlationMatrix } = useContextVectorialData(
+    "correlation_matrix",
+    datasetKey
+  );
 
   const parsingOptions = {
     replace: (domNode) => {
@@ -118,11 +116,6 @@ export const Proxies = ({
     console.log(body);
     mutateProxies({ dataset: datasetKey, body });
   };
-
-  const secureCorrelationMatrix =
-    !isCorrelationMatrixLoading && correlationMatrix
-      ? DOMPurify.sanitize(correlationMatrix)
-      : null;
 
   return (
     <QuestionnaireLayout
