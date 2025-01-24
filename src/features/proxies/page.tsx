@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
 import {
   type AnswerResponse,
@@ -41,19 +41,21 @@ export const Proxies = ({
 
   const parsingOptions = {
     replace: (domNode) => {
-      if (domNode.tagName === 'svg') {
-        domNode.attribs.class = 'w-full h-auto';
+      if (domNode.tagName === "svg") {
+        domNode.attribs.class = "w-full h-auto";
       }
       return domNode;
     },
-  }
+  };
 
   let imagesToShow: (string | React.JSX.Element | React.JSX.Element[])[] = [];
   if (correlationMatrix) {
     const images: string[] = [correlationMatrix];
-    imagesToShow = images.map((svg) => {
-      return svg.substring(svg.indexOf("<svg"));
-    }).map((svg) => parse(svg, parsingOptions))
+    imagesToShow = images
+      .map((svg) => {
+        return svg.substring(svg.indexOf("<svg"));
+      })
+      .map((svg) => parse(svg, parsingOptions));
   }
 
   const { mutate: mutateProxies, isPending: isPendingProxies } =

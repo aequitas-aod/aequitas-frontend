@@ -1,7 +1,7 @@
 "use client";
 
 import { QUESTIONNAIRE_KEYS } from "@/config/constants";
-import { useQuestionnaireFull } from "@/hooks/useQuestionnaireFull";
+import { useFullQuestionnaire } from "@/hooks/useFullQuestionnaire";
 
 import { DatasetSelectionPage } from "./dataset-selection";
 import { FeatureViewPage } from "./feature-view";
@@ -16,7 +16,7 @@ import { TestResultsViewPage } from "./test-results-view";
 
 export default function QuestionnaireContainer() {
   const { onNext, currentQuestion, menuItems, onDelete } =
-    useQuestionnaireFull();
+    useFullQuestionnaire();
 
   if (!currentQuestion) {
     return <div>Loading...</div>;

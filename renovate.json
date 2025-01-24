@@ -1,38 +1,27 @@
 {
-    "extends": [
-      "config:base",
-      ":rebaseStalePrs",
-      ":semanticCommits"
-    ],
-    "assignees": [
-      "gciatto"
-    ],
-    "automerge": true,
-    "dependencyDashboard": true,
-    "git-submodules": {
-      "enabled": true
+  "extends": ["config:base", ":rebaseStalePrs", ":semanticCommits"],
+  "assignees": ["gciatto"],
+  "automerge": true,
+  "dependencyDashboard": true,
+  "git-submodules": {
+    "enabled": true
+  },
+  "includeForks": true,
+  "packageRules": [
+    {
+      "description": "Updates to GitHub Actions should be tagged as 'ci'",
+      "matchPaths": [".github/workflows/*.yml", ".github/workflows/*.yaml"],
+      "semanticCommitType": "ci"
     },
-    "includeForks": true,
-    "packageRules": [
-      {
-        "description": "Updates to GitHub Actions should be tagged as 'ci'",
-        "matchPaths": [
-          ".github/workflows/*.yml",
-          ".github/workflows/*.yaml"
-        ],
-        "semanticCommitType": "ci"
-      },
-      {
-        "description": "Disable updates for dependencies react and react-dom",
-        "matchPackagePatterns": [
-          "^(@types/)?react(-dom)?$"
-        ],
-        "enabled": false
-      }
-    ],
-    "prConcurrentLimit": 25,
-    "prHourlyLimit": 0,
-    "separateMajorMinor": true,
-    "separateMinorPatch": true,
-    "separateMultipleMajor": true
+    {
+      "description": "Disable updates for dependencies react and react-dom",
+      "matchPackagePatterns": ["^(@types/)?react(-dom)?$"],
+      "enabled": false
+    }
+  ],
+  "prConcurrentLimit": 25,
+  "prHourlyLimit": 0,
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true
 }

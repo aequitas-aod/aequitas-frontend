@@ -12,11 +12,7 @@ export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
 
-  const {
-    data: contextData,
-    isLoading,
-    error,
-  } = useDatasetContext(datasetKey);
+  const { data: contextData, isLoading, error } = useDatasetContext(datasetKey);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {

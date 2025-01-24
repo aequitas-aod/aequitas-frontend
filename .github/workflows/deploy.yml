@@ -11,7 +11,7 @@ jobs:
       group: deploy
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: 'aequitaseu/frontend'
+      IMAGE_TAG: "aequitaseu/frontend"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: npm run build
-        
+
       - name: Compute Version
         run: echo "IMAGE_VERSION=$(jq -r .version package.json)-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
 
