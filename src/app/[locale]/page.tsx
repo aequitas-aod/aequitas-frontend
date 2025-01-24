@@ -1,9 +1,26 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { BACKEND_URL } from "@/config/constants";
 import { GOOGLE_FORM_LINK } from "@/config/constants";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
+import axios from "axios";
 import Image from "next/image";
+import { loadOrGenerateProjectId } from "@/config/session";
+
+const onStart = async () => {
+  const projectId = loadOrGenerateProjectId();
+  const name = `Project ${projectId.slice(0, 8)}`;
+  try {
+    await axios.post(`${BACKEND_URL}/projects`, {
+      name: name,
+      code: projectId,
+    });
+  } catch (error) { 
+    console.error("Project creation failed", error);
+  }
+  redirect("/en/questionnaire");
+};
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -30,7 +47,7 @@ export default function HomePage() {
               {t("buttons.googleForm")}
             </Button>
           </a>
-          <Button onClick={() => redirect("/en/questionnaire")}>
+          <Button onClick={onStart}>
             {t("buttons.start")}
           </Button>
         </div>

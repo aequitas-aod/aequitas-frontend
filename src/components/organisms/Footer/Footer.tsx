@@ -1,9 +1,10 @@
 "use client";
 import { AequitasLogoImage } from "@/components/contents/images";
 import { Button } from "@/components/ui/button";
-import { BACKEND_URL, PROJECT_CODE } from "@/config/constants";
+import { BACKEND_URL } from "@/config/constants";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import { loadOrGenerateProjectId, resetProjectId } from "@/config/session";
 
 const ApiUrlInfo = () => {
   return (
@@ -13,9 +14,13 @@ const ApiUrlInfo = () => {
 
 export const Footer = () => {
   const onResetQuestionnaire = async () => {
-    const res = await axios.delete(
-      `${BACKEND_URL}/projects/${PROJECT_CODE}/questionnaire`
-    );
+    const oldId = loadOrGenerateProjectId();
+    resetProjectId();
+    try {
+      await axios.delete(`${BACKEND_URL}/projects/${oldId}`);
+    } catch (error) {
+      console.error("Project deletion failed", error);
+    }
     redirect("/en");
   };
   return (

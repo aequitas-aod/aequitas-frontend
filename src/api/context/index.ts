@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { BackendApi } from "../api";
-import { PROJECT_CODE } from "@/config/constants";
+import { loadOrGenerateProjectId } from "@/config/session";
 
 import type {
   AnswerContextResponse,
@@ -21,7 +21,7 @@ export const useCurrentDataset = () => {
   const query = useQuery<string>({
     queryKey: ["current_dataset"],
     queryFn: async () => {
-      return backendApi.getCurrentDataset(PROJECT_CODE);
+      return backendApi.getCurrentDataset(loadOrGenerateProjectId());
     },
   });
   return query;
@@ -31,7 +31,7 @@ export const useCurrentTestDataset = () => {
   const query = useQuery<string>({
     queryKey: ["test_current_dataset"],
     queryFn: async () => {
-      return backendApi.getCurrentTestDataset(PROJECT_CODE);
+      return backendApi.getCurrentTestDataset(loadOrGenerateProjectId());
     },
   });
   return query;
@@ -50,7 +50,7 @@ export const useMutationFeatures = ({
       dataset?: string;
       body: FeaturesParams;
     }) => {
-      return backendApi.putFeatures(PROJECT_CODE, dataset!, body);
+      return backendApi.putFeatures(loadOrGenerateProjectId(), dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -72,7 +72,7 @@ export const useMutationProxies = ({
       dataset?: string;
       body: ProxyDataParams;
     }) => {
-      return backendApi.putProxies(PROJECT_CODE, dataset!, body);
+      return backendApi.putProxies(loadOrGenerateProjectId(), dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -94,7 +94,7 @@ export const useMutationDetected = ({
       dataset?: string;
       body: DetectionDataParams;
     }) => {
-      return backendApi.putDetected(PROJECT_CODE, dataset!, body);
+      return backendApi.putDetected(loadOrGenerateProjectId(), dataset!, body);
     },
     onSuccess: () => {
       onSuccess();
@@ -108,7 +108,7 @@ export const useDatasetsContext = () => {
   const query = useQuery<AnswerContextResponse[]>({
     queryKey: ["datasets"],
     queryFn: async () => {
-      return backendApi.getDatasetsInfo(PROJECT_CODE);
+      return backendApi.getDatasetsInfo(loadOrGenerateProjectId());
     },
   });
   return query;
@@ -118,7 +118,7 @@ export const useDatasetHeadContext = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["dataset", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(PROJECT_CODE, dataset!, "dataset_head");
+      return backendApi.getContextCsv(loadOrGenerateProjectId(), dataset!, "dataset_head");
     },
     enabled: !!dataset,
   });
@@ -130,7 +130,7 @@ export const useStatsContext = (dataset?: string) => {
   const query = useQuery<string>({
     queryKey: ["stats", dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(PROJECT_CODE, dataset!, "stats");
+      return backendApi.getContextCsv(loadOrGenerateProjectId(), dataset!, "stats");
     },
     enabled: !!dataset,
   });
@@ -142,7 +142,7 @@ export const useFeaturesContext = (dataset?: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
     queryFn: async () => {
-      return backendApi.getFeaturesContext(PROJECT_CODE, dataset!);
+      return backendApi.getFeaturesContext(loadOrGenerateProjectId(), dataset!);
     },
     enabled: !!dataset,
   });
@@ -153,7 +153,7 @@ export const useMetricsContext = (dataset?: string, feature?: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
-      return backendApi.getMetricsContext(PROJECT_CODE, dataset!);
+      return backendApi.getMetricsContext(loadOrGenerateProjectId(), dataset!);
     },
     enabled: !!dataset && !!feature,
   });
@@ -165,7 +165,7 @@ export const useSuggestedProxies = (dataset?: string) => {
   const query = useQuery<ProxyDataResponse>({
     queryKey: ["suggested-proxies", dataset],
     queryFn: async () => {
-      return backendApi.getSuggestedProxies(PROJECT_CODE, dataset!);
+      return backendApi.getSuggestedProxies(loadOrGenerateProjectId(), dataset!);
     },
     enabled: !!dataset,
   });
@@ -176,7 +176,11 @@ export const useContextVectorialData = (key: string, dataset?: string) => {
   const query = useQuery<string>({
     queryKey: [key, dataset],
     queryFn: async () => {
-      return backendApi.getContextVectorialData(PROJECT_CODE, dataset!, key);
+      return backendApi.getContextVectorialData(
+        loadOrGenerateProjectId(),
+        dataset!,
+        key
+      );
     },
     enabled: !!dataset,
   });
@@ -188,7 +192,7 @@ export const useDependencyGraph = (dataset?: string) => {
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(
-        PROJECT_CODE,
+        loadOrGenerateProjectId(),
         dataset!,
         "dependency_graph"
       );
@@ -207,7 +211,7 @@ export const useProcessingHyperparameters = (
     queryKey: ["hyperparameters", algorithm, hyperparameterType],
     queryFn: async () => {
       return backendApi.getProcessingHyperparametersContext(
-        PROJECT_CODE,
+        loadOrGenerateProjectId(),
         algorithm!,
         hyperparameterType
       );
@@ -233,7 +237,7 @@ export const useLaunchAlgorithmMutation = ({
       hyperparameterType: ProcessingType;
     }) => {
       return backendApi.putProcessingContext(
-        PROJECT_CODE,
+        loadOrGenerateProjectId(),
         dataset!,
         body,
         hyperparameterType
@@ -255,7 +259,7 @@ export const useUpdateContextCsv = ({
   const mutation = useMutation({
     mutationFn: (params: { dataset?: string; body: string }) => {
       return backendApi.putContext(
-        PROJECT_CODE,
+        loadOrGenerateProjectId(),
         "dataset__" + params.dataset,
         params.body
       );
