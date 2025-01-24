@@ -7,8 +7,10 @@ export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
 export const FEEDBACK_LINK = "https://google.com";
 export const TRUNCATE_TEXT = 20;
 
-/* Dataset View */
-export const CUSTOM_DATASET_KEY = "Custom";
+/* Dataset Selection View */
+export const CUSTOM_DATASET_KEY = "CustomDataset";
+export const DEFAULT_CUSTOM_DATASET_NAME = "Custom-1";
+
 
 /* Feature View */
 export const TARGET_COLUMN = "target";

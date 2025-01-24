@@ -43,7 +43,7 @@ export const DatasetPreview = ({
   };
 
   // Se è un custom dataset
-  if (selected.text === CUSTOM_DATASET_KEY) {
+  if (selected.id.code === CUSTOM_DATASET_KEY) {
     return (
       <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
         <p className="text-2xl text-primary-950">{selected.text}</p>

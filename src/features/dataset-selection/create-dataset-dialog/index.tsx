@@ -30,6 +30,7 @@ import { convertCSVToString } from "@/lib/utils";
 import { useUpdateContextCsv } from "@/api/context";
 import { EnhancedAnswerResponse } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import { DEFAULT_CUSTOM_DATASET_NAME } from "@/config/constants";
 
 export const CreateDatasetDialog = ({
   questionNumber,
@@ -95,7 +96,7 @@ export const CreateDatasetDialog = ({
       });
       // Chiamata 2: PUT /context
       await updateContext({
-        dataset: `custom-1`,
+        dataset: DEFAULT_CUSTOM_DATASET_NAME,
         body: csvString,
       });
 
