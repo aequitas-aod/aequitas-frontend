@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useCurrentDataset, useDatasetContext } from "@/api/context";
+import { useCurrentDataset, useDatasetHeadContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
 
@@ -16,14 +16,14 @@ export const DatasetViewPage = ({
   const { data: datasetKey } = useCurrentDataset();
 
   const { data, isLoading, error } = useQuestionnaireById({
-    n: questionNumber,
+    params: { n: questionNumber },
   });
 
   const {
     data: contextData,
     isLoading: isLoadingContextData,
     error: errorContextData,
-  } = useDatasetContext(datasetKey);
+  } = useDatasetHeadContext(datasetKey);
 
   if (isLoading || isLoadingContextData) {
     return <div>Loading...</div>;

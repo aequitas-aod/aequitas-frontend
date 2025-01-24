@@ -1,4 +1,4 @@
-import { useDatasetSelectionAnswersInfo } from "@/api/context";
+import { useDatasetsContext } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { DatasetSelection } from "@/features/dataset-selection";
@@ -15,12 +15,10 @@ export const TestSelectionPage = ({
   onNext,
 }: QuestionnairePageProps) => {
   const { data, isLoading, error } = useQuestionnaireById({
-    n: questionNumber,
+    params: { n: questionNumber },
   });
 
-  const { data: answersDetails } = useDatasetSelectionAnswersInfo({
-    nth: questionNumber,
-  });
+  const { data: answersDetails } = useDatasetsContext();
 
   if (isLoading) {
     return <div>Loading...</div>;

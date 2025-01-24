@@ -23,7 +23,9 @@ export const ProxiesPage = ({
     data: question,
     isLoading: questionIsLoading,
     error: questionError,
-  } = useQuestionnaireById({ n: questionNumber });
+  } = useQuestionnaireById({
+    params: { n: questionNumber },
+  });
 
   const {
     data: proxiesData,

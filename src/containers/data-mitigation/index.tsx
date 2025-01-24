@@ -16,7 +16,7 @@ export const DataMitigationPage = ({
   type,
 }: QuestionnairePageProps) => {
   const { data, isLoading, error } = useQuestionnaireById({
-    n: questionNumber,
+    params: { n: questionNumber },
   });
 
   if (isLoading) {
