@@ -1,6 +1,10 @@
 import { TableHeader, TableRow, TableHead } from "@/components/ui/table";
 
-import { TARGET, SENSITIVE, DISTRIBUTION } from "@/config/constants";
+import {
+  TARGET_COLUMN,
+  SENSITIVE_COLUMN,
+  DISTRIBUTION_COLUMN,
+} from "@/config/constants";
 
 export const FeatureViewTableHeader = ({
   columns,
@@ -20,9 +24,9 @@ export const FeatureViewTableHeader = ({
             key={key}
             id={key}
             className={`text-center bg-neutral-100 text-neutral-400 border-b-2 border-neutral-200 px-6 ${
-              key === TARGET && "!bg-primary-950 !text-white !px-0 !w-16"
-            } ${key === SENSITIVE && "!bg-primary-900 !text-white !w-16 !px-0"} 
-                    ${key === DISTRIBUTION && "!w-[600px]"}
+              key === TARGET_COLUMN && "!bg-primary-950 !text-white !px-0 !w-16"
+            } ${key === SENSITIVE_COLUMN && "!bg-primary-900 !text-white !w-16 !px-0"} 
+                    ${key === DISTRIBUTION_COLUMN && "!w-[600px]"}
                   ${colIndex !== columns.length - 1 && "border-r-2"}
                   `}
           >

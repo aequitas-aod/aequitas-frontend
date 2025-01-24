@@ -1,20 +1,20 @@
 import React from "react";
 
-import { useCurrentDataset } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DataMitigation } from "@/features/data-mitigation";
+import type { ProcessingType } from "@/types/types";
 
 interface QuestionnairePageProps {
   questionNumber: number;
   onNext: () => void;
+  type: ProcessingType;
 }
 
 export const DataMitigationPage = ({
   questionNumber,
   onNext,
+  type,
 }: QuestionnairePageProps) => {
-  const { data: datasetKey } = useCurrentDataset();
-  
   const { data, isLoading, error } = useQuestionnaireById({
     n: questionNumber,
   });
@@ -31,5 +31,12 @@ export const DataMitigationPage = ({
     return <div>No data available</div>;
   }
 
-  return <DataMitigation onNext={onNext} data={data} questionNumber={questionNumber} />;
+  return (
+    <DataMitigation
+      onNext={onNext}
+      data={data}
+      questionNumber={questionNumber}
+      hyperparameterType={type}
+    />
+  );
 };

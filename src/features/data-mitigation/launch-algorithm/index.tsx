@@ -8,15 +8,17 @@ import { FormInput } from "@/components/molecules/FormInput";
 import { parseFeatureKey } from "@/lib/utils";
 import { useCurrentDataset, useLaunchAlgorithmMutation } from "@/api/context";
 
-import type { PreprocessingHyperparametersResponse } from "@/api/types";
+import type { ProcessingHyperparametersResponse } from "@/api/types";
+import type { ProcessingType } from "@/types/types";
 
 interface LaunchAlgorithmProps {
   title: string;
   description: string;
-  formData: PreprocessingHyperparametersResponse;
+  formData: ProcessingHyperparametersResponse;
   algorithm: string;
   onEnableContinueButton: () => void;
   enableContinueButton: boolean;
+  hyperparameterType: ProcessingType;
 }
 
 export const LaunchAlgorithm = ({
@@ -26,6 +28,7 @@ export const LaunchAlgorithm = ({
   algorithm,
   onEnableContinueButton,
   enableContinueButton,
+  hyperparameterType,
 }: LaunchAlgorithmProps) => {
   const t = useTranslations("DataMitigation");
   const { control, handleSubmit } = useForm();
@@ -42,10 +45,13 @@ export const LaunchAlgorithm = ({
       return;
     }
     const parsedHyperparameters = Object.fromEntries(
-      Object.entries(data).map(([key, value]) =>
-        [key, !isNaN(parseFloat(value as string)) ? parseFloat(value as string) : value]
-      )
-    )
+      Object.entries(data).map(([key, value]) => [
+        key,
+        !isNaN(parseFloat(value as string))
+          ? parseFloat(value as string)
+          : value,
+      ])
+    );
     console.log("Parsed Hyperparameters", parsedHyperparameters);
     mutate({
       dataset: datasetKey,
@@ -53,6 +59,7 @@ export const LaunchAlgorithm = ({
         $algorithm: algorithm,
         ...parsedHyperparameters,
       },
+      hyperparameterType,
     });
   };
 

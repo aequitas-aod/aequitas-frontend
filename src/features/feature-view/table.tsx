@@ -2,11 +2,11 @@ import { TableRow, TableBody, TableCell, Table } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ParsedDataset, DataDistributions } from "@/types/types";
 import {
-  TARGET,
+  TARGET_COLUMN,
   TRUNCATE_TEXT,
-  SENSITIVE,
-  DISTRIBUTION,
-  FEATURE_NAME,
+  SENSITIVE_COLUMN,
+  DISTRIBUTION_COLUMN,
+  FEATURE_COLUMN,
 } from "@/config/constants";
 import { FeatureViewTableHeader } from "./table-header";
 import { Histogram } from "@/components/molecules/Histogram/Histogram";
@@ -31,16 +31,18 @@ export const FeatureViewTable = ({
   disabled = false,
 }: FeatureViewTableProps) => {
   const showSelectRow = !!selectedRows && !!handleSelectRow;
-  const convertDistributionsInHistogramData = (data: DataDistributions): Record<string, number> => {
-    const keys: string[] = data.keys
-    const values: number[] = data.values
-    const chartData: Record<string, number> = {}
+  const convertDistributionsInHistogramData = (
+    data: DataDistributions
+  ): Record<string, number> => {
+    const keys: string[] = data.keys;
+    const values: number[] = data.values;
+    const chartData: Record<string, number> = {};
 
     for (const [index, key] of keys.entries()) {
-      chartData[key] = values[index]
+      chartData[key] = values[index];
     }
-    return chartData
-  }
+    return chartData;
+  };
   return (
     <Table>
       <FeatureViewTableHeader columns={columns} showSelectRow={showSelectRow} />
@@ -72,10 +74,10 @@ export const FeatureViewTable = ({
 
                 const isTruncated =
                   cellContent.length > TRUNCATE_TEXT &&
-                  col !== FEATURE_NAME &&
-                  col !== TARGET &&
-                  col !== SENSITIVE &&
-                  col !== DISTRIBUTION;
+                  col !== FEATURE_COLUMN &&
+                  col !== TARGET_COLUMN &&
+                  col !== SENSITIVE_COLUMN &&
+                  col !== DISTRIBUTION_COLUMN;
 
                 const displayedContent = isTruncated
                   ? `${cellContent.slice(0, TRUNCATE_TEXT)}...`
@@ -85,11 +87,11 @@ export const FeatureViewTable = ({
                   <TableCell
                     key={col}
                     className={`bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 px-6 ${
-                      col === TARGET && "!bg-primary-200"
+                      col === TARGET_COLUMN && "!bg-primary-200"
                     } 
-                      ${col === SENSITIVE && "!bg-primary-300"}
+                      ${col === SENSITIVE_COLUMN && "!bg-primary-300"}
                       ${colIndex !== columns.length - 1 && "border-r-2"}
-                      ${col === DISTRIBUTION && "!px-1"}
+                      ${col === DISTRIBUTION_COLUMN && "!px-1"}
 
                       ${(typeof row[col] === "number" || row[col] === "-") && "!text-right"}
                       ${typeof row[col] === "boolean" && "!text-center"}
@@ -97,7 +99,7 @@ export const FeatureViewTable = ({
                     id={col}
                     title={isTruncated ? cellContent : ""}
                   >
-                    {col === TARGET ? (
+                    {col === TARGET_COLUMN ? (
                       <Checkbox
                         checked={row[col] as boolean}
                         onCheckedChange={() =>
@@ -108,7 +110,7 @@ export const FeatureViewTable = ({
                         className="mr-4"
                         variant="outlined-black"
                       />
-                    ) : col === SENSITIVE ? (
+                    ) : col === SENSITIVE_COLUMN ? (
                       <Checkbox
                         checked={row[col] as boolean}
                         onCheckedChange={() =>
@@ -119,8 +121,12 @@ export const FeatureViewTable = ({
                         className="mr-4"
                         variant="outlined-black"
                       />
-                    ) : col === DISTRIBUTION ? (
-                      <Histogram data={convertDistributionsInHistogramData(row[col] as DataDistributions)} />
+                    ) : col === DISTRIBUTION_COLUMN ? (
+                      <Histogram
+                        data={convertDistributionsInHistogramData(
+                          row[col] as DataDistributions
+                        )}
+                      />
                     ) : (
                       displayedContent
                     )}

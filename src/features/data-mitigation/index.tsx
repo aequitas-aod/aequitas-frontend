@@ -9,19 +9,23 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { LaunchAlgorithm } from "./launch-algorithm";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { usePreprocessingHyperparameters } from "@/api/context";
+import { useProcessingHyperparameters } from "@/api/context";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import type { ProcessingType } from "@/types/types";
+import { NO_MITIGATION_KEY } from "@/config/constants";
 
 export const DataMitigation = ({
   questionNumber,
   data,
   onNext,
+  hyperparameterType,
 }: {
   questionNumber: number;
   data: QuestionnaireResponse;
   onNext: () => void;
+  hyperparameterType: ProcessingType;
 }) => {
   const t = useTranslations("DataMitigation");
 
@@ -29,8 +33,9 @@ export const DataMitigation = ({
   const [enableContinueButton, setEnableContinueButton] = useState(false);
   const options = data.answers;
 
-  const { data: formData } = usePreprocessingHyperparameters(
-    selected?.id.code ?? null
+  const { data: formData } = useProcessingHyperparameters(
+    selected?.id.code ?? null,
+    hyperparameterType
   );
 
   const { mutateAsync: updateQuestionnaire, isPending } =
@@ -71,7 +76,8 @@ export const DataMitigation = ({
   };
 
   const isDisabled =
-    (selected && selected.id.code === "NoMitigation") || enableContinueButton;
+    (selected && selected.id.code === NO_MITIGATION_KEY) ||
+    enableContinueButton;
 
   return (
     <>
@@ -115,6 +121,7 @@ export const DataMitigation = ({
                 algorithm={selected.id.code}
                 onEnableContinueButton={() => setEnableContinueButton(true)}
                 enableContinueButton={enableContinueButton}
+                hyperparameterType={hyperparameterType}
               />
             </div>
           )}

@@ -64,6 +64,9 @@
     "selected-features": "Selected {selected} out of {total} features",
     "selected-target": "Selected target: {target}"
   },
+  "ResultsView": {
+    "subtitle": "Check the operations performed so far:"
+  },
   "HomePage": {
     "subtitle": "",
     "buttons": {

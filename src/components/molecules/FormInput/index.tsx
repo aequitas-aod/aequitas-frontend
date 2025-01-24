@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import type { PreprocessingHyperparametersValue } from "@/api/types";
+import type { ProcessingHyperparametersValue } from "@/api/types";
 
 export const FormInput = ({
   name,
@@ -19,7 +19,7 @@ export const FormInput = ({
   isPending,
 }: {
   name: string;
-  config: PreprocessingHyperparametersValue;
+  config: ProcessingHyperparametersValue;
   control: Control<FieldValues> | undefined;
   isPending: boolean;
 }) => {

@@ -31,8 +31,6 @@ export const ProxiesPage = ({
     error,
   } = useSuggestedProxies(datasetKey);
 
-  const { data: correlationMatrix } = useCorrelationMatrix(datasetKey);
-
   if (isLoading || questionIsLoading) {
     return <div>Loading...</div>;
   }
@@ -60,7 +58,6 @@ export const ProxiesPage = ({
       question={question}
       questionNumber={questionNumber}
       answers={question.answers}
-      correlationMatrix={correlationMatrix}
       datasetKey={datasetKey!}
     />
   );

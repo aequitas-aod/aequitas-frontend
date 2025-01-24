@@ -1,15 +1,18 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { BackendApi } from "../api";
-import {
+import { PROJECT_CODE } from "@/config/constants";
+
+import type {
   AnswerContextResponse,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
-  PreprocessingHyperparametersResponse,
+  ProcessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
 } from "../types";
-import { PROJECT_CODE } from "@/config/constants";
+import type { ProcessingType } from "@/types/types";
 
 const backendApi = new BackendApi();
 
@@ -18,6 +21,16 @@ export const useCurrentDataset = () => {
     queryKey: ["current_dataset"],
     queryFn: async () => {
       return backendApi.getCurrentDataset(PROJECT_CODE);
+    },
+  });
+  return query;
+};
+
+export const useCurrentTestDataset = () => {
+  const query = useQuery<string>({
+    queryKey: ["test_current_dataset"],
+    queryFn: async () => {
+      return backendApi.getCurrentTestDataset(PROJECT_CODE);
     },
   });
   return query;
@@ -173,13 +186,17 @@ export const useDependencyGraph = (dataset?: string) => {
 };
 
 // data-mitigation
-export const usePreprocessingHyperparameters = (algorithm: string | null) => {
-  const query = useQuery<PreprocessingHyperparametersResponse>({
-    queryKey: ["preprocessing-hyperparameters", algorithm],
+export const useProcessingHyperparameters = (
+  algorithm: string | null,
+  hyperparameterType: ProcessingType
+) => {
+  const query = useQuery<ProcessingHyperparametersResponse>({
+    queryKey: ["hyperparameters", algorithm, hyperparameterType],
     queryFn: async () => {
-      return backendApi.getPreprocessingHyperparametersContext(
+      return backendApi.getProcessingHyperparametersContext(
         PROJECT_CODE,
-        algorithm!
+        algorithm!,
+        hyperparameterType
       );
     },
     enabled: !!algorithm,
@@ -196,11 +213,18 @@ export const useLaunchAlgorithmMutation = ({
     mutationFn: ({
       dataset,
       body,
+      hyperparameterType,
     }: {
       dataset?: string;
       body: Record<string, unknown>;
+      hyperparameterType: ProcessingType;
     }) => {
-      return backendApi.putPreprocessingContext(PROJECT_CODE, dataset!, body);
+      return backendApi.putProcessingContext(
+        PROJECT_CODE,
+        dataset!,
+        body,
+        hyperparameterType
+      );
     },
     onSuccess: () => {
       onSuccess();

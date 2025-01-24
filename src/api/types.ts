@@ -75,8 +75,8 @@ export type FeaturesResponse = Record<
   }
 >;
 
-// Type for preprocessing parameters (used for hyperparameter values)
-export type PreprocessingHyperparametersValue = {
+// Type for processing parameters (used for hyperparameter values)
+export type ProcessingHyperparametersValue = {
   label: string; // Parameter label
   description: string; // Parameter description
   type: string; // Parameter type (e.g., "integer", "float")
@@ -85,9 +85,9 @@ export type PreprocessingHyperparametersValue = {
 };
 
 // Type for a collection of preprocessing parameters
-export type PreprocessingHyperparametersResponse = Record<
+export type ProcessingHyperparametersResponse = Record<
   string,
-  PreprocessingHyperparametersValue
+  ProcessingHyperparametersValue
 >;
 
 // Type for parameters related to attribute data and proxy

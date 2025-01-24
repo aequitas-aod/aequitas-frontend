@@ -12,7 +12,7 @@ import {
   ProxyDataResponse,
   QuestionnaireResponse,
 } from "@/api/types";
-import { useMutationProxies } from "@/api/context";
+import { useCorrelationMatrix, useMutationProxies } from "@/api/context";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import DOMPurify from "dompurify";
@@ -24,7 +24,6 @@ export const Proxies = ({
   datasetKey,
   questionNumber,
   answers,
-  correlationMatrix,
 }: {
   onNext: () => void;
   data: ProxyDataResponse;
@@ -32,8 +31,13 @@ export const Proxies = ({
   questionNumber: number;
   datasetKey: string;
   answers: AnswerResponse[];
-  correlationMatrix?: string;
 }) => {
+  const t = useTranslations("FeatureView");
+  const {
+    data: correlationMatrix,
+    isLoading: isCorrelationMatrixLoading,
+    error: correlationMatrixError,
+  } = useCorrelationMatrix(datasetKey);
 
   const parsingOptions = {
     replace: (domNode) => {
@@ -51,8 +55,6 @@ export const Proxies = ({
       return svg.substring(svg.indexOf("<svg"));
     }).map((svg) => parse(svg, parsingOptions))
   }
-
-  const t = useTranslations("FeatureView");
 
   const { mutate: mutateProxies, isPending: isPendingProxies } =
     useMutationProxies({
@@ -115,6 +117,11 @@ export const Proxies = ({
     mutateProxies({ dataset: datasetKey, body });
   };
 
+  const secureCorrelationMatrix =
+    !isCorrelationMatrixLoading && correlationMatrix
+      ? DOMPurify.sanitize(correlationMatrix)
+      : null;
+
   return (
     <QuestionnaireLayout
       action={
@@ -130,13 +137,13 @@ export const Proxies = ({
       <QuestionnaireBanner text={question.description} />
       <div className="flex p-2 overflow-y-auto overflow-x-hidden h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
-            <div className="flex flex-wrap p-4 mx-auto">
-              {imagesToShow.map((svg, index) => (
-                <div key={index} className="w-full xl:w-1/2 p-2">
-                  {svg}
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-wrap p-4 mx-auto">
+            {imagesToShow.map((svg, index) => (
+              <div key={index} className="w-full xl:w-1/2 p-2">
+                {svg}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="min-w-40rem p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
