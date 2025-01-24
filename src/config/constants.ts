@@ -6,6 +6,7 @@ export const PROJECT_CODE = "p-1";
 export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
 export const FEEDBACK_LINK = "https://google.com";
 export const TRUNCATE_TEXT = 20;
+export const INFINITY_VALUE = "infinity";
 
 /* Dataset Selection View */
 export const CUSTOM_DATASET_KEY = "CustomDataset";
@@ -40,7 +41,7 @@ export const QUESTIONNAIRE_KEYS = {
   OUTCOME_MITIGATION: "OutcomeMitigation",
   OUTCOME_MITIGATION_SUMMARY: "OutcomeMitigationSummary",
 
-  TEST_SET_CHOICE: "TestSetChoice",
+  TEST_SET_CHOICE: "TestSetSelection",
   POLARIZATION: "Polarization",
   TEST_SUMMARY: "TestSummary",
 

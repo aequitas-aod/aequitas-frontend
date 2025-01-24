@@ -10,6 +10,7 @@ import type {
   Graph,
   MetricGraphs,
 } from "@/types/types";
+import { INFINITY_VALUE } from "@/config/constants";
 
 // ------------------------------
 // Hook: useMetricsData
@@ -38,9 +39,22 @@ export const useMetricsData = (dataset?: string, selectedTarget?: string) => {
         if (!grouped[key]) grouped[key] = {};
         if (!grouped[key][label]) grouped[key][label] = [];
 
+        let value;
+
+        if (typeof item.value === "number") {
+          value = item.value;
+        } else if (
+          typeof item.value === "string" &&
+          item.value.toLowerCase() === INFINITY_VALUE
+        ) {
+          value = Number.POSITIVE_INFINITY;
+        } else {
+          value = NaN;
+        }
+
         grouped[key][label].push({
           class: classType,
-          value: typeof item.value === "number" ? item.value : NaN,
+          value: value,
         });
       });
 
