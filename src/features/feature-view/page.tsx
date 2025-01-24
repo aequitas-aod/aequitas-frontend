@@ -132,9 +132,9 @@ export const FeaturesView = ({
     // no rows is selected
     selectedRows.length === 0 ||
     // no feature is selected as target
-    selectedTarget;
-  // no feature is selected as sensitive
-  data.filter((record) => record.sensitive).length === 0;
+    !selectedTarget ||
+    // no feature is selected as sensitive
+    data.filter((record) => record.sensitive).length === 0;
 
   return (
     <QuestionnaireLayout
