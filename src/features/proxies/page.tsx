@@ -105,7 +105,7 @@ export const Proxies = ({
       for (const attribute in data[category]) {
         const item = data[category][attribute];
         transformedData[category][attribute] = {
-          correlation: item.correlation,
+          correlation: item.correlation as number,
           proxy: item.suggested_proxy,
         };
       }
@@ -179,7 +179,12 @@ export const Proxies = ({
                       onCheckboxChange={handleCheckboxChange}
                       selectionStatus={attributeData.suggested_proxy}
                       totalItems={Object.entries(attributes).length}
-                      label={`${(attributeData.correlation * 100).toFixed(0)}%`}
+                      disabled={typeof attributeData.correlation === "string"}
+                      label={
+                        typeof attributeData.correlation === "string"
+                          ? "N/A"
+                          : `${((attributeData.correlation as number) * 100).toFixed(0)}%`
+                      }
                     />
                   )
                 )}

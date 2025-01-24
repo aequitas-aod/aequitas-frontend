@@ -10,6 +10,7 @@ interface FeatureCheckboxProps {
   totalItems: number; // Numero totale di elementi
   selectionStatus: string; // Stato della selezione (ad esempio "true" o "false")
   title: string; // Titolo della feature
+  disabled?: boolean; // Se la checkbox è disabilitata
 }
 
 export const FeatureCheckbox = ({
@@ -21,6 +22,7 @@ export const FeatureCheckbox = ({
   label,
   selectionStatus,
   title,
+  disabled,
 }: FeatureCheckboxProps) => {
   // Determina l'altezza dell'elemento in base alla posizione (ultimo elemento o no)
   const itemHeight =
@@ -46,6 +48,7 @@ export const FeatureCheckbox = ({
           onCheckedChange={() => onCheckboxChange(featureKey, attributeKey)} // Gestisce il cambiamento della selezione
           variant="outlined-black"
           className="mr-2 mt-1"
+          disabled={disabled}
         />
       </div>
       <div
@@ -57,7 +60,9 @@ export const FeatureCheckbox = ({
       >
         {/* Etichetta o testo della feature */}
         <div className="mt-1 flex gap-2">
-          <p className="font-extrabold">{title}</p>
+          <p className={`font-extrabold ${disabled && "text-gray-500"}`}>
+            {title}
+          </p>
           {label && <p>{`${label}`}</p>} {/* Mostra l'etichetta se presente */}
         </div>
       </div>

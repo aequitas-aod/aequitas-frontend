@@ -41,7 +41,7 @@ type SelectionStrategy = {
 
 // Type for correlation data and suggestions related to a proxy
 export type AttributeDataResponse = {
-  correlation: number;
+  correlation: number | string;
   suggested_proxy: string;
 };
 
