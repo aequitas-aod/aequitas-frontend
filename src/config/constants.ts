@@ -6,7 +6,7 @@ export const SENSITIVE = "sensitive";
 export const DISTRIBUTION = "distribution";
 export const FEATURE_NAME = "feature";
 
-export const NO_MITIGATION_KEY = "DoNoMitigate";
+export const NO_MITIGATION_KEY = "NoDataMitigation";
 export const CUSTOM_DATASET_KEY = "Custom";
 
 export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!;
