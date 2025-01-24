@@ -151,7 +151,11 @@ export const useQuestionnaireData = (
     data: questionnaireData,
     isLoading: isLoadingQuestionnaireData,
     error: errorQuestionnaireData,
-  } = useQuestionnaireById({ n: questionId });
+  } = useQuestionnaireById({
+    params: {
+      n: questionId,
+    },
+  });
 
   const questionnaireKeys = useMemo(() => {
     if (!questionnaireData) return null;
