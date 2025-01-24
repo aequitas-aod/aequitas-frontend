@@ -26,11 +26,11 @@ export const useCurrentDataset = () => {
   return query;
 };
 
-export const useTestCurrentDataset = () => {
+export const useCurrentTestDataset = () => {
   const query = useQuery<string>({
     queryKey: ["test_current_dataset"],
     queryFn: async () => {
-      return backendApi.getTestCurrentDataset(PROJECT_CODE);
+      return backendApi.getCurrentTestDataset(PROJECT_CODE);
     },
   });
   return query;

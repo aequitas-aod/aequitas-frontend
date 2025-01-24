@@ -1,4 +1,4 @@
-import { useCurrentDataset } from "@/api/context";
+import { useCurrentTestDataset } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
@@ -17,7 +17,7 @@ export const TestResultsViewPage = ({
     data: datasetKey,
     isLoading: datasetLoading,
     error: datasetError,
-  } = useCurrentDataset();
+  } = useCurrentTestDataset();
 
   const {
     data: questionnaireData,
