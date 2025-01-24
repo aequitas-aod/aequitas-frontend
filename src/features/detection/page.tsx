@@ -10,11 +10,15 @@ import { FeatureCheckboxList } from "./accordion";
 import { GraphsDisplay } from "./graphs";
 
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import { useMutationDetected } from "@/api/context";
 
 import type { AnswerId } from "@/api/questionnaire/types";
-import type { AnswerResponse, DetectionDataParams, QuestionnaireResponse } from "@/api/types";
+import type {
+  AnswerResponse,
+  DetectionDataParams,
+  QuestionnaireResponse,
+} from "@/api/types";
 import type { DetectionData, Graph, MetricGraphs } from "@/types/types";
-import { useMutationDetected } from "@/api/context";
 
 export const Detection = ({
   onNext,
@@ -40,20 +44,20 @@ export const Detection = ({
   const [featureData, setFeatureData] =
     useState<DetectionData>(questionnaireKeys);
 
-  const { mutate: mutateQuestionnaire, isPending } = useUpdateQuestionnaire({
+  const { mutateAsync: mutateQuestionnaire, isPending } =
+    useUpdateQuestionnaire({
+      onSuccess: () => {
+        console.log("Questionnaire mutation success");
+      },
+    });
+
+  const { mutateAsync: mutateDetected } = useMutationDetected({
     onSuccess: () => {
-      onNext();
+      console.log("Detected mutation success");
     },
   });
 
-  // useMutationDetected
-  const { mutate: mutateDetected } = useMutationDetected({
-    onSuccess: () => {
-      // onNext();
-    },
-  });
-
-  const onContinue = () => {
+  const onContinue = async () => {
     const keysWithSelectedAttributes: string[] = Object.keys(
       featureData
     ).filter((key) =>
@@ -65,29 +69,32 @@ export const Detection = ({
       .map((answer) => answer.id)
       .filter((id) => keysWithSelectedAttributes.includes(id.code));
 
-    const body: DetectionDataParams = {}
+    const body: DetectionDataParams = {};
 
     keysWithSelectedAttributes.forEach((key) => {
-      body[key] = Object.entries(featureData[key]).filter(([attributeKey, attributeData]) => {
-        return attributeData.selected === "true";
-      }).map(([attributeKey, attributeData]) => {
-        return {
+      body[key] = Object.entries(featureData[key])
+        .filter(([_, attributeData]) => attributeData.selected === "true")
+        .map(([attributeKey]) => ({
           sensitive: attributeKey,
-          target: targetFeature
-        }
-      })
-    })
-
-    mutateDetected({
-      dataset: datasetKey,
-      body: body,
+          target: targetFeature,
+        }));
     });
 
-    mutateQuestionnaire({
-      n: questionNumber,
-      answer_ids: answerIds,
-    });
+    try {
+      await mutateDetected({
+        dataset: datasetKey,
+        body: body,
+      });
 
+      await mutateQuestionnaire({
+        n: questionNumber,
+        answer_ids: answerIds,
+      });
+
+      onNext();
+    } catch (error) {
+      console.error("Error during mutation:", error);
+    }
   };
 
   const handleCheckboxChange = (featureKey: string, attributeKey: string) => {
@@ -135,6 +142,7 @@ export const Detection = ({
       (attributeData) => attributeData.selected === "false"
     )
   );
+
   return (
     <QuestionnaireLayout
       action={
