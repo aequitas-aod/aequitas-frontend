@@ -61,7 +61,8 @@
     "buttons": {
       "continue": "Continue"
     },
-    "selected-features": "Selected {selected} out of {total} features",
+    "selected-features": "Selected {selected} features",
+    "selected-sensitive": "Selected {selected} sensitive",
     "selected-target": "Selected target: {target}"
   },
   "ResultsView": {
