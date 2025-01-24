@@ -18,12 +18,19 @@ export const useQuestionnaireList = () => {
   return query;
 };
 
-export const useQuestionnaireById = (params: QuestionnaireParams) => {
+export const useQuestionnaireById = ({
+  params,
+  enabled = true,
+}: {
+  enabled?: boolean;
+  params: QuestionnaireParams;
+}) => {
   const query = useQuery<QuestionnaireResponse>({
     queryKey: ["questionnaire", params],
     queryFn: async () => {
       return backendApi.getQuestionnaireById(PROJECT_CODE, params);
     },
+    enabled: enabled,
   });
   return query;
 };

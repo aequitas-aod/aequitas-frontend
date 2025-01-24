@@ -24,7 +24,7 @@ export const ResultsViewPage = ({
     isLoading: isLoadingQuestionnaire,
     error: errorQuestionnaire,
   } = useQuestionnaireById({
-    n: questionNumber,
+    params: { n: questionNumber },
   });
 
   const isLoading = datasetLoading || isLoadingQuestionnaire;

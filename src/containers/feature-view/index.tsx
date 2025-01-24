@@ -21,7 +21,7 @@ export const FeatureViewPage = ({
     isLoading: isLoadingQuestionnaireData,
     error: errorQuestionnaireData,
   } = useQuestionnaireById({
-    n: questionNumber,
+    params: { n: questionNumber },
   });
   const {
     data: featureViewData,
