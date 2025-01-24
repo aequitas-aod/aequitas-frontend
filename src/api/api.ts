@@ -281,7 +281,6 @@ export class BackendApi {
     });
 
     if (response.status === 200) {
-      console.log("RESPONSE", response.data);
       return response.data;
     }
 
