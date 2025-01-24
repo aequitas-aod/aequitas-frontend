@@ -95,7 +95,6 @@ export const FeaturesView = ({
   const onMutateFeatures = () => {
     const features: FeaturesParams = {};
 
-    /* it can be improved with a reduce function */
     data.forEach((record, idx) => {
       const { feature, sensitive, target } = record;
       features[feature.toString()] = {
@@ -105,9 +104,6 @@ export const FeaturesView = ({
       };
     });
 
-    console.log(features);
-    console.log("DATASET KEY");
-    console.log(datasetKey);
     mutateFeatures({
       dataset: datasetKey!,
       body: features,

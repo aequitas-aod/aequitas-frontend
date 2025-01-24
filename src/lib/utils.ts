@@ -31,7 +31,6 @@ export const processDataset = (data: CsvData[]): ParsedDataset[] => {
 
       // Specifico per "distribution"
       if (key === "distribution") {
-        console.log("VALUEEEEEEEEEEEEEEE", value);
         updatedRow[key] = parseDistributionField(value as string);
         return;
       }
