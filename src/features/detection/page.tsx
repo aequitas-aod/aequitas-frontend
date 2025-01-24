@@ -99,10 +99,19 @@ export const Detection = ({
     setGraphs((prev) => [find, ...prev]);
   };
 
+  const isDisabled = Object.values(featureData).every((attributes) =>
+    Object.values(attributes).every(
+      (attributeData) => attributeData.selected === "false"
+    )
+  );
   return (
     <QuestionnaireLayout
       action={
-        <ButtonLoading onClick={onContinue} isLoading={isPending}>
+        <ButtonLoading
+          onClick={onContinue}
+          isLoading={isPending}
+          disabled={isDisabled || isPending}
+        >
           {t("buttons.continue")}
         </ButtonLoading>
       }
