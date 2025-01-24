@@ -5,7 +5,7 @@ export const PROJECT_CODE = "p-1";
 /* Constants */
 export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
 export const FEEDBACK_LINK = "https://google.com";
-export const TRUNCATE_TEXT = 20;
+export const TRUNCATE_TEXT = 30;
 export const INFINITY_VALUE = "infinity";
 
 /* Dataset Selection View */
