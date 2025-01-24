@@ -1,9 +1,10 @@
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FeatureAccordion } from "@/components/molecules/FeatureAccordion";
 import { FeatureCheckbox } from "@/components/molecules/FeatureCheckbox";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import parse from 'html-react-parser';
 
 import {
   type AnswerResponse,
@@ -33,9 +34,22 @@ export const Proxies = ({
   answers: AnswerResponse[];
   correlationMatrix?: string;
 }) => {
-  let secureCorrelationMatrix = correlationMatrix;
+
+  const parsingOptions = {
+    replace: (domNode) => {
+      if (domNode.tagName === 'svg') {
+        domNode.attribs.class = 'w-full h-auto';
+      }
+      return domNode;
+    },
+  }
+
+  let imagesToShow: (string | React.JSX.Element | React.JSX.Element[])[] = [];
   if (correlationMatrix) {
-    secureCorrelationMatrix = DOMPurify.sanitize(correlationMatrix);
+    const images: string[] = [correlationMatrix];
+    imagesToShow = images.map((svg) => {
+      return svg.substring(svg.indexOf("<svg"));
+    }).map((svg) => parse(svg, parsingOptions))
   }
 
   const t = useTranslations("FeatureView");
@@ -116,18 +130,13 @@ export const Proxies = ({
       <QuestionnaireBanner text={question.description} />
       <div className="flex p-2 overflow-y-auto overflow-x-hidden h-full">
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
-          <div className="bg-neutral-200 p-4 flex justify-center items-center rounded min-h-auto relative">
-            {secureCorrelationMatrix ? (
-              <div
-                className="flex-1 overflow-y-auto h-full"
-                dangerouslySetInnerHTML={{ __html: secureCorrelationMatrix }}
-              />
-            ) : (
-              <p className="text-neutral-600">
-                Correlation matrix not available
-              </p>
-            )}
-          </div>
+            <div className="flex flex-wrap p-4 mx-auto">
+              {imagesToShow.map((svg, index) => (
+                <div key={index} className="w-full xl:w-1/2 p-2">
+                  {svg}
+                </div>
+              ))}
+            </div>
         </div>
         <div className="min-w-40rem p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
