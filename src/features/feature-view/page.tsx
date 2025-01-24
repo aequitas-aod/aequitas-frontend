@@ -123,22 +123,29 @@ export const FeaturesView = ({
     | string
     | undefined;
 
+  const selectedSensitive =
+    data.filter((record) => record.sensitive).length || 0;
+
   const isDisabled =
     // no rows is selected
     selectedRows.length === 0 ||
     // no feature is selected as target
     !selectedTarget ||
     // no feature is selected as sensitive
-    data.filter((record) => record.sensitive).length === 0;
+    selectedSensitive === 0;
 
   return (
     <QuestionnaireLayout
       action={
         <div className="flex justify-end gap-4">
           <span>
+            {t("selected-sensitive", {
+              selected: selectedSensitive,
+            })}
+          </span>
+          <span>
             {t("selected-features", {
               selected: selectedRows.length,
-              total: features.length,
             })}
           </span>
           <span>
