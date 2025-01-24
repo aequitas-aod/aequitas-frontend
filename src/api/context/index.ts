@@ -3,8 +3,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackendApi } from "../api";
 import { PROJECT_CODE } from "@/config/constants";
 
-import type {
-  AnswerContextResponse,
+import {
+  AnswerContextResponse, DetectionDataParams,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
@@ -72,6 +72,28 @@ export const useMutationProxies = ({
       body: ProxyDataParams;
     }) => {
       return backendApi.putProxies(PROJECT_CODE, dataset!, body);
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+  return mutation;
+};
+
+export const useMutationDetected = ({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: ({
+      dataset,
+      body,
+    }: {
+      dataset?: string;
+      body: DetectionDataParams;
+    }) => {
+      return backendApi.putDetected(PROJECT_CODE, dataset!, body);
     },
     onSuccess: () => {
       onSuccess();

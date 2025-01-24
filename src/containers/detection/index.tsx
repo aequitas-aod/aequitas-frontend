@@ -68,9 +68,11 @@ export const DetectionPage = ({
       onNext={onNext}
       questionnaireKeys={questionnaireKeys}
       metricGraphs={metrics}
+      datasetKey={datasetKey}
       questionNumber={questionNumber}
       questionAnswers={answers}
       questionnaireData={questionnaireData!}
+      targetFeature={target}
     />
   );
 };
