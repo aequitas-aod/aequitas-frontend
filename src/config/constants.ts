@@ -18,7 +18,8 @@ export const DISTRIBUTION_COLUMN = "distribution";
 export const FEATURE_COLUMN = "feature";
 
 /* Data Mitigation */
-export const NO_MITIGATION_KEY = "NoDataMitigation";
+export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
+export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 
 /* Questionnaire */
 export const QUESTIONNAIRE_KEYS = {

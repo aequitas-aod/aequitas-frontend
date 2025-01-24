@@ -14,7 +14,7 @@ import { useProcessingHyperparameters } from "@/api/context";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import type { ProcessingType } from "@/types/types";
-import { NO_MITIGATION_KEY } from "@/config/constants";
+import { NO_DATA_MITIGATION_KEY, NO_OUTCOME_MITIGATION_KEY } from "@/config/constants";
 
 export const DataMitigation = ({
   questionNumber,
@@ -76,7 +76,9 @@ export const DataMitigation = ({
   };
 
   const isDisabled =
-    (selected && selected.id.code === NO_MITIGATION_KEY) ||
+    (selected && selected.id.code === NO_DATA_MITIGATION_KEY) ||
+    (selected && selected.id.code === "NoModelMitigation") ||
+    (selected && selected.id.code === NO_OUTCOME_MITIGATION_KEY) ||
     enableContinueButton;
 
   return (

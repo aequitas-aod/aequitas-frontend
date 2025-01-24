@@ -59,7 +59,7 @@ export default function QuestionnaireContainer() {
             <DataMitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
-              type="postprocessing"
+              type="inprocessing"
             />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION && (
