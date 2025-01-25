@@ -134,7 +134,7 @@ export const Proxies = ({
         <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
           <div className="flex flex-wrap p-4 mx-auto">
             {imagesToShow.map((svg, index) => (
-              <div key={index} className="w-full xl:w-1/2 p-2">
+              <div key={index} className="w-full 2xl:w-1/2 p-2">
                 {svg}
               </div>
             ))}

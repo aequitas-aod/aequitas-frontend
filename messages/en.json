@@ -61,9 +61,9 @@
     "buttons": {
       "continue": "Continue"
     },
-    "selected-features": "Selected {selected} features",
-    "selected-sensitive": "Selected {selected} sensitive",
-    "selected-target": "Selected target: {target}"
+    "selected-features": "Sensitive features selected: {selected}",
+    "selected-sensitive": "Total features selected: {selected}",
+    "selected-target": "Target feature: {target}"
   },
   "ResultsView": {
     "subtitle": "Check the operations performed so far:"

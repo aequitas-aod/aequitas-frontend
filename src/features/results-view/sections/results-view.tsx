@@ -30,7 +30,7 @@ export const ResultsViewSection = ({
       <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
         <div className="flex flex-wrap p-4 mx-auto">
           {imagesToShow.map((svg, index) => (
-            <div key={index} className="w-full xl:w-1/2 p-2">
+            <div key={index} className="w-full 2xl:w-1/2 p-2">
               {svg}
             </div>
           ))}

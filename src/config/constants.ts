@@ -4,7 +4,8 @@ export const PROJECT_CODE = "p-1";
 
 /* Constants */
 export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
-export const FEEDBACK_LINK = "https://google.com";
+export const FEEDBACK_LINK = "https://forms.gle/WnYCvQZWerVEQfFR8";
+export const ST_GRAPH_LINK = "https://github.com/aequitas-aod/aequitas-flow";
 export const TRUNCATE_TEXT = 30;
 export const INFINITY_VALUE = "infinity";
 

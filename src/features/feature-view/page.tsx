@@ -139,13 +139,13 @@ export const FeaturesView = ({
       action={
         <div className="flex justify-end gap-4">
           <span>
-            {t("selected-sensitive", {
-              selected: selectedSensitive,
+            {t("selected-features", {
+              selected: selectedRows.length,
             })}
           </span>
           <span>
-            {t("selected-features", {
-              selected: selectedRows.length,
+            {t("selected-sensitive", {
+              selected: selectedSensitive,
             })}
           </span>
           <span>

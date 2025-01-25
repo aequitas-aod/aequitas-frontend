@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { GOOGLE_FORM_LINK } from "@/config/constants";
+import { GOOGLE_FORM_LINK, ST_GRAPH_LINK } from "@/config/constants";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 import Image from "next/image";
@@ -21,7 +21,7 @@ export default function HomePage() {
         <p className="text-lg md:text-xl mb-8">{t("subtitle")}</p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <a
-            href={GOOGLE_FORM_LINK}
+            href={ST_GRAPH_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block"
