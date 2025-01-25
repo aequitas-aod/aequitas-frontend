@@ -2,7 +2,10 @@
   "common": {
     "create": "Create",
     "continue": "Continue",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "errors": {
+      "parsing-csv": "Error parsing CSV file"
+    }
   },
   "breadcrumb": {
     "DatasetSelection": "Scelta del dataset",
@@ -52,9 +55,6 @@
   "DatasetView": {
     "buttons": {
       "continue": "Continue"
-    },
-    "errors": {
-      "parsing-csv": "Error parsing CSV file"
     }
   },
   "FeatureView": {

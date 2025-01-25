@@ -1,8 +1,9 @@
-import { useContextVectorialData, useCurrentTestDataset } from "@/api/context";
+import { useContextVectorialData, useCurrentDataset } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
 import React from "react";
+import { AnswerResponse } from "@/api/types";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -17,7 +18,7 @@ export const ModelResultsViewPage = ({
     data: datasetKey,
     isLoading: datasetLoading,
     error: datasetError,
-  } = useCurrentTestDataset();
+  } = useCurrentDataset();
 
   const {
     data: questionnaireData,
@@ -27,18 +28,41 @@ export const ModelResultsViewPage = ({
     params: { n: questionNumber },
   });
 
+  const {
+    data: previousQuestion,
+    isLoading: isLoadingPreviousQuestion,
+    error: errorPreviousQuestion,
+  } = useQuestionnaireById({
+    params: { n: questionNumber - 1 },
+  });
+
+  let key: string | undefined
+
+  if (questionnaireData && previousQuestion) {
+    const selectedAlgorithm: string = previousQuestion.answers.find(
+      (a) => a.selected
+    ).id.code;
+
+    key = `${selectedAlgorithm}__${datasetKey}`
+    console.log(key);
+  }
+
   const { data: correlationMatrix } = useContextVectorialData(
     "correlation_matrix",
-    datasetKey
+    key
   );
-
   const { data: performancePlot } = useContextVectorialData(
     "performance_plot",
-    datasetKey
+    key
+  );
+  const { data: fairnessPlot } = useContextVectorialData(
+    "fairness_plot",
+    key
   );
 
-  const isLoading = datasetLoading || isLoadingQuestionnaire;
-  const error = datasetError || errorQuestionnaire;
+  const isLoading =
+    datasetLoading || isLoadingQuestionnaire || isLoadingPreviousQuestion;
+  const error = datasetError || errorQuestionnaire || errorPreviousQuestion;
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -56,9 +80,9 @@ export const ModelResultsViewPage = ({
     return <div>No dataset available</div>;
   }
 
-  const imagesToShow =
-    correlationMatrix && performancePlot
-      ? [correlationMatrix, performancePlot]
+  const imagesToShow: string[] =
+    correlationMatrix && performancePlot && fairnessPlot
+      ? [correlationMatrix, performancePlot, fairnessPlot]
       : undefined;
 
   return (

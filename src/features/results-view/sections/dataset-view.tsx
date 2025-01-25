@@ -27,7 +27,7 @@ export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
 
       if (result.errors.length > 0) {
         toast({
-          title: t("errors.parsing-csv"),
+          title: t("common.errors.parsing-csv"),
           description: result.errors[0].message,
           variant: "destructive",
         });

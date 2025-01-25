@@ -94,14 +94,14 @@ export const LaunchAlgorithm = ({
     );
   };
 
-  const algorithmTitle = parseFeatureKey(title);
+  // const algorithmTitle = parseFeatureKey(title);
 
   return (
     <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
       <p className="text-2xl text-primary-950 mb-4 font-extrabold">
         {title === "No Mitigation"
           ? "No Mitigation"
-          : t("launch-algorithm.title", { algorithm: algorithmTitle })}
+          : t("launch-algorithm.title", { algorithm: title })}
       </p>
       {title === "No Mitigation" ? (
         <p className="text-md text-primary-900">{description}</p>
