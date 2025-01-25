@@ -3,6 +3,7 @@ import {
   AnswerResponse,
   AnswerContextResponse,
 } from "@/api/types";
+import exp from "node:constants";
 
 export type CsvData = {
   [key: string]: string;
@@ -67,3 +68,9 @@ export type ProcessingType =
   | "preprocessing"
   | "inprocessing"
   | "postprocessing";
+
+export enum MitigationType {
+  Data = "data",
+  Model = "model",
+  Outcome = "outcome",
+}

@@ -137,6 +137,21 @@ export const useStatsContext = (dataset?: string) => {
   return query;
 };
 
+export const usePredictionsContext = (dataset?: string) => {
+  const query = useQuery<string>({
+    queryKey: ["predictions_head", dataset],
+    queryFn: async () => {
+      return backendApi.getContextCsv(
+        PROJECT_CODE,
+        dataset!,
+        "predictions_head"
+      );
+    },
+    enabled: !!dataset,
+  });
+  return query;
+};
+
 // detection view
 export const useFeaturesContext = (dataset?: string) => {
   const query = useQuery<FeaturesResponse>({
@@ -177,6 +192,17 @@ export const useContextVectorialData = (key: string, dataset?: string) => {
     queryKey: [key, dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(PROJECT_CODE, dataset!, key);
+    },
+    enabled: !!dataset,
+  });
+  return query;
+};
+
+export const useContextCsv = (key: string, dataset?: string) => {
+  const query = useQuery<string>({
+    queryKey: [key, dataset],
+    queryFn: async () => {
+      return backendApi.getContextCsv(PROJECT_CODE, dataset!, key);
     },
     enabled: !!dataset,
   });

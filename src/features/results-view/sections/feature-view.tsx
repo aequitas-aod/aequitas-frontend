@@ -4,18 +4,27 @@ import { useTranslations } from "next-intl";
 import Papa from "papaparse";
 import { toast } from "@/hooks/use-toast";
 import { processDataset } from "@/lib/utils";
-import { useStatsContext } from "@/api/context";
+import { useContextVectorialData, usePredictionsContext } from "@/api/context";
 
 import { CsvData, ParsedDataset } from "@/types/types";
 import { FeatureViewTable } from "@/features/feature-view/table";
 
-export const FeaturesView = ({ datasetKey }: { datasetKey: string }) => {
+export const FeaturesView = ({
+  datasetKey,
+}: {
+  datasetKey: string;
+  targetFeature: string;
+}) => {
   const t = useTranslations();
 
   const [data, setData] = useState<ParsedDataset[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
 
-  const { data: contextData, isLoading, error } = useStatsContext(datasetKey);
+  const {
+    data: contextData,
+    isLoading,
+    error,
+  } = usePredictionsContext(` ${datasetKey}`);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {

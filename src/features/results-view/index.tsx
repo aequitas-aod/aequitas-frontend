@@ -8,24 +8,30 @@ import { Detection } from "./sections/detection";
 import { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { RESULT_SECTIONS } from "./utils";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
-import { useUpdateQuestionnaire } from "@/api/questionnaire";
+import {
+  useQuestionnaireById,
+  useUpdateQuestionnaire,
+} from "@/api/questionnaire";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import { useTranslations } from "next-intl";
+import { useFeaturesData } from "@/hooks/useDetectionData";
+import { MitigationType } from "@/types/types";
+import { useContextVectorialData } from "@/api/context";
 
 interface ResultsViewProps {
   questionnaire: QuestionnaireResponse;
   datasetKey: string;
   questionNumber: number;
-  images: string[] | undefined;
   onNext: () => void;
+  mitigationType: MitigationType;
 }
 
 export const ResultsView = ({
   questionnaire,
   datasetKey,
   questionNumber,
-  images,
   onNext,
+  mitigationType,
 }: ResultsViewProps) => {
   const t = useTranslations("ResultsView");
   const [selectedSection, setSelectedSection] = useState<string | null>(
@@ -40,6 +46,9 @@ export const ResultsView = ({
     },
   });
 
+  // TODO: to fix adding feature__ for new datasets
+  const { target } = useFeaturesData(datasetKey.split("-")[0] + "-1");
+
   const handleAction = (answer: AnswerResponse) => {
     setSelectedAnswer(answer.id.code);
     mutate({
@@ -47,6 +56,64 @@ export const ResultsView = ({
       answer_ids: [answer.id],
     });
   };
+  let key: string | undefined;
+
+  const {
+    data: previousQuestion,
+    isLoading: isLoadingPreviousQuestion,
+    error: errorPreviousQuestion,
+  } = useQuestionnaireById({
+    params: { n: questionNumber - 1 },
+  });
+
+  if (mitigationType === MitigationType.Model) {
+    let selectedAlgorithm: string | undefined;
+
+    if (previousQuestion && !isLoadingPreviousQuestion) {
+      console.log(previousQuestion);
+      console.log(isLoadingPreviousQuestion);
+      const selectedAnswer: AnswerResponse | undefined =
+        previousQuestion.answers.find((a) => a.selected);
+      if (selectedAnswer) {
+        selectedAlgorithm = selectedAnswer.id.code;
+        key = `${selectedAlgorithm}__${datasetKey}`;
+      }
+      console.log(key);
+    }
+  } else {
+    key = datasetKey;
+  }
+
+  const { data: correlationMatrix } = useContextVectorialData(
+    "correlation_matrix",
+    datasetKey
+  );
+
+  const { data: performancePlot } = useContextVectorialData(
+    "performance_plot",
+    key
+  );
+  const { data: fairnessPlot } = useContextVectorialData("fairness_plot", key);
+  const { data: polarizationPlot } = useContextVectorialData(
+    "polarization_plot",
+    key
+  );
+
+  const featuresImages: string[] = correlationMatrix
+    ? [correlationMatrix]
+    : undefined;
+
+  const imagesToShow: string[] =
+    performancePlot && fairnessPlot && polarizationPlot
+      ? [performancePlot, fairnessPlot, polarizationPlot]
+      : undefined;
+
+  if (isLoadingPreviousQuestion) {
+    return <div>Loading...</div>;
+  }
+  if (errorPreviousQuestion) {
+    return <div>Error fetching data</div>;
+  }
 
   return (
     <QuestionnaireLayout
@@ -89,16 +156,17 @@ export const ResultsView = ({
       <div className="flex justify-between rounded-b-md flex-1 mt-2 overflow-auto">
         {/* Content based on the selected section */}
         {selectedSection === "ResultsView" && (
-          <ResultsViewSection images={images} />
+          <ResultsViewSection images={imagesToShow} />
         )}
         {selectedSection === "DatasetView" && (
-          <DatasetView datasetKey={datasetKey} />
+          <DatasetView datasetKey={key} mitigationType={mitigationType} />
         )}
         {selectedSection === "FeatureView" && (
-          <FeaturesView datasetKey={datasetKey} />
+          // <FeaturesView datasetKey={key} targetFeature={target} />
+          <ResultsViewSection images={featuresImages} />
         )}
         {selectedSection === "Detection" && (
-          <Detection datasetKey={datasetKey} />
+          <Detection datasetKey={key} targetFeature={target} />
         )}
       </div>
     </QuestionnaireLayout>

@@ -3,6 +3,7 @@ import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
 import React from "react";
+import { MitigationType } from "@/types/types";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -27,16 +28,6 @@ export const OutcomeResultsViewPage = ({
     params: { n: questionNumber },
   });
 
-  const { data: correlationMatrix } = useContextVectorialData(
-    "correlation_matrix",
-    datasetKey
-  );
-
-  const { data: postProcessingPlot } = useContextVectorialData(
-    "postprocessing_plot",
-    datasetKey
-  );
-
   const isLoading = datasetLoading || isLoadingQuestionnaire;
   const error = datasetError || errorQuestionnaire;
 
@@ -56,18 +47,13 @@ export const OutcomeResultsViewPage = ({
     return <div>No dataset available</div>;
   }
 
-  const imagesToShow: string[] | undefined =
-    correlationMatrix && postProcessingPlot
-      ? [correlationMatrix, postProcessingPlot]
-      : undefined;
-
   return (
     <ResultsView
       questionNumber={questionNumber}
       questionnaire={questionnaireData}
       datasetKey={datasetKey}
-      images={imagesToShow}
       onNext={onNext}
+      mitigationType={MitigationType.Outcome}
     />
   );
 };

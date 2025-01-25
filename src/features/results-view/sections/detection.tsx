@@ -8,13 +8,17 @@ import type { Graph } from "@/types/types";
 
 type DetectionProps = {
   datasetKey: string;
+  targetFeature: string;
 };
 
-export const Detection = ({ datasetKey }: DetectionProps) => {
+export const Detection = ({ datasetKey, targetFeature }: DetectionProps) => {
   const t = useTranslations("FeatureView");
   const [graphs, setGraphs] = useState<Graph[]>([]);
-
-  const { metrics, isLoading, error } = useMetricsData(datasetKey);
+  console.log(datasetKey + ".   " + targetFeature);
+  const { metrics, isLoading, error } = useMetricsData(
+    datasetKey,
+    targetFeature
+  );
 
   useEffect(() => {
     if (!metrics) {

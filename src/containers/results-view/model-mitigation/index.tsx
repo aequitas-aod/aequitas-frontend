@@ -3,7 +3,7 @@ import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
 import React from "react";
-import { AnswerResponse } from "@/api/types";
+import { MitigationType } from "@/types/types";
 
 interface QuestionnairePageProps {
   questionNumber: number;
@@ -28,41 +28,8 @@ export const ModelResultsViewPage = ({
     params: { n: questionNumber },
   });
 
-  const {
-    data: previousQuestion,
-    isLoading: isLoadingPreviousQuestion,
-    error: errorPreviousQuestion,
-  } = useQuestionnaireById({
-    params: { n: questionNumber - 1 },
-  });
-
-  let key: string | undefined
-
-  if (questionnaireData && previousQuestion) {
-    const selectedAlgorithm: string = previousQuestion.answers.find(
-      (a) => a.selected
-    ).id.code;
-
-    key = `${selectedAlgorithm}__${datasetKey}`
-    console.log(key);
-  }
-
-  const { data: correlationMatrix } = useContextVectorialData(
-    "correlation_matrix",
-    key
-  );
-  const { data: performancePlot } = useContextVectorialData(
-    "performance_plot",
-    key
-  );
-  const { data: fairnessPlot } = useContextVectorialData(
-    "fairness_plot",
-    key
-  );
-
-  const isLoading =
-    datasetLoading || isLoadingQuestionnaire || isLoadingPreviousQuestion;
-  const error = datasetError || errorQuestionnaire || errorPreviousQuestion;
+  const isLoading = datasetLoading || isLoadingQuestionnaire;
+  const error = datasetError || errorQuestionnaire;
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -80,18 +47,13 @@ export const ModelResultsViewPage = ({
     return <div>No dataset available</div>;
   }
 
-  const imagesToShow: string[] =
-    correlationMatrix && performancePlot && fairnessPlot
-      ? [correlationMatrix, performancePlot, fairnessPlot]
-      : undefined;
-
   return (
     <ResultsView
       questionNumber={questionNumber}
       questionnaire={questionnaireData}
       datasetKey={datasetKey}
-      images={imagesToShow}
       onNext={onNext}
+      mitigationType={MitigationType.Model}
     />
   );
 };

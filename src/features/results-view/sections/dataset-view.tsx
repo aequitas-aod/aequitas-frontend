@@ -2,12 +2,18 @@ import { useTranslations } from "next-intl";
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 import { processDataset } from "@/lib/utils";
-import { CsvData, ParsedDataset } from "@/types/types";
+import { CsvData, MitigationType, ParsedDataset } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { DatasetViewTable } from "@/features/dataset-view/table";
-import { useDatasetHeadContext } from "@/api/context";
+import { useDatasetHeadContext, usePredictionsContext } from "@/api/context";
 
-export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
+export const DatasetView = ({
+  datasetKey,
+  mitigationType,
+}: {
+  datasetKey: string;
+  mitigationType: MitigationType;
+}) => {
   const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
   const [columns, setColumns] = useState<string[]>([]); // Stato per le colonne dinamiche
@@ -16,7 +22,9 @@ export const DatasetView = ({ datasetKey }: { datasetKey: string }) => {
     data: contextData,
     isLoading,
     error,
-  } = useDatasetHeadContext(datasetKey);
+  } = mitigationType === MitigationType.Model
+    ? usePredictionsContext(datasetKey)
+    : useDatasetHeadContext(datasetKey);
 
   useEffect(() => {
     const parseCsv = (csv: string) => {
