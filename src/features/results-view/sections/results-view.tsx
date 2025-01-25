@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import parse from "html-react-parser";
 
 export const ResultsViewSection = ({
@@ -27,7 +27,7 @@ export const ResultsViewSection = ({
 
   return (
     <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
-      <div className="bg-neutral-200 p-4 flex justify-center items-center rounded w-full min-h-auto relative">
+      <div className="flex flex-1 p-4 bg-neutral-100 gap-4 rounded overflow-auto">
         <div className="flex flex-wrap p-4 mx-auto">
           {imagesToShow.map((svg, index) => (
             <div key={index} className="w-full 2xl:w-1/2 p-2">
