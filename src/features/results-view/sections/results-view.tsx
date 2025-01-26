@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 export const ResultsViewSection = ({
   images,
 }: {
-  images: string[] | undefined;
+  images: undefined | (string | undefined)[];
 }) => {
   const parsingOptions = {
     replace: (domNode) => {
@@ -17,8 +17,8 @@ export const ResultsViewSection = ({
 
   const imagesToShow = useMemo(() => {
     if (images && images.length > 0) {
-      const parsedImages: string[] = images;
-      return parsedImages
+      return images
+        .filter((optSvg) => optSvg !== undefined)
         .map((svg) => svg.substring(svg.indexOf("<svg")))
         .map((svg) => parse(svg, parsingOptions));
     }

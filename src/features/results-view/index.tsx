@@ -1,6 +1,6 @@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
 import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
@@ -84,29 +84,57 @@ export const ResultsView = ({
     key = datasetKey;
   }
 
-  const { data: correlationMatrix } = useContextVectorialData(
-    "correlation_matrix",
-    datasetKey
-  );
+  const { data: correlationMatrix, isLoading: isLoadingCorrelationMatrix } =
+    useContextVectorialData("correlation_matrix", datasetKey);
 
-  const { data: performancePlot } = useContextVectorialData(
-    "performance_plot",
-    key
-  );
-  const { data: fairnessPlot } = useContextVectorialData("fairness_plot", key);
-  const { data: polarizationPlot } = useContextVectorialData(
-    "polarization_plot",
-    key
-  );
+  const { data: preprocessingPlot, isLoading: isLoadingPreprocessingPlot } =
+    useContextVectorialData("preprocessing_plot", key);
+  const { data: performancePlot, isLoading: isLoadingPerformancePlot } =
+    useContextVectorialData("performance_plot", key);
+  const { data: fairnessPlot, isLoading: isLoadingFairnessPlot } =
+    useContextVectorialData("fairness_plot", key);
+  const { data: polarizationPlot, isLoading: isLoadingPolarizationPlot } =
+    useContextVectorialData("polarization_plot", key);
 
   const featuresImages: string[] = correlationMatrix
     ? [correlationMatrix]
     : undefined;
 
-  const imagesToShow: string[] =
-    performancePlot && fairnessPlot && polarizationPlot
-      ? [performancePlot, fairnessPlot, polarizationPlot]
-      : undefined;
+  const [imagesToShow, setLoadedImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Map all plots and loading states into a single array for processing.
+    const preprocessing =
+      mitigationType === MitigationType.Data
+        ? [{ src: preprocessingPlot, isLoading: isLoadingPreprocessingPlot }]
+        : [];
+
+    const otherPlots = [
+      { src: performancePlot, isLoading: isLoadingPerformancePlot },
+      { src: fairnessPlot, isLoading: isLoadingFairnessPlot },
+      { src: polarizationPlot, isLoading: isLoadingPolarizationPlot },
+    ];
+
+    // Combine preprocessing and other plots, ensuring preprocessing comes first
+    const plots = [...preprocessing, ...otherPlots];
+
+    // Filter and display images as they load.
+    const availableImages = plots
+      .filter((plot) => !plot.isLoading)
+      .map((plot) => plot.src);
+
+    setLoadedImages(availableImages);
+  }, [
+    preprocessingPlot,
+    performancePlot,
+    fairnessPlot,
+    polarizationPlot,
+    mitigationType,
+    isLoadingPerformancePlot,
+    isLoadingFairnessPlot,
+    isLoadingPolarizationPlot,
+    isLoadingPreprocessingPlot,
+  ]);
 
   if (isLoadingPreviousQuestion) {
     return <div>Loading...</div>;
