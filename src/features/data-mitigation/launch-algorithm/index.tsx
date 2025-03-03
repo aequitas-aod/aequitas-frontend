@@ -98,19 +98,18 @@ export const LaunchAlgorithm = ({
 
   return (
     <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full">
-      <p className="text-2xl text-primary-950 mb-4 font-extrabold">
+      <p className="text-2xl text-primary-950 mb-2 font-extrabold">
         {title === "No Mitigation"
           ? "No Mitigation"
           : t("launch-algorithm.title", { algorithm: title })}
       </p>
-      {title === "No Mitigation" ? (
-        <p className="text-md text-primary-900">{description}</p>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {renderFormInputs()}
-          <div className="flex justify-end">{renderButton()}</div>
-        </form>
+      {title !== "No Mitigation" && (
+        <p className="text-md text-neutral-500 mb-5">{description}</p>
       )}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {renderFormInputs()}
+        <div className="flex justify-end">{renderButton()}</div>
+      </form>
     </div>
   );
 };

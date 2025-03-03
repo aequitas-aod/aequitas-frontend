@@ -144,7 +144,7 @@ export const Proxies = ({
           </div>
         </div>
         <div className="min-w-40rem p-6 overflow-auto">
-          <p className="mb-6 text-neutral-800 text-base font-normal">
+          <p className="mb-6 text-neutral-800 text-base font-normal max-w-xs">
             {question.text}
           </p>
           {Object.entries(featureData).map(([featureKey, attributes]) => {

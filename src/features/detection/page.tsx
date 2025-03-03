@@ -158,7 +158,7 @@ export const Detection = ({
     >
       <QuestionnaireBanner text={questionnaireData.description} />
       <div className="flex p-2 h-full overflow-auto">
-        <div className="w-90 p-6 overflow-auto">
+        <div className="max-w-md p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
             {questionnaireData.text}
           </p>
