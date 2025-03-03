@@ -5,6 +5,9 @@
     "feedback": "Feedback",
     "errors": {
       "parsing-csv": "Error parsing CSV file"
+    },
+    "heatmap": {
+      "tooltip": "Shows feature correlations: values range from -1 (strong negative) to 1 (strong positive). Darker colors indicate stronger relationships"
     }
   },
   "breadcrumb": {

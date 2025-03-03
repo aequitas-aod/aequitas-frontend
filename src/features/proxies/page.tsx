@@ -15,6 +15,7 @@ import {
 import { useContextVectorialData, useMutationProxies } from "@/api/context";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export const Proxies = ({
   onNext,
@@ -31,7 +32,7 @@ export const Proxies = ({
   datasetKey: string;
   answers: AnswerResponse[];
 }) => {
-  const t = useTranslations("FeatureView");
+  const t = useTranslations();
   const { data: correlationMatrix } = useContextVectorialData(
     "correlation_matrix",
     datasetKey
@@ -124,7 +125,7 @@ export const Proxies = ({
           onClick={onContinue}
           isLoading={isPendingProxies || isPendingQuestionnaire}
         >
-          {t("buttons.continue")}
+          {t("common.continue")}
         </ButtonLoading>
       }
       className="!bg-white !overflow-hidden"
@@ -135,7 +136,10 @@ export const Proxies = ({
           <div className="flex flex-wrap p-4 mx-auto">
             {imagesToShow.map((svg, index) => (
               <div key={index} className="w-full 2xl:w-1/2 p-2">
-                {svg}
+                <Tooltip content={t("common.heatmap.tooltip")}>
+                  <div className="w-full h-auto">{svg}</div>
+                </Tooltip>
+                {/*<TooltipComponent children={svg} tooltipText="Correlation matrix" />*/}
               </div>
             ))}
           </div>
