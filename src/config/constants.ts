@@ -24,6 +24,9 @@ export const FEATURE_COLUMN = "feature";
 export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 
+/* Proxies */
+export const THRESHOLD = 50;
+
 /* Questionnaire */
 export const QUESTIONNAIRE_KEYS = {
   DATASET_SELECTION: "DatasetSelection",

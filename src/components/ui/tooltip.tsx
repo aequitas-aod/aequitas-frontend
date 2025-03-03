@@ -7,7 +7,7 @@ export const Tooltip = ({ children, content, ...props }) => (
       <RadixTooltip.Content
         side="left"
         align="center"
-        className="bg-[hsl(var(--ae--primary-200))] text-black px-3 py-2 rounded-md shadow-lg w-[300px] text-center"
+        className="bg-[hsl(var(--ae--primary-200))] text-black px-3 py-2 rounded-md shadow-lg w-[300px] text-center z-50"
         sideOffset={5}
         {...props}
       >

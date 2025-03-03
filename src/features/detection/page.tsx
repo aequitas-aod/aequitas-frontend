@@ -160,7 +160,7 @@ export const Detection = ({
       <div className="flex p-2 h-full overflow-auto">
         <div className="w-90 p-6 overflow-auto">
           <p className="mb-6 text-neutral-800 text-base font-normal">
-            Detect bias in the data
+            {questionnaireData.text}
           </p>
           {Object.entries(featureData).map(([featureKey, attributes]) => {
             const suggestedCount = Object.entries(attributes).filter(
@@ -171,6 +171,11 @@ export const Detection = ({
               <FeatureAccordion
                 key={featureKey}
                 featureKey={featureKey}
+                description={
+                  questionAnswers.find(
+                    (answer) => answer.id.code === featureKey
+                  ).description
+                }
                 suggestedCount={suggestedCount}
               >
                 <FeatureCheckboxList

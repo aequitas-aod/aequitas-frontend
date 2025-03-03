@@ -139,7 +139,6 @@ export const Proxies = ({
                 <Tooltip content={t("common.heatmap.tooltip")}>
                   <div className="w-full h-auto">{svg}</div>
                 </Tooltip>
-                {/*<TooltipComponent children={svg} tooltipText="Correlation matrix" />*/}
               </div>
             ))}
           </div>
@@ -155,6 +154,7 @@ export const Proxies = ({
             return (
               <FeatureAccordion
                 key={featureKey}
+                description={undefined}
                 featureKey={
                   featureKey
                     .replace(/([a-z])([A-Z])/g, "$1 $2") // Aggiunge uno spazio tra lettere minuscole e maiuscole

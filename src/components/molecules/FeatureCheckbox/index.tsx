@@ -1,5 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ReactNode } from "react";
+import { THRESHOLD } from "@/config/constants";
 
 interface FeatureCheckboxProps {
   attributeKey: string; // Chiave dell'attributo
@@ -60,7 +61,9 @@ export const FeatureCheckbox = ({
       >
         {/* Etichetta o testo della feature */}
         <div className="mt-1 flex gap-2">
-          <p className={`font-extrabold ${disabled && "text-gray-500"}`}>
+          <p
+            className={`${Math.abs(parseInt(label as string)) > THRESHOLD && "font-extrabold"} ${disabled && "text-gray-500"}`}
+          >
             {title}
           </p>
           {label && <p>{`${label}`}</p>} {/* Mostra l'etichetta se presente */}
