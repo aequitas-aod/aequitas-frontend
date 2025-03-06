@@ -136,7 +136,7 @@ export const Proxies = ({
           <div className="flex flex-wrap p-4 mx-auto">
             {imagesToShow.map((svg, index) => (
               <div key={index} className="w-full 2xl:w-1/2 p-2">
-                <Tooltip content={t("common.heatmap.tooltip")}>
+                <Tooltip content={t("common.tooltips.correlation_matrix")}>
                   <div className="w-full h-auto">{svg}</div>
                 </Tooltip>
               </div>
