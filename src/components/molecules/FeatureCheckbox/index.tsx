@@ -53,7 +53,7 @@ export const FeatureCheckbox = ({
         />
       </div>
       <div
-        className={`absolute ${
+        className={`absolute w-[80%] ${
           featureIndex === totalItems - 1
             ? "bottom-[-8px] transform left-16"
             : "top-1/2 transform -translate-y-1/2 left-16"
@@ -62,11 +62,11 @@ export const FeatureCheckbox = ({
         {/* Etichetta o testo della feature */}
         <div className="mt-1 flex gap-2">
           <p
-            className={`${Math.abs(parseInt(label as string)) > THRESHOLD && "font-extrabold"} ${disabled && "text-gray-500"}`}
+            className={`break-words max-w-[85%] ${Math.abs(parseInt(label as string)) > THRESHOLD && "font-extrabold"} ${disabled && "text-gray-500"}`}
           >
             {title}
           </p>
-          {label && <p>{`${label}`}</p>} {/* Mostra l'etichetta se presente */}
+          {label && <p className="ml-auto pr-2">{`${label}`}</p>} {/* Mostra l'etichetta se presente */}
         </div>
       </div>
     </div>
