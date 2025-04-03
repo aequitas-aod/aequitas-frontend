@@ -30,6 +30,19 @@ export const isMocked = (): boolean => {
 export class BackendApi {
   /* Questionnaire */
 
+  async createProject(code: string, name: string) {
+    const url = `${BACKEND_URL}/projects`;
+    const res = await axios.post(url, {
+      code,
+      name,
+    });
+    if (res.status === 201) {
+      console.log("RESPONSE", res.data);
+      return res.data;
+    }
+    throw new Error("Failed to create project");
+  }
+
   async getQuestionnaireList(
     project: string
   ): Promise<QuestionnaireResponse[]> {

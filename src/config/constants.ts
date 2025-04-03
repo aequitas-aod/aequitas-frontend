@@ -1,7 +1,5 @@
 export const BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
-export const PROJECT_CODE = "p-1";
-
 /* Constants */
 export const GOOGLE_FORM_LINK = process.env.NEXT_PUBLIC_GOOGLE_FORM_LINK || "";
 export const FEEDBACK_LINK = "https://forms.gle/WnYCvQZWerVEQfFR8";

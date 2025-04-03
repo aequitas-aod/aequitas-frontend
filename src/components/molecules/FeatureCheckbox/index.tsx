@@ -66,7 +66,8 @@ export const FeatureCheckbox = ({
           >
             {title}
           </p>
-          {label && <p className="ml-auto pr-2">{`${label}`}</p>} {/* Mostra l'etichetta se presente */}
+          {label && <p className="ml-auto pr-2">{`${label}`}</p>}{" "}
+          {/* Mostra l'etichetta se presente */}
         </div>
       </div>
     </div>
