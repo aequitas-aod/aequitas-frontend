@@ -54,6 +54,7 @@
     "eslint-config-next": "15.2.4",
     "postcss": "^8",
     "prettier": "3.5.3",
+    "semantic-release-preconfigured-conventional-commits": "latest",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

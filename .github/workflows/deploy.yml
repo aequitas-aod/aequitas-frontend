@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # all history
+          token: ${{ secrets.DEPLOYMENT_TOKEN }}
 
       - name: Restore Dependencies
         run: npm install
@@ -24,27 +25,22 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Compute Version
-        run: echo "IMAGE_VERSION=$(jq -r .version package.json)-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3.2.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.7.1
 
       - name: Login on DockerHub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker Image
-        run: |
-          docker build -t $IMAGE_TAG .
-          docker tag $IMAGE_TAG $IMAGE_TAG:$IMAGE_VERSION
+      - name: Test Docker image creation
+        run: docker build .
 
-      - name: Push Docker Image
-        run: |
-          docker push $IMAGE_TAG:$IMAGE_VERSION
-          docker push $IMAGE_TAG:latest
-
-      - name: Release on GitHub
-        shell: bash
+      - name: Release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_TAG: 'aequitaseu/frontend'
         run: |
-          ASSET_NAME=$(basename $GITHUB_REPOSITORY)
-          zip -r $ASSET_NAME out
-          gh release create $IMAGE_VERSION $ASSET_NAME.zip --title "v$IMAGE_VERSION"
+          npm install
+          npx semantic-release
