@@ -1,3 +1,19 @@
+## [1.0.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.1...v1.0.2) (2025-04-07)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.24.0 ([#181](https://github.com/aequitas-aod/aequitas-frontend/issues/181)) ([7b7c755](https://github.com/aequitas-aod/aequitas-frontend/commit/7b7c755ae9b4d0a734a3c85ae3ae2bdded1fd85c))
+* **deps:** update dependency typescript to v5.8.3 ([#182](https://github.com/aequitas-aod/aequitas-frontend/issues/182)) ([b0a9dd4](https://github.com/aequitas-aod/aequitas-frontend/commit/b0a9dd4628f5aba47681d839d7b856798eb3d255))
+
+### Bug Fixes
+
+* **deps:** update dependency tailwind-merge to v3.2.0 ([#183](https://github.com/aequitas-aod/aequitas-frontend/issues/183)) ([cb10a37](https://github.com/aequitas-aod/aequitas-frontend/commit/cb10a372a18eea65670bca2e64577b8cdb4c5237))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-buildx-action action to v3.10.0 ([#178](https://github.com/aequitas-aod/aequitas-frontend/issues/178)) ([0620296](https://github.com/aequitas-aod/aequitas-frontend/commit/0620296eb887a918563d3ac7b5ebeb8a6814d523))
+* **deps:** update docker/setup-qemu-action action to v3.6.0 ([#179](https://github.com/aequitas-aod/aequitas-frontend/issues/179)) ([4f978ee](https://github.com/aequitas-aod/aequitas-frontend/commit/4f978ee37da71692b19c5dc7775c1dcf6d340b07))
+
 ## [1.0.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.0...v1.0.1) (2025-04-04)
 
 ### Bug Fixes
