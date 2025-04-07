@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.2...v1.0.3) (2025-04-07)
+
+### Bug Fixes
+
+* **deps:** update tanstack-query monorepo to v5.72.0 ([#184](https://github.com/aequitas-aod/aequitas-frontend/issues/184)) ([c164784](https://github.com/aequitas-aod/aequitas-frontend/commit/c164784f9f6cd4aa7681558ee39001725b2a2db7))
+
 ## [1.0.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.1...v1.0.2) (2025-04-07)
 
 ### Dependency updates
