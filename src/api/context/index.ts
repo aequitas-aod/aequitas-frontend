@@ -21,7 +21,7 @@ export const useCurrentDataset = () => {
   const query = useQuery<string>({
     queryKey: ["current_dataset"],
     queryFn: async () => {
-      return backendApi.getCurrentDataset(loadOrGenerateProjectId());
+      return backendApi.getCurrentDataset(await loadOrGenerateProjectId());
     },
   });
   return query;
@@ -31,7 +31,7 @@ export const useCurrentTestDataset = () => {
   const query = useQuery<string>({
     queryKey: ["test_current_dataset"],
     queryFn: async () => {
-      return backendApi.getCurrentTestDataset(loadOrGenerateProjectId());
+      return backendApi.getCurrentTestDataset(await loadOrGenerateProjectId());
     },
   });
   return query;
@@ -43,14 +43,18 @@ export const useMutationFeatures = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       dataset,
       body,
     }: {
       dataset?: string;
       body: FeaturesParams;
     }) => {
-      return backendApi.putFeatures(loadOrGenerateProjectId(), dataset!, body);
+      return backendApi.putFeatures(
+        await loadOrGenerateProjectId(),
+        dataset!,
+        body
+      );
     },
     onSuccess: () => {
       onSuccess();
@@ -65,14 +69,18 @@ export const useMutationProxies = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       dataset,
       body,
     }: {
       dataset?: string;
       body: ProxyDataParams;
     }) => {
-      return backendApi.putProxies(loadOrGenerateProjectId(), dataset!, body);
+      return backendApi.putProxies(
+        await loadOrGenerateProjectId(),
+        dataset!,
+        body
+      );
     },
     onSuccess: () => {
       onSuccess();
@@ -87,14 +95,18 @@ export const useMutationDetected = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       dataset,
       body,
     }: {
       dataset?: string;
       body: DetectionDataParams;
     }) => {
-      return backendApi.putDetected(loadOrGenerateProjectId(), dataset!, body);
+      return backendApi.putDetected(
+        await loadOrGenerateProjectId(),
+        dataset!,
+        body
+      );
     },
     onSuccess: () => {
       onSuccess();
@@ -108,7 +120,7 @@ export const useDatasetsContext = () => {
   const query = useQuery<AnswerContextResponse[]>({
     queryKey: ["datasets"],
     queryFn: async () => {
-      return backendApi.getDatasetsInfo(loadOrGenerateProjectId());
+      return backendApi.getDatasetsInfo(await loadOrGenerateProjectId());
     },
   });
   return query;
@@ -119,7 +131,7 @@ export const useDatasetHeadContext = (dataset?: string) => {
     queryKey: ["dataset", dataset],
     queryFn: async () => {
       return backendApi.getContextCsv(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         "dataset_head"
       );
@@ -135,7 +147,7 @@ export const useStatsContext = (dataset?: string) => {
     queryKey: ["stats", dataset],
     queryFn: async () => {
       return backendApi.getContextCsv(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         "stats"
       );
@@ -150,7 +162,7 @@ export const usePredictionsContext = (dataset?: string) => {
     queryKey: ["predictions_head", dataset],
     queryFn: async () => {
       return backendApi.getContextCsv(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         "predictions_head"
       );
@@ -165,7 +177,10 @@ export const useFeaturesContext = (dataset?: string) => {
   const query = useQuery<FeaturesResponse>({
     queryKey: ["features", dataset],
     queryFn: async () => {
-      return backendApi.getFeaturesContext(loadOrGenerateProjectId(), dataset!);
+      return backendApi.getFeaturesContext(
+        await loadOrGenerateProjectId(),
+        dataset!
+      );
     },
     enabled: !!dataset,
   });
@@ -176,7 +191,10 @@ export const useMetricsContext = (dataset?: string, feature?: string) => {
   const query = useQuery<MetricsResponse>({
     queryKey: ["metrics", dataset],
     queryFn: async () => {
-      return backendApi.getMetricsContext(loadOrGenerateProjectId(), dataset!);
+      return backendApi.getMetricsContext(
+        await loadOrGenerateProjectId(),
+        dataset!
+      );
     },
     enabled: !!dataset && !!feature,
   });
@@ -189,7 +207,7 @@ export const useSuggestedProxies = (dataset?: string) => {
     queryKey: ["suggested-proxies", dataset],
     queryFn: async () => {
       return backendApi.getSuggestedProxies(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!
       );
     },
@@ -203,7 +221,7 @@ export const useContextVectorialData = (key: string, dataset?: string) => {
     queryKey: [key, dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         key
       );
@@ -217,7 +235,11 @@ export const useContextCsv = (key: string, dataset?: string) => {
   const query = useQuery<string>({
     queryKey: [key, dataset],
     queryFn: async () => {
-      return backendApi.getContextCsv(loadOrGenerateProjectId(), dataset!, key);
+      return backendApi.getContextCsv(
+        await loadOrGenerateProjectId(),
+        dataset!,
+        key
+      );
     },
     enabled: !!dataset,
   });
@@ -229,7 +251,7 @@ export const useDependencyGraph = (dataset?: string) => {
     queryKey: ["dependency-graph", dataset],
     queryFn: async () => {
       return backendApi.getContextVectorialData(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         "dependency_graph"
       );
@@ -248,7 +270,7 @@ export const useProcessingHyperparameters = (
     queryKey: ["hyperparameters", algorithm, hyperparameterType],
     queryFn: async () => {
       return backendApi.getProcessingHyperparametersContext(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         algorithm!,
         hyperparameterType
       );
@@ -264,7 +286,7 @@ export const useLaunchAlgorithmMutation = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       dataset,
       body,
       hyperparameterType,
@@ -274,7 +296,7 @@ export const useLaunchAlgorithmMutation = ({
       hyperparameterType: ProcessingType;
     }) => {
       return backendApi.putProcessingContext(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         dataset!,
         body,
         hyperparameterType
@@ -294,9 +316,9 @@ export const useUpdateContextCsv = ({
   onSuccess?: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (params: { dataset?: string; body: string }) => {
+    mutationFn: async (params: { dataset?: string; body: string }) => {
       return backendApi.putContext(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         "dataset__" + params.dataset,
         params.body
       );

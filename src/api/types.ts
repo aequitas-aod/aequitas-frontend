@@ -23,6 +23,13 @@ export type QuestionnaireId = {
   dataset_code: string | null; // Dataset code
 };
 
+// Type for the projects response
+export type ProjectResponse = {
+  id: { code: string };
+  name: string;
+  context: Record<string, string>;
+};
+
 // Type for the questionnaire response
 export type QuestionnaireResponse = {
   id: QuestionnaireId;

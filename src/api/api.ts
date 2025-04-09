@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { sleep } from "@/lib/utils";
 import { BACKEND_URL } from "@/config/constants";
@@ -11,6 +11,7 @@ import {
   FeaturesResponse,
   MetricsResponse,
   ProcessingHyperparametersResponse,
+  ProjectResponse,
   ProxyDataParams,
   ProxyDataResponse,
   QuestionnaireResponse,
@@ -32,6 +33,7 @@ export class BackendApi {
 
   async createProject(code: string, name: string) {
     const url = `${BACKEND_URL}/projects`;
+    console.log(`POST URL: ${url}`);
     const res = await axios.post(url, {
       code,
       name,
@@ -41,6 +43,17 @@ export class BackendApi {
       return res.data;
     }
     throw new Error("Failed to create project");
+  }
+
+  async getProject(project: string): Promise<AxiosResponse<ProjectResponse>> {
+    const url = `${BACKEND_URL}/projects/${project}`;
+    console.log(`GET URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      console.log("RESPONSE", res.data);
+      return res.data;
+    }
+    throw new Error("Project not found");
   }
 
   async getQuestionnaireList(

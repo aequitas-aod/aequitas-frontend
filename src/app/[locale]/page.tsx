@@ -5,20 +5,6 @@ import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
-import { loadOrGenerateProjectId } from "@/storage/session";
-import { backendApi } from "@/api/api";
-
-const onStart = async () => {
-  const projectId: string = loadOrGenerateProjectId();
-  const name = `Project ${projectId}`;
-  try {
-    await backendApi.createProject(projectId, name);
-  } catch (error) {
-    console.error("Project creation failed", error);
-  }
-  redirect("/en/questionnaire");
-};
-
 export default function HomePage() {
   const t = useTranslations("HomePage");
 
@@ -44,7 +30,9 @@ export default function HomePage() {
               {t("buttons.googleForm")}
             </Button>
           </a>
-          <Button onClick={onStart}>{t("buttons.start")}</Button>
+          <Button onClick={() => redirect("/en/questionnaire")}>
+            {t("buttons.start")}
+          </Button>
         </div>
       </div>
     </div>

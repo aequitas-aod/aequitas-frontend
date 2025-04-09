@@ -14,7 +14,7 @@ const ApiUrlInfo = () => {
 
 export const Footer = () => {
   const onResetQuestionnaire = async () => {
-    const oldId: string = loadOrGenerateProjectId();
+    const oldId: string = await loadOrGenerateProjectId();
     const res = await axios.delete(
       `${BACKEND_URL}/projects/${oldId}/questionnaire`
     );

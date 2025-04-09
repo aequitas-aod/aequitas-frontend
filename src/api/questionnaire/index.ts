@@ -12,7 +12,7 @@ export const useQuestionnaireList = () => {
   const query = useQuery<QuestionnaireResponse[]>({
     queryKey: ["questionnaireFull"],
     queryFn: async () => {
-      return backendApi.getQuestionnaireList(loadOrGenerateProjectId());
+      return backendApi.getQuestionnaireList(await loadOrGenerateProjectId());
     },
   });
   return query;
@@ -28,7 +28,10 @@ export const useQuestionnaireById = ({
   const query = useQuery<QuestionnaireResponse>({
     queryKey: ["questionnaire", params],
     queryFn: async () => {
-      return backendApi.getQuestionnaireById(loadOrGenerateProjectId(), params);
+      return backendApi.getQuestionnaireById(
+        await loadOrGenerateProjectId(),
+        params
+      );
     },
     enabled: enabled,
   });
@@ -41,8 +44,11 @@ export const useUpdateQuestionnaire = ({
   onSuccess?: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (params: PutQuestionnaireParams) => {
-      return backendApi.putQuestionnaire(loadOrGenerateProjectId(), params);
+    mutationFn: async (params: PutQuestionnaireParams) => {
+      return backendApi.putQuestionnaire(
+        await loadOrGenerateProjectId(),
+        params
+      );
     },
     onSuccess: () => {
       if (onSuccess) {
@@ -60,8 +66,11 @@ export const useUpdateCustomQuestionnaire = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (params: PutQuestionnaireParams) => {
-      return backendApi.putQuestionnaire(loadOrGenerateProjectId(), params);
+    mutationFn: async (params: PutQuestionnaireParams) => {
+      return backendApi.putQuestionnaire(
+        await loadOrGenerateProjectId(),
+        params
+      );
     },
     onSuccess: () => {
       onSuccess();
@@ -77,9 +86,9 @@ export const useDeleteQuestionnaireById = ({
   onSuccess: () => void;
 }) => {
   const mutation = useMutation({
-    mutationFn: (params: DeleteQuestionnaireParams) => {
+    mutationFn: async (params: DeleteQuestionnaireParams) => {
       return backendApi.deleteQuestionnaireById(
-        loadOrGenerateProjectId(),
+        await loadOrGenerateProjectId(),
         params
       );
     },

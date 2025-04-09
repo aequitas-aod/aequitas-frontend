@@ -40,7 +40,7 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IMAGE_TAG: 'aequitaseu/frontend'
+          IMAGE_TAG: "aequitaseu/frontend"
         run: |
           npm install
           npx semantic-release
