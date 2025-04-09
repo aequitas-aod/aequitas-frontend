@@ -1,3 +1,9 @@
+## [1.0.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.6...v1.0.7) (2025-04-09)
+
+### Bug Fixes
+
+* **session:** fix project loading/creation when session is empty or inconsistent ([63185b5](https://github.com/aequitas-aod/aequitas-frontend/commit/63185b559743c1e60e697ee5b4833be52059cf82))
+
 ## [1.0.6](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.5...v1.0.6) (2025-04-09)
 
 ### Bug Fixes
