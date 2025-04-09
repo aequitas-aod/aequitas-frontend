@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.4...v1.0.5) (2025-04-09)
+
+### Bug Fixes
+
+* **deps:** update radix-ui-primitives monorepo ([#186](https://github.com/aequitas-aod/aequitas-frontend/issues/186)) ([4027552](https://github.com/aequitas-aod/aequitas-frontend/commit/402755234f48feb0398255d6eaeff651fb1cced3))
+
 ## [1.0.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.3...v1.0.4) (2025-04-08)
 
 ### Bug Fixes
