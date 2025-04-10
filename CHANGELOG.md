@@ -1,3 +1,9 @@
+## [1.0.9](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.8...v1.0.9) (2025-04-10)
+
+### Bug Fixes
+
+* **deps:** update dependency @radix-ui/react-tooltip to v1.2.0 ([#187](https://github.com/aequitas-aod/aequitas-frontend/issues/187)) ([78eb6b3](https://github.com/aequitas-aod/aequitas-frontend/commit/78eb6b330194194533d4eb77e61387426e291320))
+
 ## [1.0.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.7...v1.0.8) (2025-04-09)
 
 ### Bug Fixes
