@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.10...v1.1.0) (2025-04-11)
+
+### Features
+
+* add call to check if project exists ([76ab40b](https://github.com/aequitas-aod/aequitas-frontend/commit/76ab40bda1086e27d34ad75e07c2a9895f0f49d3))
+
 ## [1.0.10](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.9...v1.0.10) (2025-04-10)
 
 ### Bug Fixes
