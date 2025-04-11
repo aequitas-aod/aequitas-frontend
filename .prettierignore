@@ -1,3 +1,4 @@
 *.d.ts
 azure-pipelines.yml
 tailwind.config.ts
+CHANGELOG.md

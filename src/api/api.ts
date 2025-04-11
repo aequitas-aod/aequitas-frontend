@@ -56,6 +56,17 @@ export class BackendApi {
     throw new Error("Project not found");
   }
 
+  async checkProjectExists(project: string): Promise<AxiosResponse<boolean>> {
+    const url = `${BACKEND_URL}/projects/${project}/exists`;
+    console.log(`GET URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      console.log("RESPONSE", res.data);
+      return res.data;
+    }
+    throw new Error("Error checking project existence");
+  }
+
   async getQuestionnaireList(
     project: string
   ): Promise<QuestionnaireResponse[]> {

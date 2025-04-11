@@ -14,10 +14,9 @@ export const loadOrGenerateProjectId = async (): Promise<string> => {
   let id: string = sessionStorage.getItem(KEY);
   console.log("PROJECT ID:", id);
   if (id) {
-    try {
-      await backendApi.getProject(id);
-    } catch (error) {
-      console.log(error);
+    const exists = await backendApi.checkProjectExists(id);
+    console.log("Project ID exists:", exists);
+    if (!exists) {
       sessionStorage.removeItem(KEY);
       redirect("/en");
     }
