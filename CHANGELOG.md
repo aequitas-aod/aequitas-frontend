@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.0...v1.1.1) (2025-04-12)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.14.1 ([#191](https://github.com/aequitas-aod/aequitas-frontend/issues/191)) ([a4147b3](https://github.com/aequitas-aod/aequitas-frontend/commit/a4147b331fbad6e1d628b53cc6f275c31024c4ca))
+
+### Bug Fixes
+
+* **deps:** update tanstack-query monorepo to v5.73.3 ([#192](https://github.com/aequitas-aod/aequitas-frontend/issues/192)) ([57c3c24](https://github.com/aequitas-aod/aequitas-frontend/commit/57c3c2470e8737f1d8bc82d616a09b18ae456462))
+
 ## [1.1.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.0.10...v1.1.0) (2025-04-11)
 
 ### Features
