@@ -1,3 +1,9 @@
+## [1.1.13](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.12...v1.1.13) (2025-04-20)
+
+### Bug Fixes
+
+* **deps:** update dependency react-hook-form to v7.56.0 ([#205](https://github.com/aequitas-aod/aequitas-frontend/issues/205)) ([ff0bcdd](https://github.com/aequitas-aod/aequitas-frontend/commit/ff0bcdd104e9947563559e64028c2aa3958b2f9b))
+
 ## [1.1.12](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.11...v1.1.12) (2025-04-20)
 
 ### Bug Fixes
