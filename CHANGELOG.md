@@ -1,3 +1,13 @@
+## [1.1.15](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.14...v1.1.15) (2025-04-22)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.25.1 ([#207](https://github.com/aequitas-aod/aequitas-frontend/issues/207)) ([6d3b4ff](https://github.com/aequitas-aod/aequitas-frontend/commit/6d3b4ff7429c70a7c578aa5d56792b6b863a89da))
+
+### Bug Fixes
+
+* **deps:** update dependency next-intl to v4.0.3 ([#208](https://github.com/aequitas-aod/aequitas-frontend/issues/208)) ([e83dfa9](https://github.com/aequitas-aod/aequitas-frontend/commit/e83dfa9dff1902775f5bc7df9fdc1b9d65877548))
+
 ## [1.1.14](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.13...v1.1.14) (2025-04-21)
 
 ### Bug Fixes
