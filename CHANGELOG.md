@@ -1,3 +1,9 @@
+## [1.1.18](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.17...v1.1.18) (2025-04-24)
+
+### Bug Fixes
+
+* **deps:** update dependency next-intl to v4.1.0 ([#211](https://github.com/aequitas-aod/aequitas-frontend/issues/211)) ([2844f7d](https://github.com/aequitas-aod/aequitas-frontend/commit/2844f7d361c0fd951b19d33500034f86342d539c))
+
 ## [1.1.17](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.16...v1.1.17) (2025-04-23)
 
 ### Bug Fixes
