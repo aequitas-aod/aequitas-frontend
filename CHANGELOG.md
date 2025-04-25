@@ -1,3 +1,13 @@
+## [1.1.19](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.18...v1.1.19) (2025-04-25)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.0 ([#212](https://github.com/aequitas-aod/aequitas-frontend/issues/212)) ([1236829](https://github.com/aequitas-aod/aequitas-frontend/commit/1236829fe042dcc18996ab87f617d82ad6696b6e))
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.9.0 ([#213](https://github.com/aequitas-aod/aequitas-frontend/issues/213)) ([3d9cc5a](https://github.com/aequitas-aod/aequitas-frontend/commit/3d9cc5afabc88337ca572224cc019ef44b2f3ad3))
+
 ## [1.1.18](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.17...v1.1.18) (2025-04-24)
 
 ### Bug Fixes
