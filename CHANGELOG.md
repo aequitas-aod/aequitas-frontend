@@ -1,3 +1,13 @@
+## [1.1.29](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.28...v1.1.29) (2025-05-06)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.11 ([#227](https://github.com/aequitas-aod/aequitas-frontend/issues/227)) ([87a13d1](https://github.com/aequitas-aod/aequitas-frontend/commit/87a13d18010a59cbc09ea1f703a99b5b779ec50a))
+
+### Bug Fixes
+
+* **deps:** update radix-ui-primitives monorepo ([#230](https://github.com/aequitas-aod/aequitas-frontend/issues/230)) ([41bc650](https://github.com/aequitas-aod/aequitas-frontend/commit/41bc65001e5a6d52f9e239f36c10760607bf2068))
+
 ## [1.1.28](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.27...v1.1.28) (2025-05-05)
 
 ### Bug Fixes
