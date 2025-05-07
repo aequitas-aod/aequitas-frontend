@@ -1,3 +1,14 @@
+## [1.1.31](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.30...v1.1.31) (2025-05-07)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.14 ([#231](https://github.com/aequitas-aod/aequitas-frontend/issues/231)) ([504101c](https://github.com/aequitas-aod/aequitas-frontend/commit/504101c27bb8ff644b86056ca2c6f8081af3e748))
+* **deps:** update dependency @types/papaparse to v5.3.16 ([#234](https://github.com/aequitas-aod/aequitas-frontend/issues/234)) ([1a656b7](https://github.com/aequitas-aod/aequitas-frontend/commit/1a656b747bde4e72d42169ed99a874575bee0210))
+
+### Bug Fixes
+
+* **deps:** update dependency @tanstack/react-query to v5.75.5 ([#235](https://github.com/aequitas-aod/aequitas-frontend/issues/235)) ([053faac](https://github.com/aequitas-aod/aequitas-frontend/commit/053faac3aec2aeb34afac082b08c72b9e6b59ff2))
+
 ## [1.1.30](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.29...v1.1.30) (2025-05-06)
 
 ### Bug Fixes
