@@ -1,3 +1,13 @@
+## [1.1.32](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.31...v1.1.32) (2025-05-08)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.15 ([#237](https://github.com/aequitas-aod/aequitas-frontend/issues/237)) ([f1b9f28](https://github.com/aequitas-aod/aequitas-frontend/commit/f1b9f28bc1a3c56aac7f952afb76c1d87dcebbb3))
+
+### Bug Fixes
+
+* **deps:** update dependency react-hook-form to v7.56.3 ([#238](https://github.com/aequitas-aod/aequitas-frontend/issues/238)) ([3629801](https://github.com/aequitas-aod/aequitas-frontend/commit/362980187ffc0370fb99bcc8c47872402e6fe097))
+
 ## [1.1.31](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.30...v1.1.31) (2025-05-07)
 
 ### Dependency updates
