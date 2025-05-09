@@ -1,3 +1,13 @@
+## [1.1.34](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.33...v1.1.34) (2025-05-09)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.17 ([#239](https://github.com/aequitas-aod/aequitas-frontend/issues/239)) ([089d4c1](https://github.com/aequitas-aod/aequitas-frontend/commit/089d4c12c491ecd5e790650e39c8c6a66af5c500))
+
+### Bug Fixes
+
+* **deps:** update dependency @radix-ui/react-checkbox to v1.3.1 ([#229](https://github.com/aequitas-aod/aequitas-frontend/issues/229)) ([c60302d](https://github.com/aequitas-aod/aequitas-frontend/commit/c60302dd32f67a462812b7d9098e19cc186965c1))
+
 ## [1.1.33](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.32...v1.1.33) (2025-05-08)
 
 ### Bug Fixes
