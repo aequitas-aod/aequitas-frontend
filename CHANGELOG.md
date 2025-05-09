@@ -1,3 +1,9 @@
+## [1.1.35](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.34...v1.1.35) (2025-05-09)
+
+### Bug Fixes
+
+* **deps:** update dependency html-react-parser to v5.2.4 ([#240](https://github.com/aequitas-aod/aequitas-frontend/issues/240)) ([b218a69](https://github.com/aequitas-aod/aequitas-frontend/commit/b218a692e3f68be8cf8f34e9b62199ab46c05d6b))
+
 ## [1.1.34](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.33...v1.1.34) (2025-05-09)
 
 ### Dependency updates
