@@ -1,3 +1,9 @@
+## [1.1.38](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.37...v1.1.38) (2025-05-12)
+
+### Bug Fixes
+
+* **deps:** update dependency tailwind-merge to v3.3.0 ([#242](https://github.com/aequitas-aod/aequitas-frontend/issues/242)) ([e3a7508](https://github.com/aequitas-aod/aequitas-frontend/commit/e3a7508ad687201b734ad4b03cbe9b1d7cf303e0))
+
 ## [1.1.37](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.36...v1.1.37) (2025-05-10)
 
 ### Bug Fixes
