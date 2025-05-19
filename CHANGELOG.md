@@ -1,3 +1,13 @@
+## [1.1.45](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.44...v1.1.45) (2025-05-19)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.19 ([#251](https://github.com/aequitas-aod/aequitas-frontend/issues/251)) ([a31dc9f](https://github.com/aequitas-aod/aequitas-frontend/commit/a31dc9fd956322257ddbb100ace4f899035d5e71))
+
+### Bug Fixes
+
+* **deps:** update dependency papaparse to v5.5.3 ([#252](https://github.com/aequitas-aod/aequitas-frontend/issues/252)) ([fa409bb](https://github.com/aequitas-aod/aequitas-frontend/commit/fa409bbe1ad9bf95715faed9182f7adba69c7061))
+
 ## [1.1.44](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.43...v1.1.44) (2025-05-17)
 
 ### Dependency updates
