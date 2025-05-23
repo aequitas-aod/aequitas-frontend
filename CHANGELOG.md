@@ -1,3 +1,9 @@
+## [1.1.51](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.50...v1.1.51) (2025-05-23)
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v3.25.23 ([#259](https://github.com/aequitas-aod/aequitas-frontend/issues/259)) ([49d7a3f](https://github.com/aequitas-aod/aequitas-frontend/commit/49d7a3f70e039529a669312c00463e5fd471852d))
+
 ## [1.1.50](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.49...v1.1.50) (2025-05-22)
 
 ### Bug Fixes
