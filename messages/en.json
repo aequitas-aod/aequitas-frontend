@@ -15,6 +15,7 @@
     }
   },
   "breadcrumb": {
+    "DatasetTypeSelection": "Scelta del tipo di dataset",
     "DatasetSelection": "Scelta del dataset",
     "DatasetView": "Dataset view",
     "FeatureView": "Feature view",

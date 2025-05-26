@@ -27,6 +27,7 @@ export const THRESHOLD = 50;
 
 /* Questionnaire */
 export const QUESTIONNAIRE_KEYS = {
+  DATASET_TYPE_SELECTION: "DatasetTypeSelection",
   DATASET_SELECTION: "DatasetSelection",
   DATASET_VIEW: "DatasetConfirmation",
   FEATURE_VIEW: "FeaturesSelection",

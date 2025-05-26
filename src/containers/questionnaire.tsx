@@ -15,6 +15,7 @@ import { Sidebar } from "@/components/organisms/Sidebar/Sidebar";
 import { TestResultsViewPage } from "./results-view/test";
 import { OutcomeResultsViewPage } from "./results-view/outcome-mitigation";
 import { ModelResultsViewPage } from "./results-view/model-mitigation";
+import { DatasetTypeSelectionPage } from "./dataset-type-selection";
 
 export default function QuestionnaireContainer() {
   const { onNext, currentQuestion, menuItems, onDelete } =
@@ -32,6 +33,12 @@ export default function QuestionnaireContainer() {
       <Sidebar menuItems={menuItems} onDelete={onDelete} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <>
+          {questionKey === QUESTIONNAIRE_KEYS.DATASET_TYPE_SELECTION && (
+            <DatasetTypeSelectionPage
+              onNext={onNext}
+              questionNumber={questionNumber}
+            />
+          )}
           {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
             <DatasetSelectionPage
               onNext={onNext}
