@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.54...v1.2.0) (2025-05-26)
+
+### Features
+
+* add Dataset Type Selection view ([3ee07a5](https://github.com/aequitas-aod/aequitas-frontend/commit/3ee07a5c082a23f1476c7437955f15fdda1cac76))
+
 ## [1.1.54](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.1.53...v1.1.54) (2025-05-26)
 
 ### Bug Fixes
