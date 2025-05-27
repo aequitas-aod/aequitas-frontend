@@ -8,7 +8,6 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { isMocked } from "@/api/api";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
@@ -44,11 +43,6 @@ export const DatasetTypeSelection = ({
 
   const onContinue = () => {
     if (!selected) {
-      return;
-    }
-    if (isMocked()) {
-      console.log("Using mocked response for putQuestionnaire");
-      onNext();
       return;
     }
     mutate({

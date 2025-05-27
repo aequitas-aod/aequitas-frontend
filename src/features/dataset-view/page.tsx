@@ -9,7 +9,6 @@ import { DatasetViewTable } from "./table";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
-import { isMocked } from "@/api/api";
 import { ButtonLoading } from "@/components/ui/loading-button";
 
 export const DatasetView = ({
@@ -35,16 +34,10 @@ export const DatasetView = ({
   });
 
   const onContinue = () => {
-    if (isMocked()) {
-      console.log("Using mocked response for putQuestionnaire");
-      onNext();
-      return;
-    }
     updateQuestionnaire({
       n: questionNumber,
       answer_ids: [
-        questionnaire.answers.find((answer) => answer.id.code.includes("Yes"))!
-          .id,
+        answers.find((answer) => answer.id.code.includes("Yes"))!.id,
       ],
     });
   };

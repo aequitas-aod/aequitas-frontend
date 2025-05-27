@@ -1,6 +1,10 @@
 import React from "react";
 
-import { useCurrentDataset, useDatasetHeadContext } from "@/api/context";
+import {
+  useCurrentDataset,
+  useDatasetHeadContext,
+  useDatasetType,
+} from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { DatasetView } from "@/features/dataset-view/page";
 

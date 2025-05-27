@@ -17,6 +17,16 @@ import { loadOrGenerateProjectId } from "@/storage/session";
 
 const backendApi = new BackendApi();
 
+export const useDatasetType = () => {
+  const query = useQuery<string>({
+    queryKey: ["dataset_type"],
+    queryFn: async () => {
+      return backendApi.getDatasetType(await loadOrGenerateProjectId());
+    },
+  });
+  return query;
+};
+
 export const useCurrentDataset = () => {
   const query = useQuery<string>({
     queryKey: ["current_dataset"],

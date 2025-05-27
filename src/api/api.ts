@@ -22,11 +22,6 @@ import type {
   QuestionnaireParams,
 } from "./questionnaire/types";
 
-// Funzione per verificare se utilizzare i mock
-export const isMocked = (): boolean => {
-  return process.env.NEXT_PUBLIC_USE_MOCKS === "true";
-};
-
 // Handle the response data
 export class BackendApi {
   /* Questionnaire */
@@ -72,10 +67,6 @@ export class BackendApi {
   ): Promise<QuestionnaireResponse[]> {
     const url = `${BACKEND_URL}/projects/${project}/questionnaire`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for getQuestionnaireList");
-      return require(`../../mocks/questionnaire/full.json`);
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -91,10 +82,6 @@ export class BackendApi {
     const { n } = params;
     const url = `${BACKEND_URL}/projects/${project}/questionnaire/${n}`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for getQuestionnaireById");
-      return require(`../../mocks/questionnaire/${n}.json`);
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -111,10 +98,6 @@ export class BackendApi {
     const url = `${BACKEND_URL}/projects/${project}/questionnaire/${n}`;
     console.log(`PUT URL: ${url}`);
     console.log(params);
-    if (isMocked()) {
-      console.log("Using mocked response for putQuestionnaire");
-      return;
-    }
     const res = await axios.put(url, { answer_ids });
     if (res.status === 200) {
       console.log("PUT SUCCESS");
@@ -130,10 +113,6 @@ export class BackendApi {
     const { n } = params;
     const url = `${BACKEND_URL}/projects/${project}/questionnaire/${n}`;
     console.log(`DELETE URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for deleteQuestionnaireById");
-      return;
-    }
     const res = await axios.delete(url);
     if (res.status === 200) {
       console.log("DELETE SUCCESS");
@@ -144,13 +123,20 @@ export class BackendApi {
 
   /* Context */
 
+  async getDatasetType(project: string): Promise<string> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=dataset_type`;
+    console.log(`GET URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      console.log("RETRIEVED DATASET TYPE");
+      return res.data;
+    }
+    throw new Error("Failed to fetch dataset type");
+  }
+
   async getCurrentDataset(project: string): Promise<string> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=current_dataset`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for getCurrentDataset");
-      return "custom-1";
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       console.log("RETRIEVED CURRENT DATASET");
@@ -172,10 +158,6 @@ export class BackendApi {
   async getDatasetsInfo(project: string): Promise<AnswerContextResponse[]> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=datasets`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      await sleep(500);
-      return require(`../../mocks/datasets/index.json`);
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       return res.data;
@@ -191,10 +173,6 @@ export class BackendApi {
     const url = `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`;
     console.log(`PUT URL: ${url}`);
     console.log(body);
-    if (isMocked()) {
-      console.log("Using mocked response for putFeatures");
-      return;
-    }
     const res = await axios.put(url, body);
     if (res.status === 200) {
       console.log("PUT SUCCESS");
@@ -209,10 +187,6 @@ export class BackendApi {
   ): Promise<ProxyDataResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=suggested_proxies__${dataset}`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for getSuggestedProxies");
-      return require(`../../mocks/suggested_proxies/custom-1.json`);
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
@@ -229,10 +203,6 @@ export class BackendApi {
     const url = `${BACKEND_URL}/projects/${project}/context?key=proxies__${dataset}`;
     console.log(`PUT URL: ${url}`);
     console.log(body);
-    if (isMocked()) {
-      console.log("Using mocked response for putProxies");
-      return;
-    }
     const res = await axios.put(url, body);
     if (res.status === 200) {
       console.log("PUT SUCCESS");
@@ -249,10 +219,6 @@ export class BackendApi {
     const url = `${BACKEND_URL}/projects/${project}/context?key=detected__${dataset}`;
     console.log(`PUT URL: ${url}`);
     console.log(body);
-    if (isMocked()) {
-      console.log("Using mocked response for putDetected");
-      return;
-    }
     const res = await axios.put(url, body);
     if (res.status === 200) {
       console.log("PUT SUCCESS");
@@ -269,11 +235,6 @@ export class BackendApi {
   ): Promise<void> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=${hyperparameterType}__${dataset}`;
     console.log(`PUT URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for putContext");
-      await sleep(2000);
-      return;
-    }
     const res = await axios.put(url, body);
     if (res.status === 200) {
       console.log("PUT SUCCESS");
@@ -289,12 +250,6 @@ export class BackendApi {
   ): Promise<string> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=${key}__${dataset}`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for getContextCsv");
-      console.log(`../../mocks/${key}/${dataset}.ts`);
-      const csvData = (await import(`../../mocks/${key}/custom-1.ts`)).default;
-      return csvData;
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       console.log("RETRIEVED CSV");
@@ -330,9 +285,6 @@ export class BackendApi {
   ): Promise<FeaturesResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      return require(`../../mocks/features/${dataset}.json`);
-    }
     const res = await axios.get(
       `${BACKEND_URL}/projects/${project}/context?key=features__${dataset}`
     );
@@ -348,9 +300,6 @@ export class BackendApi {
   ): Promise<MetricsResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
-    if (isMocked()) {
-      return require(`../../mocks/metrics/custom-1.json`);
-    }
     const res = await axios.get(url);
     if (res.status === 200) {
       return res.data;
@@ -386,11 +335,6 @@ export class BackendApi {
   async putContext(project: string, key: string, body: unknown): Promise<void> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=${key}`;
     console.log(`PUT URL: ${url}`);
-    if (isMocked()) {
-      console.log("Using mocked response for putContext");
-      await sleep(2000);
-      return;
-    }
     const res = await axios.put(url, body);
     if (res.status === 200) {
       console.log("PUT SUCCESS");

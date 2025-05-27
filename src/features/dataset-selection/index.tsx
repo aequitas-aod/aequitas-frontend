@@ -9,7 +9,6 @@ import { DatasetPreview } from "./dataset-preview";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { isMocked } from "@/api/api";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
@@ -33,6 +32,16 @@ export const DatasetSelection = ({
     },
   });
   const options = data.answers;
+  // If there is "CustomDataset" option, it should be the first last
+  if (options && options.length > 1) {
+    const customOptionIndex = options.findIndex(
+      (option) => option.id.code === "CustomDataset"
+    );
+    if (customOptionIndex !== -1) {
+      const customOption = options.splice(customOptionIndex, 1)[0];
+      options.push(customOption);
+    }
+  }
 
   const onSelect = (value: string) => {
     const selectedOption =
@@ -45,11 +54,6 @@ export const DatasetSelection = ({
 
   const onContinue = () => {
     if (!selected) {
-      return;
-    }
-    if (isMocked()) {
-      console.log("Using mocked response for putQuestionnaire");
-      onNext();
       return;
     }
     mutate({
