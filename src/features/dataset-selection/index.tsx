@@ -12,6 +12,7 @@ import { useUpdateQuestionnaire } from "@/api/questionnaire";
 
 import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
+import { CUSTOM_DATASET_KEY } from "@/config/constants";
 
 export const DatasetSelection = ({
   data,
@@ -35,7 +36,7 @@ export const DatasetSelection = ({
   // If there is "CustomDataset" option, it should be the first last
   if (options && options.length > 1) {
     const customOptionIndex = options.findIndex(
-      (option) => option.id.code === "CustomDataset"
+      (option) => option.id.code === CUSTOM_DATASET_KEY,
     );
     if (customOptionIndex !== -1) {
       const customOption = options.splice(customOptionIndex, 1)[0];

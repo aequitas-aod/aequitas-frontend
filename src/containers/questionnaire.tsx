@@ -7,7 +7,7 @@ import { DatasetSelectionPage } from "./dataset-selection";
 import { FeatureViewPage } from "./feature-view";
 import { ProxiesPage } from "./proxies";
 import { DatasetViewPage } from "./dataset-view";
-import { DataMitigationPage } from "./data-mitigation";
+import { MitigationPage } from "./data-mitigation";
 import { DetectionPage } from "./detection";
 import { DataMitigationResultsViewPage } from "./results-view/data-mitigation";
 import { TestSelectionPage } from "./test-selection";
@@ -39,7 +39,8 @@ export default function QuestionnaireContainer() {
               questionNumber={questionNumber}
             />
           )}
-          {questionKey === QUESTIONNAIRE_KEYS.DATASET_SELECTION && (
+          {(questionKey === QUESTIONNAIRE_KEYS.TABULAR_DATASET_SELECTION ||
+            questionKey === QUESTIONNAIRE_KEYS.IMAGE_DATASET_SELECTION) && (
             <DatasetSelectionPage
               onNext={onNext}
               questionNumber={questionNumber}
@@ -58,28 +59,28 @@ export default function QuestionnaireContainer() {
             <DetectionPage onNext={onNext} questionNumber={questionNumber} />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.DATA_MITIGATION && (
-            <DataMitigationPage
+            <MitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
               type={"preprocessing"}
             />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.MODEL_MITIGATION && (
-            <DataMitigationPage
+            <MitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
               type="inprocessing"
             />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.OUTCOME_MITIGATION && (
-            <DataMitigationPage
+            <MitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
               type="postprocessing"
             />
           )}
           {questionKey === QUESTIONNAIRE_KEYS.POLARIZATION && (
-            <DataMitigationPage
+            <MitigationPage
               onNext={onNext}
               questionNumber={questionNumber}
               type="inprocessing"

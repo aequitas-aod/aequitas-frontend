@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useQuestionnaireById } from "@/api/questionnaire";
-import { DataMitigation } from "@/features/data-mitigation";
+import { DataMitigation } from "../../features/mitigation";
 import type { ProcessingType } from "@/types/types";
 
 interface QuestionnairePageProps {
@@ -10,7 +10,7 @@ interface QuestionnairePageProps {
   type: ProcessingType;
 }
 
-export const DataMitigationPage = ({
+export const MitigationPage = ({
   questionNumber,
   onNext,
   type,

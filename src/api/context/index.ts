@@ -271,7 +271,7 @@ export const useDependencyGraph = (dataset?: string) => {
   return query;
 };
 
-// data-mitigation
+// mitigation
 export const useProcessingHyperparameters = (
   algorithm: string | null,
   hyperparameterType: ProcessingType
