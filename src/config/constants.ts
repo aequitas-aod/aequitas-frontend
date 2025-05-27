@@ -20,6 +20,7 @@ export const FEATURE_COLUMN = "feature";
 
 /* Data Mitigation */
 export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
+export const NO_MODEL_MITIGATION_KEY = "NoModelMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 
 /* Proxies */

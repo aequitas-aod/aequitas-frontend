@@ -36,7 +36,7 @@ export const DatasetSelection = ({
   // If there is "CustomDataset" option, it should be the first last
   if (options && options.length > 1) {
     const customOptionIndex = options.findIndex(
-      (option) => option.id.code === CUSTOM_DATASET_KEY,
+      (option) => option.id.code === CUSTOM_DATASET_KEY
     );
     if (customOptionIndex !== -1) {
       const customOption = options.splice(customOptionIndex, 1)[0];

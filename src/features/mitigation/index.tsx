@@ -15,7 +15,9 @@ import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import type { ProcessingType } from "@/types/types";
 import {
+  CUSTOM_DATASET_KEY,
   NO_DATA_MITIGATION_KEY,
+  NO_MODEL_MITIGATION_KEY,
   NO_OUTCOME_MITIGATION_KEY,
 } from "@/config/constants";
 
@@ -35,7 +37,19 @@ export const DataMitigation = ({
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
   const options = data.answers;
-
+  // If there is "Do not mitigatw" option, it should be the first last
+  if (options && options.length > 1) {
+    const noMitigationOptionIndex = options.findIndex(
+      (option) =>
+        option.id.code === NO_DATA_MITIGATION_KEY ||
+        option.id.code === NO_MODEL_MITIGATION_KEY ||
+        option.id.code === NO_OUTCOME_MITIGATION_KEY
+    );
+    if (noMitigationOptionIndex !== -1) {
+      const customOption = options.splice(noMitigationOptionIndex, 1)[0];
+      options.push(customOption);
+    }
+  }
   const { data: formData } = useProcessingHyperparameters(
     selected?.id.code ?? null,
     hyperparameterType
