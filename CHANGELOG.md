@@ -1,3 +1,14 @@
+## [1.2.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.2.2...v1.2.3) (2025-05-28)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/eslint-plugin-query to v5.78.0 ([#264](https://github.com/aequitas-aod/aequitas-frontend/issues/264)) ([31908aa](https://github.com/aequitas-aod/aequitas-frontend/commit/31908aa026d165c2a93026076a5fa16ba8ee42dc))
+* **deps:** update dependency @types/node to v22.15.23 ([#266](https://github.com/aequitas-aod/aequitas-frontend/issues/266)) ([3e87117](https://github.com/aequitas-aod/aequitas-frontend/commit/3e871173e61009d566bb1ed7e3af951483378a97))
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v3.25.32 ([#267](https://github.com/aequitas-aod/aequitas-frontend/issues/267)) ([d8c0871](https://github.com/aequitas-aod/aequitas-frontend/commit/d8c087163d8fe6e740d6e144a71b145067de514c))
+
 ## [1.2.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.2.1...v1.2.2) (2025-05-27)
 
 ### Bug Fixes
