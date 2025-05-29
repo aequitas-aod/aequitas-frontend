@@ -38,9 +38,9 @@ export const useFullQuestionnaire = () => {
 
   const onDelete = useCallback(
     async (path: number) => {
-      const currentIndex = questions.length;
+      let currentIndex = questions.length;
       if (path === currentIndex) {
-        return;
+        currentIndex = currentIndex + 1; // if going back to the last question
       }
       if (questions.length === 0) {
         return;

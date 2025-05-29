@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -15,7 +14,7 @@ import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import type { ProcessingType } from "@/types/types";
 import {
-  CUSTOM_DATASET_KEY,
+  DONE_KEY,
   NO_DATA_MITIGATION_KEY,
   NO_MODEL_MITIGATION_KEY,
   NO_OUTCOME_MITIGATION_KEY,
@@ -37,18 +36,21 @@ export const DataMitigation = ({
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
   const options = data.answers;
-  // If there is "Do not mitigatw" option, it should be the first last
+  // If there are "Do not mitigate" and "Done" options, they must be the last ones
   if (options && options.length > 1) {
-    const noMitigationOptionIndex = options.findIndex(
-      (option) =>
-        option.id.code === NO_DATA_MITIGATION_KEY ||
-        option.id.code === NO_MODEL_MITIGATION_KEY ||
-        option.id.code === NO_OUTCOME_MITIGATION_KEY
-    );
-    if (noMitigationOptionIndex !== -1) {
-      const customOption = options.splice(noMitigationOptionIndex, 1)[0];
-      options.push(customOption);
+    const optionsToMove = [
+      NO_DATA_MITIGATION_KEY,
+      NO_MODEL_MITIGATION_KEY,
+      NO_OUTCOME_MITIGATION_KEY,
+      DONE_KEY,
+    ];
+    const toMove: typeof options = [];
+    for (let i = options.length - 1; i >= 0; i--) {
+      if (optionsToMove.includes(options[i].id.code)) {
+        toMove.unshift(options.splice(i, 1)[0]);
+      }
     }
+    options.push(...toMove);
   }
   const { data: formData } = useProcessingHyperparameters(
     selected?.id.code ?? null,
@@ -93,6 +95,7 @@ export const DataMitigation = ({
   };
 
   const isDisabled =
+    (selected && selected.id.code === DONE_KEY) ||
     (selected && selected.id.code === NO_DATA_MITIGATION_KEY) ||
     (selected && selected.id.code === NO_MODEL_MITIGATION_KEY) ||
     (selected && selected.id.code === NO_OUTCOME_MITIGATION_KEY) ||

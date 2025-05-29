@@ -23,6 +23,8 @@ export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
 export const NO_MODEL_MITIGATION_KEY = "NoModelMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 
+export const DONE_KEY = "Done";
+
 /* Proxies */
 export const THRESHOLD = 50;
 
@@ -49,5 +51,5 @@ export const QUESTIONNAIRE_KEYS = {
   POLARIZATION: "Polarization",
   TEST_SUMMARY: "TestSummary",
 
-  END_TEST: "Done",
+  QUESTIONNAIRE_END: "QuestionnaireEnd",
 };
