@@ -1,3 +1,15 @@
+## [1.3.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.2.4...v1.3.0) (2025-05-29)
+
+### Features
+
+* remove mocks, add get of dataset type, add URI support to dataset view ([dbe78df](https://github.com/aequitas-aod/aequitas-frontend/commit/dbe78dfcca1acfe071861d8050c1cee49767af3f))
+
+### Refactoring
+
+* move Do Not Mitigate answer to the bottom ([0f0c06a](https://github.com/aequitas-aod/aequitas-frontend/commit/0f0c06a9d22934684fdb77fce5e8528a68a7bf7d))
+* rename MitigationPage, support different dataset selection with types ([5ba552d](https://github.com/aequitas-aod/aequitas-frontend/commit/5ba552deefe63de54d7f61284b01deed6397e4d2))
+* update useFullQuestionnaire and setup finished questionnaire page ([56f9dc2](https://github.com/aequitas-aod/aequitas-frontend/commit/56f9dc254e4063b661a06b2acea3f7d1c1ae5ecc))
+
 ## [1.2.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.2.3...v1.2.4) (2025-05-29)
 
 ### Dependency updates
