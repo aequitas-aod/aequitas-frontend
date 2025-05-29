@@ -94,7 +94,7 @@ export const DataMitigation = ({
 
   const isDisabled =
     (selected && selected.id.code === NO_DATA_MITIGATION_KEY) ||
-    (selected && selected.id.code === "NoModelMitigation") ||
+    (selected && selected.id.code === NO_MODEL_MITIGATION_KEY) ||
     (selected && selected.id.code === NO_OUTCOME_MITIGATION_KEY) ||
     enableContinueButton;
 

@@ -21,9 +21,11 @@ export const useQuestionnaireList = () => {
 export const useQuestionnaireById = ({
   params,
   enabled = true,
+  retry = 3,
 }: {
-  enabled?: boolean;
   params: QuestionnaireParams;
+  enabled?: boolean;
+  retry?: number;
 }) => {
   const query = useQuery<QuestionnaireResponse>({
     queryKey: ["questionnaire", params],
@@ -34,6 +36,7 @@ export const useQuestionnaireById = ({
       );
     },
     enabled: enabled,
+    retry: retry,
   });
   return query;
 };

@@ -86,6 +86,8 @@ export class BackendApi {
     if (res.status === 200) {
       console.log("RESPONSE", res.data);
       return res.data;
+    } else if (res.status === 400 && res.data === "Questionnaire is finished") {
+      throw new Error("Questionnaire is finished");
     }
     throw new Error("Failed to fetch questionnaire");
   }

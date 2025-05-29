@@ -16,17 +16,49 @@ import { TestResultsViewPage } from "./results-view/test";
 import { OutcomeResultsViewPage } from "./results-view/outcome-mitigation";
 import { ModelResultsViewPage } from "./results-view/model-mitigation";
 import { DatasetTypeSelectionPage } from "./dataset-type-selection";
+import { useQuestionnaireById } from "@/api/questionnaire";
+import { AxiosError } from "axios";
 
 export default function QuestionnaireContainer() {
-  const { onNext, currentQuestion, menuItems, onDelete } =
-    useFullQuestionnaire();
+  const { onNext, questions, menuItems, onDelete } = useFullQuestionnaire();
+  const { data: nextQuestion, error } = useQuestionnaireById({
+    params: { n: (questions?.length ?? 1) + 1 },
+    retry: 0,
+  });
 
+  const currentQuestion = questions?.length
+    ? questions[questions.length - 1]
+    : null;
   if (!currentQuestion) {
     return <div>Loading...</div>;
   }
 
-  const questionKey = currentQuestion.id;
-  const questionNumber = currentQuestion.step;
+  const questionKey = currentQuestion.id.code;
+  const questionNumber = questions.length;
+  const hasSelectedAnswer: boolean = currentQuestion.answers.some(
+    (answer) => answer.selected
+  );
+
+  if (hasSelectedAnswer && error) {
+    if ((error as AxiosError).response.data === "Questionnaire is finished") {
+      const menuItemsCopy = [...menuItems];
+      menuItemsCopy.push({
+        id: "FinalStep",
+        step: questions.length + 1,
+        name: "Final Step",
+      });
+      return (
+        <>
+          <Sidebar menuItems={menuItems} onDelete={onDelete} />
+          <div className="flex-1 flex items-center justify-center">
+            <h1 className="text-2xl font-bold text-center">
+              Experiment concluded.
+            </h1>
+          </div>
+        </>
+      );
+    }
+  }
 
   return (
     <>
