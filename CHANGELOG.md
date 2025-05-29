@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.3.0...v1.4.0) (2025-05-29)
+
+### Features
+
+* add last page of questionnaire ([d1b1900](https://github.com/aequitas-aod/aequitas-frontend/commit/d1b1900977c423135aa9693f6b34b849df364974))
+
 ## [1.3.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.2.4...v1.3.0) (2025-05-29)
 
 ### Features
