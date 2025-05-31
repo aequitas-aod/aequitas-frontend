@@ -1,3 +1,13 @@
+## [1.4.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.3...v1.4.4) (2025-05-31)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.29 ([#277](https://github.com/aequitas-aod/aequitas-frontend/issues/277)) ([a64b69b](https://github.com/aequitas-aod/aequitas-frontend/commit/a64b69b7ef0dbf765f551719bea8d81b21627d16))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v15.3.3 ([#273](https://github.com/aequitas-aod/aequitas-frontend/issues/273)) ([555d02a](https://github.com/aequitas-aod/aequitas-frontend/commit/555d02aaf65468acc0a35f0516e8f4b97c1ef5db))
+
 ## [1.4.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.2...v1.4.3) (2025-05-30)
 
 ### Dependency updates
