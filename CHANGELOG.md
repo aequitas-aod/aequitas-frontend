@@ -1,3 +1,13 @@
+## [1.4.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.4...v1.4.5) (2025-05-31)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.28.0 ([#278](https://github.com/aequitas-aod/aequitas-frontend/issues/278)) ([b04fad6](https://github.com/aequitas-aod/aequitas-frontend/commit/b04fad6d0452bde29262c24a803183734ab137ff))
+
+### Bug Fixes
+
+* **deps:** update dependency @tanstack/react-query to v5.79.0 ([#272](https://github.com/aequitas-aod/aequitas-frontend/issues/272)) ([cf883af](https://github.com/aequitas-aod/aequitas-frontend/commit/cf883af8d277877aa0eca95aed819522ccc5b237))
+
 ## [1.4.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.3...v1.4.4) (2025-05-31)
 
 ### Dependency updates
