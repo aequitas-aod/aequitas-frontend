@@ -1,3 +1,13 @@
+## [1.4.25](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.24...v1.4.25) (2025-06-12)
+
+### Dependency updates
+
+* **deps:** update dependency postcss to v8.5.5 ([#301](https://github.com/aequitas-aod/aequitas-frontend/issues/301)) ([46cdbb6](https://github.com/aequitas-aod/aequitas-frontend/commit/46cdbb6920dd2fe26c3531356305b872740542f4))
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v3.25.62 ([#300](https://github.com/aequitas-aod/aequitas-frontend/issues/300)) ([8d219cc](https://github.com/aequitas-aod/aequitas-frontend/commit/8d219ccab196c538fe51f7a2e219f881a2d1b37f))
+
 ## [1.4.24](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.23...v1.4.24) (2025-06-11)
 
 ### Bug Fixes
