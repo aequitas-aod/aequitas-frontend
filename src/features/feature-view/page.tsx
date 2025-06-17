@@ -37,7 +37,6 @@ export const FeaturesView = ({
     Array.from({ length: features.length }, (_, index) => index)
   );
   const [data, setData] = useState<ParsedDataset[]>(features);
-
   const columns = features.length > 0 ? Object.keys(features[0]) : [];
 
   const { mutate: mutateFeatures, isPending: isPendingFeatures } =

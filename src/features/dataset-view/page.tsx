@@ -24,7 +24,7 @@ export const DatasetView = ({
   questionNumber: number;
   contextData: string;
 }) => {
-  const t = useTranslations("DatasetView");
+  const t = useTranslations();
   const [data, setData] = useState<ParsedDataset[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
   const { mutate: updateQuestionnaire, isPending } = useUpdateQuestionnaire({
@@ -47,8 +47,8 @@ export const DatasetView = ({
       const result = Papa.parse<CsvData>(csv, {
         header: true,
         skipEmptyLines: true,
+        quoteChar: '\''
       });
-
       if (result.errors.length > 0) {
         toast({
           title: t("common.errors.parsing-csv"),
@@ -67,7 +67,6 @@ export const DatasetView = ({
 
     parseCsv(contextData);
   }, [contextData, t]);
-
   return (
     <QuestionnaireLayout
       action={
@@ -76,7 +75,7 @@ export const DatasetView = ({
           disabled={isPending}
           isLoading={isPending}
         >
-          {t("buttons.continue")}
+          {t("common.continue")}
         </ButtonLoading>
       }
       classNameWrapper="!overflow-hidden"
