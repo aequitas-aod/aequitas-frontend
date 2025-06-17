@@ -1,3 +1,9 @@
+## [1.4.33](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.32...v1.4.33) (2025-06-17)
+
+### Bug Fixes
+
+* add quoteChar to csv parser ([3c97e18](https://github.com/aequitas-aod/aequitas-frontend/commit/3c97e184c822cf19ddd19c1633cfd77be810925b))
+
 ## [1.4.32](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.31...v1.4.32) (2025-06-17)
 
 ### Dependency updates
