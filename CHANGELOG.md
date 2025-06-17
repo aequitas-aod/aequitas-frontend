@@ -1,3 +1,18 @@
+## [1.4.32](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.31...v1.4.32) (2025-06-17)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.32 ([#309](https://github.com/aequitas-aod/aequitas-frontend/issues/309)) ([5ecb78c](https://github.com/aequitas-aod/aequitas-frontend/commit/5ecb78cad3350a0be6abee2c78c5e26a5bcb44c2))
+* **deps:** update dependency postcss to v8.5.6 ([#310](https://github.com/aequitas-aod/aequitas-frontend/issues/310)) ([25aed1e](https://github.com/aequitas-aod/aequitas-frontend/commit/25aed1e79b6f3f68461a97ea37112e36f81b90b9))
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v3.25.67 ([#312](https://github.com/aequitas-aod/aequitas-frontend/issues/312)) ([7396c1d](https://github.com/aequitas-aod/aequitas-frontend/commit/7396c1d878f59a1b51f674143318fdbf3e8c3088))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-buildx-action action to v3.11.0 ([#311](https://github.com/aequitas-aod/aequitas-frontend/issues/311)) ([5356adc](https://github.com/aequitas-aod/aequitas-frontend/commit/5356adc9967b0d16719cbf3672987a9eb0f38a4d))
+
 ## [1.4.31](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.30...v1.4.31) (2025-06-15)
 
 ### Bug Fixes
