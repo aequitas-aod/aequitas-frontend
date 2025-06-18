@@ -9,6 +9,8 @@ export const INFINITY_VALUE = "infinity";
 
 /* Dataset Selection View */
 export const CUSTOM_DATASET_KEY = "CustomDataset";
+export const TEST_CUSTOM_DATASET_KEY = "Test-CustomDataset";
+
 export const DEFAULT_CUSTOM_DATASET_NAME = "Custom-1";
 
 /* Feature View */
@@ -24,6 +26,7 @@ export const NO_MODEL_MITIGATION_KEY = "NoModelMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 
 export const DONE_KEY = "Done";
+export const TEST_KEY = "Test";
 
 /* Proxies */
 export const THRESHOLD = 50;

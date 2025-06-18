@@ -38,9 +38,10 @@ export const DatasetSelectionPage = ({
   const nextData: Questionnaire = {
     ...data,
     answers: data.answers.map((answer) => {
-      const answerDetails = answersDetails.find(
-        (answerDetail) => answerDetail.name === answer.text
-      );
+      const answerDetails = answersDetails.find((answerDetail) => {
+        console.log(answerDetail.name + " === " + answer.text);
+        return answerDetail.name === answer.text;
+      });
 
       const filteredDetails =
         answerDetails &&

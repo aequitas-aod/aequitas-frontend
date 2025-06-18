@@ -18,6 +18,7 @@ import {
   NO_DATA_MITIGATION_KEY,
   NO_MODEL_MITIGATION_KEY,
   NO_OUTCOME_MITIGATION_KEY,
+  TEST_KEY,
 } from "@/config/constants";
 
 export const DataMitigation = ({
@@ -99,6 +100,7 @@ export const DataMitigation = ({
     (selected && selected.id.code === NO_DATA_MITIGATION_KEY) ||
     (selected && selected.id.code === NO_MODEL_MITIGATION_KEY) ||
     (selected && selected.id.code === NO_OUTCOME_MITIGATION_KEY) ||
+    (selected && selected.id.code === TEST_KEY) ||
     enableContinueButton;
 
   return (

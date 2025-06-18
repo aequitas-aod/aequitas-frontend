@@ -117,7 +117,7 @@ export const FeatureViewTable = ({
                           handleSensitiveCheckboxChange &&
                           handleSensitiveCheckboxChange(rowIndex, col)
                         }
-                        disabled={disabled}
+                        disabled={row["type"] === "list" ? true : disabled}
                         className="mr-4"
                         variant="outlined-black"
                       />
