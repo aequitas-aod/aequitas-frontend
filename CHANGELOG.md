@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.34...v1.5.0) (2025-06-18)
+
+### Features
+
+* enable dataset test selection view, disable sensitive option in features view if values are arrays, change quoteChar to csv parsing ([91dd526](https://github.com/aequitas-aod/aequitas-frontend/commit/91dd5260e532a0d7ddb335cd766699be41f1e42d))
+
 ## [1.4.34](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.33...v1.4.34) (2025-06-18)
 
 ### Bug Fixes
