@@ -1,3 +1,9 @@
+## [1.5.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.1...v1.5.2) (2025-06-19)
+
+### Bug Fixes
+
+* **DatasetView:** fix alignment of booleans and images ([ccb9c9e](https://github.com/aequitas-aod/aequitas-frontend/commit/ccb9c9e3a96562d1da0c7769b104d2ce811d4032))
+
 ## [1.5.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.0...v1.5.1) (2025-06-19)
 
 ### Bug Fixes
