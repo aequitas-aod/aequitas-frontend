@@ -63,13 +63,16 @@ export const DatasetViewTable = ({
                   ? `${cellContent.slice(0, TRUNCATE_TEXT)}...`
                   : cellContent;
               }
-
+              if (col === "Italian Residence") {
+                console.log(typeof row[col] === "boolean");
+              }
               return (
                 <TableCell
                   key={colIndex}
                   className={`min-h-14 border-b-2 border-neutral-100 py-4 px-4
                   ${(typeof row[col] === "number" || row[col] === "-") && "!text-right"}
-                  ${(typeof row[col] === "boolean" || isImageColumn) && "flex justify-center items-center"}
+                  ${typeof row[col] === "boolean" && "!text-center"}
+                  ${isImageColumn && "flex justify-center items-center"}
                   ${
                     colIndex !== 0 ? "border-l-2" : ""
                   } ${colIndex !== columns.length - 1 ? "border-r-2" : ""}`}
