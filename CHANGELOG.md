@@ -1,3 +1,13 @@
+## [1.5.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.0...v1.5.1) (2025-06-19)
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v15.3.4 ([#316](https://github.com/aequitas-aod/aequitas-frontend/issues/316)) ([0968389](https://github.com/aequitas-aod/aequitas-frontend/commit/0968389afa4903af7f20039c9d2d179882f0beeb))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-buildx-action action to v3.11.1 ([#315](https://github.com/aequitas-aod/aequitas-frontend/issues/315)) ([656b765](https://github.com/aequitas-aod/aequitas-frontend/commit/656b765ed8c74de2b4b3ab4c5c0b8a4f09ec59b8))
+
 ## [1.5.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.4.34...v1.5.0) (2025-06-18)
 
 ### Features
