@@ -1,3 +1,9 @@
+## [1.5.6](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.5...v1.5.6) (2025-06-21)
+
+### Bug Fixes
+
+* **deps:** update dependency recharts to v2.15.4 ([#319](https://github.com/aequitas-aod/aequitas-frontend/issues/319)) ([72f6432](https://github.com/aequitas-aod/aequitas-frontend/commit/72f6432eaa5ac205bd0d54acbe2787f9d01d5aa8))
+
 ## [1.5.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.4...v1.5.5) (2025-06-21)
 
 ### Bug Fixes
