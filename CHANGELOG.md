@@ -1,3 +1,13 @@
+## [1.5.10](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.9...v1.5.10) (2025-06-23)
+
+### Dependency updates
+
+* **deps:** update dependency prettier to v3.6.0 ([#323](https://github.com/aequitas-aod/aequitas-frontend/issues/323)) ([2f19011](https://github.com/aequitas-aod/aequitas-frontend/commit/2f190112756da1bfc6d1942dc67dfee505199cc5))
+
+### Bug Fixes
+
+* **deps:** update dependency next-intl to v4.3.0 ([#324](https://github.com/aequitas-aod/aequitas-frontend/issues/324)) ([97f76a1](https://github.com/aequitas-aod/aequitas-frontend/commit/97f76a18eaceb49bc824e66edfecc888e768f855))
+
 ## [1.5.9](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.8...v1.5.9) (2025-06-22)
 
 ### Bug Fixes
