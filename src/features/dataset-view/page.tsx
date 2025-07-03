@@ -47,7 +47,7 @@ export const DatasetView = ({
       const result = Papa.parse<CsvData>(csv, {
         header: true,
         skipEmptyLines: true,
-        quoteChar: "'",
+        quoteChar: '"',
       });
       if (result.errors.length > 0) {
         toast({
