@@ -1,3 +1,17 @@
+## [2.0.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.12...v2.0.0) (2025-07-03)
+
+### ⚠ BREAKING CHANGES
+
+* change quoteChar for csv data
+
+### Dependency updates
+
+* **deps:** update dependency prettier to v3.6.1 ([#329](https://github.com/aequitas-aod/aequitas-frontend/issues/329)) ([eb78301](https://github.com/aequitas-aod/aequitas-frontend/commit/eb78301ee15fa6056375801497e353e78c1894c9))
+
+### Refactoring
+
+* change quoteChar for csv data ([3ba1e89](https://github.com/aequitas-aod/aequitas-frontend/commit/3ba1e897955ebe101e4859f6799b72792cb09cbe))
+
 ## [1.5.12](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.11...v1.5.12) (2025-06-25)
 
 ### Dependency updates
