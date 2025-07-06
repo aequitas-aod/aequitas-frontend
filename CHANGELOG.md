@@ -1,3 +1,14 @@
+## [2.0.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.0...v2.0.1) (2025-07-06)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.15.35 ([#330](https://github.com/aequitas-aod/aequitas-frontend/issues/330)) ([d6647eb](https://github.com/aequitas-aod/aequitas-frontend/commit/d6647eb6f66714a541dc9d254294b5bef6e4044e))
+* **deps:** update dependency prettier to v3.6.2 ([#331](https://github.com/aequitas-aod/aequitas-frontend/issues/331)) ([88c6b89](https://github.com/aequitas-aod/aequitas-frontend/commit/88c6b895e46d6755b48495f2398868212d3ca2ec))
+
+### Bug Fixes
+
+* **deps:** update dependency @tanstack/react-query to v5.81.5 ([#332](https://github.com/aequitas-aod/aequitas-frontend/issues/332)) ([1c4ea07](https://github.com/aequitas-aod/aequitas-frontend/commit/1c4ea07d78948fb2cff5081c5b658a59f57ee652))
+
 ## [2.0.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v1.5.12...v2.0.0) (2025-07-03)
 
 ### ⚠ BREAKING CHANGES
