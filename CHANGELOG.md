@@ -1,3 +1,13 @@
+## [2.0.6](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.5...v2.0.6) (2025-07-08)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.30.1 ([#337](https://github.com/aequitas-aod/aequitas-frontend/issues/337)) ([4581394](https://github.com/aequitas-aod/aequitas-frontend/commit/45813942288a3670f2dd456d696425467eef088e))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.525.0 ([#338](https://github.com/aequitas-aod/aequitas-frontend/issues/338)) ([f9cb133](https://github.com/aequitas-aod/aequitas-frontend/commit/f9cb133b46e79bd8104d694d4f8417b9bb6ae1c6))
+
 ## [2.0.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.4...v2.0.5) (2025-07-07)
 
 ### Dependency updates
