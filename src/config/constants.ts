@@ -20,10 +20,12 @@ export const SENSITIVE_COLUMN = "sensitive";
 export const DISTRIBUTION_COLUMN = "distribution";
 export const FEATURE_COLUMN = "feature";
 
-/* Data Mitigation */
+/* Mitigation */
 export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
 export const NO_MODEL_MITIGATION_KEY = "NoModelMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
+export const IMAGE_MITIGATION_ALGORITHM =
+  "StableDiffusion-BasedDataAugmentation";
 
 export const DONE_KEY = "Done";
 export const TEST_KEY = "Test";
@@ -36,6 +38,8 @@ export const QUESTIONNAIRE_KEYS = {
   DATASET_TYPE_SELECTION: "DatasetTypeSelection",
   TABULAR_DATASET_SELECTION: "TabularDatasetSelection",
   IMAGE_DATASET_SELECTION: "ImageDatasetSelection",
+  TABULAR_DATASET_TYPE: "TabularDatasetType",
+  IMAGE_DATASET_TYPE: "ImageDatasetType",
   DATASET_VIEW: "DatasetConfirmation",
   FEATURE_VIEW: "FeaturesSelection",
   PROXIES: "Proxies",

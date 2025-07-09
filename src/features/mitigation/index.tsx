@@ -8,16 +8,18 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { LaunchAlgorithm } from "./launch-algorithm";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { useProcessingHyperparameters } from "@/api/context";
+import { useDatasetType, useProcessingHyperparameters } from "@/api/context";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import type { ProcessingType } from "@/types/types";
 import {
   DONE_KEY,
+  IMAGE_MITIGATION_ALGORITHM,
   NO_DATA_MITIGATION_KEY,
   NO_MODEL_MITIGATION_KEY,
   NO_OUTCOME_MITIGATION_KEY,
+  QUESTIONNAIRE_KEYS,
   TEST_KEY,
 } from "@/config/constants";
 
@@ -33,18 +35,34 @@ export const DataMitigation = ({
   hyperparameterType: ProcessingType;
 }) => {
   const t = useTranslations("DataMitigation");
+  const { data: datasetType } = useDatasetType();
 
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
-  const options = data.answers;
+  let options = data.answers;
+  const optionsToMove = [
+    NO_DATA_MITIGATION_KEY,
+    NO_MODEL_MITIGATION_KEY,
+    NO_OUTCOME_MITIGATION_KEY,
+    DONE_KEY,
+    TEST_KEY,
+  ];
+
+  if (datasetType === QUESTIONNAIRE_KEYS.IMAGE_DATASET_TYPE) {
+    options = options.filter(
+      (opt) =>
+        opt.id.code === IMAGE_MITIGATION_ALGORITHM ||
+        optionsToMove.includes(opt.id.code)
+    );
+  } else if (datasetType === QUESTIONNAIRE_KEYS.TABULAR_DATASET_TYPE) {
+    options = options.filter(
+      (opt) =>
+        opt.id.code !== IMAGE_MITIGATION_ALGORITHM ||
+        optionsToMove.includes(opt.id.code)
+    );
+  }
   // If there are "Do not mitigate" and "Done" options, they must be the last ones
   if (options && options.length > 1) {
-    const optionsToMove = [
-      NO_DATA_MITIGATION_KEY,
-      NO_MODEL_MITIGATION_KEY,
-      NO_OUTCOME_MITIGATION_KEY,
-      DONE_KEY,
-    ];
     const toMove: typeof options = [];
     for (let i = options.length - 1; i >= 0; i--) {
       if (optionsToMove.includes(options[i].id.code)) {
