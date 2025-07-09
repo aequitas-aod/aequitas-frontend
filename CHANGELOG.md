@@ -1,3 +1,9 @@
+## [2.2.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.1.0...v2.2.0) (2025-07-09)
+
+### Features
+
+* add mitigation type test, add polarization plot in test summary, fix name of current test dataset ([60aa746](https://github.com/aequitas-aod/aequitas-frontend/commit/60aa7469bdbd05da2793800139a5fdb7ea72af2c))
+
 ## [2.1.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.8...v2.1.0) (2025-07-09)
 
 ### Features
