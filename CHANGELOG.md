@@ -1,3 +1,13 @@
+## [2.1.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.8...v2.1.0) (2025-07-09)
+
+### Features
+
+* add mitigation algorithm for image dataset ([f8bf01c](https://github.com/aequitas-aod/aequitas-frontend/commit/f8bf01c4c6702a9cdb9ae77b4a86ade36f0f7487))
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.16.2 ([#342](https://github.com/aequitas-aod/aequitas-frontend/issues/342)) ([8fec72d](https://github.com/aequitas-aod/aequitas-frontend/commit/8fec72d8dc0d2ef015a5652fb3ee93fddbedfe29))
+
 ## [2.0.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.0.7...v2.0.8) (2025-07-09)
 
 ### Bug Fixes
