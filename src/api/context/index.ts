@@ -39,7 +39,7 @@ export const useCurrentDataset = () => {
 
 export const useCurrentTestDataset = () => {
   const query = useQuery<string>({
-    queryKey: ["test_current_dataset"],
+    queryKey: ["current_test_dataset"],
     queryFn: async () => {
       return backendApi.getCurrentTestDataset(await loadOrGenerateProjectId());
     },

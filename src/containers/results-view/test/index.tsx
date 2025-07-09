@@ -1,4 +1,4 @@
-import { useContextVectorialData, useCurrentTestDataset } from "@/api/context";
+import { useCurrentDataset, useCurrentTestDataset } from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 import { ResultsView } from "@/features/results-view";
 
@@ -18,7 +18,8 @@ export const TestResultsViewPage = ({
     data: datasetKey,
     isLoading: datasetLoading,
     error: datasetError,
-  } = useCurrentTestDataset();
+  } = useCurrentDataset();
+  // } = useCurrentTestDataset();
 
   const {
     data: questionnaireData,
@@ -53,7 +54,7 @@ export const TestResultsViewPage = ({
       questionnaire={questionnaireData}
       datasetKey={datasetKey}
       onNext={onNext}
-      mitigationType={null}
+      mitigationType={MitigationType.Test}
     />
   );
 };

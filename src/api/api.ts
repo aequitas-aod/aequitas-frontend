@@ -148,13 +148,13 @@ export class BackendApi {
   }
 
   async getCurrentTestDataset(project: string): Promise<string> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=test_current_dataset`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=current_test_dataset`;
     const res = await axios.get(url);
     if (res.status === 200) {
-      console.log("RETRIEVED CURRENT DATASET");
+      console.log("RETRIEVED CURRENT TEST DATASET");
       return res.data;
     }
-    throw new Error("Failed to fetch current dataset");
+    throw new Error("Failed to fetch current test dataset");
   }
 
   async getDatasetsInfo(project: string): Promise<AnswerContextResponse[]> {

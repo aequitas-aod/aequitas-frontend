@@ -109,14 +109,22 @@ export const ResultsView = ({
         ? [{ src: preprocessingPlot, isLoading: isLoadingPreprocessingPlot }]
         : [];
 
+    const polarization =
+      mitigationType === MitigationType.Test
+        ? [{ src: polarizationPlot, isLoading: isLoadingPolarizationPlot }]
+        : [];
+
     const otherPlots = [
       { src: performancePlot, isLoading: isLoadingPerformancePlot },
       { src: fairnessPlot, isLoading: isLoadingFairnessPlot },
-      { src: polarizationPlot, isLoading: isLoadingPolarizationPlot },
     ];
 
     // Combine preprocessing and other plots, ensuring preprocessing comes first
-    const plots = [...preprocessing, ...otherPlots];
+    let plots = [...preprocessing, ...otherPlots];
+
+    if (mitigationType === MitigationType.Test) {
+      plots = polarization
+    }
 
     // Filter and display images as they load.
     const availableImages = plots

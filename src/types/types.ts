@@ -73,4 +73,5 @@ export enum MitigationType {
   Data = "data",
   Model = "model",
   Outcome = "outcome",
+  Test = "test",
 }
