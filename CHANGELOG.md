@@ -1,3 +1,9 @@
+## [2.3.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.2.2...v2.3.0) (2025-07-10)
+
+### Features
+
+* add polarization stuffs for adecco use case ([be29483](https://github.com/aequitas-aod/aequitas-frontend/commit/be294832d2e0d03478c5e658a973fa25fa3b9356))
+
 ## [2.2.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.2.1...v2.2.2) (2025-07-10)
 
 ### Bug Fixes
