@@ -67,7 +67,8 @@ export type DetectionData = Record<
 export type ProcessingType =
   | "preprocessing"
   | "inprocessing"
-  | "postprocessing";
+  | "postprocessing"
+  | "polarizationprocessing";
 
 export enum MitigationType {
   Data = "data",

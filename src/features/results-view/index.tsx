@@ -2,7 +2,6 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { useEffect, useState } from "react";
 import { DatasetView } from "./sections/dataset-view";
-import { FeaturesView } from "./sections/feature-view";
 import { ResultsViewSection } from "./sections/results-view";
 import { Detection } from "./sections/detection";
 import { AnswerResponse, QuestionnaireResponse } from "@/api/types";
@@ -46,9 +45,6 @@ export const ResultsView = ({
     },
   });
 
-  // TODO: to fix adding feature__ for new datasets
-  const { target } = useFeaturesData(datasetKey.split("-")[0] + "-1");
-
   const handleAction = (answer: AnswerResponse) => {
     setSelectedAnswer(answer.id.code);
     mutate({
@@ -58,15 +54,30 @@ export const ResultsView = ({
   };
   let key: string | undefined;
 
+  let featuresDataDatasetKey = datasetKey;
+  let gap = 1;
+  if (mitigationType === MitigationType.Test) {
+    gap = 3;
+    featuresDataDatasetKey = datasetKey.startsWith("Test-")
+      ? datasetKey.slice(5) + "-1"
+      : datasetKey;
+  }
+
+  const { target } = useFeaturesData(featuresDataDatasetKey);
+  console.log("Target feature:", target);
+
   const {
     data: previousQuestion,
     isLoading: isLoadingPreviousQuestion,
     error: errorPreviousQuestion,
   } = useQuestionnaireById({
-    params: { n: questionNumber - 1 },
+    params: { n: questionNumber - gap },
   });
 
-  if (mitigationType === MitigationType.Model) {
+  if (
+    mitigationType === MitigationType.Model ||
+    mitigationType === MitigationType.Test
+  ) {
     let selectedAlgorithm: string | undefined;
 
     if (previousQuestion && !isLoadingPreviousQuestion) {
@@ -85,7 +96,10 @@ export const ResultsView = ({
   }
 
   const { data: correlationMatrix, isLoading: isLoadingCorrelationMatrix } =
-    useContextVectorialData("correlation_matrix", datasetKey);
+    useContextVectorialData(
+      "correlation_matrix",
+      mitigationType === MitigationType.Test ? key : datasetKey
+    );
 
   const { data: preprocessingPlot, isLoading: isLoadingPreprocessingPlot } =
     useContextVectorialData("preprocessing_plot", key);
@@ -123,7 +137,7 @@ export const ResultsView = ({
     let plots = [...preprocessing, ...otherPlots];
 
     if (mitigationType === MitigationType.Test) {
-      plots = polarization
+      plots = polarization;
     }
 
     // Filter and display images as they load.
@@ -195,7 +209,10 @@ export const ResultsView = ({
           <ResultsViewSection images={imagesToShow} />
         )}
         {selectedSection === "DatasetView" && (
-          <DatasetView datasetKey={key} mitigationType={mitigationType} />
+          <DatasetView
+            datasetKey={datasetKey}
+            mitigationType={mitigationType}
+          />
         )}
         {selectedSection === "FeatureView" && (
           // <FeaturesView datasetKey={key} targetFeature={target} />

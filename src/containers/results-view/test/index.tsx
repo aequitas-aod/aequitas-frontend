@@ -18,8 +18,8 @@ export const TestResultsViewPage = ({
     data: datasetKey,
     isLoading: datasetLoading,
     error: datasetError,
-  } = useCurrentDataset();
-  // } = useCurrentTestDataset();
+    // } = useCurrentDataset();
+  } = useCurrentTestDataset();
 
   const {
     data: questionnaireData,

@@ -35,6 +35,12 @@ export const DatasetSelection = ({
       onNext();
     },
   });
+  // const { mutate: mutatePolarization } = useLaunchAlgorithmMutation({
+  //   onSuccess: () => {
+  //     console.log("Polarization algorithm launched successfully");
+  //   },
+  // });
+
   const options = data.answers;
 
   // If there is "CustomDataset" option, it should be the last
@@ -67,6 +73,21 @@ export const DatasetSelection = ({
       n: questionNumber,
       answer_ids: [selected.id],
     });
+    // const parsedHyperparameters = {
+    //   hidden_dim: 8,
+    //   input_dim: 8,
+    //   lambda_adv: 5,
+    //   output_dim: 1,
+    //   sensitive_dim: 1,
+    // }
+    // mutatePolarization({
+    //   dataset: "Test-Adecco",
+    //   body: {
+    //     $algorithm: "AdversarialDebiasing",
+    //     ...parsedHyperparameters,
+    //   },
+    //   hyperparameterType: "polarizationprocessing",
+    // })
   };
 
   return (
