@@ -1,3 +1,13 @@
+## [2.3.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.0...v2.3.1) (2025-07-11)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.16.3 ([#345](https://github.com/aequitas-aod/aequitas-frontend/issues/345)) ([efad912](https://github.com/aequitas-aod/aequitas-frontend/commit/efad912a3eb7704e11390f31bf9b084a5f6d0257))
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.0.5 ([#346](https://github.com/aequitas-aod/aequitas-frontend/issues/346)) ([532d2d9](https://github.com/aequitas-aod/aequitas-frontend/commit/532d2d9bac99e9530f30a8b645b77cfd56a8069f))
+
 ## [2.3.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.2.2...v2.3.0) (2025-07-10)
 
 ### Features
