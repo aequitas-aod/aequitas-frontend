@@ -1,3 +1,13 @@
+## [2.3.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.2...v2.3.3) (2025-07-15)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.31.0 ([#348](https://github.com/aequitas-aod/aequitas-frontend/issues/348)) ([0b10d2e](https://github.com/aequitas-aod/aequitas-frontend/commit/0b10d2e452e031bfe149c36515d552f339fafb2a))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v15.4.1 ([#349](https://github.com/aequitas-aod/aequitas-frontend/issues/349)) ([af2d6f9](https://github.com/aequitas-aod/aequitas-frontend/commit/af2d6f90330e355a61387c288471f08de47b2e7c))
+
 ## [2.3.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.1...v2.3.2) (2025-07-11)
 
 ### Bug Fixes
