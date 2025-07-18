@@ -1,3 +1,13 @@
+## [2.3.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.3...v2.3.4) (2025-07-18)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.16.4 ([#350](https://github.com/aequitas-aod/aequitas-frontend/issues/350)) ([c3cb24c](https://github.com/aequitas-aod/aequitas-frontend/commit/c3cb24ca21da11f8a3a55428a6a465b2f27c19fc))
+
+### Bug Fixes
+
+* **deps:** update dependency html-react-parser to v5.2.6 ([#351](https://github.com/aequitas-aod/aequitas-frontend/issues/351)) ([cf0e10b](https://github.com/aequitas-aod/aequitas-frontend/commit/cf0e10b42c45d3572f42d1efd7f028986cbd2760))
+
 ## [2.3.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.2...v2.3.3) (2025-07-15)
 
 ### Dependency updates
