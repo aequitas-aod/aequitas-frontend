@@ -1,6 +1,9 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CUSTOM_DATASET_KEY } from "@/config/constants";
+import {
+  CUSTOM_DATASET_KEY,
+  TEST_CUSTOM_DATASET_KEY,
+} from "@/config/constants";
 import { capitalize } from "@/lib/utils";
 import { CreateDatasetDialog } from "../create-dataset-dialog";
 
@@ -43,7 +46,10 @@ export const DatasetPreview = ({
   };
 
   // Se è un custom dataset
-  if (selected.id.code === CUSTOM_DATASET_KEY) {
+  if (
+    selected.id.code === CUSTOM_DATASET_KEY ||
+    selected.id.code === TEST_CUSTOM_DATASET_KEY
+  ) {
     return (
       <div className="flex flex-col border p-4 shadow-md rounded-md bg-white h-full gap-4">
         <p className="text-2xl text-primary-950">{selected.text}</p>
