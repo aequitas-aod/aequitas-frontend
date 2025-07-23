@@ -1,3 +1,9 @@
+## [2.3.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.7...v2.3.8) (2025-07-23)
+
+### Bug Fixes
+
+* fix create button for Custom test dataset selection ([ec0f7c8](https://github.com/aequitas-aod/aequitas-frontend/commit/ec0f7c8edd8285193b4e24fc0455dcc3a668b40e))
+
 ## [2.3.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.6...v2.3.7) (2025-07-23)
 
 ### Bug Fixes
