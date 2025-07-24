@@ -25,7 +25,7 @@ export const NO_DATA_MITIGATION_KEY = "NoDataMitigation";
 export const NO_MODEL_MITIGATION_KEY = "NoModelMitigation";
 export const NO_OUTCOME_MITIGATION_KEY = "NoOutcomeMitigation";
 export const IMAGE_MITIGATION_ALGORITHM =
-  "StableDiffusion-BasedDataAugmentation";
+  "StableDiffusionBasedDataAugmentation";
 
 export const DONE_KEY = "Done";
 export const TEST_KEY = "Test";
