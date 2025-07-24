@@ -1,3 +1,9 @@
+## [2.3.10](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.9...v2.3.10) (2025-07-24)
+
+### Bug Fixes
+
+* naming of StableDiffusionBasedDataAugmentation ([6fbe30b](https://github.com/aequitas-aod/aequitas-frontend/commit/6fbe30b255f77ae579d0c2b48882f8c434ee1819))
+
 ## [2.3.9](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.8...v2.3.9) (2025-07-24)
 
 ### Bug Fixes
