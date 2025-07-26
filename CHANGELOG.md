@@ -1,3 +1,13 @@
+## [2.3.14](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.13...v2.3.14) (2025-07-26)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.32.0 ([#360](https://github.com/aequitas-aod/aequitas-frontend/issues/360)) ([64a4a90](https://github.com/aequitas-aod/aequitas-frontend/commit/64a4a9009a504fd47ac792363c991f191da66b93))
+
+### Bug Fixes
+
+* **deps:** update dependency @hookform/resolvers to v5.2.0 ([#361](https://github.com/aequitas-aod/aequitas-frontend/issues/361)) ([b4f802b](https://github.com/aequitas-aod/aequitas-frontend/commit/b4f802b9af87d68f6333172d168e4c479c37ecbf))
+
 ## [2.3.13](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.12...v2.3.13) (2025-07-25)
 
 ### Bug Fixes
