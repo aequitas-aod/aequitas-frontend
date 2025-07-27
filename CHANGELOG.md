@@ -1,3 +1,9 @@
+## [2.3.15](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.14...v2.3.15) (2025-07-27)
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.526.0 ([#362](https://github.com/aequitas-aod/aequitas-frontend/issues/362)) ([56d7ae6](https://github.com/aequitas-aod/aequitas-frontend/commit/56d7ae610e8d1a073283cd45986c85cd117b690e))
+
 ## [2.3.14](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.13...v2.3.14) (2025-07-26)
 
 ### Dependency updates
