@@ -62,7 +62,10 @@ export const ResultsView = ({
       ? datasetKey.slice(5) + "-1"
       : datasetKey;
   }
-
+  if (featuresDataDatasetKey.includes("-2")) {
+    featuresDataDatasetKey = featuresDataDatasetKey.replace("-2", "-1");
+  }
+  console.log("Features data dataset key:", featuresDataDatasetKey);
   const { target } = useFeaturesData(featuresDataDatasetKey);
   console.log("Target feature:", target);
 
