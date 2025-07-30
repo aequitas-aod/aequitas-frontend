@@ -54,7 +54,7 @@ export const Footer = () => {
       <AequitasLogoImage maxW="sm" hFull={false} />
       <ApiUrlInfo />
       <Button onClick={onResetQuestionnaire}>Reset all</Button>
-      <Button onClick={getReport} style={{ marginLeft: "10px" }}>
+      <Button onClick={getReport} style={{ marginLeft: "20px" }}>
         Create Report
       </Button>
     </footer>
