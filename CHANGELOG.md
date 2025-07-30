@@ -1,3 +1,9 @@
+## [2.4.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.15...v2.4.0) (2025-07-30)
+
+### Features
+
+* add create report button and fix detection in mitigation results ([8371641](https://github.com/aequitas-aod/aequitas-frontend/commit/83716416db5c50ca05dfef17b23ed793500e24ed))
+
 ## [2.3.15](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.14...v2.3.15) (2025-07-27)
 
 ### Bug Fixes
