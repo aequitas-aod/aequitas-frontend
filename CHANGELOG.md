@@ -1,3 +1,13 @@
+## [2.4.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.0...v2.4.1) (2025-07-30)
+
+### Bug Fixes
+
+* fix margin to report button ([f8466b3](https://github.com/aequitas-aod/aequitas-frontend/commit/f8466b3779375420da301d10109f696f95832ee5))
+
+### General maintenance
+
+* add margin to report button ([cd23a10](https://github.com/aequitas-aod/aequitas-frontend/commit/cd23a10a5c64ae0906fea1650d49ca504bdece3d))
+
 ## [2.4.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.3.15...v2.4.0) (2025-07-30)
 
 ### Features
