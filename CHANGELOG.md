@@ -1,3 +1,9 @@
+## [2.4.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.1...v2.4.2) (2025-08-04)
+
+### Bug Fixes
+
+* fix constant name ([5af1d1f](https://github.com/aequitas-aod/aequitas-frontend/commit/5af1d1f0914b8b59ca31f581b95595336fdb4d4c))
+
 ## [2.4.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.0...v2.4.1) (2025-07-30)
 
 ### Bug Fixes
