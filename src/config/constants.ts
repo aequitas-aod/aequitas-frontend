@@ -54,7 +54,7 @@ export const QUESTIONNAIRE_KEYS = {
   OUTCOME_MITIGATION: "OutcomeMitigation",
   OUTCOME_MITIGATION_SUMMARY: "OutcomeMitigationSummary",
 
-  TEST_SET_CHOICE: "TestSetSelection",
+  TEST_SET_CHOICE: "TestDatasetSelection",
   POLARIZATION: "Polarization",
   TEST_SUMMARY: "TestSummary",
 
