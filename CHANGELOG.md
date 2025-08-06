@@ -1,3 +1,9 @@
+## [2.5.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.2...v2.5.0) (2025-08-06)
+
+### Features
+
+* add trigger for polarization ([da6f986](https://github.com/aequitas-aod/aequitas-frontend/commit/da6f986f2e63f82f3bfd88689870660ad890bc58))
+
 ## [2.4.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.1...v2.4.2) (2025-08-04)
 
 ### Bug Fixes
