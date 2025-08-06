@@ -68,7 +68,7 @@ export type ProcessingType =
   | "preprocessing"
   | "inprocessing"
   | "postprocessing"
-  | "polarizationprocessing";
+  | "polarization";
 
 export enum MitigationType {
   Data = "data",

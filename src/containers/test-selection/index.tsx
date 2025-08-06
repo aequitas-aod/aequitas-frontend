@@ -63,6 +63,7 @@ export const TestSelectionPage = ({
       onNext={onNext}
       questionNumber={questionNumber}
       data={nextData}
+      isTest={true}
     />
   );
 };

@@ -16,15 +16,18 @@ import {
   CUSTOM_DATASET_KEY,
   TEST_CUSTOM_DATASET_KEY,
 } from "@/config/constants";
+import { useLaunchAlgorithmMutation } from "@/api/context";
 
 export const DatasetSelection = ({
   data,
   questionNumber,
   onNext,
+  isTest,
 }: {
   data: Questionnaire;
   questionNumber: number;
   onNext: () => void;
+  isTest: boolean;
 }) => {
   const t = useTranslations("DatasetSelection");
 
@@ -35,11 +38,11 @@ export const DatasetSelection = ({
       onNext();
     },
   });
-  // const { mutate: mutatePolarization } = useLaunchAlgorithmMutation({
-  //   onSuccess: () => {
-  //     console.log("Polarization algorithm launched successfully");
-  //   },
-  // });
+  const { mutate: launchAlgorithm } = useLaunchAlgorithmMutation({
+    onSuccess: () => {
+      onNext();
+    },
+  });
 
   const options = data.answers;
 
@@ -69,25 +72,17 @@ export const DatasetSelection = ({
     if (!selected) {
       return;
     }
+    if (isTest) {
+      launchAlgorithm({
+        dataset: selected.id.code.replace("Dataset", ""),
+        body: {},
+        hyperparameterType: "polarization",
+      });
+    }
     mutate({
       n: questionNumber,
       answer_ids: [selected.id],
     });
-    // const parsedHyperparameters = {
-    //   hidden_dim: 8,
-    //   input_dim: 8,
-    //   lambda_adv: 5,
-    //   output_dim: 1,
-    //   sensitive_dim: 1,
-    // }
-    // mutatePolarization({
-    //   dataset: "Test-Adecco",
-    //   body: {
-    //     $algorithm: "AdversarialDebiasing",
-    //     ...parsedHyperparameters,
-    //   },
-    //   hyperparameterType: "polarizationprocessing",
-    // })
   };
 
   return (

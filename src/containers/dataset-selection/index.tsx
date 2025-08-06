@@ -63,6 +63,7 @@ export const DatasetSelectionPage = ({
       onNext={onNext}
       questionNumber={questionNumber}
       data={nextData}
+      isTest={false}
     />
   );
 };
