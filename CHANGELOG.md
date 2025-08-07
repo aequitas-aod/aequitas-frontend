@@ -1,3 +1,9 @@
+## [2.5.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.0...v2.5.1) (2025-08-07)
+
+### Bug Fixes
+
+* **deps:** update dependency @hookform/resolvers to v5.2.1 ([#364](https://github.com/aequitas-aod/aequitas-frontend/issues/364)) ([ba5e980](https://github.com/aequitas-aod/aequitas-frontend/commit/ba5e980362416c6cb606c750fb4f577f22ea8779))
+
 ## [2.5.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.4.2...v2.5.0) (2025-08-06)
 
 ### Features
