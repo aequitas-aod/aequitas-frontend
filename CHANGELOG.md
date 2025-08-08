@@ -1,3 +1,14 @@
+## [2.5.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.4...v2.5.5) (2025-08-08)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.17.0 ([#368](https://github.com/aequitas-aod/aequitas-frontend/issues/368)) ([70f88e2](https://github.com/aequitas-aod/aequitas-frontend/commit/70f88e2bc162c8014582de1d037c557aed721fbe))
+* **deps:** update dependency typescript to v5.9.2 ([#369](https://github.com/aequitas-aod/aequitas-frontend/issues/369)) ([af64eb9](https://github.com/aequitas-aod/aequitas-frontend/commit/af64eb9c95f217930827275fdc5a7d6856329b32))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.539.0 ([#363](https://github.com/aequitas-aod/aequitas-frontend/issues/363)) ([d3a10dc](https://github.com/aequitas-aod/aequitas-frontend/commit/d3a10dce181c5008d3131a896e70a3294d6f1168))
+
 ## [2.5.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.3...v2.5.4) (2025-08-08)
 
 ### Bug Fixes
