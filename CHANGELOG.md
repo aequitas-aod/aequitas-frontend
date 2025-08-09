@@ -1,3 +1,14 @@
+## [2.5.6](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.5...v2.5.6) (2025-08-09)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.17.1 ([#372](https://github.com/aequitas-aod/aequitas-frontend/issues/372)) ([a8d25f9](https://github.com/aequitas-aod/aequitas-frontend/commit/a8d25f9bb0532761a13a7ad7ba0b94939e9023bf))
+* **deps:** update dependency eslint to v9.33.0 ([#374](https://github.com/aequitas-aod/aequitas-frontend/issues/374)) ([8d20ac5](https://github.com/aequitas-aod/aequitas-frontend/commit/8d20ac54c974215272c8eadfac5b2d81d046c2c7))
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.0.16 ([#375](https://github.com/aequitas-aod/aequitas-frontend/issues/375)) ([46e1b05](https://github.com/aequitas-aod/aequitas-frontend/commit/46e1b05be4d595afdc61b2cf19effe808f50f2aa))
+
 ## [2.5.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.4...v2.5.5) (2025-08-08)
 
 ### Dependency updates
