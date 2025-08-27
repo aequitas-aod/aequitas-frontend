@@ -1,3 +1,9 @@
+## [2.5.23](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.22...v2.5.23) (2025-08-27)
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v15.5.2 ([#395](https://github.com/aequitas-aod/aequitas-frontend/issues/395)) ([f0ba6cf](https://github.com/aequitas-aod/aequitas-frontend/commit/f0ba6cf7204b8ba625165017926a92a18f52809a))
+
 ## [2.5.22](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.21...v2.5.22) (2025-08-26)
 
 ### Bug Fixes
