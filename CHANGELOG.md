@@ -1,3 +1,13 @@
+## [2.5.30](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.29...v2.5.30) (2025-09-07)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.35.0 ([#402](https://github.com/aequitas-aod/aequitas-frontend/issues/402)) ([b15a7ac](https://github.com/aequitas-aod/aequitas-frontend/commit/b15a7ac7f228804fbec6619538abe184e837c7a9))
+
+### Bug Fixes
+
+* **deps:** update tanstack-query monorepo ([#403](https://github.com/aequitas-aod/aequitas-frontend/issues/403)) ([0bc7344](https://github.com/aequitas-aod/aequitas-frontend/commit/0bc73447e402e63353c848eb2f45ad91d8c8341c))
+
 ## [2.5.29](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.28...v2.5.29) (2025-09-07)
 
 ### Bug Fixes
