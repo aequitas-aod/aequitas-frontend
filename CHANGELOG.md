@@ -1,3 +1,9 @@
+## [2.6.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.0...v2.6.1) (2025-09-09)
+
+### Bug Fixes
+
+* remove blocking if in Dataset Selection, remove previous asnwer filter feat ([3b18bcf](https://github.com/aequitas-aod/aequitas-frontend/commit/3b18bcf4854e5f91ba8750b9ed73004c76eb64af))
+
 ## [2.6.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.31...v2.6.0) (2025-09-09)
 
 ### Features
