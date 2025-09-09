@@ -1,3 +1,9 @@
+## [2.6.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.31...v2.6.0) (2025-09-09)
+
+### Features
+
+* filter answers in Test Dataset selection, update dependencies ([aa8e4b9](https://github.com/aequitas-aod/aequitas-frontend/commit/aa8e4b9f0cc0b613cdbcf2c4c159ad10320a4d3c))
+
 ## [2.5.31](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.5.30...v2.5.31) (2025-09-09)
 
 ### Bug Fixes
