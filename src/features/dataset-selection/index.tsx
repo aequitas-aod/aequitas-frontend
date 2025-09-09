@@ -47,12 +47,11 @@ export const DatasetSelection = ({
   let options = data.answers;
 
   const { data: datasetKey } = useCurrentDataset();
-  if (!datasetKey) {
-    return <div>Loading...</div>;
-  }
-
-  const testDatasetKey = "Test-" + datasetKey.slice(0, -2) + "Dataset";
   if (isTest) {
+    if (!datasetKey) {
+      return <div>Loading...</div>;
+    }
+    const testDatasetKey = "Test-" + datasetKey.slice(0, -2) + "Dataset";
     // In test mode, only show the answer of dataset relative to the current dataset
     options = options.filter(
       (option) =>
