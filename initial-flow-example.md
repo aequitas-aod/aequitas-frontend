@@ -54,7 +54,6 @@ Le operazioni rilevanti lato API sono:
 Al caricamento iniziale del frontend, il backend deve fornire tutte le domande necessarie come array di oggetti JSON.
 
 - `GET /projects/{project-name}/questionnaires`
-
   - risposta possibile
 
     ```json
@@ -91,7 +90,6 @@ Al caricamento iniziale del frontend, il backend deve fornire tutte le domande n
 Al caricamento della view:
 
 - `GET /projects/{project-name}/questionnaire/1`
-
   - risposta possibile:
 
     ```json
@@ -137,7 +135,6 @@ Se l'utente preme il pulsante "Create" e carica un nuovo dataset,
 il frontend deve fare un PUT di una informazione di contesto:
 
 - `PUT /projects/{project-name}/context?key=custom-dataset-1`
-
   - il corpo della richiesta HTTP contiene il dataset caricato dall'utente
 
     ```json
@@ -154,9 +151,7 @@ il frontend deve fare un PUT di una informazione di contesto:
 Quando si deve passare alla prossima view (es. pressione di "Continua")...
 
 1.  ... se l'utente ha selezionato un dataset pre-confezionato:
-
     - `PUT /projects/{project-name}/questionnaire/1`
-
       - il body della request deve contenere l'ID della risposta selezionata
         (tra quelli forniti nella risposta alla GET sopra):
 
@@ -165,9 +160,7 @@ Quando si deve passare alla prossima view (es. pressione di "Continua")...
         ```
 
 2.  ... se l'utente ha caricato un dataset custom:
-
     - `PUT /projects/{project-name}/questionnaire/1`
-
       - in realtà non è diverso dal caso precedente:
 
         ```json
@@ -198,7 +191,6 @@ Tuttavia, il backend potrebbe aver bisogno di tempo per calcolare le statistiche
 Quando la pagina è caricata:
 
 - `GET /projects/{project-name}/questionnaire/2`
-
   - possibile risposta:
 
     ```json
@@ -227,7 +219,6 @@ Quando la pagina è caricata:
 Una volta selezionate le caratteristiche sensibili e di target, al clic sul pulsante "Next":
 
 - `PUT /projects/{project-name}/questionnaire/2`
-
   - possibile body:
 
     ```json

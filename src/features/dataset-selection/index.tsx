@@ -16,7 +16,7 @@ import {
   CUSTOM_DATASET_KEY,
   TEST_CUSTOM_DATASET_KEY,
 } from "@/config/constants";
-import { useLaunchAlgorithmMutation } from "@/api/context";
+import { useCurrentDataset, useLaunchAlgorithmMutation } from "@/api/context";
 
 export const DatasetSelection = ({
   data,
@@ -44,7 +44,22 @@ export const DatasetSelection = ({
     },
   });
 
-  const options = data.answers;
+  let options = data.answers;
+
+  const { data: datasetKey } = useCurrentDataset();
+  if (!datasetKey) {
+    return <div>Loading...</div>;
+  }
+
+  const testDatasetKey = "Test-" + datasetKey.slice(0, -2) + "Dataset";
+  if (isTest) {
+    // In test mode, only show the answer of dataset relative to the current dataset
+    options = options.filter(
+      (option) =>
+        option.id.code === TEST_CUSTOM_DATASET_KEY ||
+        option.id.code === testDatasetKey
+    );
+  }
 
   // If there is "CustomDataset" option, it should be the last
   if (options && options.length > 1) {

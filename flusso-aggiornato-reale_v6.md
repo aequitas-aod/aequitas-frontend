@@ -62,7 +62,6 @@ Le operazioni rilevanti lato API sono:
 Al caricamento della view:
 
 - `GET /projects/{project-code}/questionnaire/1`
-
   - risposta:
 
     ```json
@@ -107,7 +106,6 @@ Al caricamento della view:
 - `GET /projects/{project-code}/context?key=datasets`
 
   Per ottenere le informazioni sui datasets disponibili.
-
   - risposta:
 
   ```json
@@ -126,9 +124,7 @@ Al caricamento della view:
 Successivamente
 
 1.  ... se l'utente ha selezionato un dataset pre-confezionato:
-
     - `PUT /projects/{project-code}/questionnaire/1`
-
       - il body della request deve contenere l'ID della risposta selezionata
         (tra quelli forniti nella risposta alla GET sopra):
 
@@ -145,9 +141,7 @@ Successivamente
         ```
 
 2.  ... se l'utente ha caricato un dataset custom:
-
     - `PUT /projects/{project-code}/questionnaire/1`
-
       - in realtà non è diverso dal caso precedente:
 
         ```json
@@ -165,7 +159,6 @@ Successivamente
     - L'utente preme il pulsante "Create" e carica un nuovo dataset, il frontend deve fare un PUT di una informazione di contesto:
 
     - `PUT /projects/{project-code}/context?key=dataset__custom-1`
-
       - il corpo della richiesta HTTP contiene il dataset caricato dall'utente in **formato CSV**:
 
 Tutte le richieste HTTP in entrambi i punti 1. e 2. vengono eseguiti al premere del pulsante "Continue".
@@ -177,7 +170,6 @@ A questo punto si passa alla Data View.
 La "Data View" visualizza semplicemente il contenuto del dataset.
 
 - `GET /projects/{project-code}/questionnaire/2`
-
   - risposta:
 
     ```json
@@ -216,7 +208,6 @@ La "Data View" visualizza semplicemente il contenuto del dataset.
 Recupero dei dati:
 
 - `GET /projects/{project-code}/context?key=dataset__{ID_DEL_DATASET}` dove `{ID_DEL_DATASET}` in questo caso è `custom-1`
-
   - risposta in formato **CSV**, ad esempio:
     ```csv
     age,workclass,fnlwgt,education,education-num,marital-status,occupation,relationship,race,sex,capitalgain,capitalloss,hoursperweek,native-country,class
@@ -232,7 +223,6 @@ Recupero dei dati:
 - L'utente prosegue confermando il dataset.
 
   `PUT /projects/{project-code}/questionnaire/2`
-
   - body:
 
     ```json
@@ -252,7 +242,6 @@ Recupero dei dati:
 Quando la pagina è caricata:
 
 - `GET /projects/{project-code}/context?key=stats__custom-1`
-
   - risposta info sul dataset in formato **CSV**:
 
   ```csv
@@ -282,7 +271,6 @@ Quando la pagina è caricata:
   ```
 
 - `GET /projects/{project-code}/questionnaire/3`
-
   - risposta:
 
     ```json
@@ -316,7 +304,6 @@ Quando la pagina è caricata:
 Una volta selezionate le caratteristiche sensibili e di target, al clic sul pulsante "Continue":
 
 - `PUT /projects/{project-code}/questionnaire/3`
-
   - possibile body:
 
     ```json
@@ -340,7 +327,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 ### Dependencies View:
 
 - `GET /projects/{project-code}/questionnaire/4`
-
   - risposta:
 
   ```json
@@ -368,29 +354,24 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - `GET /projects/{project-code}/context?key=correlation_matrix__custom-1`
-
   - risposta:
 
   ```json
   "{correlation matrix in formato vettoriale}"
 
-
   // ad esempio '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" stroke="black" stroke-width="3" fill="lightblue" /></svg>'
   ```
 
 - `GET /projects/{project-code}/context?key=dependency_graph__custom-1`
-
   - risposta:
 
   ```json
   "{dependency graph in formato vettoriale}"
 
-
   // analogo a sopra
   ```
 
 - `GET /projects/{project-code}/context?key=suggested_proxies__custom-1` per pre-selezionare i proxy
-
   - risposta:
 
   ```json
@@ -457,11 +438,9 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - l'utente seleziona di fatto le features proxy (tramite le checkbox), dopodichè cliccando su "Continue":
-
   1.  si riempie il contesto con le features selezionate come proxy
 
       `PUT /projects/{project-code}/context?key=proxies__custom-1`
-
       - body:
 
       ```json
@@ -530,7 +509,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   2.  si prosegue dando (l'unica, in questo caso) risposta alla domanda del questionario
 
       `PUT /projects/{project-code}/questionnaire/4`
-
       - body, sempre così (è l'unica risposta possibile)
 
       ```json
@@ -610,7 +588,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 - Ottengo le features dal backend per popolare gli elementi figli degli accordio con le sensitive features (quelle con sensitive: true)
 
   `GET /projects/{project-code}/context?key=features__custom-1`
-
   - risposta:
 
   ```json
@@ -679,7 +656,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - `GET /projects/{project-code}/context?key=metrics__custom-1` per popolare la schermata corrente con i grafici (istogrammi)
-
   - risposta:
 
   ```json
@@ -888,9 +864,7 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - l'utente seleziona le metriche e le features da considerare, dopodichè cliccando su "Continue":
-
   1.  `PUT /projects/{project-code}/context?key=detected__custom-1`
-
       - body: dizionario a più livelli che identifica quale metrica, e assegnamento delle feature andare a considerare "da mitigare"
 
       ```json
@@ -913,7 +887,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   2.  si seleziona la risposta alla domanda del questionario
 
       `PUT /projects/{project-code}/questionnaire/5`
-
       - il body della request deve contenere gli ID delle risposte selezionate (in questo caso, le metriche prese in considerazione), per esempio:
 
       ```json
@@ -938,7 +911,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 ### Data Mitigation View
 
 - `GET /projects/{project-code}/questionnaire/6`
-
   - risposta:
 
   ```json
@@ -996,9 +968,7 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - l'utente seleziona il radio button dell'algoritmo scelto:
-
   - `PUT /projects/{project-code}/questionnaire/6`
-
     - body: l'ID dell'algoritmo scelto
 
     ```json
@@ -1016,7 +986,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 - dopodiché appare un popup o un'altra schermata per selezionare gli iperparametri:
 
   `GET /projects/{project-code}/context?key=preprocessing-hyperparameters__selectedalg` per popolare popup/vista con gli input di un form per la selezione degli iperparametri.
-
   - risposta:
 
   ```json
@@ -1061,9 +1030,7 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   ```
 
 - selezionati gli iperparametri tramite gli input del form, cliccando su "Select and Run":
-
   1.  `PUT /projects/{project-code}/context?key=preprocessing__custom-1`
-
       - body: iperparametri scelti dall'utente
 
         possibili iperparametri rispettivamente per ogni algoritmo, in questo caso:
@@ -1081,37 +1048,30 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
   2.  La computazione potrebbe richiedere del tempo, quindi si mostra un caricamento all'utente. Successivamente, si mostra la Results View.
 
       Per riempire la Results View:
-
       - `GET /projects/{project-code}/context?key=dataset__custom-2` per recuperare il dataset modificato e i risultati con cui riempire la view (in particolare `results`).
 
         Per ora l'id del nuovo dataset sarà incrementale (`custom-2`, `custom-3` e cosi via in caso di altri pre-processing).
-
         - risposta: il dataset in formato **CSV** e i risultati del pre-processing
 
       - `GET /projects/{project-code}/context?key=correlation_matrix__custom-2` (come in **Dependencies View**)
-
         - risposta:
 
         ```json
         "{correlation matrix in formato vettoriale}"
 
-
         // ad esempio '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" stroke="black" stroke-width="3" fill="lightblue" /></svg>'
         ```
 
       - `GET /projects/{project-code}/context?key=dependency_graph__custom-2` (come in **Dependencies View**)
-
         - risposta:
 
         ```json
         "{dependency graph in formato vettoriale}"
 
-
         // analogo a sopra
         ```
 
       - `GET /projects/{project-code}/context?key=stats__custom-2` per recuperare le statistiche del dataset modificato
-
         - risposta in formato **CSV**, come sopra in **Data View**
 
       - `GET /projects/{project-code}/context?key=metrics__custom2` per recuperare le metriche di fairness del dataset modificato
@@ -1124,7 +1084,6 @@ Una volta selezionate le caratteristiche sensibili e di target, al clic sul puls
 Semplice schermata in cui si chiede se si vuole fare un nuovo pre-processing o andare avanti con in-processing.
 
 - `GET /projects/{project-code}/questionnaire/7`
-
   - risposta:
 
   ```json
@@ -1172,9 +1131,7 @@ Semplice schermata in cui si chiede se si vuole fare un nuovo pre-processing o a
   ```
 
 - l'utente seleziona il radio button, dopodichè cliccando su "Continue":
-
   1.  `PUT /projects/{project-code}/questionnaire/7`
-
       - body supponendo di voler passare all'in-processing:
 
       ```json
@@ -1190,7 +1147,6 @@ Semplice schermata in cui si chiede se si vuole fare un nuovo pre-processing o a
       ```
 
       Notare bene il branching, soprattutto per la breadcrumb:
-
       1. se si sceglie "MitigateDataAgain", si ritorna alla Data Mitigation View
       2. se si sceglie "MitigateModel", si passa alla Model Mitigation View
       3. se si sceglie "Done", il flusso termina
