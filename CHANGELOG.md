@@ -1,3 +1,13 @@
+## [2.6.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.1...v2.6.2) (2025-09-09)
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.543.0 ([#405](https://github.com/aequitas-aod/aequitas-frontend/issues/405)) ([7062444](https://github.com/aequitas-aod/aequitas-frontend/commit/7062444385a0ee6dcb1d9d6a57b8c16ca8ef10c1))
+
+### General maintenance
+
+* fix first column in Features View ([a1e1e4f](https://github.com/aequitas-aod/aequitas-frontend/commit/a1e1e4f46280f1bdb32aec7830d1392c870b15db))
+
 ## [2.6.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.0...v2.6.1) (2025-09-09)
 
 ### Bug Fixes
