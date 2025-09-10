@@ -57,7 +57,7 @@ export const FeatureViewTable = ({
               }`}
             >
               {showSelectRow && (
-                <TableCell className="sticky left-0 z-10 font-medium text-sm border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">
+                <TableCell className="z-11 font-medium text-sm border-b-2 border-r-2 bg-neutral-100 text-neutral-600 !border-neutral-200">
                   <Checkbox
                     checked={isRowSelected}
                     onCheckedChange={() => handleSelectRow(rowIndex)}
@@ -87,6 +87,7 @@ export const FeatureViewTable = ({
                   <TableCell
                     key={col}
                     className={`bg-neutral-50 font-medium text-sm text-primary-950 border-b-2 px-6
+                      ${colIndex === 0 ? "sticky left-0 z-1" : ""}
                       ${col === TARGET_COLUMN && "!bg-primary-200"} 
                       ${col === SENSITIVE_COLUMN && "!bg-primary-300"}
                       ${colIndex !== columns.length - 1 && "border-r-2"}
