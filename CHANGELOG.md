@@ -1,3 +1,13 @@
+## [2.6.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.2...v2.6.3) (2025-09-10)
+
+### Bug Fixes
+
+* **deps:** update dependency @tanstack/react-query to v5.87.4 ([#406](https://github.com/aequitas-aod/aequitas-frontend/issues/406)) ([b534a8d](https://github.com/aequitas-aod/aequitas-frontend/commit/b534a8dfb1ae3fd89050d4704d5955bec5069796))
+
+### General maintenance
+
+* fix feature column in Features View ([7ce80ac](https://github.com/aequitas-aod/aequitas-frontend/commit/7ce80ac4d8b066f9bd97392b6926b208009dc4b6))
+
 ## [2.6.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.1...v2.6.2) (2025-09-09)
 
 ### Bug Fixes
