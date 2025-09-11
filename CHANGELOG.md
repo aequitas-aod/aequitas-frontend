@@ -1,3 +1,13 @@
+## [2.6.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.4...v2.6.5) (2025-09-11)
+
+### Bug Fixes
+
+* fix dataset view in Model Mitigation Results ([b50fe19](https://github.com/aequitas-aod/aequitas-frontend/commit/b50fe19d642826a30724e45f4637432642c4c861))
+
+### Refactoring
+
+* change dataset key in Data Mitigation Results ([40f01c8](https://github.com/aequitas-aod/aequitas-frontend/commit/40f01c80db8d4669f37b401cfffd571fd248a5bc))
+
 ## [2.6.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.3...v2.6.4) (2025-09-11)
 
 ### Bug Fixes
