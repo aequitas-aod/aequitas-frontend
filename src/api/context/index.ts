@@ -167,14 +167,14 @@ export const useStatsContext = (dataset?: string) => {
   return query;
 };
 
-export const usePredictionsContext = (dataset?: string) => {
+export const usePredictionsContext = (dataset?: string, algorithm?: string) => {
   const query = useQuery<string>({
-    queryKey: ["predictions_head", dataset],
+    queryKey: ["predictions_head", dataset, algorithm],
     queryFn: async () => {
-      return backendApi.getContextCsv(
+      return backendApi.getPredictionsContext(
         await loadOrGenerateProjectId(),
         dataset!,
-        "predictions_head"
+        algorithm!
       );
     },
     enabled: !!dataset,

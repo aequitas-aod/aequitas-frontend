@@ -77,12 +77,11 @@ export const ResultsView = ({
     params: { n: questionNumber - gap },
   });
 
+  let selectedAlgorithm: string | undefined;
   if (
     mitigationType === MitigationType.Model ||
     mitigationType === MitigationType.Test
   ) {
-    let selectedAlgorithm: string | undefined;
-
     if (previousQuestion && !isLoadingPreviousQuestion) {
       const selectedAnswer: AnswerResponse | undefined =
         previousQuestion.answers.find((a) => a.selected);
@@ -213,6 +212,7 @@ export const ResultsView = ({
           <DatasetView
             datasetKey={datasetKey}
             mitigationType={mitigationType}
+            selectedAlgorithm={selectedAlgorithm}
           />
         )}
         {selectedSection === "FeatureView" && (

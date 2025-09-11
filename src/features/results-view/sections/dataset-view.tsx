@@ -10,9 +10,11 @@ import { useDatasetHeadContext, usePredictionsContext } from "@/api/context";
 export const DatasetView = ({
   datasetKey,
   mitigationType,
+  selectedAlgorithm,
 }: {
   datasetKey: string;
   mitigationType: MitigationType;
+  selectedAlgorithm: string;
 }) => {
   const t = useTranslations("DatasetView");
   const [data, setData] = useState<ParsedDataset[]>([]); // Stato per i dati del CSV
@@ -23,7 +25,7 @@ export const DatasetView = ({
     isLoading,
     error,
   } = mitigationType === MitigationType.Model
-    ? usePredictionsContext(datasetKey)
+    ? usePredictionsContext(datasetKey, selectedAlgorithm)
     : useDatasetHeadContext(datasetKey);
 
   useEffect(() => {

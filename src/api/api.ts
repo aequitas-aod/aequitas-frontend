@@ -245,6 +245,21 @@ export class BackendApi {
     }
   }
 
+  async getPredictionsContext(
+    project: string,
+    dataset: string,
+    algorithm: string
+  ): Promise<string> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=predictions_head__${algorithm}__${dataset}`;
+    console.log(`GET URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      console.log("RETRIEVED CSV");
+      return res.data;
+    }
+    throw new Error("Failed to fetch context CSV");
+  }
+
   async getContextCsv(
     project: string,
     dataset: string,
