@@ -65,8 +65,8 @@ export const ResultsView = ({
   if (featuresDataDatasetKey.includes("-2")) {
     featuresDataDatasetKey = featuresDataDatasetKey.replace("-2", "-1");
   }
-  console.log("Features data dataset key:", featuresDataDatasetKey);
   const { target } = useFeaturesData(featuresDataDatasetKey);
+
   console.log("Target feature:", target);
 
   const {
@@ -84,8 +84,6 @@ export const ResultsView = ({
     let selectedAlgorithm: string | undefined;
 
     if (previousQuestion && !isLoadingPreviousQuestion) {
-      console.log(previousQuestion);
-      console.log(isLoadingPreviousQuestion);
       const selectedAnswer: AnswerResponse | undefined =
         previousQuestion.answers.find((a) => a.selected);
       if (selectedAnswer) {

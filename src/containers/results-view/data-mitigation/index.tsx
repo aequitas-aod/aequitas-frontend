@@ -47,11 +47,13 @@ export const DataMitigationResultsViewPage = ({
     return <div>No dataset available</div>;
   }
 
+  const newDatasetKey = datasetKey.replace("-1", "-2");
+  console.log("New dataset key for data mitigation:", newDatasetKey);
   return (
     <ResultsView
       questionNumber={questionNumber}
       questionnaire={questionnaireData}
-      datasetKey={datasetKey}
+      datasetKey={newDatasetKey}
       onNext={onNext}
       mitigationType={MitigationType.Data}
     />
