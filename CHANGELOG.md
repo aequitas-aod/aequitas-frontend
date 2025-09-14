@@ -1,3 +1,13 @@
+## [2.6.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.7...v2.6.8) (2025-09-14)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.18.3 ([#413](https://github.com/aequitas-aod/aequitas-frontend/issues/413)) ([08f1aaf](https://github.com/aequitas-aod/aequitas-frontend/commit/08f1aaf82e9370fc695e054aae2022b245cf6cdd))
+
+### Bug Fixes
+
+* **deps:** update dependency @hookform/resolvers to v5.2.2 ([#415](https://github.com/aequitas-aod/aequitas-frontend/issues/415)) ([df097ce](https://github.com/aequitas-aod/aequitas-frontend/commit/df097ce69e6f0d6bab9c84b0585acd27fa924704))
+
 ## [2.6.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.6...v2.6.7) (2025-09-14)
 
 ### Bug Fixes
