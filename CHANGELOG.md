@@ -1,3 +1,9 @@
+## [2.6.9](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.8...v2.6.9) (2025-09-15)
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.12.2 ([#414](https://github.com/aequitas-aod/aequitas-frontend/issues/414)) ([0410845](https://github.com/aequitas-aod/aequitas-frontend/commit/0410845dc61a2fc02a4f9b58b0f1f7c0b80e1af4))
+
 ## [2.6.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.7...v2.6.8) (2025-09-14)
 
 ### Dependency updates
