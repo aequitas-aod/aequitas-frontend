@@ -109,13 +109,13 @@ export default function QuestionnaireContainer() {
             />
           )}
           {/* Test */}
-          {questionKey === QUESTIONNAIRE_KEYS.TEST_SUMMARY && (
+          {questionKey.includes(QUESTIONNAIRE_KEYS.TEST_SUMMARY) && (
             <TestResultsViewPage
               onNext={onNext}
               questionNumber={questionNumber}
             />
           )}
-          {questionKey === QUESTIONNAIRE_KEYS.TEST_SET_CHOICE && (
+          {questionKey.includes(QUESTIONNAIRE_KEYS.TEST_SET_CHOICE) && (
             <TestSelectionPage
               onNext={onNext}
               questionNumber={questionNumber}

@@ -10,6 +10,7 @@ import {
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
+  ProcessingHistory,
   ProcessingHyperparametersResponse,
   ProjectResponse,
   ProxyDataParams,
@@ -243,6 +244,16 @@ export class BackendApi {
     } else {
       console.log("PUT FAILED");
     }
+  }
+
+  async getProcessingHistory(project: string): Promise<ProcessingHistory> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=processing_history`;
+    console.log(`PUT URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch ProcessingHistory");
   }
 
   async getPredictionsContext(

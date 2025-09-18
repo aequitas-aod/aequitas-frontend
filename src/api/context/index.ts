@@ -2,12 +2,13 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { BackendApi } from "../api";
 
-import type {
+import {
   AnswerContextResponse,
   DetectionDataParams,
   FeaturesParams,
   FeaturesResponse,
   MetricsResponse,
+  ProcessingHistory,
   ProcessingHyperparametersResponse,
   ProxyDataParams,
   ProxyDataResponse,
@@ -341,4 +342,13 @@ export const useUpdateContextCsv = ({
     retry: false, // failed mutations will not retry.
   });
   return mutation;
+};
+
+export const useProcessingHistory = () => {
+  return useQuery<ProcessingHistory>({
+    queryKey: ["processing_history"],
+    queryFn: async () => {
+      return backendApi.getProcessingHistory(await loadOrGenerateProjectId());
+    },
+  });
 };

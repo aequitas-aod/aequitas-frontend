@@ -15,7 +15,7 @@ import { ButtonLoading } from "@/components/ui/loading-button";
 import { useTranslations } from "next-intl";
 import { useFeaturesData } from "@/hooks/useDetectionData";
 import { MitigationType } from "@/types/types";
-import { useContextVectorialData } from "@/api/context";
+import { useContextVectorialData, useProcessingHistory } from "@/api/context";
 
 interface ResultsViewProps {
   questionnaire: QuestionnaireResponse;
@@ -55,9 +55,8 @@ export const ResultsView = ({
   let key: string | undefined;
 
   let featuresDataDatasetKey = datasetKey;
-  let gap = 1;
+
   if (mitigationType === MitigationType.Test) {
-    gap = 3;
     featuresDataDatasetKey = datasetKey.startsWith("Test-")
       ? datasetKey.slice(5) + "-1"
       : datasetKey;
@@ -69,32 +68,26 @@ export const ResultsView = ({
 
   console.log("Target feature:", target);
 
-  const {
-    data: previousQuestion,
-    isLoading: isLoadingPreviousQuestion,
-    error: errorPreviousQuestion,
-  } = useQuestionnaireById({
-    params: { n: questionNumber - gap },
-  });
+  let selectedAlgorithm: string;
+  const { data: processingHistory, isLoading: isLoadingProcessingHistory } =
+    useProcessingHistory();
+  if (processingHistory && !isLoadingProcessingHistory) {
+    console.log("Processing history:", processingHistory);
+    selectedAlgorithm = processingHistory[0].algorithm;
 
-  let selectedAlgorithm: string | undefined;
-  if (
-    mitigationType === MitigationType.Model ||
-    mitigationType === MitigationType.Test
-  ) {
-    if (previousQuestion && !isLoadingPreviousQuestion) {
-      const selectedAnswer: AnswerResponse | undefined =
-        previousQuestion.answers.find((a) => a.selected);
-      if (selectedAnswer) {
-        selectedAlgorithm = selectedAnswer.id.code;
-        key = `${selectedAlgorithm}__${datasetKey}`;
+    if (mitigationType === MitigationType.Data) {
+      key = datasetKey;
+    } else {
+      key = `${selectedAlgorithm}__${datasetKey}`;
+
+      if (mitigationType === MitigationType.Test) {
+        const questionCode: string = questionnaire.id.code;
+        key += questionCode.includes("-")
+          ? "-" + questionCode.split("-")[1]
+          : "-0";
       }
-      console.log(key);
     }
-  } else {
-    key = datasetKey;
   }
-
   const { data: correlationMatrix, isLoading: isLoadingCorrelationMatrix } =
     useContextVectorialData(
       "correlation_matrix",
@@ -157,13 +150,6 @@ export const ResultsView = ({
     isLoadingPolarizationPlot,
     isLoadingPreprocessingPlot,
   ]);
-
-  if (isLoadingPreviousQuestion) {
-    return <div>Loading...</div>;
-  }
-  if (errorPreviousQuestion) {
-    return <div>Error fetching data</div>;
-  }
 
   return (
     <QuestionnaireLayout

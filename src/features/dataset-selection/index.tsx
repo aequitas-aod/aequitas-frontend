@@ -45,7 +45,6 @@ export const DatasetSelection = ({
   });
 
   let options = data.answers;
-
   const { data: datasetKey } = useCurrentDataset();
   if (isTest) {
     if (!datasetKey) {
@@ -87,9 +86,15 @@ export const DatasetSelection = ({
       return;
     }
     if (isTest) {
+      const questionCode: string = data.id.code;
+      const index: number = questionCode.includes("-")
+        ? parseInt(questionCode.split("-")[1])
+        : 0;
       launchAlgorithm({
         dataset: selected.id.code.replace("Dataset", ""),
-        body: {},
+        body: {
+          index: index,
+        },
         hyperparameterType: "polarization",
       });
     }
