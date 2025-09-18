@@ -1,3 +1,13 @@
+## [2.7.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.13...v2.7.0) (2025-09-18)
+
+### Features
+
+* add multiple polarization support ([869be55](https://github.com/aequitas-aod/aequitas-frontend/commit/869be55b49354326f9c89d767f06c28368f0546f))
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.18.6 ([#420](https://github.com/aequitas-aod/aequitas-frontend/issues/420)) ([b74ca46](https://github.com/aequitas-aod/aequitas-frontend/commit/b74ca4664245d8caec6a1b78372e5fc097c08490))
+
 ## [2.6.13](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.12...v2.6.13) (2025-09-17)
 
 ### Bug Fixes
