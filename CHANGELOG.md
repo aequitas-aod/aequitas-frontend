@@ -1,3 +1,13 @@
+## [2.7.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.0...v2.7.1) (2025-09-20)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v9.36.0 ([#421](https://github.com/aequitas-aod/aequitas-frontend/issues/421)) ([fcd9bf2](https://github.com/aequitas-aod/aequitas-frontend/commit/fcd9bf2261e56d720049e315aa6fa1bb3c3351d4))
+
+### Bug Fixes
+
+* **deps:** update dependency react-hook-form to v7.63.0 ([#422](https://github.com/aequitas-aod/aequitas-frontend/issues/422)) ([ac523dc](https://github.com/aequitas-aod/aequitas-frontend/commit/ac523dcf397fdeb4158dddecfeef28ab54dd0f39))
+
 ## [2.7.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.6.13...v2.7.0) (2025-09-18)
 
 ### Features
