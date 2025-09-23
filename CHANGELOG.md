@@ -1,3 +1,9 @@
+## [2.7.5](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.4...v2.7.5) (2025-09-23)
+
+### Bug Fixes
+
+* fix dataset view in Results, adapt answers to test dataset selection question ([3e89f71](https://github.com/aequitas-aod/aequitas-frontend/commit/3e89f71aaeec70bf2c09280f521d18552d2b783f))
+
 ## [2.7.4](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.3...v2.7.4) (2025-09-23)
 
 ### Bug Fixes
