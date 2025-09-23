@@ -54,32 +54,23 @@ export const ResultsView = ({
   };
   let key: string | undefined;
 
-  let featuresDataDatasetKey = datasetKey;
-
-  if (mitigationType === MitigationType.Test) {
-    featuresDataDatasetKey = datasetKey.startsWith("Test-")
-      ? datasetKey.slice(5) + "-1"
-      : datasetKey;
-  }
-  if (featuresDataDatasetKey.includes("-2")) {
-    featuresDataDatasetKey = featuresDataDatasetKey.replace("-2", "-1");
-  }
-  const { target } = useFeaturesData(featuresDataDatasetKey);
-
-  console.log("Target feature:", target);
-
+  let originalDatasetKey: string = datasetKey;
+  console.log("original dataset key:", originalDatasetKey);
   let selectedAlgorithm: string;
+
   const { data: processingHistory, isLoading: isLoadingProcessingHistory } =
     useProcessingHistory();
+
   if (processingHistory && !isLoadingProcessingHistory) {
     console.log("Processing history:", processingHistory);
     selectedAlgorithm = processingHistory[0].algorithm;
-
+    originalDatasetKey = processingHistory[0].dataset;
+    console.log("updated original dataset key:", originalDatasetKey);
     if (mitigationType === MitigationType.Data) {
       key = datasetKey;
     } else {
       key = `${selectedAlgorithm}__${datasetKey}`;
-
+      console.log("Dataset key:", datasetKey);
       if (mitigationType === MitigationType.Test) {
         const questionCode: string = questionnaire.id.code;
         key += questionCode.includes("-")
@@ -88,6 +79,10 @@ export const ResultsView = ({
       }
     }
   }
+
+  const { target } = useFeaturesData(originalDatasetKey);
+  console.log("Target feature:", target);
+
   const { data: correlationMatrix, isLoading: isLoadingCorrelationMatrix } =
     useContextVectorialData(
       "correlation_matrix",

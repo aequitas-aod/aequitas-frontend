@@ -19,7 +19,7 @@ export const Detection = ({ datasetKey, targetFeature }: DetectionProps) => {
     datasetKey,
     targetFeature
   );
-
+  console.log("METRICS: ", metrics);
   useEffect(() => {
     if (!metrics) {
       return;

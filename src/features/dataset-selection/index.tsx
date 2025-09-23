@@ -50,12 +50,12 @@ export const DatasetSelection = ({
     if (!datasetKey) {
       return <div>Loading...</div>;
     }
-    const testDatasetKey = "Test-" + datasetKey.slice(0, -2) + "Dataset";
+    const testDatasetKey = "Test-" + datasetKey.slice(0, -2);
     // In test mode, only show the answer of dataset relative to the current dataset
     options = options.filter(
       (option) =>
-        option.id.code === TEST_CUSTOM_DATASET_KEY ||
-        option.id.code === testDatasetKey
+        option.id.code.includes(TEST_CUSTOM_DATASET_KEY) ||
+        option.id.code.includes(testDatasetKey)
     );
   }
 
