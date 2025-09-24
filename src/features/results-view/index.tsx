@@ -71,12 +71,6 @@ export const ResultsView = ({
     } else {
       key = `${selectedAlgorithm}__${datasetKey}`;
       console.log("Dataset key:", datasetKey);
-      if (mitigationType === MitigationType.Test) {
-        const questionCode: string = questionnaire.id.code;
-        key += questionCode.includes("-")
-          ? "-" + questionCode.split("-")[1]
-          : "-0";
-      }
     }
   }
 

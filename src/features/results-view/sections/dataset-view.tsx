@@ -24,7 +24,8 @@ export const DatasetView = ({
     data: contextData,
     isLoading,
     error,
-  } = mitigationType === MitigationType.Model
+  } = mitigationType === MitigationType.Model ||
+  mitigationType === MitigationType.Test
     ? usePredictionsContext(datasetKey, selectedAlgorithm)
     : useDatasetHeadContext(datasetKey);
 
