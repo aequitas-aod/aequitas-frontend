@@ -1,3 +1,9 @@
+## [2.7.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.6...v2.7.7) (2025-09-24)
+
+### Bug Fixes
+
+* remove incremental numbers from polarization keys ([47351b7](https://github.com/aequitas-aod/aequitas-frontend/commit/47351b70cb5ee7a2eba7842e30454360ab5a0b51))
+
 ## [2.7.6](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.5...v2.7.6) (2025-09-23)
 
 ### Bug Fixes
