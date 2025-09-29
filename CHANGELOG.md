@@ -1,3 +1,9 @@
+## [2.8.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.0...v2.8.1) (2025-09-29)
+
+### Bug Fixes
+
+* add polarization call also for custom datasets ([a8f31cf](https://github.com/aequitas-aod/aequitas-frontend/commit/a8f31cfc1d4643990ef57929f4f148ef06244ee7))
+
 ## [2.8.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.7...v2.8.0) (2025-09-29)
 
 ### Features
