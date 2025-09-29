@@ -63,8 +63,8 @@ export const ResultsView = ({
 
   if (processingHistory && !isLoadingProcessingHistory) {
     console.log("Processing history:", processingHistory);
-    selectedAlgorithm = processingHistory[0].algorithm;
-    originalDatasetKey = processingHistory[0].dataset;
+    selectedAlgorithm = processingHistory.algorithm;
+    originalDatasetKey = processingHistory.dataset;
     console.log("updated original dataset key:", originalDatasetKey);
     if (mitigationType === MitigationType.Data) {
       key = datasetKey;
@@ -78,19 +78,31 @@ export const ResultsView = ({
   console.log("Target feature:", target);
 
   const { data: correlationMatrix, isLoading: isLoadingCorrelationMatrix } =
-    useContextVectorialData(
-      "correlation_matrix",
-      mitigationType === MitigationType.Test ? key : datasetKey
-    );
-
+    useContextVectorialData("correlation_matrix", key);
   const { data: preprocessingPlot, isLoading: isLoadingPreprocessingPlot } =
-    useContextVectorialData("preprocessing_plot", key);
+    useContextVectorialData(
+      "preprocessing_plot",
+      key,
+      mitigationType === MitigationType.Data
+    );
   const { data: performancePlot, isLoading: isLoadingPerformancePlot } =
-    useContextVectorialData("performance_plot", key);
+    useContextVectorialData(
+      "performance_plot",
+      key,
+      mitigationType !== MitigationType.Test
+    );
   const { data: fairnessPlot, isLoading: isLoadingFairnessPlot } =
-    useContextVectorialData("fairness_plot", key);
+    useContextVectorialData(
+      "fairness_plot",
+      key,
+      mitigationType !== MitigationType.Test
+    );
   const { data: polarizationPlot, isLoading: isLoadingPolarizationPlot } =
-    useContextVectorialData("polarization_plot", key);
+    useContextVectorialData(
+      "polarization_plot",
+      key,
+      mitigationType === MitigationType.Test
+    );
 
   const featuresImages: string[] = correlationMatrix
     ? [correlationMatrix]

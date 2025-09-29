@@ -12,6 +12,7 @@ export const CUSTOM_DATASET_KEY = "CustomDataset";
 export const TEST_CUSTOM_DATASET_KEY = "Test-CustomDataset";
 
 export const DEFAULT_CUSTOM_DATASET_NAME = "Custom-1";
+export const DEFAULT_CUSTOM_TEST_DATASET_NAME = "Test-Custom";
 
 /* Feature View */
 export const TARGET_COLUMN = "target";

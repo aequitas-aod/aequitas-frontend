@@ -227,7 +227,14 @@ export const useSuggestedProxies = (dataset?: string) => {
   return query;
 };
 
-export const useContextVectorialData = (key: string, dataset?: string) => {
+export const useContextVectorialData = (
+  key: string,
+  dataset?: string,
+  enabled: boolean = true
+) => {
+  if (!enabled) {
+    return { data: undefined, isLoading: false };
+  }
   const query = useQuery<string>({
     queryKey: [key, dataset],
     queryFn: async () => {

@@ -30,15 +30,20 @@ import { convertCSVToString } from "@/lib/utils";
 import { useUpdateContextCsv } from "@/api/context";
 import { EnhancedAnswerResponse } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
-import { DEFAULT_CUSTOM_DATASET_NAME } from "@/config/constants";
+import {
+  DEFAULT_CUSTOM_DATASET_NAME,
+  DEFAULT_CUSTOM_TEST_DATASET_NAME,
+} from "@/config/constants";
 
 export const CreateDatasetDialog = ({
   questionNumber,
   selected,
+  isTest,
   onNext,
 }: {
   questionNumber: number;
   selected: EnhancedAnswerResponse;
+  isTest: boolean;
   onNext: () => void;
 }) => {
   const t = useTranslations("DatasetSelection");
@@ -96,9 +101,11 @@ export const CreateDatasetDialog = ({
           },
         ],
       });
-      // Chiamata 2: PUT /context
+
       await updateContext({
-        dataset: DEFAULT_CUSTOM_DATASET_NAME,
+        dataset: isTest
+          ? DEFAULT_CUSTOM_TEST_DATASET_NAME
+          : DEFAULT_CUSTOM_DATASET_NAME,
         body: csvString,
       });
     } catch (error) {

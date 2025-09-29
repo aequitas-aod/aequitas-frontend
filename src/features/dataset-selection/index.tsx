@@ -143,6 +143,7 @@ export const DatasetSelection = ({
               <DatasetPreview
                 selected={selected}
                 questionNumber={questionNumber}
+                isTest={isTest}
                 onNext={onNext}
               />
             </div>

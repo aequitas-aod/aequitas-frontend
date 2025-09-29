@@ -126,9 +126,9 @@ type FeatureData = {
 };
 export type FeaturesParams = Record<string, FeatureData>;
 
-export type ProcessingHistory = Array<{
+export type ProcessingHistory = {
   phase: "in" | "pre";
   dataset: string;
   algorithm: string;
   hyperparameters: object;
-}>;
+};

@@ -12,12 +12,14 @@ import type { EnhancedAnswerResponse } from "@/types/types";
 type DatasetPreviewProps = {
   questionNumber: number;
   onNext: () => void;
+  isTest: boolean;
   selected: EnhancedAnswerResponse;
 };
 
 export const DatasetPreview = ({
   questionNumber,
   onNext,
+  isTest,
   selected,
 }: DatasetPreviewProps) => {
   const isValidDate = (date: string) => {
@@ -62,6 +64,7 @@ export const DatasetPreview = ({
           <CreateDatasetDialog
             onNext={onNext}
             selected={selected}
+            isTest={isTest}
             questionNumber={questionNumber}
           />
         </div>
