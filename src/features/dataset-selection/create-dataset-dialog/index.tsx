@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -20,15 +20,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
 import { FormSchema, FormValues } from "./schema";
 import { CheckIcon, PlusIcon, TrashIcon } from "lucide-react";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
 import { convertCSVToString } from "@/lib/utils";
-import { useUpdateContextCsv } from "@/api/context";
-import { EnhancedAnswerResponse } from "@/types/types";
+import { useLaunchAlgorithmMutation, useUpdateContextCsv } from "@/api/context";
+import { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
 import {
   DEFAULT_CUSTOM_DATASET_NAME,
@@ -36,11 +36,13 @@ import {
 } from "@/config/constants";
 
 export const CreateDatasetDialog = ({
+  data,
   questionNumber,
   selected,
   isTest,
   onNext,
 }: {
+  data: Questionnaire;
   questionNumber: number;
   selected: EnhancedAnswerResponse;
   isTest: boolean;
@@ -54,6 +56,11 @@ export const CreateDatasetDialog = ({
   const { mutateAsync: updateQuestionnaire } = useUpdateQuestionnaire({});
   const { mutateAsync: updateContext } = useUpdateContextCsv({
     onSuccess: onNext,
+  });
+  const { mutate: launchAlgorithm } = useLaunchAlgorithmMutation({
+    onSuccess: () => {
+      onNext();
+    },
   });
 
   const form = useForm<FormValues>({
@@ -108,6 +115,20 @@ export const CreateDatasetDialog = ({
           : DEFAULT_CUSTOM_DATASET_NAME,
         body: csvString,
       });
+
+      if (isTest) {
+        const questionCode: string = data.id.code;
+        const index: number = questionCode.includes("-")
+          ? parseInt(questionCode.split("-")[1])
+          : 0;
+        launchAlgorithm({
+          dataset: selected.id.code.replace("Dataset", ""),
+          body: {
+            index: index,
+          },
+          hyperparameterType: "polarization",
+        });
+      }
     } catch (error) {
       console.error("Errore durante la creazione:", error);
     }

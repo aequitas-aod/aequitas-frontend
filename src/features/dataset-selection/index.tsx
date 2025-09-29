@@ -142,6 +142,7 @@ export const DatasetSelection = ({
             <div className="flex-1 h-full">
               <DatasetPreview
                 selected={selected}
+                data={data}
                 questionNumber={questionNumber}
                 isTest={isTest}
                 onNext={onNext}

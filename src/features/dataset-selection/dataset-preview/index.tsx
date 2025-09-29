@@ -7,9 +7,10 @@ import {
 import { capitalize } from "@/lib/utils";
 import { CreateDatasetDialog } from "../create-dataset-dialog";
 
-import type { EnhancedAnswerResponse } from "@/types/types";
+import type { EnhancedAnswerResponse, Questionnaire } from "@/types/types";
 
 type DatasetPreviewProps = {
+  data: Questionnaire;
   questionNumber: number;
   onNext: () => void;
   isTest: boolean;
@@ -17,6 +18,7 @@ type DatasetPreviewProps = {
 };
 
 export const DatasetPreview = ({
+  data,
   questionNumber,
   onNext,
   isTest,
@@ -63,6 +65,7 @@ export const DatasetPreview = ({
         <div className="mt-auto flex justify-end">
           <CreateDatasetDialog
             onNext={onNext}
+            data={data}
             selected={selected}
             isTest={isTest}
             questionNumber={questionNumber}
