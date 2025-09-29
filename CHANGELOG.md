@@ -1,3 +1,14 @@
+## [2.8.0](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.7...v2.8.0) (2025-09-29)
+
+### Features
+
+* optimize images loading, add Test Custom dataset name, change processing history type ([e6e5bbc](https://github.com/aequitas-aod/aequitas-frontend/commit/e6e5bbc32ffa752ecfe15c3a48805adc389d2ca7))
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/eslint-plugin-query to v5.90.2 ([#427](https://github.com/aequitas-aod/aequitas-frontend/issues/427)) ([e1788e9](https://github.com/aequitas-aod/aequitas-frontend/commit/e1788e997c2eb02c527e1b9afb254b0ebf1796d2))
+* **deps:** update dependency @tanstack/eslint-plugin-query to v5.91.0 ([#428](https://github.com/aequitas-aod/aequitas-frontend/issues/428)) ([a6bf2e2](https://github.com/aequitas-aod/aequitas-frontend/commit/a6bf2e24fe0957600f945d2ed5d8d77b6182988e))
+
 ## [2.7.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.7.6...v2.7.7) (2025-09-24)
 
 ### Bug Fixes
