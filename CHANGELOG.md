@@ -1,3 +1,14 @@
+## [2.8.3](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.2...v2.8.3) (2025-10-06)
+
+### Dependency updates
+
+* **deps:** update dependency zod to v4.1.12 ([#434](https://github.com/aequitas-aod/aequitas-frontend/issues/434)) ([1c24a37](https://github.com/aequitas-aod/aequitas-frontend/commit/1c24a37bcc594aee13ebebd4fbb68c0ade1004a2))
+
+### Bug Fixes
+
+* reintroduce metrics request and add selected_metrics request ([e5cb9bf](https://github.com/aequitas-aod/aequitas-frontend/commit/e5cb9bf51e3f67961780c3b87e22dcfcab993370))
+* replace metrics with selected_metrics ([821dff8](https://github.com/aequitas-aod/aequitas-frontend/commit/821dff8a236b665f481513a73a71e8851daf223c))
+
 ## [2.8.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.1...v2.8.2) (2025-10-06)
 
 ### Dependency updates
