@@ -17,7 +17,8 @@ export const Detection = ({ datasetKey, targetFeature }: DetectionProps) => {
   console.log(datasetKey + ".   " + targetFeature);
   const { metrics, isLoading, error } = useMetricsData(
     datasetKey,
-    targetFeature
+    targetFeature,
+    true
   );
   console.log("METRICS: ", metrics);
   useEffect(() => {

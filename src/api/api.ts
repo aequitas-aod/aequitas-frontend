@@ -326,6 +326,19 @@ export class BackendApi {
     project: string,
     dataset: string
   ): Promise<MetricsResponse> {
+    const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
+    console.log(`GET URL: ${url}`);
+    const res = await axios.get(url);
+    if (res.status === 200) {
+      return res.data;
+    }
+    throw new Error("Failed to fetch context");
+  }
+
+  async getSelectedMetricsContext(
+    project: string,
+    dataset: string
+  ): Promise<MetricsResponse> {
     const url = `${BACKEND_URL}/projects/${project}/context?key=selected_metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
     const res = await axios.get(url);

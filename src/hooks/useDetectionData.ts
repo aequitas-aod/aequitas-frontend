@@ -1,6 +1,10 @@
 import { useCallback, useMemo } from "react";
 
-import { useFeaturesContext, useMetricsContext } from "@/api/context";
+import {
+  useFeaturesContext,
+  useMetricsContext,
+  useSelectedMetricsContext,
+} from "@/api/context";
 import { useQuestionnaireById } from "@/api/questionnaire";
 
 import { ConditionResponse, MetricsResponse } from "@/api/types";
@@ -15,12 +19,18 @@ import { INFINITY_VALUE } from "@/config/constants";
 // ------------------------------
 // Hook: useMetricsData
 // ------------------------------
-export const useMetricsData = (dataset?: string, selectedTarget?: string) => {
+export const useMetricsData = (
+  dataset?: string,
+  selectedTarget?: string,
+  selected?: boolean
+) => {
   const {
     data: metricsData,
     isLoading: metricsLoading,
     error: metricsError,
-  } = useMetricsContext(dataset, selectedTarget);
+  } = selected
+    ? useSelectedMetricsContext(dataset, selectedTarget)
+    : useMetricsContext(dataset, selectedTarget);
   const parseGraphs = useCallback(
     <T>(
       items: ConditionResponse<T>[],

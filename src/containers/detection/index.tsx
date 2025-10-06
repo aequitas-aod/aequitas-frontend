@@ -31,7 +31,7 @@ export const DetectionPage = ({
     isLoading: metricsLoading,
     error: metricsError,
     metrics,
-  } = useMetricsData(datasetKey, target);
+  } = useMetricsData(datasetKey, target, false);
 
   const {
     isLoading: questionnaireLoading,

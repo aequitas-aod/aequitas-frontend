@@ -212,6 +212,23 @@ export const useMetricsContext = (dataset?: string, feature?: string) => {
   return query;
 };
 
+export const useSelectedMetricsContext = (
+  dataset?: string,
+  feature?: string
+) => {
+  const query = useQuery<MetricsResponse>({
+    queryKey: ["metrics", dataset],
+    queryFn: async () => {
+      return backendApi.getSelectedMetricsContext(
+        await loadOrGenerateProjectId(),
+        dataset!
+      );
+    },
+    enabled: !!dataset && !!feature,
+  });
+  return query;
+};
+
 // dependencies
 export const useSuggestedProxies = (dataset?: string) => {
   const query = useQuery<ProxyDataResponse>({
