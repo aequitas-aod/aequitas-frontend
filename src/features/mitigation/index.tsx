@@ -8,7 +8,11 @@ import { QuestionnaireLayout } from "@/components/molecules/Layout/layout";
 import { LaunchAlgorithm } from "./launch-algorithm";
 import { QuestionnaireBanner } from "@/components/molecules/Layout/banner";
 import { useUpdateQuestionnaire } from "@/api/questionnaire";
-import { useDatasetType, useProcessingHyperparameters } from "@/api/context";
+import {
+  useCurrentDataset,
+  useDatasetType,
+  useProcessingHyperparameters,
+} from "@/api/context";
 
 import type { AnswerResponse, QuestionnaireResponse } from "@/api/types";
 import { ButtonLoading } from "@/components/ui/loading-button";
@@ -36,6 +40,7 @@ export const DataMitigation = ({
 }) => {
   const t = useTranslations("DataMitigation");
   const { data: datasetType } = useDatasetType();
+  const { data: datasetKey } = useCurrentDataset();
 
   const [selected, setSelected] = useState<AnswerResponse | null>(null);
   const [enableContinueButton, setEnableContinueButton] = useState(false);
@@ -60,6 +65,11 @@ export const DataMitigation = ({
         opt.id.code !== IMAGE_MITIGATION_ALGORITHM ||
         optionsToMove.includes(opt.id.code)
     );
+    if (!datasetKey.includes("Ull")) {
+      options = options.filter(
+        (answer) => answer.id.code !== "ContributionBasedClassifier"
+      );
+    }
   }
   // If there are "Do not mitigate" and "Done" options, they must be the last ones
   if (options && options.length > 1) {
