@@ -65,7 +65,7 @@ export const DataMitigation = ({
         opt.id.code !== IMAGE_MITIGATION_ALGORITHM ||
         optionsToMove.includes(opt.id.code)
     );
-    if (!datasetKey.includes("Ull")) {
+    if (datasetKey && !datasetKey.includes("Ull")) {
       options = options.filter(
         (answer) => answer.id.code !== "ContributionBasedClassifier"
       );

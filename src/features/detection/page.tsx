@@ -79,7 +79,6 @@ export const Detection = ({
           target: targetFeature,
         }));
     });
-
     try {
       await mutateDetected({
         dataset: datasetKey,

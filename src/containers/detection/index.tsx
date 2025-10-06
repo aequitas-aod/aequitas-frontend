@@ -17,7 +17,8 @@ export const DetectionPage = ({
   questionNumber,
   onNext,
 }: QuestionnairePageProps) => {
-  const { data: datasetKey } = useCurrentDataset();
+  const { data: datasetKey, isLoading: currentDatasetLoading } =
+    useCurrentDataset();
 
   const {
     isLoading: featuresLoading,
@@ -39,10 +40,12 @@ export const DetectionPage = ({
     questionnaireData,
     answers,
   } = useQuestionnaireData(questionNumber, sensitiveFeatures);
-  console.log("---------------------");
-  console.log(questionnaireKeys);
 
-  const isLoading = metricsLoading || featuresLoading || questionnaireLoading;
+  const isLoading =
+    metricsLoading ||
+    featuresLoading ||
+    questionnaireLoading ||
+    currentDatasetLoading;
   const error = metricsError || featuresError || questionnaireError;
 
   if (isLoading) {

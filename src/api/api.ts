@@ -326,7 +326,7 @@ export class BackendApi {
     project: string,
     dataset: string
   ): Promise<MetricsResponse> {
-    const url = `${BACKEND_URL}/projects/${project}/context?key=metrics__${dataset}`;
+    const url = `${BACKEND_URL}/projects/${project}/context?key=selected_metrics__${dataset}`;
     console.log(`GET URL: ${url}`);
     const res = await axios.get(url);
     if (res.status === 200) {

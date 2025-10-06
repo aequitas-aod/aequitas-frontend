@@ -114,7 +114,6 @@ export const Proxies = ({
   }
   const onContinue = () => {
     const body = transformProxyData(featureData);
-    console.log(body);
     mutateProxies({ dataset: datasetKey, body });
   };
 
