@@ -1,3 +1,19 @@
+## [2.8.2](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.1...v2.8.2) (2025-10-06)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.18.7 ([#429](https://github.com/aequitas-aod/aequitas-frontend/issues/429)) ([ed5fc56](https://github.com/aequitas-aod/aequitas-frontend/commit/ed5fc56088763b8eef554511b0dfde6fb81ee3cb))
+* **deps:** update dependency @types/node to v22.18.8 ([#430](https://github.com/aequitas-aod/aequitas-frontend/issues/430)) ([3ccf288](https://github.com/aequitas-aod/aequitas-frontend/commit/3ccf288b973b15240ed30b012a8642b49e5f4389))
+* **deps:** update dependency eslint to v9.37.0 ([#432](https://github.com/aequitas-aod/aequitas-frontend/issues/432)) ([f6090f8](https://github.com/aequitas-aod/aequitas-frontend/commit/f6090f8aa31bf2c31ad292cb5524abec5b59ed7d))
+* **deps:** update dependency react-hook-form to v7.64.0 ([#433](https://github.com/aequitas-aod/aequitas-frontend/issues/433)) ([5f031cf](https://github.com/aequitas-aod/aequitas-frontend/commit/5f031cfe88310012ea4ebfeeb9939753e8ff75dd))
+* **deps:** update dependency tailwindcss to v3.4.18 ([#431](https://github.com/aequitas-aod/aequitas-frontend/issues/431)) ([8039932](https://github.com/aequitas-aod/aequitas-frontend/commit/8039932cedcadb4e33b19e274b8ae07016933abb))
+* **deps:** update dependency typescript to v5.9.3 ([#373](https://github.com/aequitas-aod/aequitas-frontend/issues/373)) ([a103d53](https://github.com/aequitas-aod/aequitas-frontend/commit/a103d5314ea86ed2b95f7c880e846af3a6a20bf9))
+
+### Bug Fixes
+
+* remove Conditioned Demographic Disparity metric except for ull use case ([5f9b77a](https://github.com/aequitas-aod/aequitas-frontend/commit/5f9b77a2fc85eaffee118f059bdf9cdbafaadb62))
+* remove Contribution Based Classifier except for ull use case ([2daef34](https://github.com/aequitas-aod/aequitas-frontend/commit/2daef3441bf02d66d4a3d090f97b193a7b03478a))
+
 ## [2.8.1](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.0...v2.8.1) (2025-09-29)
 
 ### Bug Fixes
