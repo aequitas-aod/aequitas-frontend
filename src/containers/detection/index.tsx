@@ -39,6 +39,8 @@ export const DetectionPage = ({
     questionnaireData,
     answers,
   } = useQuestionnaireData(questionNumber, sensitiveFeatures);
+  console.log("---------------------");
+  console.log(questionnaireKeys);
 
   const isLoading = metricsLoading || featuresLoading || questionnaireLoading;
   const error = metricsError || featuresError || questionnaireError;
@@ -61,6 +63,13 @@ export const DetectionPage = ({
 
   if (!questionnaireKeys) {
     return <div>No questionnaire keys available</div>;
+  }
+
+  if (!datasetKey.includes("Ull")) {
+    questionnaireData.answers = questionnaireData.answers.filter(
+      (answer) => answer.id.code !== "ConditionedDemographicDisparity"
+    );
+    delete questionnaireKeys["ConditionedDemographicDisparity"];
   }
 
   return (
