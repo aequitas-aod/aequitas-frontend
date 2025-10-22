@@ -1,3 +1,15 @@
+## [2.8.8](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.7...v2.8.8) (2025-10-22)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v22.18.12 ([#451](https://github.com/aequitas-aod/aequitas-frontend/issues/451)) ([8680e0e](https://github.com/aequitas-aod/aequitas-frontend/commit/8680e0e5b8050f318753fa01e7d74d659cc765d8))
+* **deps:** update dependency eslint to v9.38.0 ([#450](https://github.com/aequitas-aod/aequitas-frontend/issues/450)) ([944b98f](https://github.com/aequitas-aod/aequitas-frontend/commit/944b98f5c065060239d3fc4c34dcfc01b52fd9dc))
+* **deps:** update dependency next-intl to v4.4.0 ([#452](https://github.com/aequitas-aod/aequitas-frontend/issues/452)) ([cf8ce96](https://github.com/aequitas-aod/aequitas-frontend/commit/cf8ce96f61352e11f6d5146b51b3815e3f39198d))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16 ([#453](https://github.com/aequitas-aod/aequitas-frontend/issues/453)) ([179a1b2](https://github.com/aequitas-aod/aequitas-frontend/commit/179a1b262f159076c685fbfcedd0783a1e7cd2b2))
+
 ## [2.8.7](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.6...v2.8.7) (2025-10-17)
 
 ### Dependency updates
