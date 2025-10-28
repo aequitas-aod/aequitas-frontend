@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.60.1",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
     "@types/papaparse": "^5.3.15",
     "@types/react": "<19.0.0",
     "@types/react-dom": "<19.0.0",
