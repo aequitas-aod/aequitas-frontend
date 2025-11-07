@@ -1,3 +1,26 @@
+## [2.8.12](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.11...v2.8.12) (2025-11-07)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/react-query to v5.90.6 ([#463](https://github.com/aequitas-aod/aequitas-frontend/issues/463)) ([d7a8c91](https://github.com/aequitas-aod/aequitas-frontend/commit/d7a8c91be8ea98adc94457fd767a1de8155a277a))
+* **deps:** update dependency @tanstack/react-query to v5.90.7 ([#470](https://github.com/aequitas-aod/aequitas-frontend/issues/470)) ([6eb867a](https://github.com/aequitas-aod/aequitas-frontend/commit/6eb867afd3113e64aae97ba4ce21839afbfdc433))
+* **deps:** update dependency @types/node to v24.10.0 ([#464](https://github.com/aequitas-aod/aequitas-frontend/issues/464)) ([7a631b4](https://github.com/aequitas-aod/aequitas-frontend/commit/7a631b4a0e7b5eeb563e444baeaa7007b3ce75a6))
+* **deps:** update dependency @types/papaparse to v5.5.0 ([#469](https://github.com/aequitas-aod/aequitas-frontend/issues/469)) ([d910a81](https://github.com/aequitas-aod/aequitas-frontend/commit/d910a81c84a22311b594f4dc821acc10744f4615))
+* **deps:** update dependency axios to v1.13.2 ([#467](https://github.com/aequitas-aod/aequitas-frontend/issues/467)) ([2023f99](https://github.com/aequitas-aod/aequitas-frontend/commit/2023f99db8aeb30e9075a7adc1c25258c9898dd8))
+* **deps:** update dependency eslint to v9.39.0 ([#461](https://github.com/aequitas-aod/aequitas-frontend/issues/461)) ([bbae95b](https://github.com/aequitas-aod/aequitas-frontend/commit/bbae95b7278ad96dd690e54cc7f43c0771742e73))
+* **deps:** update dependency eslint to v9.39.1 ([#465](https://github.com/aequitas-aod/aequitas-frontend/issues/465)) ([4b38d43](https://github.com/aequitas-aod/aequitas-frontend/commit/4b38d430c91782e21d6554090fb4b6d1ea90cea3))
+* **deps:** update dependency html-react-parser to v5.2.8 ([#466](https://github.com/aequitas-aod/aequitas-frontend/issues/466)) ([2f75f0c](https://github.com/aequitas-aod/aequitas-frontend/commit/2f75f0caea601c91ee1badf897f060362e23cdee))
+* **deps:** update dependency react-hook-form to v7.66.0 ([#462](https://github.com/aequitas-aod/aequitas-frontend/issues/462)) ([0463ca1](https://github.com/aequitas-aod/aequitas-frontend/commit/0463ca1fe728638ca3d0b517b50041ce200e9288))
+* **deps:** update radix-ui-primitives monorepo ([#468](https://github.com/aequitas-aod/aequitas-frontend/issues/468)) ([856726a](https://github.com/aequitas-aod/aequitas-frontend/commit/856726a729ee9392a3392dd5c44129304f2bbca4))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.553.0 ([#472](https://github.com/aequitas-aod/aequitas-frontend/issues/472)) ([478c287](https://github.com/aequitas-aod/aequitas-frontend/commit/478c287709bc0c1382959797ab3c6a6bc69e7413))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-qemu-action action to v3.7.0 ([#471](https://github.com/aequitas-aod/aequitas-frontend/issues/471)) ([b225a40](https://github.com/aequitas-aod/aequitas-frontend/commit/b225a40e6b0346d924b49adb708c92afb3dca521))
+
 ## [2.8.11](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.10...v2.8.11) (2025-10-31)
 
 ### Bug Fixes
