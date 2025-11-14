@@ -1,3 +1,9 @@
+## [2.8.14](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.13...v2.8.14) (2025-11-14)
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.0.3 ([#480](https://github.com/aequitas-aod/aequitas-frontend/issues/480)) ([fb3bab9](https://github.com/aequitas-aod/aequitas-frontend/commit/fb3bab9e5814abfc4ace04768a148ede17dcb1d7))
+
 ## [2.8.13](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.12...v2.8.13) (2025-11-13)
 
 ### Dependency updates
