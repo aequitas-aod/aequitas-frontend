@@ -1,3 +1,19 @@
+## [2.8.16](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.15...v2.8.16) (2025-11-24)
+
+### Dependency updates
+
+* **deps:** update dependency next-intl to v4.5.5 ([#488](https://github.com/aequitas-aod/aequitas-frontend/issues/488)) ([b255e09](https://github.com/aequitas-aod/aequitas-frontend/commit/b255e0977a0308080c9ffaa728da8b0df57f737e))
+* **deps:** update dependency react-hook-form to v7.66.1 ([#487](https://github.com/aequitas-aod/aequitas-frontend/issues/487)) ([88df2e7](https://github.com/aequitas-aod/aequitas-frontend/commit/88df2e711aa4ea6c2110884e58a7516d7896a0ce))
+* **deps:** update dependency zod to v4.1.13 ([#490](https://github.com/aequitas-aod/aequitas-frontend/issues/490)) ([b91920c](https://github.com/aequitas-aod/aequitas-frontend/commit/b91920cc90546380780715d94fc1375ef44fcc4a))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.0.4 ([#491](https://github.com/aequitas-aod/aequitas-frontend/issues/491)) ([f7bd924](https://github.com/aequitas-aod/aequitas-frontend/commit/f7bd924f06e045dd2da9bbd43ffdbe8ef0a5e4ec))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v6 ([#489](https://github.com/aequitas-aod/aequitas-frontend/issues/489)) ([a2155c3](https://github.com/aequitas-aod/aequitas-frontend/commit/a2155c30ec8edfcf88b63c4b09e0078a68915dfc))
+
 ## [2.8.15](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.14...v2.8.15) (2025-11-17)
 
 ### Dependency updates
