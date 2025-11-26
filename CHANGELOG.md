@@ -1,3 +1,13 @@
+## [2.8.17](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.16...v2.8.17) (2025-11-26)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/react-query to v5.90.11 ([#492](https://github.com/aequitas-aod/aequitas-frontend/issues/492)) ([804458b](https://github.com/aequitas-aod/aequitas-frontend/commit/804458b81039b35f94c1ee6a321053c00a03be36))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.555.0 ([#493](https://github.com/aequitas-aod/aequitas-frontend/issues/493)) ([471057e](https://github.com/aequitas-aod/aequitas-frontend/commit/471057ebe9f9b7e8df92448154a2410ca6881151))
+
 ## [2.8.16](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.15...v2.8.16) (2025-11-24)
 
 ### Dependency updates
