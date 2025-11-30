@@ -1,3 +1,17 @@
+## [2.8.19](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.18...v2.8.19) (2025-11-30)
+
+### Dependency updates
+
+* **deps:** update dependency next-intl to v4.5.6 ([#496](https://github.com/aequitas-aod/aequitas-frontend/issues/496)) ([0b3d0c0](https://github.com/aequitas-aod/aequitas-frontend/commit/0b3d0c04f6d7d638847e27d5580095c288d613ef))
+* **deps:** update dependency prettier to v3.7.1 ([#495](https://github.com/aequitas-aod/aequitas-frontend/issues/495)) ([4d5061e](https://github.com/aequitas-aod/aequitas-frontend/commit/4d5061edd671749f913f7146c48695e6fb706044))
+* **deps:** update dependency prettier to v3.7.2 ([#497](https://github.com/aequitas-aod/aequitas-frontend/issues/497)) ([59914ef](https://github.com/aequitas-aod/aequitas-frontend/commit/59914efc5f0b2d89cffe93163d5dfdd0cbd2a954))
+* **deps:** update dependency prettier to v3.7.3 ([#499](https://github.com/aequitas-aod/aequitas-frontend/issues/499)) ([29d32b1](https://github.com/aequitas-aod/aequitas-frontend/commit/29d32b1ef79e3ef75ae50e01171f6661625565e7))
+* **deps:** update dependency react-hook-form to v7.67.0 ([#498](https://github.com/aequitas-aod/aequitas-frontend/issues/498)) ([7814e3b](https://github.com/aequitas-aod/aequitas-frontend/commit/7814e3b4da8ce12b708c16b10464453e8b0061d0))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.0.6 ([#500](https://github.com/aequitas-aod/aequitas-frontend/issues/500)) ([d989d3a](https://github.com/aequitas-aod/aequitas-frontend/commit/d989d3ab788e1d4426af530f863b262cf7fd052b))
+
 ## [2.8.18](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.17...v2.8.18) (2025-11-27)
 
 ### Bug Fixes
