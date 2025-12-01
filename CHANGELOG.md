@@ -1,3 +1,9 @@
+## [2.8.20](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.19...v2.8.20) (2025-12-01)
+
+### Bug Fixes
+
+* **deps:** update dependency short-uuid to v6 ([#501](https://github.com/aequitas-aod/aequitas-frontend/issues/501)) ([b583305](https://github.com/aequitas-aod/aequitas-frontend/commit/b583305d4e060dde87852a7e67aa4ffadca6f842))
+
 ## [2.8.19](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.18...v2.8.19) (2025-11-30)
 
 ### Dependency updates
