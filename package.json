@@ -53,7 +53,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "16.0.6",
     "postcss": "^8",
-    "prettier": "3.7.3",
+    "prettier": "3.7.4",
     "semantic-release-preconfigured-conventional-commits": "latest",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
