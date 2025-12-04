@@ -1,3 +1,17 @@
+## [2.8.21](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.20...v2.8.21) (2025-12-04)
+
+### Dependency updates
+
+* **deps:** update dependency @types/papaparse to v5.5.1 ([#504](https://github.com/aequitas-aod/aequitas-frontend/issues/504)) ([2784915](https://github.com/aequitas-aod/aequitas-frontend/commit/278491544eb1dd4813c6fda9389bd8815dd1ad66))
+* **deps:** update dependency next-intl to v4.5.7 ([#502](https://github.com/aequitas-aod/aequitas-frontend/issues/502)) ([b48fda6](https://github.com/aequitas-aod/aequitas-frontend/commit/b48fda6b885939b2b03f50368141483759c78391))
+* **deps:** update dependency next-intl to v4.5.8 ([#505](https://github.com/aequitas-aod/aequitas-frontend/issues/505)) ([31cdc0a](https://github.com/aequitas-aod/aequitas-frontend/commit/31cdc0a8c6569282dd9b78457c3d0ed402fbf3ad))
+* **deps:** update dependency prettier to v3.7.4 ([#506](https://github.com/aequitas-aod/aequitas-frontend/issues/506)) ([90cd1f4](https://github.com/aequitas-aod/aequitas-frontend/commit/90cd1f470575db37e360bbfc7303fca3b31fbcdc))
+* **deps:** update dependency short-uuid to v6.0.3 ([#503](https://github.com/aequitas-aod/aequitas-frontend/issues/503)) ([547c68c](https://github.com/aequitas-aod/aequitas-frontend/commit/547c68c36e823d148a67249b4e09d639a5d1bb2f))
+
+### Bug Fixes
+
+* **deps:** update dependency next to v16.0.7 [security] ([#508](https://github.com/aequitas-aod/aequitas-frontend/issues/508)) ([b6ad62e](https://github.com/aequitas-aod/aequitas-frontend/commit/b6ad62ed17f5c67758eb6d463c9f432e8c7fe931))
+
 ## [2.8.20](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.19...v2.8.20) (2025-12-01)
 
 ### Bug Fixes
