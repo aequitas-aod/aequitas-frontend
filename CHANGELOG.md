@@ -1,3 +1,15 @@
+## [2.8.22](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.21...v2.8.22) (2025-12-05)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/react-query to v5.90.12 ([#510](https://github.com/aequitas-aod/aequitas-frontend/issues/510)) ([da610f2](https://github.com/aequitas-aod/aequitas-frontend/commit/da610f28a35633fade6d5b36e502c3fc7a37d6fe))
+* **deps:** update dependency eslint-config-next to v16.0.7 ([#507](https://github.com/aequitas-aod/aequitas-frontend/issues/507)) ([8172ef2](https://github.com/aequitas-aod/aequitas-frontend/commit/8172ef24bd801baab6869df44dd35547efa00f88))
+* **deps:** update dependency react-hook-form to v7.68.0 ([#509](https://github.com/aequitas-aod/aequitas-frontend/issues/509)) ([2f2821d](https://github.com/aequitas-aod/aequitas-frontend/commit/2f2821d9aa17393e31073ac9a10cc1c95f5471a7))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.556.0 ([#511](https://github.com/aequitas-aod/aequitas-frontend/issues/511)) ([f3fc2c5](https://github.com/aequitas-aod/aequitas-frontend/commit/f3fc2c57736453fc02c4cf35efc0879d1c453f23))
+
 ## [2.8.21](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.20...v2.8.21) (2025-12-04)
 
 ### Dependency updates
