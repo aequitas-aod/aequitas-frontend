@@ -1,3 +1,14 @@
+## [2.8.25](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.24...v2.8.25) (2025-12-11)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v24.10.3 ([#515](https://github.com/aequitas-aod/aequitas-frontend/issues/515)) ([d3b72bf](https://github.com/aequitas-aod/aequitas-frontend/commit/d3b72bfe0a6fea1cb3a91a3f7e98a98c1d72d768))
+* **deps:** update dependency tailwindcss to v3.4.19 ([#516](https://github.com/aequitas-aod/aequitas-frontend/issues/516)) ([a9ffc5c](https://github.com/aequitas-aod/aequitas-frontend/commit/a9ffc5cef9a81888aa15917e2f84824a52075276))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.560.0 ([#517](https://github.com/aequitas-aod/aequitas-frontend/issues/517)) ([4a68276](https://github.com/aequitas-aod/aequitas-frontend/commit/4a682763850439e006fa490f828307472e6b2c3e))
+
 ## [2.8.24](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.23...v2.8.24) (2025-12-10)
 
 ### Bug Fixes
