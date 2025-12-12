@@ -1,3 +1,9 @@
+## [2.8.26](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.25...v2.8.26) (2025-12-12)
+
+### Bug Fixes
+
+* **deps:** update dependency next to v16.0.9 [security] ([#519](https://github.com/aequitas-aod/aequitas-frontend/issues/519)) ([ab375f2](https://github.com/aequitas-aod/aequitas-frontend/commit/ab375f25fd5d61fd08e0a4340f24bd3b25f02e8a))
+
 ## [2.8.25](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.24...v2.8.25) (2025-12-11)
 
 ### Dependency updates
