@@ -1,3 +1,18 @@
+## [2.8.29](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.28...v2.8.29) (2025-12-18)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v24.10.4 ([#524](https://github.com/aequitas-aod/aequitas-frontend/issues/524)) ([4b4b0da](https://github.com/aequitas-aod/aequitas-frontend/commit/4b4b0da877c5bb83cbece70920739c5ee921037e))
+* **deps:** update dependency @types/papaparse to v5.5.2 ([#523](https://github.com/aequitas-aod/aequitas-frontend/issues/523)) ([7b2d078](https://github.com/aequitas-aod/aequitas-frontend/commit/7b2d0788315ffd1e7f981a91d17f30e3a6de0064))
+* **deps:** update dependency eslint to v9.39.2 ([#522](https://github.com/aequitas-aod/aequitas-frontend/issues/522)) ([c692f3a](https://github.com/aequitas-aod/aequitas-frontend/commit/c692f3acf5cb00a9860e44d3db2c662b20cf895a))
+* **deps:** update dependency next-intl to v4.6.1 ([#527](https://github.com/aequitas-aod/aequitas-frontend/issues/527)) ([49d6972](https://github.com/aequitas-aod/aequitas-frontend/commit/49d6972a5f75d983d088c17233dccccc6028a641))
+* **deps:** update dependency zod to v4.2.0 ([#525](https://github.com/aequitas-aod/aequitas-frontend/issues/525)) ([a9f57ac](https://github.com/aequitas-aod/aequitas-frontend/commit/a9f57ac137986c5eb003dbdc48a4a87c4b808c6c))
+* **deps:** update dependency zod to v4.2.1 ([#526](https://github.com/aequitas-aod/aequitas-frontend/issues/526)) ([d8f60d0](https://github.com/aequitas-aod/aequitas-frontend/commit/d8f60d0d138f904a357f3278372af597bce61c65))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.562.0 ([#528](https://github.com/aequitas-aod/aequitas-frontend/issues/528)) ([2ed7d01](https://github.com/aequitas-aod/aequitas-frontend/commit/2ed7d01f13c520f921092d0741bddf8e6e61a754))
+
 ## [2.8.28](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.27...v2.8.28) (2025-12-13)
 
 ### Dependency updates
