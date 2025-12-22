@@ -1,3 +1,18 @@
+## [2.8.31](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.30...v2.8.31) (2025-12-22)
+
+### Dependency updates
+
+* **deps:** update dependency html-react-parser to v5.2.11 ([#531](https://github.com/aequitas-aod/aequitas-frontend/issues/531)) ([9d6404b](https://github.com/aequitas-aod/aequitas-frontend/commit/9d6404be127d1dcff53a73827bd3bf34302dd6d0))
+* **deps:** update dependency react-hook-form to v7.69.0 ([#532](https://github.com/aequitas-aod/aequitas-frontend/issues/532)) ([b082cb1](https://github.com/aequitas-aod/aequitas-frontend/commit/b082cb15297821279afdfaacab73f4b50fba7858))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.1.1 ([#533](https://github.com/aequitas-aod/aequitas-frontend/issues/533)) ([a49c84c](https://github.com/aequitas-aod/aequitas-frontend/commit/a49c84c9bf90ba7dcafcd1cc7aebd3129ae84af8))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-buildx-action action to v3.12.0 ([#530](https://github.com/aequitas-aod/aequitas-frontend/issues/530)) ([6d0b812](https://github.com/aequitas-aod/aequitas-frontend/commit/6d0b812865e84f76ce6943d7d9dbed4b8834d45b))
+
 ## [2.8.30](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.29...v2.8.30) (2025-12-19)
 
 ### Bug Fixes
