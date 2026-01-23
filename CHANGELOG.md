@@ -1,3 +1,15 @@
+## [2.8.35](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.34...v2.8.35) (2026-01-23)
+
+### Dependency updates
+
+* **deps:** update dependency html-react-parser to v5.2.12 ([#558](https://github.com/aequitas-aod/aequitas-frontend/issues/558)) ([9a782ba](https://github.com/aequitas-aod/aequitas-frontend/commit/9a782baa89cb992cbbd167c8a9131859c3198e63))
+* **deps:** update dependency prettier to v3.8.1 ([#556](https://github.com/aequitas-aod/aequitas-frontend/issues/556)) ([e3ab6a9](https://github.com/aequitas-aod/aequitas-frontend/commit/e3ab6a97f15a883640b9ff2d8e8a0e40719aa114))
+* **deps:** update dependency zod to v4.3.6 ([#557](https://github.com/aequitas-aod/aequitas-frontend/issues/557)) ([8ac1e65](https://github.com/aequitas-aod/aequitas-frontend/commit/8ac1e65a1d35575072861a59321925fdd95d64d0))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.563.0 ([#559](https://github.com/aequitas-aod/aequitas-frontend/issues/559)) ([ad39073](https://github.com/aequitas-aod/aequitas-frontend/commit/ad39073d63844f49f377cf87bc308a7016eb6012))
+
 ## [2.8.34](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.33...v2.8.34) (2026-01-20)
 
 ### Dependency updates
