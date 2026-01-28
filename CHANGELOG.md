@@ -1,3 +1,14 @@
+## [2.8.37](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.36...v2.8.37) (2026-01-28)
+
+### Dependency updates
+
+* **deps:** update dependency axios to v1.13.4 ([#564](https://github.com/aequitas-aod/aequitas-frontend/issues/564)) ([5a1c6ac](https://github.com/aequitas-aod/aequitas-frontend/commit/5a1c6ac8ef21d75c63f63748642fd4a808b2c930))
+* **deps:** update dependency html-react-parser to v5.2.13 ([#563](https://github.com/aequitas-aod/aequitas-frontend/issues/563)) ([9dd54ac](https://github.com/aequitas-aod/aequitas-frontend/commit/9dd54acd2e527d1f509091ab781e6f019cd3de71))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.1.6 ([#565](https://github.com/aequitas-aod/aequitas-frontend/issues/565)) ([4f62f4d](https://github.com/aequitas-aod/aequitas-frontend/commit/4f62f4db4d44488875614b493100261d00d06118))
+
 ## [2.8.36](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.35...v2.8.36) (2026-01-27)
 
 ### Dependency updates
