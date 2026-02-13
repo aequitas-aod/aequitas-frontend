@@ -1,3 +1,26 @@
+## [2.8.38](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.37...v2.8.38) (2026-02-13)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/eslint-plugin-query to v5.91.4 ([#568](https://github.com/aequitas-aod/aequitas-frontend/issues/568)) ([28e3d73](https://github.com/aequitas-aod/aequitas-frontend/commit/28e3d737a60506fb9b64c331f365621d56f12374))
+* **deps:** update dependency @tanstack/react-query to v5.90.21 ([#580](https://github.com/aequitas-aod/aequitas-frontend/issues/580)) ([58044d1](https://github.com/aequitas-aod/aequitas-frontend/commit/58044d1eaf33c22a0e3e05d40af466151a78ce99))
+* **deps:** update dependency @types/node to v24.10.10 ([#573](https://github.com/aequitas-aod/aequitas-frontend/issues/573)) ([ea371a7](https://github.com/aequitas-aod/aequitas-frontend/commit/ea371a7da607fa8c3a8281ac0850e0e405c114ae))
+* **deps:** update dependency @types/node to v24.10.11 ([#574](https://github.com/aequitas-aod/aequitas-frontend/issues/574)) ([6a4955e](https://github.com/aequitas-aod/aequitas-frontend/commit/6a4955e13c31516604a9123f868c31231f03b4a2))
+* **deps:** update dependency @types/node to v24.10.12 ([#577](https://github.com/aequitas-aod/aequitas-frontend/issues/577)) ([db4d0be](https://github.com/aequitas-aod/aequitas-frontend/commit/db4d0be2d04c5e0d266fab2a518775facdd9ea59))
+* **deps:** update dependency @types/node to v24.10.13 ([#579](https://github.com/aequitas-aod/aequitas-frontend/issues/579)) ([9f08603](https://github.com/aequitas-aod/aequitas-frontend/commit/9f08603c36640521e401da4cabf2b5ab8e4b8f86))
+* **deps:** update dependency axios to v1.13.5 ([#578](https://github.com/aequitas-aod/aequitas-frontend/issues/578)) ([8552dea](https://github.com/aequitas-aod/aequitas-frontend/commit/8552dea601f8827e94abec156ff92b3cf99f7a22))
+* **deps:** update dependency html-react-parser to v5.2.14 ([#566](https://github.com/aequitas-aod/aequitas-frontend/issues/566)) ([ef5be43](https://github.com/aequitas-aod/aequitas-frontend/commit/ef5be43febf82018829178da460822d9c5570437))
+* **deps:** update dependency html-react-parser to v5.2.15 ([#570](https://github.com/aequitas-aod/aequitas-frontend/issues/570)) ([e9fb9ec](https://github.com/aequitas-aod/aequitas-frontend/commit/e9fb9ec05fd9ef2db3dbfb1ba2b6a565f2667d46))
+* **deps:** update dependency html-react-parser to v5.2.16 ([#572](https://github.com/aequitas-aod/aequitas-frontend/issues/572)) ([ba1e223](https://github.com/aequitas-aod/aequitas-frontend/commit/ba1e2235d815279070d94ee10abc8948f9ddbaec))
+* **deps:** update dependency html-react-parser to v5.2.17 ([#576](https://github.com/aequitas-aod/aequitas-frontend/issues/576)) ([da1effe](https://github.com/aequitas-aod/aequitas-frontend/commit/da1effe531101ef230f9dbab9bfb96eb1006d1ef))
+* **deps:** update dependency next-intl to v4.8.0 ([#567](https://github.com/aequitas-aod/aequitas-frontend/issues/567)) ([46528b6](https://github.com/aequitas-aod/aequitas-frontend/commit/46528b6a5e4c49c0009632210a2eeb85ea61b701))
+* **deps:** update dependency next-intl to v4.8.1 ([#569](https://github.com/aequitas-aod/aequitas-frontend/issues/569)) ([14ba119](https://github.com/aequitas-aod/aequitas-frontend/commit/14ba11985b2225761a5c059714b060aa2c737c08))
+* **deps:** update dependency next-intl to v4.8.2 ([#571](https://github.com/aequitas-aod/aequitas-frontend/issues/571)) ([b755cfa](https://github.com/aequitas-aod/aequitas-frontend/commit/b755cfa450c3323dc67f098016094e658b3fc841))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.564.0 ([#581](https://github.com/aequitas-aod/aequitas-frontend/issues/581)) ([3e2c2e2](https://github.com/aequitas-aod/aequitas-frontend/commit/3e2c2e2bbe5a537fd60c21d463db44926d4a200f))
+
 ## [2.8.37](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.36...v2.8.37) (2026-01-28)
 
 ### Dependency updates
