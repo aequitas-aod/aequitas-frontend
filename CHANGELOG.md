@@ -1,3 +1,13 @@
+## [2.8.40](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.39...v2.8.40) (2026-02-19)
+
+### Dependency updates
+
+* **deps:** update dependency tailwind-merge to v3.5.0 ([#585](https://github.com/aequitas-aod/aequitas-frontend/issues/585)) ([cd1f182](https://github.com/aequitas-aod/aequitas-frontend/commit/cd1f18274d1da32d024d6b8510ab269280b67a64))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.575.0 ([#586](https://github.com/aequitas-aod/aequitas-frontend/issues/586)) ([5aae4d6](https://github.com/aequitas-aod/aequitas-frontend/commit/5aae4d6193c5f40f6ff2e31c123d13ae4545158f))
+
 ## [2.8.39](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.38...v2.8.39) (2026-02-17)
 
 ### Dependency updates
