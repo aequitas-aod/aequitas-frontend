@@ -1,3 +1,18 @@
+## [2.8.41](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.40...v2.8.41) (2026-03-02)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v24.10.14 ([#589](https://github.com/aequitas-aod/aequitas-frontend/issues/589)) ([c9c7afd](https://github.com/aequitas-aod/aequitas-frontend/commit/c9c7afd2cf42b190084c50b2c53f844981c99112))
+* **deps:** update dependency @types/node to v24.10.15 ([#590](https://github.com/aequitas-aod/aequitas-frontend/issues/590)) ([0ac457d](https://github.com/aequitas-aod/aequitas-frontend/commit/0ac457d561c5fc87789eb4066782b2cf672bce4a))
+* **deps:** update dependency @types/node to v24.11.0 ([#592](https://github.com/aequitas-aod/aequitas-frontend/issues/592)) ([0888cae](https://github.com/aequitas-aod/aequitas-frontend/commit/0888cae2438beac4c9cd0a5840e226795cd34985))
+* **deps:** update dependency axios to v1.13.6 ([#591](https://github.com/aequitas-aod/aequitas-frontend/issues/591)) ([8277e4b](https://github.com/aequitas-aod/aequitas-frontend/commit/8277e4bd5da0a14d45ae56754a178f5bf0c6385b))
+* **deps:** update dependency eslint to v9.39.3 ([#587](https://github.com/aequitas-aod/aequitas-frontend/issues/587)) ([2dbe130](https://github.com/aequitas-aod/aequitas-frontend/commit/2dbe130f9d5952a4fc78e046c5703aea2d833601))
+* **deps:** update dependency react-hook-form to v7.71.2 ([#588](https://github.com/aequitas-aod/aequitas-frontend/issues/588)) ([8bb2dfc](https://github.com/aequitas-aod/aequitas-frontend/commit/8bb2dfce58b09962fef98f234c4f8b47052a6238))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.576.0 ([#593](https://github.com/aequitas-aod/aequitas-frontend/issues/593)) ([a0587bf](https://github.com/aequitas-aod/aequitas-frontend/commit/a0587bf224d9f1780d82ccc1c83e5d42500e4af6))
+
 ## [2.8.40](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.39...v2.8.40) (2026-02-19)
 
 ### Dependency updates
