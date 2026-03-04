@@ -1,3 +1,14 @@
+## [2.8.42](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.41...v2.8.42) (2026-03-04)
+
+### Dependency updates
+
+* **deps:** update dependency postcss to v8.5.8 ([#594](https://github.com/aequitas-aod/aequitas-frontend/issues/594)) ([68d5dd6](https://github.com/aequitas-aod/aequitas-frontend/commit/68d5dd66cdd36d75839a14c65e14381aeb642dfb))
+* **deps:** update dependency react-icons to v5.6.0 ([#595](https://github.com/aequitas-aod/aequitas-frontend/issues/595)) ([a7fb37f](https://github.com/aequitas-aod/aequitas-frontend/commit/a7fb37f71c40713421467e0ea21c27c663d7f060))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.577.0 ([#596](https://github.com/aequitas-aod/aequitas-frontend/issues/596)) ([b417796](https://github.com/aequitas-aod/aequitas-frontend/commit/b4177969e8394b996a1ae1c5a7cd0c3cd03b6cf3))
+
 ## [2.8.41](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.40...v2.8.41) (2026-03-02)
 
 ### Dependency updates
