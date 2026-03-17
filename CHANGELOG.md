@@ -1,3 +1,20 @@
+## [2.8.43](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.42...v2.8.43) (2026-03-17)
+
+### Dependency updates
+
+* **deps:** update dependency @types/node to v24.11.2 ([#599](https://github.com/aequitas-aod/aequitas-frontend/issues/599)) ([1d2a472](https://github.com/aequitas-aod/aequitas-frontend/commit/1d2a4720a5e15aaf456837e90e1b9258f431ff2f))
+* **deps:** update dependency @types/node to v24.12.0 ([#600](https://github.com/aequitas-aod/aequitas-frontend/issues/600)) ([c0e6bec](https://github.com/aequitas-aod/aequitas-frontend/commit/c0e6bec8aef75d7253a61f1da960a44860ff5e48))
+* **deps:** update dependency eslint to v9.39.4 ([#601](https://github.com/aequitas-aod/aequitas-frontend/issues/601)) ([6113786](https://github.com/aequitas-aod/aequitas-frontend/commit/6113786c03b4aff5f089d6d59b775ceb6db45a80))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.1.7 ([#602](https://github.com/aequitas-aod/aequitas-frontend/issues/602)) ([1ad7cff](https://github.com/aequitas-aod/aequitas-frontend/commit/1ad7cffca7cff6bf4e189ad171d6987e92539970))
+
+### Build and continuous integration
+
+* **deps:** update docker/setup-buildx-action action to v4 ([#598](https://github.com/aequitas-aod/aequitas-frontend/issues/598)) ([33378cc](https://github.com/aequitas-aod/aequitas-frontend/commit/33378cce653243c70bd8f593912f36814c831130))
+* **deps:** update docker/setup-qemu-action action to v4 ([#597](https://github.com/aequitas-aod/aequitas-frontend/issues/597)) ([d3876d1](https://github.com/aequitas-aod/aequitas-frontend/commit/d3876d1ace0e4f65ba5a167ca546a9cb195de27e))
+
 ## [2.8.42](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.41...v2.8.42) (2026-03-04)
 
 ### Dependency updates
