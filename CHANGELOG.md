@@ -1,3 +1,14 @@
+## [2.8.45](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.44...v2.8.45) (2026-03-21)
+
+### Dependency updates
+
+* **deps:** update dependency @tanstack/react-query to v5.91.2 ([#606](https://github.com/aequitas-aod/aequitas-frontend/issues/606)) ([121ef0f](https://github.com/aequitas-aod/aequitas-frontend/commit/121ef0f3052fc12a7e88337e8e3c174ee3f88035))
+* **deps:** update dependency @tanstack/react-query to v5.91.3 ([#607](https://github.com/aequitas-aod/aequitas-frontend/issues/607)) ([0133f06](https://github.com/aequitas-aod/aequitas-frontend/commit/0133f06cee0b183de62dd44db7ffa09a857d2164))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.2.1 ([#608](https://github.com/aequitas-aod/aequitas-frontend/issues/608)) ([4f47e83](https://github.com/aequitas-aod/aequitas-frontend/commit/4f47e83f3db9746d3bda1c6b098522b9fc4299f8))
+
 ## [2.8.44](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.43...v2.8.44) (2026-03-19)
 
 ### Dependency updates
