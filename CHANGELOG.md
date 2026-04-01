@@ -1,3 +1,13 @@
+## [2.8.47](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.46...v2.8.47) (2026-04-01)
+
+### Dependency updates
+
+* **deps:** update tanstack-query monorepo to v5.96.1 ([#616](https://github.com/aequitas-aod/aequitas-frontend/issues/616)) ([83e22a4](https://github.com/aequitas-aod/aequitas-frontend/commit/83e22a421ac59cce38688b896a5947ae8a41be5f))
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to v1 ([#615](https://github.com/aequitas-aod/aequitas-frontend/issues/615)) ([7cb253d](https://github.com/aequitas-aod/aequitas-frontend/commit/7cb253d465a7c501aa9f97ad7b7cd250cf2f7709))
+
 ## [2.8.46](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.45...v2.8.46) (2026-04-01)
 
 ### Dependency updates
