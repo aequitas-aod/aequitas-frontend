@@ -1,3 +1,13 @@
+## [2.8.48](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.47...v2.8.48) (2026-04-03)
+
+### Dependency updates
+
+* **deps:** update dependency next-intl to v4.9.0 ([#619](https://github.com/aequitas-aod/aequitas-frontend/issues/619)) ([84a6c49](https://github.com/aequitas-aod/aequitas-frontend/commit/84a6c490774cfec1cb703ad7c9a28e2919fb3dd3))
+
+### Bug Fixes
+
+* **deps:** update dependency html-react-parser to v6 ([#620](https://github.com/aequitas-aod/aequitas-frontend/issues/620)) ([770f643](https://github.com/aequitas-aod/aequitas-frontend/commit/770f6437e6a0cd223a159a85478e3949d485b517))
+
 ## [2.8.47](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.46...v2.8.47) (2026-04-01)
 
 ### Dependency updates
