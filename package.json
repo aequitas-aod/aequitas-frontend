@@ -56,6 +56,6 @@
     "prettier": "3.8.1",
     "semantic-release-preconfigured-conventional-commits": "latest",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^6.0.0"
   }
 }
