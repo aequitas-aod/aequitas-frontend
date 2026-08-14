@@ -1,3 +1,21 @@
+## [2.8.58](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.57...v2.8.58) (2026-08-14)
+
+### Dependency updates
+
+* **deps:** update dependency eslint to v10.8.1 ([#771](https://github.com/aequitas-aod/aequitas-frontend/issues/771)) ([f8bc13d](https://github.com/aequitas-aod/aequitas-frontend/commit/f8bc13d6db7fd32a019f8e88fe1ad78f62b4ecc9))
+* **deps:** update dependency html-react-parser to v6.1.7 ([#777](https://github.com/aequitas-aod/aequitas-frontend/issues/777)) ([9326942](https://github.com/aequitas-aod/aequitas-frontend/commit/93269428a293b8a4c98045353d380b48e4b23058))
+* **deps:** update dependency lucide-react to v1.30.0 ([#770](https://github.com/aequitas-aod/aequitas-frontend/issues/770)) ([cdca649](https://github.com/aequitas-aod/aequitas-frontend/commit/cdca6493ea02cc740139396eb5ebd0980a1d6976))
+* **deps:** update dependency lucide-react to v1.31.0 ([#773](https://github.com/aequitas-aod/aequitas-frontend/issues/773)) ([4e91889](https://github.com/aequitas-aod/aequitas-frontend/commit/4e91889a47b4e917ffd07e72fe86f20ffff7dd96))
+* **deps:** update dependency next-intl to v4.13.5 ([#768](https://github.com/aequitas-aod/aequitas-frontend/issues/768)) ([7d9a419](https://github.com/aequitas-aod/aequitas-frontend/commit/7d9a419c7fb8b47629a65818d59765805d504bfa))
+* **deps:** update dependency next-intl to v4.13.6 ([#774](https://github.com/aequitas-aod/aequitas-frontend/issues/774)) ([65a8074](https://github.com/aequitas-aod/aequitas-frontend/commit/65a8074a5b545552eeccaafbaaf160ca2f48fa31))
+* **deps:** update dependency papaparse to v5.5.5 ([#775](https://github.com/aequitas-aod/aequitas-frontend/issues/775)) ([2399057](https://github.com/aequitas-aod/aequitas-frontend/commit/2399057f859ae9ed04e0f72bb70dce7100b39f2d))
+* **deps:** update dependency postcss to v8.5.26 ([#769](https://github.com/aequitas-aod/aequitas-frontend/issues/769)) ([c660f4b](https://github.com/aequitas-aod/aequitas-frontend/commit/c660f4ba5808151d0c8d4c2ecdd2924e622e6490))
+* **deps:** update dependency react-hook-form to v7.85.0 ([#772](https://github.com/aequitas-aod/aequitas-frontend/issues/772)) ([484cdb5](https://github.com/aequitas-aod/aequitas-frontend/commit/484cdb529cde0e316aec17cc687529602bef13f9))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.3.1 ([#778](https://github.com/aequitas-aod/aequitas-frontend/issues/778)) ([358f92b](https://github.com/aequitas-aod/aequitas-frontend/commit/358f92b513fd479d4061e8331535ef2995deeda2))
+
 ## [2.8.57](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.56...v2.8.57) (2026-08-04)
 
 ### Dependency updates
