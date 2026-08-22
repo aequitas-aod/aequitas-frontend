@@ -1,3 +1,17 @@
+## [2.8.59](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.58...v2.8.59) (2026-08-22)
+
+### Dependency updates
+
+* **deps:** update dependency @hookform/resolvers to v5.8.0 ([#779](https://github.com/aequitas-aod/aequitas-frontend/issues/779)) ([6b7564b](https://github.com/aequitas-aod/aequitas-frontend/commit/6b7564bda757b678df5afc39fcaceb799500a16a))
+* **deps:** update dependency @hookform/resolvers to v5.9.0 ([#780](https://github.com/aequitas-aod/aequitas-frontend/issues/780)) ([62533cb](https://github.com/aequitas-aod/aequitas-frontend/commit/62533cba9d3600e78c36d906a017be99061764df))
+* **deps:** update dependency @hookform/resolvers to v5.9.1 ([#781](https://github.com/aequitas-aod/aequitas-frontend/issues/781)) ([801ff0e](https://github.com/aequitas-aod/aequitas-frontend/commit/801ff0eaf95a994c3e878fdf45dae397e2c31672))
+* **deps:** update dependency next-intl to v4.13.7 ([#782](https://github.com/aequitas-aod/aequitas-frontend/issues/782)) ([30adae7](https://github.com/aequitas-aod/aequitas-frontend/commit/30adae7d5ffad19bd4e12bf0e5f075adb6b88b87))
+* **deps:** update dependency papaparse to v5.6.0 ([#776](https://github.com/aequitas-aod/aequitas-frontend/issues/776)) ([28f10a1](https://github.com/aequitas-aod/aequitas-frontend/commit/28f10a1d98ea8a0631e30e79b43d1b08e3d41b0f))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.3.2 ([#783](https://github.com/aequitas-aod/aequitas-frontend/issues/783)) ([8095b1c](https://github.com/aequitas-aod/aequitas-frontend/commit/8095b1c976a326e348baf6ca1162a6f81b811876))
+
 ## [2.8.58](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.57...v2.8.58) (2026-08-14)
 
 ### Dependency updates
