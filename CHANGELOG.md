@@ -1,3 +1,27 @@
+## [2.8.67](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.66...v2.8.67) (2026-10-14)
+
+### Dependency updates
+
+* **deps:** update dependency @radix-ui/react-label to v2.1.17 ([#876](https://github.com/aequitas-aod/aequitas-frontend/issues/876)) ([693d071](https://github.com/aequitas-aod/aequitas-frontend/commit/693d0711ee79abd2dd3014c33ad9645a8fabb36b))
+* **deps:** update dependency @types/node to v24.19.2 ([#870](https://github.com/aequitas-aod/aequitas-frontend/issues/870)) ([9f32b9b](https://github.com/aequitas-aod/aequitas-frontend/commit/9f32b9b4b35df56d5b8f7f21177d931363fc96e9))
+* **deps:** update dependency lucide-react to v1.53.0 ([#868](https://github.com/aequitas-aod/aequitas-frontend/issues/868)) ([a54a786](https://github.com/aequitas-aod/aequitas-frontend/commit/a54a786e8cde22b18cb3a901da55d68907738860))
+* **deps:** update dependency lucide-react to v1.54.0 ([#869](https://github.com/aequitas-aod/aequitas-frontend/issues/869)) ([119f333](https://github.com/aequitas-aod/aequitas-frontend/commit/119f333dc7805787489f466e6963b5cbe93bb32d))
+* **deps:** update dependency lucide-react to v1.55.0 ([#872](https://github.com/aequitas-aod/aequitas-frontend/issues/872)) ([d1476ff](https://github.com/aequitas-aod/aequitas-frontend/commit/d1476ff198040356979d6b8a76a00d6004781bbf))
+* **deps:** update dependency lucide-react to v1.56.0 ([#881](https://github.com/aequitas-aod/aequitas-frontend/issues/881)) ([3facde6](https://github.com/aequitas-aod/aequitas-frontend/commit/3facde691fe14c8bab9555e21950169887e3191b))
+* **deps:** update dependency lucide-react to v1.57.0 ([#882](https://github.com/aequitas-aod/aequitas-frontend/issues/882)) ([237285c](https://github.com/aequitas-aod/aequitas-frontend/commit/237285cb810aec7a621dadbd461ee57366c32898))
+* **deps:** update dependency postcss to v8.5.30 ([#878](https://github.com/aequitas-aod/aequitas-frontend/issues/878)) ([ce64bb5](https://github.com/aequitas-aod/aequitas-frontend/commit/ce64bb585f4d530523acf36bd0d62b0f1cba740e))
+* **deps:** update dependency prettier to v3.9.10 ([#871](https://github.com/aequitas-aod/aequitas-frontend/issues/871)) ([8e8f4af](https://github.com/aequitas-aod/aequitas-frontend/commit/8e8f4af6afacc81da6b23f9d3f53da6557ebe9bf))
+* **deps:** update dependency react-hook-form to v7.90.0 ([#873](https://github.com/aequitas-aod/aequitas-frontend/issues/873)) ([5770900](https://github.com/aequitas-aod/aequitas-frontend/commit/57709000b54f556cd94abb570611404d5a7526bb))
+* **deps:** update dependency zod to v4.6.6 ([#874](https://github.com/aequitas-aod/aequitas-frontend/issues/874)) ([0647da5](https://github.com/aequitas-aod/aequitas-frontend/commit/0647da508b0dedcd4e5d0e880d38f92cafe5df47))
+* **deps:** update dependency zod to v4.6.7 ([#879](https://github.com/aequitas-aod/aequitas-frontend/issues/879)) ([875f09a](https://github.com/aequitas-aod/aequitas-frontend/commit/875f09af5fb9e68f509d2363f716d5ca79dd084f))
+* **deps:** update radix-ui-primitives monorepo ([#877](https://github.com/aequitas-aod/aequitas-frontend/issues/877)) ([1b75df3](https://github.com/aequitas-aod/aequitas-frontend/commit/1b75df37652b7517d6793c6a7a88511067830c73))
+* **deps:** update radix-ui-primitives monorepo ([#880](https://github.com/aequitas-aod/aequitas-frontend/issues/880)) ([77e09f0](https://github.com/aequitas-aod/aequitas-frontend/commit/77e09f04529c76a47347be9ced83ad499a939a6d))
+* **deps:** update tanstack-query monorepo to v5.104.2 ([#875](https://github.com/aequitas-aod/aequitas-frontend/issues/875)) ([1b48d8f](https://github.com/aequitas-aod/aequitas-frontend/commit/1b48d8f26103b0a2edafb294e061fb470191f6cc))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.4.1 ([#883](https://github.com/aequitas-aod/aequitas-frontend/issues/883)) ([00d37b2](https://github.com/aequitas-aod/aequitas-frontend/commit/00d37b2ec7507ec762cb86b7be3e96c723760540))
+
 ## [2.8.66](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.65...v2.8.66) (2026-10-07)
 
 ### Dependency updates
