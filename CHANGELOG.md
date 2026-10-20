@@ -1,3 +1,18 @@
+## [2.8.69](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.68...v2.8.69) (2026-10-20)
+
+### Dependency updates
+
+* **deps:** update dependency @hookform/resolvers to v5.9.2 ([#888](https://github.com/aequitas-aod/aequitas-frontend/issues/888)) ([fe45633](https://github.com/aequitas-aod/aequitas-frontend/commit/fe45633512f053b6706f8a9ec734afcd7cdff822))
+* **deps:** update dependency eslint to v10.13.0 ([#887](https://github.com/aequitas-aod/aequitas-frontend/issues/887)) ([4407bcf](https://github.com/aequitas-aod/aequitas-frontend/commit/4407bcf6b32f0d6c0286389adf5e10ec4515facd))
+* **deps:** update dependency lucide-react to v1.58.0 ([#886](https://github.com/aequitas-aod/aequitas-frontend/issues/886)) ([ed10f4e](https://github.com/aequitas-aod/aequitas-frontend/commit/ed10f4e39277949b18beaa7c479ef30ed43ddbee))
+* **deps:** update dependency lucide-react to v1.59.0 ([#889](https://github.com/aequitas-aod/aequitas-frontend/issues/889)) ([fc10f8e](https://github.com/aequitas-aod/aequitas-frontend/commit/fc10f8e35ae15ee879b7570bc347b17fc0100a56))
+* **deps:** update dependency postcss to v8.5.31 ([#891](https://github.com/aequitas-aod/aequitas-frontend/issues/891)) ([58808c8](https://github.com/aequitas-aod/aequitas-frontend/commit/58808c823d5c8c3dca6edf6edd1caea9017fd61e))
+* **deps:** update tanstack-query monorepo to v5.104.4 ([#890](https://github.com/aequitas-aod/aequitas-frontend/issues/890)) ([b8e4c40](https://github.com/aequitas-aod/aequitas-frontend/commit/b8e4c40fae8365187cc4d84717daad99b85979be))
+
+### Bug Fixes
+
+* **deps:** update dependency @hookform/resolvers to v6 ([#892](https://github.com/aequitas-aod/aequitas-frontend/issues/892)) ([4a84857](https://github.com/aequitas-aod/aequitas-frontend/commit/4a84857481a7e51cd2ce09fe006232e6d6b3df62))
+
 ## [2.8.68](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.67...v2.8.68) (2026-10-16)
 
 ### Dependency updates
