@@ -1,3 +1,15 @@
+## [2.8.70](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.69...v2.8.70) (2026-10-23)
+
+### Dependency updates
+
+* **deps:** update dependency html-react-parser to v6.1.9 ([#895](https://github.com/aequitas-aod/aequitas-frontend/issues/895)) ([aef65e9](https://github.com/aequitas-aod/aequitas-frontend/commit/aef65e9cd37c34d85ad500ef34d7dd654ba5fb2e))
+* **deps:** update dependency lucide-react to v1.61.0 ([#894](https://github.com/aequitas-aod/aequitas-frontend/issues/894)) ([2f830ab](https://github.com/aequitas-aod/aequitas-frontend/commit/2f830ab70b5170ef6f927d727ad8bc4dfafc72ae))
+* **deps:** update tanstack-query monorepo to v5.104.5 ([#893](https://github.com/aequitas-aod/aequitas-frontend/issues/893)) ([e8b81ac](https://github.com/aequitas-aod/aequitas-frontend/commit/e8b81ac07d466b85c7613efc71666b90915d191d))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.4.3 ([#896](https://github.com/aequitas-aod/aequitas-frontend/issues/896)) ([2e11669](https://github.com/aequitas-aod/aequitas-frontend/commit/2e1166981556c3fbe3c0f4baab8036481c7aa423))
+
 ## [2.8.69](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.68...v2.8.69) (2026-10-20)
 
 ### Dependency updates
