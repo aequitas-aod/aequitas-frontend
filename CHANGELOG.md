@@ -1,3 +1,21 @@
+## [2.8.74](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.73...v2.8.74) (2026-11-10)
+
+### Dependency updates
+
+* **deps:** update dependency @hookform/resolvers to v7.0.3 ([#921](https://github.com/aequitas-aod/aequitas-frontend/issues/921)) ([0a5215e](https://github.com/aequitas-aod/aequitas-frontend/commit/0a5215e7727c3c2d1b1a45af18e40e3c80b13724))
+* **deps:** update dependency @hookform/resolvers to v7.0.5 ([#926](https://github.com/aequitas-aod/aequitas-frontend/issues/926)) ([652b6f8](https://github.com/aequitas-aod/aequitas-frontend/commit/652b6f8654fee43db8b98314647e3dc4119edf58))
+* **deps:** update dependency axios to v1.21.1 ([#927](https://github.com/aequitas-aod/aequitas-frontend/issues/927)) ([7d44201](https://github.com/aequitas-aod/aequitas-frontend/commit/7d442016765437ab6aedcd86127e5ee042a20e70))
+* **deps:** update dependency lucide-react to v1.68.0 ([#919](https://github.com/aequitas-aod/aequitas-frontend/issues/919)) ([56b8fd4](https://github.com/aequitas-aod/aequitas-frontend/commit/56b8fd4f8378cada38f92510664576425b911963))
+* **deps:** update dependency lucide-react to v1.69.0 ([#923](https://github.com/aequitas-aod/aequitas-frontend/issues/923)) ([a0349c6](https://github.com/aequitas-aod/aequitas-frontend/commit/a0349c692246ae8a20423de23136cdb98937f0b6))
+* **deps:** update dependency lucide-react to v1.70.0 ([#924](https://github.com/aequitas-aod/aequitas-frontend/issues/924)) ([87431f5](https://github.com/aequitas-aod/aequitas-frontend/commit/87431f5b164d6f5ec35af860bcad012f222f8b74))
+* **deps:** update tanstack-query monorepo to v5.106.0 ([#920](https://github.com/aequitas-aod/aequitas-frontend/issues/920)) ([0896357](https://github.com/aequitas-aod/aequitas-frontend/commit/089635715ed161f0ba532b83539cbfc7bae38be6))
+* **deps:** update tanstack-query monorepo to v5.106.1 ([#922](https://github.com/aequitas-aod/aequitas-frontend/issues/922)) ([a77b710](https://github.com/aequitas-aod/aequitas-frontend/commit/a77b710640f0ae53b4d82a6e3cc19108853f57b5))
+* **deps:** update tanstack-query monorepo to v5.107.1 ([#925](https://github.com/aequitas-aod/aequitas-frontend/issues/925)) ([c171e5e](https://github.com/aequitas-aod/aequitas-frontend/commit/c171e5e38f76aacc73bd48ec3636f4081e175109))
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.4.6 ([#928](https://github.com/aequitas-aod/aequitas-frontend/issues/928)) ([0dfc8df](https://github.com/aequitas-aod/aequitas-frontend/commit/0dfc8df74967fbb7fb3e6ae392d63a853b7241c8))
+
 ## [2.8.73](https://github.com/aequitas-aod/aequitas-frontend/compare/v2.8.72...v2.8.73) (2026-11-04)
 
 ### Dependency updates
